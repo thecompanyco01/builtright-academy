@@ -1,11 +1,19 @@
 {
-  "version": 2,
-  "builds": [
-    { "src": "index.html", "use": "@vercel/static" },
-    { "src": "api/**/*.js", "use": "@vercel/node" }
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
+    { "source": "/blog/how-to-bid-contractor-jobs", "destination": "/blog/how-to-bid-contractor-jobs.html" },
+    { "source": "/blog/how-to-start-an-electrical-business", "destination": "/blog/how-to-start-an-electrical-business.html" },
+    { "source": "/blog/contractor-bookkeeping-guide", "destination": "/blog/contractor-bookkeeping-guide.html" },
+    { "source": "/blog/plumber-marketing-guide", "destination": "/blog/plumber-marketing-guide.html" }
   ],
-  "routes": [
-    { "src": "/api/(.*)", "dest": "/api/$1" },
-    { "src": "/(.*)", "dest": "/index.html" }
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options", "value": "DENY" }
+      ]
+    }
   ]
 }
