@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Residential Electrical Estimating: Step-by-Step Guide | BuiltRight Academy</title>
+  <meta name="description" content="Learn residential electrical estimating step by step. Covers material takeoffs, labor hour calculations, overhead markup, and pricing for common residential electrical jobs.">
+  <meta name="keywords" content="residential electrical estimating, electrical estimating guide, electrician pricing, electrical contractor estimating, how to estimate electrical work">
+  <link rel="canonical" href="https://builtright-academy.vercel.app/blog/residential-electrical-estimating">
+  <meta property="og:title" content="Residential Electrical Estimating: Step-by-Step Guide">
+  <meta property="og:description" content="The complete guide to estimating residential electrical work. Material takeoffs, labor calculations, markup, and real-world pricing examples.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://builtright-academy.vercel.app/blog/residential-electrical-estimating">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root { --orange: #F97316; --orange-dark: #EA580C; --dark: #1A1A2E; --darker: #0F0F1A; --gray: #94A3B8; --light: #F8FAFC; }
+    body { font-family: 'Inter', -apple-system, sans-serif; background: var(--darker); color: var(--light); line-height: 1.8; -webkit-font-smoothing: antialiased; }
+    .container { max-width: 720px; margin: 0 auto; padding: 0 24px; }
+    nav { padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    nav .container { display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.3rem; color: var(--orange); text-decoration: none; letter-spacing: -0.5px; }
+    .logo span { color: var(--light); }
+    .nav-links a { color: var(--gray); text-decoration: none; font-size: 0.9rem; margin-left: 24px; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--light); }
+    article { padding: 60px 0; }
+    .article-meta { margin-bottom: 32px; }
+    .article-meta .category { display: inline-block; background: rgba(249,115,22,0.1); border: 1px solid rgba(249,115,22,0.3); color: var(--orange); font-size: 0.75rem; font-weight: 600; padding: 4px 12px; border-radius: 100px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 16px; }
+    .article-meta .date { color: var(--gray); font-size: 0.85rem; }
+    article h1 { font-size: clamp(2rem, 4.5vw, 2.8rem); font-weight: 800; line-height: 1.15; letter-spacing: -1.5px; margin-bottom: 16px; }
+    article .subtitle { font-size: 1.15rem; color: var(--gray); margin-bottom: 40px; line-height: 1.7; }
+    article h2 { font-size: 1.5rem; font-weight: 700; margin: 48px 0 16px; letter-spacing: -0.5px; }
+    article h3 { font-size: 1.15rem; font-weight: 600; margin: 32px 0 12px; }
+    article p { margin-bottom: 16px; font-size: 1.02rem; color: #CBD5E1; }
+    article ul, article ol { margin-bottom: 16px; padding-left: 24px; }
+    article li { margin-bottom: 8px; color: #CBD5E1; }
+    article strong { color: var(--light); }
+    .callout { background: rgba(249,115,22,0.08); border-left: 3px solid var(--orange); padding: 20px 24px; border-radius: 0 8px 8px 0; margin: 24px 0; }
+    .callout p { margin-bottom: 0; color: var(--light); }
+    .callout strong { color: var(--orange); }
+    .step-box { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 24px; margin: 16px 0; }
+    .step-box h4 { color: var(--orange); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+    .cta-box { background: linear-gradient(135deg, rgba(249,115,22,0.15), rgba(249,115,22,0.05)); border: 1px solid rgba(249,115,22,0.3); border-radius: 16px; padding: 40px; text-align: center; margin: 48px 0; }
+    .cta-box h3 { font-size: 1.4rem; margin: 0 0 12px; color: var(--light); }
+    .cta-box p { color: var(--gray); margin-bottom: 24px; }
+    .cta-btn { display: inline-block; padding: 14px 32px; background: var(--orange); color: white; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 1rem; transition: background 0.2s; }
+    .cta-btn:hover { background: var(--orange-dark); }
+    .toc { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 24px 32px; margin: 0 0 40px; }
+    .toc h4 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--gray); margin-bottom: 12px; }
+    .toc ol { padding-left: 20px; }
+    .toc li { margin-bottom: 6px; }
+    .toc a { color: var(--orange); text-decoration: none; }
+    .toc a:hover { text-decoration: underline; }
+    footer { padding: 24px 0; border-top: 1px solid rgba(255,255,255,0.06); text-align: center; font-size: 0.8rem; color: #334155; }
+    @media (max-width: 600px) { article { padding: 40px 0; } .cta-box { padding: 24px; } }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "Residential Electrical Estimating: Step-by-Step Guide",
+    "description": "A complete step-by-step guide for electricians on estimating residential electrical work profitably.",
+    "step": [
+      { "@type": "HowToStep", "name": "Review plans and visit the site", "text": "Study drawings, visit the property, and identify complexity factors before estimating." },
+      { "@type": "HowToStep", "name": "Complete the material takeoff", "text": "List every material needed with quantities and current prices from your supplier." },
+      { "@type": "HowToStep", "name": "Calculate labor hours", "text": "Estimate installation hours using industry labor units and adjust for site conditions." },
+      { "@type": "HowToStep", "name": "Add overhead and profit", "text": "Apply overhead markup (30-50%) and profit margin (10-20%) to your base costs." },
+      { "@type": "HowToStep", "name": "Review and present the estimate", "text": "Double-check calculations, compare to similar past jobs, and present professionally." }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <a href="/" class="logo">Built<span>Right</span></a>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/blog/">Blog</a>
+      <a href="/templates/">Free Templates</a>
+    </div>
+  </div>
+</nav>
+
+<article>
+  <div class="container">
+    <div class="article-meta">
+      <div class="category">Electrical</div><br>
+      <span class="date">March 6, 2026 · 15 min read</span>
+    </div>
+
+    <h1>Residential Electrical Estimating: Step-by-Step Guide</h1>
+    <p class="subtitle">Electrical estimating is where jobs are won or lost. Estimate too high and you lose the bid. Too low and you're working for free — or worse, losing money. Here's the systematic approach that gets it right.</p>
+
+    <div class="toc">
+      <h4>In This Guide</h4>
+      <ol>
+        <li><a href="#site-review">Step 1: Plan Review &amp; Site Visit</a></li>
+        <li><a href="#material-takeoff">Step 2: Material Takeoff</a></li>
+        <li><a href="#labor">Step 3: Labor Hour Calculations</a></li>
+        <li><a href="#overhead">Step 4: Overhead, Markup &amp; Profit</a></li>
+        <li><a href="#common-jobs">Pricing Common Residential Electrical Jobs</a></li>
+        <li><a href="#complexity">Complexity Factors That Affect Your Estimate</a></li>
+        <li><a href="#software">Estimating Tools &amp; Software</a></li>
+        <li><a href="#review">Step 5: Review, Compare &amp; Present</a></li>
+      </ol>
+    </div>
+
+    <p>Electrical estimating is part science, part experience. The science is the systematic process of counting materials, calculating labor, and applying markup. The experience is knowing that a panel upgrade in a 1960s ranch takes twice as long as the same upgrade in a 2010 build — because nothing in that old house is where you expect it to be.</p>
+
+    <p>This guide gives you the science. The experience comes from doing the work. But a good system ensures your experience translates into profitable pricing instead of expensive guesswork.</p>
+
+    <h2 id="site-review">Step 1: Plan Review &amp; Site Visit</h2>
+
+    <h3>Reviewing Plans and Specifications</h3>
+    <p>For new construction or major remodels, you'll have plans to work from. Review them carefully before estimating:</p>
+    <ul>
+      <li><strong>Electrical plans:</strong> Panel location, circuit layout, fixture schedule, switch/outlet placement</li>
+      <li><strong>Architectural plans:</strong> Room dimensions, ceiling heights, wall types (drywall vs. masonry)</li>
+      <li><strong>Specifications:</strong> Material requirements, fixture allowances, code requirements</li>
+      <li><strong>Notes:</strong> Special requirements, customer preferences, any deviations from standard</li>
+    </ul>
+
+    <h3>The Site Visit</h3>
+    <p>Never estimate electrical work without visiting the site. For existing homes, the site visit reveals:</p>
+    <ul>
+      <li><strong>Existing electrical system:</strong> Panel type, capacity, condition. Is it a Federal Pacific or Zinsco panel that needs replacement?</li>
+      <li><strong>Wiring type:</strong> Romex, BX/MC, knob and tube, aluminum? This dramatically affects labor time.</li>
+      <li><strong>Access:</strong> Attic access, crawl space, finished vs. unfinished basement. Can you run wire easily or will you be fishing through finished walls?</li>
+      <li><strong>Building age:</strong> Pre-1960 homes have unique challenges — plaster walls, obsolete wiring methods, hidden junction boxes.</li>
+      <li><strong>Distance from panel:</strong> Longer runs = more wire = higher cost. Measure key distances.</li>
+    </ul>
+
+    <div class="step-box">
+      <h4>Site Visit Checklist</h4>
+      <p>✅ Photograph the panel (cover off) · ✅ Note panel amperage and available spaces · ✅ Measure key distances (panel to work areas) · ✅ Check attic/crawl access · ✅ Identify wall types (drywall, plaster, masonry) · ✅ Note existing wiring type · ✅ Check for knob &amp; tube or aluminum wiring · ✅ Identify any code violations that need correction · ✅ Ask customer about future plans (EV charger, hot tub, shop)</p>
+    </div>
+
+    <h2 id="material-takeoff">Step 2: Material Takeoff</h2>
+
+    <p>The material takeoff is your detailed list of every item needed for the job. This is where precision matters — missing items means trips to the supply house (lost time) or eating the cost.</p>
+
+    <h3>Categories to Include</h3>
+
+    <p><strong>Wire and cable:</strong></p>
+    <ul>
+      <li>14/2 NM-B (15A circuits — lighting)</li>
+      <li>12/2 NM-B (20A circuits — outlets, kitchen, bath)</li>
+      <li>10/2 NM-B (30A circuits — dryer)</li>
+      <li>10/3 NM-B (dryer with neutral)</li>
+      <li>6/3 NM-B (50A circuits — range, sub-panel)</li>
+      <li>Specialty wire: THHN for conduit, direct burial, armored cable</li>
+    </ul>
+    <p>Measure wire runs and add 10–15% for waste, routing around obstacles, and service loops.</p>
+
+    <p><strong>Devices and covers:</strong></p>
+    <ul>
+      <li>Receptacles (standard, GFCI, AFCI, USB, 240V)</li>
+      <li>Switches (single pole, 3-way, 4-way, dimmer, smart)</li>
+      <li>Cover plates (match style and color)</li>
+      <li>Outlet boxes (new work, old work/remodel, weatherproof)</li>
+    </ul>
+
+    <p><strong>Panel and breakers:</strong></p>
+    <ul>
+      <li>Panel (if upgrading: 200A is now standard for residential)</li>
+      <li>Breakers (standard, GFCI, AFCI, dual-function, tandem)</li>
+      <li>Main breaker</li>
+      <li>Grounding electrode conductor and rod</li>
+    </ul>
+
+    <p><strong>Fixtures and trim:</strong></p>
+    <ul>
+      <li>Light fixtures (recessed, surface, pendant — get specific models)</li>
+      <li>Ceiling fans</li>
+      <li>Exhaust fans</li>
+      <li>Smoke/CO detectors</li>
+      <li>Doorbell/intercom</li>
+    </ul>
+
+    <p><strong>Miscellaneous:</strong></p>
+    <ul>
+      <li>Staples, connectors, wire nuts, tape</li>
+      <li>Conduit and fittings (if required)</li>
+      <li>Anchors, screws, straps</li>
+      <li>Nail plates, bushings</li>
+    </ul>
+
+    <div class="callout">
+      <p><strong>Pricing materials:</strong> Use current prices from your primary supplier. Material prices fluctuate — especially copper wire. Don't use prices from your last job if it was 3+ months ago. Call or check online for current pricing. Add 5–10% for waste and incidentals.</p>
+    </div>
+
+    <h2 id="labor">Step 3: Labor Hour Calculations</h2>
+
+    <p>Labor is typically 40–60% of a residential electrical estimate. Getting this right is critical.</p>
+
+    <h3>Labor Unit Method</h3>
+    <p>The industry uses "labor units" — the average time to install each type of item. Common residential labor units:</p>
+
+    <ul>
+      <li><strong>Standard receptacle (new construction):</strong> 0.3–0.5 hours</li>
+      <li><strong>GFCI receptacle:</strong> 0.4–0.6 hours</li>
+      <li><strong>Standard switch:</strong> 0.3–0.4 hours</li>
+      <li><strong>3-way switch (pair):</strong> 0.6–0.8 hours</li>
+      <li><strong>Recessed light (new construction):</strong> 0.4–0.6 hours</li>
+      <li><strong>Recessed light (remodel/retrofit):</strong> 0.6–1.0 hours</li>
+      <li><strong>Ceiling fan:</strong> 0.8–1.5 hours</li>
+      <li><strong>200A panel install:</strong> 6–10 hours</li>
+      <li><strong>200A panel swap (existing):</strong> 4–8 hours</li>
+      <li><strong>Circuit run (per circuit, average length):</strong> 1–2 hours</li>
+      <li><strong>Smoke detector (hardwired):</strong> 0.3–0.5 hours</li>
+    </ul>
+
+    <h3>Adjustment Factors</h3>
+    <p>Base labor units assume new construction with open walls. Adjust for reality:</p>
+    <ul>
+      <li><strong>Remodel/old work (fishing wires through finished walls):</strong> Multiply by 1.5–2.0x</li>
+      <li><strong>Plaster walls:</strong> Multiply by 1.5x (harder to cut, crumbles, unpredictable)</li>
+      <li><strong>Attic work in summer:</strong> Multiply by 1.25x (heat reduces efficiency)</li>
+      <li><strong>Tight access/crawl space:</strong> Multiply by 1.5–2.0x</li>
+      <li><strong>Multi-story (running wire between floors):</strong> Multiply by 1.25x</li>
+      <li><strong>Old wiring requiring troubleshooting:</strong> Add 15–25% buffer</li>
+    </ul>
+
+    <div class="step-box">
+      <h4>Example: Kitchen Remodel Electrical</h4>
+      <p><strong>Scope:</strong> 6 new circuits (2 SABC, 1 dishwasher, 1 disposal, 1 fridge, 1 lighting), 12 outlets (4 GFCI), 8 recessed lights, 2 under-cabinet lights, 1 exhaust fan connection.</p>
+      <p><strong>Labor calculation:</strong></p>
+      <p>12 receptacles × 0.6 hrs (remodel) = 7.2 hrs</p>
+      <p>8 recessed lights × 0.8 hrs (remodel) = 6.4 hrs</p>
+      <p>2 under-cabinet lights × 0.5 hrs = 1.0 hrs</p>
+      <p>1 exhaust fan connection × 0.5 hrs = 0.5 hrs</p>
+      <p>6 circuit runs × 1.5 hrs = 9.0 hrs</p>
+      <p>Panel work (add breakers, label) = 1.5 hrs</p>
+      <p><strong>Subtotal: 25.6 hrs × 1.25 (complexity factor) = 32 hours</strong></p>
+    </div>
+
+    <h3>Your Labor Rate</h3>
+    <p>Your labor rate isn't what you pay yourself per hour — it's your fully-loaded cost including taxes, insurance, benefits, vehicle, tools, and unbillable time overhead. For most residential electricians, the fully-loaded labor rate is $55–$85/hour (your cost), and you bill at $100–$175/hour.</p>
+
+    <h2 id="overhead">Step 4: Overhead, Markup &amp; Profit</h2>
+
+    <h3>Calculating Your Overhead Rate</h3>
+    <p>Add up all your annual non-job-specific costs: office, insurance, vehicle, tools, marketing, licensing, software, accounting, phone, etc. Divide by your total annual direct costs (materials + labor on all jobs). This gives you your overhead rate.</p>
+
+    <p><strong>Example:</strong> $50,000 annual overhead ÷ $200,000 annual direct costs = 25% overhead rate. Apply this to every estimate.</p>
+
+    <h3>Applying Markup</h3>
+    <ul>
+      <li><strong>Material markup:</strong> 25–50% (covers procurement time, waste, delivery, and profit on materials)</li>
+      <li><strong>Labor markup:</strong> Apply overhead rate + profit margin</li>
+      <li><strong>Subcontractor markup:</strong> 10–15% (if you use subs for any portion)</li>
+    </ul>
+
+    <h3>Profit Margin</h3>
+    <p>After covering all costs and overhead, add your profit. Target <strong>10–20% net profit margin.</strong> This is what funds your business growth, emergency reserves, and makes the risk of running a business worthwhile.</p>
+
+    <div class="step-box">
+      <h4>Complete Estimate Example: 200A Panel Upgrade</h4>
+      <p><strong>Materials:</strong> 200A panel ($250), main breaker ($45), 20 breakers ($300), wire ($180), grounding ($75), misc ($50) = $900</p>
+      <p><strong>Material markup (35%):</strong> $315</p>
+      <p><strong>Labor:</strong> 8 hours × $65/hr loaded rate = $520</p>
+      <p><strong>Overhead (25%):</strong> $355</p>
+      <p><strong>Subtotal:</strong> $2,090</p>
+      <p><strong>Profit (15%):</strong> $314</p>
+      <p><strong>Permit fee:</strong> $150</p>
+      <p><strong>Total estimate: $2,554</strong></p>
+      <p>Rounded to: <strong>$2,550</strong></p>
+    </div>
+
+    <h2 id="common-jobs">Pricing Common Residential Electrical Jobs</h2>
+
+    <p>These are typical price ranges including materials, labor, overhead, and profit. Your specific prices depend on your market and overhead structure.</p>
+
+    <h3>Service &amp; Repair</h3>
+    <ul>
+      <li><strong>Outlet/switch replacement:</strong> $125–$250</li>
+      <li><strong>GFCI outlet install:</strong> $150–$300</li>
+      <li><strong>Light fixture replacement:</strong> $150–$400</li>
+      <li><strong>Ceiling fan install (existing wiring):</strong> $200–$450</li>
+      <li><strong>Ceiling fan install (new wiring):</strong> $400–$800</li>
+      <li><strong>Circuit troubleshooting:</strong> $150–$400</li>
+      <li><strong>Dedicated circuit (standard run):</strong> $300–$600</li>
+    </ul>
+
+    <h3>Panel Work</h3>
+    <ul>
+      <li><strong>100A to 200A panel upgrade:</strong> $2,000–$4,000</li>
+      <li><strong>Panel replacement (same amperage):</strong> $1,500–$3,000</li>
+      <li><strong>Sub-panel install:</strong> $800–$2,500</li>
+      <li><strong>Whole-house surge protector:</strong> $300–$600</li>
+    </ul>
+
+    <h3>New Circuits &amp; Additions</h3>
+    <ul>
+      <li><strong>EV charger install (Level 2, 240V):</strong> $800–$2,500</li>
+      <li><strong>Hot tub wiring:</strong> $800–$2,000</li>
+      <li><strong>Generator transfer switch + hookup:</strong> $1,500–$4,000</li>
+      <li><strong>Kitchen remodel (electrical):</strong> $3,000–$8,000</li>
+      <li><strong>Bathroom remodel (electrical):</strong> $1,000–$3,000</li>
+      <li><strong>Basement finish (electrical):</strong> $3,000–$10,000</li>
+    </ul>
+
+    <h3>Whole-House</h3>
+    <ul>
+      <li><strong>Whole-house rewire (1,500 sq ft):</strong> $10,000–$20,000</li>
+      <li><strong>New construction rough-in (2,000 sq ft):</strong> $8,000–$15,000</li>
+      <li><strong>Smart home package (basic):</strong> $2,000–$5,000</li>
+    </ul>
+
+    <h2 id="complexity">Complexity Factors That Affect Your Estimate</h2>
+
+    <p>Two "identical" jobs can cost very different amounts based on complexity factors. Always assess these during your site visit:</p>
+
+    <ul>
+      <li><strong>Building age:</strong> Pre-1960 homes often have knob-and-tube, cloth wiring, or ungrounded circuits that must be addressed. Budget 30–50% more labor.</li>
+      <li><strong>Finished vs. unfinished spaces:</strong> Running wire through finished walls is 2x slower than new construction. Factor in patching/painting costs or use remodel-specific methods.</li>
+      <li><strong>Code upgrades:</strong> If the existing system has code violations, you may be required to bring it up to current code when performing work. This can significantly increase scope.</li>
+      <li><strong>Utility coordination:</strong> Panel upgrades often require utility company involvement (meter base, service entrance). This adds time and sometimes cost.</li>
+      <li><strong>Permit and inspection fees:</strong> Vary by jurisdiction from $75–$500. Always include in your estimate.</li>
+    </ul>
+
+    <h2 id="software">Estimating Tools &amp; Software</h2>
+
+    <ul>
+      <li><strong>Spreadsheet (free):</strong> A well-built Excel or Google Sheets template works great for small operations. Create formulas for labor units, material markup, and overhead calculations.</li>
+      <li><strong>Electrical estimating software ($50–$200/month):</strong> Tools like Accubid, ConEst, or McCormick have built-in material databases and labor units. Worth it when you're doing 5+ estimates per week.</li>
+      <li><strong>All-in-one contractor software ($30–$150/month):</strong> Jobber, ServiceTitan, or Housecall Pro combine estimating with scheduling, invoicing, and customer management.</li>
+      <li><strong>NECA Manual of Labor Units:</strong> The industry standard reference for electrical labor units. Essential for any serious estimator.</li>
+    </ul>
+
+    <h2 id="review">Step 5: Review, Compare &amp; Present</h2>
+
+    <h3>Review Your Estimate</h3>
+    <ul>
+      <li>Double-check all math (simple errors are the most common estimating mistake)</li>
+      <li>Verify material prices are current</li>
+      <li>Make sure nothing was missed (go back to your site visit notes and photos)</li>
+      <li>Compare to similar past jobs — if your estimate is significantly different, figure out why</li>
+    </ul>
+
+    <h3>The Sanity Check</h3>
+    <p>After completing your detailed estimate, do a "per square foot" or "per unit" sanity check. If your kitchen remodel electrical comes out to $2,500 and you know the market range is $3,000–$8,000, you might be too low. If it comes out to $12,000, double-check your numbers.</p>
+
+    <h3>Present Professionally</h3>
+    <p>Use the Good/Better/Best framework. Present in person. Walk the customer through the scope and options. Follow up within 48 hours if they don't decide on the spot.</p>
+
+    <div class="callout">
+      <p><strong>Track your estimates:</strong> After every job, compare actual costs to estimated costs. Were your labor hours accurate? Did you miss materials? Was the complexity factor right? This feedback loop is how you improve over time. Without it, you repeat mistakes indefinitely.</p>
+    </div>
+
+    <div class="cta-box">
+      <h3>Want to master electrical estimating?</h3>
+      <p>BuiltRight Academy's estimating course includes electrical-specific templates, labor unit databases, and real-world walkthrough examples. Built for residential electricians who want to stop guessing and start profiting.</p>
+      <a href="/#waitlistForm" class="cta-btn">Join the Waitlist — Free</a>
+      <p style="margin-top: 12px; font-size: 0.85rem;">Launching Q2 2026. No credit card required.</p>
+    </div>
+
+    <h2>The Bottom Line</h2>
+
+    <p>Residential electrical estimating is a skill that directly determines your profitability. A systematic approach — site visit, material takeoff, labor calculation, overhead markup, and profit — eliminates the guessing that costs most electricians 15–30% of potential profit on every job.</p>
+
+    <p>Build your estimating system once. Use it on every job. Refine it with actual job data. Over time, your estimates will be faster, more accurate, and more profitable — because you'll know exactly what every type of job costs you and what you need to charge.</p>
+
+    <p>Your hands do the electrical work. Your estimating system does the business work. Master both.</p>
+
+  </div>
+</article>
+
+<footer>
+  <div class="container">
+    &copy; 2026 BuiltRight Academy. Business skills for tradespeople.<br>
+    <a href="/" style="color: var(--gray); text-decoration: none;">Home</a> &middot; <a href="/blog/" style="color: var(--gray); text-decoration: none;">Blog</a> &middot; <a href="/templates/" style="color: var(--gray); text-decoration: none;">Free Templates</a>
+  </div>
+</footer>
+
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/_vercel/speed-insights/script.js"></script>
+</body>
+</html>
