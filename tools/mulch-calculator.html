@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mulch Calculator — How Much Mulch Do I Need? | BuiltRight Academy</title>
+  <meta name="description" content="Free mulch calculator. Enter bed dimensions and depth to get cubic yards, bags, and cost. Works for bark, wood chips, rubber mulch, and more. Updated 2026 pricing.">
+  <meta name="keywords" content="mulch calculator, how much mulch do I need, mulch estimator, bark mulch calculator, cubic yards of mulch, mulch cost calculator">
+  <link rel="canonical" href="https://builtright-academy.vercel.app/tools/mulch-calculator">
+  <meta property="og:title" content="Mulch Calculator — How Much Mulch Do I Need?">
+  <meta property="og:description" content="Free interactive mulch calculator. Get cubic yards, bags needed, and cost estimate for any landscaping project.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Mulch Calculator",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "description": "Calculate how much mulch you need in cubic yards and bags. Get cost estimates for bark, wood chips, rubber mulch, and more."
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How much mulch do I need?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Measure the length and width of each bed in feet, then multiply by your desired depth (typically 2–3 inches). Divide total cubic feet by 27 to get cubic yards, or by 2 to get the number of standard 2-cubic-foot bags. For a 10×20 ft bed at 3 inches deep, you need about 1.85 cubic yards or roughly 25 bags."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much does mulch cost?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Bulk mulch costs $20–$60 per cubic yard depending on type. Hardwood bark runs $30–$45/yard, dyed mulch $35–$50/yard, and cedar mulch $40–$60/yard. Bagged mulch from home centers costs $3–$7 per 2-cubic-foot bag, which is significantly more expensive per yard than bulk delivery."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How deep should mulch be?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Apply 2–3 inches for most landscape beds. Around trees, keep mulch 3–6 inches away from the trunk to prevent rot. For weed suppression, 3 inches minimum is recommended. Don't exceed 4 inches — too-deep mulch can suffocate roots and create moisture problems."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How many bags of mulch in a cubic yard?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "There are 13.5 bags of 2-cubic-foot mulch in one cubic yard (27 cubic feet ÷ 2 = 13.5). For 3-cubic-foot bags, you need 9 bags per cubic yard. Buying in bulk (by the yard) is typically 40–60% cheaper than buying bags."
+        }
+      }
+    ]
+  }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root { --orange: #F97316; --orange-dark: #EA580C; --darker: #0F0F1A; --dark-card: #1A1A2E; --gray: #94A3B8; --light: #F8FAFC; --green: #22C55E; --border: rgba(255,255,255,0.08); }
+    body { font-family: 'Inter', -apple-system, sans-serif; background: var(--darker); color: var(--light); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+    nav { padding: 20px 0; border-bottom: 1px solid var(--border); }
+    nav .container { display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.3rem; color: var(--orange); text-decoration: none; letter-spacing: -0.5px; }
+    .logo span { color: var(--light); }
+    .nav-links a { color: var(--gray); text-decoration: none; font-size: 0.9rem; margin-left: 24px; }
+    .nav-links a:hover { color: var(--light); }
+    .hero { padding: 48px 0 32px; text-align: center; }
+    .hero .badge { display: inline-block; background: rgba(249,115,22,0.1); border: 1px solid rgba(249,115,22,0.3); color: var(--orange); font-size: 0.8rem; font-weight: 600; padding: 6px 16px; border-radius: 100px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .hero h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 800; line-height: 1.15; letter-spacing: -1px; margin-bottom: 12px; }
+    .hero h1 .highlight { color: var(--orange); }
+    .hero p { color: var(--gray); font-size: 1.05rem; max-width: 600px; margin: 0 auto; }
+    .calc-section { padding: 24px 0 60px; }
+    .calc-card { background: var(--dark-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; margin-bottom: 24px; }
+    .calc-card h2 { font-size: 1.2rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+    .calc-card h2 .icon { font-size: 1.4rem; }
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-size: 0.85rem; color: var(--gray); margin-bottom: 6px; font-weight: 500; }
+    .form-group input, .form-group select { width: 100%; padding: 12px 16px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 10px; color: var(--light); font-size: 1rem; font-family: inherit; outline: none; transition: border 0.2s; }
+    .form-group input:focus, .form-group select:focus { border-color: var(--orange); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    @media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
+    .btn { display: inline-block; padding: 14px 32px; background: var(--orange); color: #fff; font-weight: 700; font-size: 1rem; border: none; border-radius: 10px; cursor: pointer; transition: background 0.2s, transform 0.1s; font-family: inherit; width: 100%; }
+    .btn:hover { background: var(--orange-dark); transform: translateY(-1px); }
+    .results { display: none; margin-top: 24px; }
+    .results.show { display: block; }
+    .result-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 16px; }
+    .result-item { background: rgba(249,115,22,0.08); border: 1px solid rgba(249,115,22,0.2); border-radius: 12px; padding: 16px; text-align: center; }
+    .result-item .value { font-size: 1.5rem; font-weight: 800; color: var(--orange); }
+    .result-item .label { font-size: 0.78rem; color: var(--gray); margin-top: 4px; }
+    .cost-table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+    .cost-table th, .cost-table td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+    .cost-table th { color: var(--gray); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; }
+    .cost-table td:last-child { text-align: right; font-weight: 600; }
+    .beds-list { margin-bottom: 16px; }
+    .bed-entry { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; background: rgba(255,255,255,0.03); padding: 8px 12px; border-radius: 8px; }
+    .bed-entry input { flex: 1; padding: 8px 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 8px; color: var(--light); font-size: 0.9rem; font-family: inherit; outline: none; }
+    .bed-entry input:focus { border-color: var(--orange); }
+    .bed-entry .remove-btn { background: none; border: none; color: #ef4444; cursor: pointer; font-size: 1.2rem; padding: 4px; }
+    .add-bed-btn { background: rgba(249,115,22,0.1); border: 1px dashed rgba(249,115,22,0.4); color: var(--orange); padding: 10px; border-radius: 8px; cursor: pointer; width: 100%; font-family: inherit; font-size: 0.9rem; margin-bottom: 16px; }
+    .add-bed-btn:hover { background: rgba(249,115,22,0.15); }
+    .seo-content { padding: 40px 0 60px; }
+    .seo-content h2 { font-size: 1.5rem; font-weight: 800; margin-bottom: 16px; letter-spacing: -0.5px; }
+    .seo-content h3 { font-size: 1.1rem; font-weight: 700; margin: 24px 0 10px; color: var(--orange); }
+    .seo-content p { color: var(--gray); margin-bottom: 14px; line-height: 1.8; }
+    .seo-content ul, .seo-content ol { color: var(--gray); margin: 10px 0 16px 24px; }
+    .seo-content li { margin-bottom: 6px; }
+    .seo-content table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+    .seo-content table th, .seo-content table td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+    .seo-content table th { color: var(--gray); font-weight: 600; }
+    footer { border-top: 1px solid var(--border); padding: 32px 0; text-align: center; color: var(--gray); font-size: 0.85rem; }
+    footer a { color: var(--orange); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <nav><div class="container"><a href="/" class="logo">Built<span>Right</span></a><div class="nav-links"><a href="/blog/">Blog</a><a href="/tools/">Tools</a><a href="/templates/">Templates</a></div></div></nav>
+
+  <section class="hero">
+    <div class="container">
+      <span class="badge">Free Calculator</span>
+      <h1>Mulch Calculator — How Much <span class="highlight">Mulch</span> Do I Need?</h1>
+      <p>Add multiple beds, pick your mulch type, and get cubic yards, bags needed, and estimated cost in seconds.</p>
+    </div>
+  </section>
+
+  <section class="calc-section">
+    <div class="container">
+      <div class="calc-card">
+        <h2><span class="icon">🌿</span> Landscape Beds</h2>
+        <p style="color:var(--gray); font-size:0.85rem; margin-bottom:16px;">Add each bed separately for an accurate total. Enter length and width in feet.</p>
+        <div class="beds-list" id="bedsList">
+          <div class="bed-entry">
+            <input type="number" placeholder="Length (ft)" class="bed-length" step="0.1">
+            <span style="color:var(--gray)">×</span>
+            <input type="number" placeholder="Width (ft)" class="bed-width" step="0.1">
+            <button class="remove-btn" onclick="removeBed(this)">✕</button>
+          </div>
+        </div>
+        <button class="add-bed-btn" onclick="addBed()">+ Add Another Bed</button>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Depth (inches)</label>
+            <select id="depth">
+              <option value="1">1 inch (top-up existing mulch)</option>
+              <option value="2">2 inches (light coverage)</option>
+              <option value="3" selected>3 inches (recommended)</option>
+              <option value="4">4 inches (heavy weed suppression)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Mulch Type</label>
+            <select id="mulchType">
+              <option value="hardwood" data-low="30" data-high="45" data-bag="4">Hardwood Bark Mulch</option>
+              <option value="cedar" data-low="40" data-high="60" data-bag="5">Cedar Mulch</option>
+              <option value="cypress" data-low="35" data-high="50" data-bag="5">Cypress Mulch</option>
+              <option value="dyed" data-low="35" data-high="50" data-bag="4.50">Dyed (Black/Red/Brown) Mulch</option>
+              <option value="pine" data-low="25" data-high="40" data-bag="3.50">Pine Bark Mulch</option>
+              <option value="woodchip" data-low="15" data-high="30" data-bag="3">Wood Chips</option>
+              <option value="rubber" data-low="80" data-high="160" data-bag="8">Rubber Mulch</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn" onclick="calculate()">Calculate Mulch Needed</button>
+
+        <div class="results" id="results">
+          <div class="result-grid">
+            <div class="result-item"><div class="value" id="cubicYards">—</div><div class="label">Cubic Yards</div></div>
+            <div class="result-item"><div class="value" id="bags2cf">—</div><div class="label">2 cu ft Bags</div></div>
+            <div class="result-item"><div class="value" id="totalSqft">—</div><div class="label">Total Sq Ft</div></div>
+            <div class="result-item"><div class="value" id="cubicFeet">—</div><div class="label">Cubic Feet</div></div>
+          </div>
+          <h3 style="font-size:1rem; margin-bottom:12px; color:var(--gray);">Cost Comparison</h3>
+          <table class="cost-table">
+            <thead><tr><th>Option</th><th>Amount</th><th>Estimated Cost</th></tr></thead>
+            <tbody id="costBody"></tbody>
+          </table>
+          <p style="font-size:0.8rem; color:var(--gray); margin-top:8px;">*2026 pricing. Bulk delivery usually adds $30–$80. Buying bags from home centers costs 40–60% more per yard than bulk.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="seo-content">
+    <div class="container">
+      <h2>The Complete Guide to Buying Mulch</h2>
+      <p>Mulch is one of the most cost-effective landscaping investments you can make. It suppresses weeds, retains moisture, regulates soil temperature, and makes your beds look clean and professional. But buying the wrong amount wastes money — and most homeowners and landscapers either over-buy or have to make a second trip.</p>
+
+      <h3>Bulk vs. Bagged: Which Is Cheaper?</h3>
+      <p>As a rule of thumb: if you need more than 3 cubic yards, buy in bulk. Here's a real-world comparison:</p>
+      <table>
+        <thead><tr><th>Method</th><th>Cost per Cubic Yard</th><th>For 5 Cubic Yards</th></tr></thead>
+        <tbody>
+          <tr><td>Bulk delivery</td><td>$30–$45 + delivery</td><td>$180–$275 total</td></tr>
+          <tr><td>Bagged (2 cu ft, $4/bag)</td><td>~$54/yard</td><td>$270 (68 bags)</td></tr>
+          <tr><td>Bagged (3 cu ft, $5.50/bag)</td><td>~$50/yard</td><td>$248 (45 bags)</td></tr>
+        </tbody>
+      </table>
+      <p>Bulk saves you 30–50% on material, plus you avoid the backbreaking work of loading 60+ bags into your truck. Most landscape supply yards deliver for $30–$80 depending on distance.</p>
+
+      <h3>How Deep Should You Mulch?</h3>
+      <ul>
+        <li><strong>2 inches:</strong> Minimum for weed suppression. Fine for topping up existing mulch.</li>
+        <li><strong>3 inches:</strong> The sweet spot. Effective weed barrier, good moisture retention, looks professional.</li>
+        <li><strong>4 inches:</strong> Maximum for most applications. More than this can trap too much moisture and harm plants.</li>
+        <li><strong>Never pile mulch against tree trunks</strong> ("volcano mulching"). Keep it 3–6 inches away from the base to prevent bark rot.</li>
+      </ul>
+
+      <h3>Mulch Types: Pros and Cons</h3>
+      <table>
+        <thead><tr><th>Type</th><th>Lifespan</th><th>Pros</th><th>Cons</th></tr></thead>
+        <tbody>
+          <tr><td>Hardwood Bark</td><td>1–2 years</td><td>Most popular, looks great, affordable</td><td>Needs annual replacement</td></tr>
+          <tr><td>Cedar</td><td>2–3 years</td><td>Natural insect repellent, slow to decompose</td><td>More expensive</td></tr>
+          <tr><td>Cypress</td><td>2–3 years</td><td>Resists floating in rain, attractive</td><td>Sustainability concerns in some regions</td></tr>
+          <tr><td>Dyed Mulch</td><td>1–2 years</td><td>Holds color longer, cheap</td><td>May contain recycled wood with chemicals</td></tr>
+          <tr><td>Pine Bark</td><td>1–2 years</td><td>Good for acid-loving plants, lightweight</td><td>Can float away on slopes</td></tr>
+          <tr><td>Wood Chips</td><td>1–2 years</td><td>Cheapest option, often free from arborists</td><td>Rougher appearance, can rob nitrogen</td></tr>
+          <tr><td>Rubber</td><td>10+ years</td><td>Doesn't decompose, great for playgrounds</td><td>Expensive upfront, not natural looking</td></tr>
+        </tbody>
+      </table>
+
+      <h3>When to Mulch</h3>
+      <p>The best time to apply mulch is <strong>mid to late spring</strong>, after the soil has warmed but before summer heat kicks in. Fall mulching is the second-best option — it insulates roots through winter. Avoid mulching when the ground is frozen or waterlogged.</p>
+
+      <h3>Pro Tips for Landscapers</h3>
+      <ul>
+        <li><strong>Always add 10% to your estimate.</strong> Irregular bed shapes, settling, and spillage always eat more material than you expect.</li>
+        <li><strong>Edge beds before mulching.</strong> A clean edge keeps mulch from spilling onto lawns and walkways, making maintenance easier.</li>
+        <li><strong>Remove old mulch if it's more than 4 inches deep.</strong> Just adding on top year after year creates a mat that repels water instead of retaining it.</li>
+        <li><strong>Pre-emergent herbicide under mulch</strong> provides double weed protection for commercial properties.</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer><div class="container"><p>© 2026 <a href="/">BuiltRight Academy</a> — Free tools for contractors and tradespeople.</p></div></footer>
+
+  <script>
+    function addBed() {
+      const list = document.getElementById('bedsList');
+      const entry = document.createElement('div');
+      entry.className = 'bed-entry';
+      entry.innerHTML = '<input type="number" placeholder="Length (ft)" class="bed-length" step="0.1"><span style="color:var(--gray)">×</span><input type="number" placeholder="Width (ft)" class="bed-width" step="0.1"><button class="remove-btn" onclick="removeBed(this)">✕</button>';
+      list.appendChild(entry);
+    }
+
+    function removeBed(btn) {
+      const entries = document.querySelectorAll('.bed-entry');
+      if (entries.length > 1) btn.parentElement.remove();
+    }
+
+    function calculate() {
+      const entries = document.querySelectorAll('.bed-entry');
+      let totalSqft = 0;
+      for (const entry of entries) {
+        const l = parseFloat(entry.querySelector('.bed-length').value) || 0;
+        const w = parseFloat(entry.querySelector('.bed-width').value) || 0;
+        totalSqft += l * w;
+      }
+      if (totalSqft <= 0) return alert('Please enter at least one bed with length and width.');
+
+      const depthIn = parseFloat(document.getElementById('depth').value);
+      const mulchSelect = document.getElementById('mulchType');
+      const sel = mulchSelect.options[mulchSelect.selectedIndex];
+      const priceLow = parseFloat(sel.dataset.low);
+      const priceHigh = parseFloat(sel.dataset.high);
+      const bagPrice = parseFloat(sel.dataset.bag);
+
+      const depthFt = depthIn / 12;
+      const cubicFeet = totalSqft * depthFt * 1.10; // 10% extra built in
+      const cubicYards = cubicFeet / 27;
+      const bags2cf = Math.ceil(cubicFeet / 2);
+
+      document.getElementById('cubicYards').textContent = cubicYards.toFixed(2);
+      document.getElementById('bags2cf').textContent = bags2cf;
+      document.getElementById('totalSqft').textContent = totalSqft.toFixed(0);
+      document.getElementById('cubicFeet').textContent = cubicFeet.toFixed(1);
+
+      const bulkLow = cubicYards * priceLow;
+      const bulkHigh = cubicYards * priceHigh;
+      const baggedCost = bags2cf * bagPrice;
+
+      document.getElementById('costBody').innerHTML = `
+        <tr><td>Bulk delivery</td><td>${cubicYards.toFixed(2)} yards</td><td>$${bulkLow.toFixed(0)} – $${bulkHigh.toFixed(0)} + delivery</td></tr>
+        <tr><td>Bagged (2 cu ft)</td><td>${bags2cf} bags</td><td>$${baggedCost.toFixed(0)}</td></tr>
+        <tr style="font-weight:700;border-top:2px solid var(--orange);"><td>Savings with Bulk</td><td></td><td style="color:var(--green);">Save $${Math.max(0, baggedCost - bulkHigh).toFixed(0)}–$${Math.max(0, baggedCost - bulkLow).toFixed(0)}</td></tr>
+      `;
+      document.getElementById('results').classList.add('show');
+      document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
+</body>
+</html>

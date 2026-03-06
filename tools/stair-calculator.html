@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stair Calculator — Rise, Run, Stringer Length & Code Check | BuiltRight Academy</title>
+  <meta name="description" content="Free stair calculator. Enter total rise and desired run to get number of steps, riser height, tread depth, stringer length, and building code compliance. For decks, porches, and interior stairs.">
+  <meta name="keywords" content="stair calculator, stair stringer calculator, rise and run calculator, deck stair calculator, stair building calculator, how to calculate stairs">
+  <link rel="canonical" href="https://builtright-academy.vercel.app/tools/stair-calculator">
+  <meta property="og:title" content="Stair Calculator — Rise, Run & Stringer Length">
+  <meta property="og:description" content="Free stair calculator with code compliance check. Get riser height, tread depth, stringer length, and angle for any staircase.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Stair Calculator",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "description": "Calculate stair dimensions including number of steps, riser height, tread depth, stringer length, and stair angle. Includes IRC building code compliance check."
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the ideal riser height for stairs?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The IRC building code allows a maximum riser height of 7¾ inches (196mm). The ideal comfort range is 7 to 7½ inches. The most comfortable stairs follow the rule: 2 × riser + tread = 24–25 inches. A 7¼ inch riser with a 10½ inch tread is considered the gold standard."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do you calculate the number of stairs needed?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Divide the total rise (height from bottom floor to top floor) by the desired riser height (typically 7–7.5 inches). Round to the nearest whole number. For example: 108 inches total rise ÷ 7.25 inches per riser = 14.9, so you'd use 15 risers. Then divide 108 by 15 to get 7.2 inches per riser."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long should a stair stringer be?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Stringer length equals the hypotenuse of the total rise and total run triangle. Use the formula: Stringer = √(rise² + run²). For a staircase with 108 inches of rise and 150 inches of run, the stringer is √(108² + 150²) = √(11,664 + 22,500) = √34,164 = about 184.8 inches, or 15 feet 5 inches."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the 7-11 rule for stairs?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The 7-11 rule is a guideline stating that risers should be no more than 7¾ inches high and treads no less than 10 inches deep (11 inches including nosing). This comes from the IRC building code and ensures stairs are safe and comfortable. The variation between the tallest and shortest riser in a staircase should not exceed ⅜ inch."
+        }
+      }
+    ]
+  }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root { --orange: #F97316; --orange-dark: #EA580C; --darker: #0F0F1A; --dark-card: #1A1A2E; --gray: #94A3B8; --light: #F8FAFC; --green: #22C55E; --red: #EF4444; --border: rgba(255,255,255,0.08); }
+    body { font-family: 'Inter', -apple-system, sans-serif; background: var(--darker); color: var(--light); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+    nav { padding: 20px 0; border-bottom: 1px solid var(--border); }
+    nav .container { display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.3rem; color: var(--orange); text-decoration: none; letter-spacing: -0.5px; }
+    .logo span { color: var(--light); }
+    .nav-links a { color: var(--gray); text-decoration: none; font-size: 0.9rem; margin-left: 24px; }
+    .nav-links a:hover { color: var(--light); }
+    .hero { padding: 48px 0 32px; text-align: center; }
+    .hero .badge { display: inline-block; background: rgba(249,115,22,0.1); border: 1px solid rgba(249,115,22,0.3); color: var(--orange); font-size: 0.8rem; font-weight: 600; padding: 6px 16px; border-radius: 100px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .hero h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 800; line-height: 1.15; letter-spacing: -1px; margin-bottom: 12px; }
+    .hero h1 .highlight { color: var(--orange); }
+    .hero p { color: var(--gray); font-size: 1.05rem; max-width: 600px; margin: 0 auto; }
+    .calc-section { padding: 24px 0 40px; }
+    .calc-card { background: var(--dark-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; margin-bottom: 24px; }
+    .calc-card h2 { font-size: 1.2rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+    .calc-card h2 .icon { font-size: 1.4rem; }
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-size: 0.85rem; color: var(--gray); margin-bottom: 6px; font-weight: 500; }
+    .form-group input, .form-group select { width: 100%; padding: 12px 16px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 10px; color: var(--light); font-size: 1rem; font-family: inherit; outline: none; transition: border 0.2s; }
+    .form-group input:focus, .form-group select:focus { border-color: var(--orange); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .form-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+    @media (max-width: 600px) { .form-row, .form-row-3 { grid-template-columns: 1fr; } }
+    .btn { display: inline-block; padding: 14px 32px; background: var(--orange); color: #fff; font-weight: 700; font-size: 1rem; border: none; border-radius: 10px; cursor: pointer; transition: background 0.2s, transform 0.1s; font-family: inherit; width: 100%; }
+    .btn:hover { background: var(--orange-dark); transform: translateY(-1px); }
+    .results { display: none; margin-top: 24px; }
+    .results.show { display: block; }
+    .result-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; margin-bottom: 16px; }
+    .result-item { background: rgba(249,115,22,0.08); border: 1px solid rgba(249,115,22,0.2); border-radius: 12px; padding: 16px; text-align: center; }
+    .result-item .value { font-size: 1.4rem; font-weight: 800; color: var(--orange); }
+    .result-item .label { font-size: 0.78rem; color: var(--gray); margin-top: 4px; }
+    .code-check { margin-top: 16px; padding: 16px; border-radius: 12px; }
+    .code-pass { background: rgba(34,197,94,0.08); border: 1px solid rgba(34,197,94,0.3); }
+    .code-fail { background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.3); }
+    .code-check h3 { font-size: 0.95rem; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+    .code-check ul { font-size: 0.85rem; color: var(--gray); margin-left: 20px; }
+    .code-check li { margin-bottom: 4px; }
+    .code-check .pass { color: var(--green); }
+    .code-check .fail { color: var(--red); }
+    .diagram-card { background: var(--dark-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; margin-bottom: 24px; }
+    canvas { width: 100%; max-width: 500px; display: block; margin: 16px auto; }
+    .seo-content { padding: 40px 0 60px; }
+    .seo-content h2 { font-size: 1.5rem; font-weight: 800; margin-bottom: 16px; letter-spacing: -0.5px; }
+    .seo-content h3 { font-size: 1.1rem; font-weight: 700; margin: 24px 0 10px; color: var(--orange); }
+    .seo-content p { color: var(--gray); margin-bottom: 14px; line-height: 1.8; }
+    .seo-content ul, .seo-content ol { color: var(--gray); margin: 10px 0 16px 24px; }
+    .seo-content li { margin-bottom: 6px; }
+    .seo-content table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+    .seo-content table th, .seo-content table td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+    .seo-content table th { color: var(--gray); font-weight: 600; }
+    footer { border-top: 1px solid var(--border); padding: 32px 0; text-align: center; color: var(--gray); font-size: 0.85rem; }
+    footer a { color: var(--orange); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <nav><div class="container"><a href="/" class="logo">Built<span>Right</span></a><div class="nav-links"><a href="/blog/">Blog</a><a href="/tools/">Tools</a><a href="/templates/">Templates</a></div></div></nav>
+
+  <section class="hero">
+    <div class="container">
+      <span class="badge">Free Calculator</span>
+      <h1>Stair Calculator — <span class="highlight">Rise, Run</span> & Stringer Length</h1>
+      <p>Enter total rise to get number of steps, riser height, tread depth, stringer length, stair angle, and IRC building code compliance check.</p>
+    </div>
+  </section>
+
+  <section class="calc-section">
+    <div class="container">
+      <div class="calc-card">
+        <h2><span class="icon">🪜</span> Stair Dimensions</h2>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Total Rise — floor to floor (inches)</label>
+            <input type="number" id="totalRise" placeholder="e.g., 108" step="0.125">
+          </div>
+          <div class="form-group">
+            <label>Desired Riser Height (inches)</label>
+            <input type="number" id="desiredRiser" placeholder="7.25" value="7.25" step="0.125">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Tread Depth (inches, excluding nosing)</label>
+            <input type="number" id="treadDepth" placeholder="10" value="10" step="0.25">
+          </div>
+          <div class="form-group">
+            <label>Nosing (inches)</label>
+            <input type="number" id="nosing" placeholder="1.25" value="1.25" step="0.125">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Stair Width (inches)</label>
+            <input type="number" id="stairWidth" placeholder="36" value="36" step="1">
+          </div>
+          <div class="form-group">
+            <label>Stringer Board Size</label>
+            <select id="stringerBoard">
+              <option value="11.25">2×12 (standard)</option>
+              <option value="9.25">2×10</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn" onclick="calculate()">Calculate Stairs</button>
+
+        <div class="results" id="results">
+          <div class="result-grid">
+            <div class="result-item"><div class="value" id="numRisers">—</div><div class="label">Risers</div></div>
+            <div class="result-item"><div class="value" id="numTreads">—</div><div class="label">Treads</div></div>
+            <div class="result-item"><div class="value" id="riserHeight">—</div><div class="label">Riser Height</div></div>
+            <div class="result-item"><div class="value" id="totalRun">—</div><div class="label">Total Run</div></div>
+            <div class="result-item"><div class="value" id="stringerLen">—</div><div class="label">Stringer Length</div></div>
+            <div class="result-item"><div class="value" id="stairAngle">—</div><div class="label">Angle</div></div>
+          </div>
+
+          <div class="code-check" id="codeCheck"></div>
+
+          <h3 style="font-size:1rem; margin:20px 0 12px; color:var(--gray);">Materials Needed</h3>
+          <table class="cost-table" style="width:100%; border-collapse:collapse;">
+            <thead><tr><th>Item</th><th>Qty</th><th>Notes</th></tr></thead>
+            <tbody id="materialsBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="diagram-card" id="diagramCard" style="display:none;">
+        <h2><span class="icon">📐</span> Stair Diagram</h2>
+        <canvas id="stairCanvas" width="500" height="400"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <section class="seo-content">
+    <div class="container">
+      <h2>How to Build Stairs: The Complete Guide</h2>
+      <p>Building stairs correctly is one of the most math-intensive tasks in construction. Get the calculations wrong and you'll end up with uneven risers, a code violation, or worse — a safety hazard. This guide walks you through every step, from measuring total rise to cutting stringers.</p>
+
+      <h3>Step 1: Measure Total Rise Accurately</h3>
+      <p>Total rise is the vertical distance from the finished floor at the bottom to the finished floor at the top. This is the most critical measurement — every other calculation depends on it.</p>
+      <ul>
+        <li>Measure from <strong>finished floor to finished floor</strong>, not subfloor to subfloor.</li>
+        <li>Account for flooring thickness if it hasn't been installed yet.</li>
+        <li>Measure at the exact location where the stairs will be.</li>
+        <li>Double-check by measuring from multiple points — floors are rarely perfectly level.</li>
+      </ul>
+
+      <h3>Step 2: Calculate Number of Risers</h3>
+      <p>Divide total rise by your target riser height (7.25 inches is ideal). Round to the nearest whole number. Then divide total rise by that number to get the exact riser height.</p>
+      <p><strong>Example:</strong> 108 inches ÷ 7.25 = 14.9 → round to 15 risers. Actual riser height: 108 ÷ 15 = 7.2 inches.</p>
+
+      <h3>Step 3: Determine Total Run</h3>
+      <p>Total run = number of treads × tread depth. Remember: you always have one fewer tread than risers (the top floor acts as the last tread).</p>
+      <p><strong>Example:</strong> 15 risers = 14 treads. At 10 inches each: 14 × 10 = 140 inches total run (11 feet 8 inches).</p>
+
+      <h3>IRC Building Code Requirements (2021)</h3>
+      <table>
+        <thead><tr><th>Requirement</th><th>Minimum</th><th>Maximum</th></tr></thead>
+        <tbody>
+          <tr><td>Riser Height</td><td>—</td><td>7¾ inches (196mm)</td></tr>
+          <tr><td>Tread Depth</td><td>10 inches (254mm)</td><td>—</td></tr>
+          <tr><td>Stair Width</td><td>36 inches (914mm)</td><td>—</td></tr>
+          <tr><td>Headroom</td><td>80 inches (2032mm)</td><td>—</td></tr>
+          <tr><td>Nosing</td><td>¾ inch</td><td>1¼ inch</td></tr>
+          <tr><td>Riser Variation</td><td>—</td><td>⅜ inch between any two risers</td></tr>
+          <tr><td>Handrail Height</td><td>34 inches</td><td>38 inches</td></tr>
+        </tbody>
+      </table>
+
+      <h3>The Comfort Rule: 2R + T = 24–25</h3>
+      <p>The most comfortable stairs follow this formula: <strong>(2 × Riser Height) + Tread Depth = 24 to 25 inches</strong>. A 7.25-inch riser with a 10.5-inch tread gives you 25 — right in the sweet spot. Stairs that feel "too steep" or "too shallow" almost always violate this rule.</p>
+
+      <h3>How to Cut Stair Stringers</h3>
+      <ol>
+        <li>Use 2×12 lumber (pressure-treated for exterior stairs). After cutting, you need at least 3.5 inches of solid wood remaining at the narrowest point.</li>
+        <li>Set a framing square to your riser height and tread depth. Use stair gauges to lock the measurements.</li>
+        <li>Mark each step on the stringer, starting from one end.</li>
+        <li>Cut the bottom of the first stringer to account for tread thickness (typically subtract 1–1.5 inches from the first riser).</li>
+        <li>Test-fit the first stringer before cutting the rest. Check that the first and last riser heights are equal.</li>
+        <li>Use the first stringer as a template for the remaining ones.</li>
+      </ol>
+
+      <h3>How Many Stringers Do You Need?</h3>
+      <table>
+        <thead><tr><th>Stair Width</th><th>Stringers Needed</th></tr></thead>
+        <tbody>
+          <tr><td>Up to 24 inches</td><td>2 stringers</td></tr>
+          <tr><td>24–36 inches</td><td>3 stringers</td></tr>
+          <tr><td>36–48 inches</td><td>3–4 stringers</td></tr>
+          <tr><td>Over 48 inches</td><td>4+ stringers (every 16 inches)</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Common Stair-Building Mistakes</h3>
+      <ul>
+        <li><strong>Not accounting for finish flooring:</strong> If the top floor gets ¾-inch hardwood but you measured to the subfloor, your last riser will be ¾ inch too short.</li>
+        <li><strong>Forgetting the bottom riser adjustment:</strong> The bottom riser must be shortened by the tread thickness, or the first step will be taller than the rest.</li>
+        <li><strong>Uneven risers:</strong> Even a ¼-inch variation creates a noticeable trip hazard. Measure and cut precisely.</li>
+        <li><strong>Using 2×10 stringers:</strong> 2×12s give you the required 3.5 inches of solid wood after cutting. 2×10s only work for short risers and shallow treads.</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer><div class="container"><p>© 2026 <a href="/">BuiltRight Academy</a> — Free tools for contractors and tradespeople.</p></div></footer>
+
+  <script>
+    function calculate() {
+      const totalRise = parseFloat(document.getElementById('totalRise').value);
+      const desiredRiser = parseFloat(document.getElementById('desiredRiser').value);
+      const treadDepth = parseFloat(document.getElementById('treadDepth').value);
+      const nosing = parseFloat(document.getElementById('nosing').value) || 0;
+      const stairWidth = parseFloat(document.getElementById('stairWidth').value) || 36;
+      const stringerBoard = parseFloat(document.getElementById('stringerBoard').value);
+
+      if (!totalRise || !desiredRiser || !treadDepth) return alert('Please fill in total rise, riser height, and tread depth.');
+
+      const numRisers = Math.round(totalRise / desiredRiser);
+      const numTreads = numRisers - 1;
+      const actualRiser = totalRise / numRisers;
+      const totalRun = numTreads * treadDepth;
+      const stringerLength = Math.sqrt(totalRise * totalRise + totalRun * totalRun);
+      const angle = Math.atan(totalRise / totalRun) * (180 / Math.PI);
+
+      // Calculate remaining wood after cut
+      const hyp = Math.sqrt(actualRiser * actualRiser + treadDepth * treadDepth);
+      const remainingWood = stringerBoard - (actualRiser * treadDepth / hyp + treadDepth * actualRiser / hyp);
+
+      document.getElementById('numRisers').textContent = numRisers;
+      document.getElementById('numTreads').textContent = numTreads;
+      document.getElementById('riserHeight').textContent = actualRiser.toFixed(3) + '"';
+      document.getElementById('totalRun').textContent = (totalRun / 12).toFixed(1) + ' ft';
+      document.getElementById('stringerLen').textContent = (stringerLength / 12).toFixed(1) + ' ft';
+      document.getElementById('stairAngle').textContent = angle.toFixed(1) + '°';
+
+      // Code compliance check
+      const checks = [];
+      const riserOk = actualRiser <= 7.75;
+      const treadOk = treadDepth >= 10;
+      const widthOk = stairWidth >= 36;
+      const nosingOk = nosing >= 0.75 && nosing <= 1.25;
+      const allPass = riserOk && treadOk && widthOk && nosingOk;
+      const comfortScore = 2 * actualRiser + treadDepth;
+
+      checks.push(`<li class="${riserOk ? 'pass' : 'fail'}">${riserOk ? '✓' : '✗'} Riser height: ${actualRiser.toFixed(2)}" (max 7.75")</li>`);
+      checks.push(`<li class="${treadOk ? 'pass' : 'fail'}">${treadOk ? '✓' : '✗'} Tread depth: ${treadDepth}" (min 10")</li>`);
+      checks.push(`<li class="${widthOk ? 'pass' : 'fail'}">${widthOk ? '✓' : '✗'} Stair width: ${stairWidth}" (min 36")</li>`);
+      checks.push(`<li class="${nosingOk ? 'pass' : 'fail'}">${nosingOk ? '✓' : '✗'} Nosing: ${nosing}" (0.75"–1.25")</li>`);
+      const comfortOk = comfortScore >= 24 && comfortScore <= 25;
+      checks.push(`<li class="${comfortOk ? 'pass' : 'fail'}">${comfortOk ? '✓' : '△'} Comfort rule (2R+T): ${comfortScore.toFixed(1)} (ideal 24–25)</li>`);
+
+      const codeDiv = document.getElementById('codeCheck');
+      codeDiv.className = `code-check ${allPass ? 'code-pass' : 'code-fail'}`;
+      codeDiv.innerHTML = `<h3>${allPass ? '✅' : '⚠️'} IRC Building Code Check</h3><ul>${checks.join('')}</ul>`;
+
+      // Determine stringers needed
+      let numStringers = stairWidth <= 24 ? 2 : stairWidth <= 36 ? 3 : Math.ceil(stairWidth / 16) + 1;
+      const stringerFt = Math.ceil(stringerLength / 12);
+
+      document.getElementById('materialsBody').innerHTML = `
+        <tr><td>Stringers (2×12 × ${stringerFt}ft)</td><td>${numStringers}</td><td>Pressure-treated for exterior</td></tr>
+        <tr><td>Treads (${treadDepth + nosing}" wide × ${stairWidth}" long)</td><td>${numTreads}</td><td>Use 5/4 deck boards or 2× lumber</td></tr>
+        <tr><td>Risers (${actualRiser.toFixed(2)}" × ${stairWidth}")</td><td>${numRisers}</td><td>1× lumber; open risers OK on some decks</td></tr>
+        <tr><td>Handrail (${(stringerLength / 12).toFixed(1)} ft)</td><td>${stairWidth > 44 ? 2 : 1}</td><td>34–38" height per code</td></tr>
+        <tr><td>Structural screws / lag bolts</td><td>—</td><td>For stringer-to-header and landing connections</td></tr>
+      `;
+
+      document.getElementById('results').classList.add('show');
+
+      // Draw diagram
+      drawDiagram(numRisers, actualRiser, treadDepth, totalRise, totalRun);
+      document.getElementById('diagramCard').style.display = 'block';
+      document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function drawDiagram(risers, riserH, treadD, totalRise, totalRun) {
+      const canvas = document.getElementById('stairCanvas');
+      const ctx = canvas.getContext('2d');
+      const w = canvas.width, h = canvas.height;
+      ctx.clearRect(0, 0, w, h);
+
+      const pad = 50;
+      const drawW = w - pad * 2;
+      const drawH = h - pad * 2;
+      const scaleX = drawW / totalRun;
+      const scaleY = drawH / totalRise;
+      const scale = Math.min(scaleX, scaleY);
+
+      const startX = pad;
+      const startY = h - pad;
+
+      // Draw stair steps
+      ctx.strokeStyle = '#F97316';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(startX, startY);
+      for (let i = 0; i < risers; i++) {
+        const x1 = startX + i * treadD * scale;
+        const y1 = startY - i * riserH * scale;
+        const y2 = startY - (i + 1) * riserH * scale;
+        ctx.lineTo(x1, y2); // riser (vertical)
+        if (i < risers - 1) {
+          ctx.lineTo(x1 + treadD * scale, y2); // tread (horizontal)
+        } else {
+          ctx.lineTo(x1 + treadD * scale * 0.5, y2); // last landing
+        }
+      }
+      ctx.stroke();
+
+      // Draw stringer line
+      ctx.strokeStyle = 'rgba(148,163,184,0.4)';
+      ctx.lineWidth = 1;
+      ctx.setLineDash([5, 5]);
+      ctx.beginPath();
+      ctx.moveTo(startX, startY);
+      ctx.lineTo(startX + totalRun * scale, startY - totalRise * scale);
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      // Labels
+      ctx.fillStyle = '#94A3B8';
+      ctx.font = '12px Inter, sans-serif';
+      ctx.textAlign = 'center';
+
+      // Total run label
+      ctx.fillText(`Total Run: ${(totalRun / 12).toFixed(1)} ft`, startX + totalRun * scale / 2, startY + 30);
+
+      // Total rise label
+      ctx.save();
+      ctx.translate(startX - 30, startY - totalRise * scale / 2);
+      ctx.rotate(-Math.PI / 2);
+      ctx.fillText(`Total Rise: ${(totalRise / 12).toFixed(1)} ft`, 0, 0);
+      ctx.restore();
+
+      // Label a riser and tread
+      if (risers > 1) {
+        const midStep = Math.floor(risers / 2);
+        const rx = startX + midStep * treadD * scale + treadD * scale / 2;
+        const ry = startY - midStep * riserH * scale - riserH * scale / 2;
+        ctx.fillStyle = '#F97316';
+        ctx.font = '11px Inter, sans-serif';
+        ctx.fillText(`${riserH.toFixed(2)}"`, rx - treadD * scale / 2 - 25, ry);
+        ctx.fillText(`${treadD}"`, rx, ry + riserH * scale / 2 + 15);
+      }
+    }
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
+</body>
+</html>

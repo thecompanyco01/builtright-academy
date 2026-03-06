@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fence Calculator — Posts, Pickets, Rails & Cost | BuiltRight Academy</title>
+  <meta name="description" content="Free fence calculator. Enter linear feet and fence height to get posts, pickets, rails, concrete, and cost. Works for wood, vinyl, and chain link fences. 2026 pricing.">
+  <meta name="keywords" content="fence calculator, fence cost calculator, how many fence pickets do I need, fence post calculator, fence material calculator, fence estimator">
+  <link rel="canonical" href="https://builtright-academy.vercel.app/tools/fence-calculator">
+  <meta property="og:title" content="Fence Calculator — Posts, Pickets, Rails & Cost">
+  <meta property="og:description" content="Free fence calculator. Get exact material quantities and cost for wood, vinyl, and chain link fences.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Fence Calculator",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "description": "Calculate fence materials including posts, pickets, rails, concrete, and hardware. Get cost estimates for wood privacy, picket, vinyl, and chain link fences."
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How much does a fence cost per linear foot?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Wood privacy fences cost $15–$35 per linear foot installed, vinyl fences $25–$50, chain link $10–$25, and aluminum $25–$55. Materials alone run roughly 40–60% of the installed price. A 150-foot wood privacy fence typically costs $2,500–$5,000 installed in 2026."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How many pickets do I need for a fence?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For a privacy fence with no gaps, divide total linear feet by picket width (typically 5.5 inches or 0.458 feet for a standard 1×6 picket). For 100 linear feet: 100 ÷ 0.458 = 219 pickets. For a picket fence with 2-inch gaps, divide by (picket width + gap width). Add 5–10% for waste."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How deep should fence posts be?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Fence posts should be buried at least 1/3 of their total length. For a 6-foot fence, use 8-foot posts buried 24–30 inches deep. For a 4-foot fence, use 6-foot posts buried 18–24 inches deep. In cold climates, posts must be set below the frost line — typically 36–48 inches in northern states."
+        }
+      }
+    ]
+  }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root { --orange: #F97316; --orange-dark: #EA580C; --darker: #0F0F1A; --dark-card: #1A1A2E; --gray: #94A3B8; --light: #F8FAFC; --green: #22C55E; --border: rgba(255,255,255,0.08); }
+    body { font-family: 'Inter', -apple-system, sans-serif; background: var(--darker); color: var(--light); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+    nav { padding: 20px 0; border-bottom: 1px solid var(--border); }
+    nav .container { display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.3rem; color: var(--orange); text-decoration: none; letter-spacing: -0.5px; }
+    .logo span { color: var(--light); }
+    .nav-links a { color: var(--gray); text-decoration: none; font-size: 0.9rem; margin-left: 24px; }
+    .nav-links a:hover { color: var(--light); }
+    .hero { padding: 48px 0 32px; text-align: center; }
+    .hero .badge { display: inline-block; background: rgba(249,115,22,0.1); border: 1px solid rgba(249,115,22,0.3); color: var(--orange); font-size: 0.8rem; font-weight: 600; padding: 6px 16px; border-radius: 100px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .hero h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 800; line-height: 1.15; letter-spacing: -1px; margin-bottom: 12px; }
+    .hero h1 .highlight { color: var(--orange); }
+    .hero p { color: var(--gray); font-size: 1.05rem; max-width: 600px; margin: 0 auto; }
+    .calc-section { padding: 24px 0 60px; }
+    .calc-card { background: var(--dark-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; margin-bottom: 24px; }
+    .calc-card h2 { font-size: 1.2rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-size: 0.85rem; color: var(--gray); margin-bottom: 6px; font-weight: 500; }
+    .form-group input, .form-group select { width: 100%; padding: 12px 16px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 10px; color: var(--light); font-size: 1rem; font-family: inherit; outline: none; }
+    .form-group input:focus, .form-group select:focus { border-color: var(--orange); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    @media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
+    .btn { display: inline-block; padding: 14px 32px; background: var(--orange); color: #fff; font-weight: 700; font-size: 1rem; border: none; border-radius: 10px; cursor: pointer; font-family: inherit; width: 100%; }
+    .btn:hover { background: var(--orange-dark); }
+    .results { display: none; margin-top: 24px; }
+    .results.show { display: block; }
+    .result-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; margin-bottom: 16px; }
+    .result-item { background: rgba(249,115,22,0.08); border: 1px solid rgba(249,115,22,0.2); border-radius: 12px; padding: 16px; text-align: center; }
+    .result-item .value { font-size: 1.4rem; font-weight: 800; color: var(--orange); }
+    .result-item .label { font-size: 0.78rem; color: var(--gray); margin-top: 4px; }
+    .cost-table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+    .cost-table th, .cost-table td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+    .cost-table th { color: var(--gray); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; }
+    .cost-table td:last-child { text-align: right; font-weight: 600; }
+    .seo-content { padding: 40px 0 60px; }
+    .seo-content h2 { font-size: 1.5rem; font-weight: 800; margin-bottom: 16px; }
+    .seo-content h3 { font-size: 1.1rem; font-weight: 700; margin: 24px 0 10px; color: var(--orange); }
+    .seo-content p { color: var(--gray); margin-bottom: 14px; line-height: 1.8; }
+    .seo-content ul, .seo-content ol { color: var(--gray); margin: 10px 0 16px 24px; }
+    .seo-content li { margin-bottom: 6px; }
+    .seo-content table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+    .seo-content table th, .seo-content table td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+    .seo-content table th { color: var(--gray); font-weight: 600; }
+    footer { border-top: 1px solid var(--border); padding: 32px 0; text-align: center; color: var(--gray); font-size: 0.85rem; }
+    footer a { color: var(--orange); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <nav><div class="container"><a href="/" class="logo">Built<span>Right</span></a><div class="nav-links"><a href="/blog/">Blog</a><a href="/tools/">Tools</a><a href="/templates/">Templates</a></div></div></nav>
+
+  <section class="hero">
+    <div class="container">
+      <span class="badge">Free Calculator</span>
+      <h1>Fence Calculator — <span class="highlight">Materials</span> & Cost Estimator</h1>
+      <p>Enter total fence length and style to get exact quantities for posts, pickets, rails, concrete, and hardware with cost estimates.</p>
+    </div>
+  </section>
+
+  <section class="calc-section">
+    <div class="container">
+      <div class="calc-card">
+        <h2>🪵 Fence Details</h2>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Total Fence Length (linear feet)</label>
+            <input type="number" id="totalLength" placeholder="e.g., 150" step="1">
+          </div>
+          <div class="form-group">
+            <label>Number of Gates</label>
+            <input type="number" id="numGates" placeholder="e.g., 1" value="1" step="1">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Fence Type</label>
+            <select id="fenceType" onchange="updateFields()">
+              <option value="privacy6" data-height="6" data-rails="3" data-postspace="8">6 ft Wood Privacy</option>
+              <option value="privacy4" data-height="4" data-rails="2" data-postspace="8">4 ft Wood Privacy</option>
+              <option value="picket4" data-height="4" data-rails="2" data-postspace="8">4 ft Wood Picket (gaps)</option>
+              <option value="picket3" data-height="3" data-rails="2" data-postspace="8">3 ft Wood Picket (gaps)</option>
+              <option value="boardonboard" data-height="6" data-rails="3" data-postspace="8">6 ft Board-on-Board</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Post Spacing (feet)</label>
+            <select id="postSpacing">
+              <option value="6">6 ft (stronger, more posts)</option>
+              <option value="8" selected>8 ft (standard)</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Picket Width (inches)</label>
+            <select id="picketWidth">
+              <option value="3.5">3.5" (1×4)</option>
+              <option value="5.5" selected>5.5" (1×6)</option>
+            </select>
+          </div>
+          <div class="form-group" id="gapGroup" style="display:none;">
+            <label>Gap Between Pickets (inches)</label>
+            <input type="number" id="picketGap" value="2" step="0.25">
+          </div>
+        </div>
+        <button class="btn" onclick="calculate()">Calculate Fence Materials</button>
+
+        <div class="results" id="results">
+          <div class="result-grid">
+            <div class="result-item"><div class="value" id="posts">—</div><div class="label">Posts</div></div>
+            <div class="result-item"><div class="value" id="pickets">—</div><div class="label">Pickets</div></div>
+            <div class="result-item"><div class="value" id="rails">—</div><div class="label">Rails</div></div>
+            <div class="result-item"><div class="value" id="concrete">—</div><div class="label">Concrete Bags</div></div>
+          </div>
+          <h3 style="font-size:1rem; margin-bottom:12px; color:var(--gray);">Materials & Cost Estimate</h3>
+          <table class="cost-table">
+            <thead><tr><th>Material</th><th>Qty</th><th>Est. Cost</th></tr></thead>
+            <tbody id="costBody"></tbody>
+          </table>
+          <p style="font-size:0.8rem; color:var(--gray); margin-top:8px;">*2026 national average pricing for pressure-treated lumber. Cedar costs 30–50% more. Prices vary by region.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="seo-content">
+    <div class="container">
+      <h2>How to Estimate Fence Materials</h2>
+      <p>Building a fence requires precise material estimates. Short a few pickets and you're making an extra trip to the lumber yard. Too many extras and you've got wasted lumber. Here's how to get it right every time.</p>
+
+      <h3>Fence Cost Comparison (2026, installed)</h3>
+      <table>
+        <thead><tr><th>Fence Type</th><th>Materials/ft</th><th>Installed/ft</th><th>150 ft Total</th></tr></thead>
+        <tbody>
+          <tr><td>6 ft Wood Privacy (PT pine)</td><td>$8–$15</td><td>$18–$35</td><td>$2,700–$5,250</td></tr>
+          <tr><td>6 ft Wood Privacy (cedar)</td><td>$12–$22</td><td>$25–$45</td><td>$3,750–$6,750</td></tr>
+          <tr><td>4 ft Wood Picket</td><td>$5–$10</td><td>$12–$25</td><td>$1,800–$3,750</td></tr>
+          <tr><td>6 ft Vinyl Privacy</td><td>$15–$30</td><td>$25–$50</td><td>$3,750–$7,500</td></tr>
+          <tr><td>4 ft Chain Link</td><td>$5–$12</td><td>$10–$25</td><td>$1,500–$3,750</td></tr>
+          <tr><td>4 ft Aluminum</td><td>$15–$30</td><td>$25–$55</td><td>$3,750–$8,250</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Post Depth by Fence Height</h3>
+      <table>
+        <thead><tr><th>Fence Height</th><th>Post Length</th><th>Hole Depth</th><th>Hole Diameter</th></tr></thead>
+        <tbody>
+          <tr><td>3 ft</td><td>5 ft</td><td>18–24 in</td><td>8 in</td></tr>
+          <tr><td>4 ft</td><td>6 ft</td><td>24 in</td><td>8–10 in</td></tr>
+          <tr><td>6 ft</td><td>8 ft</td><td>24–30 in</td><td>10–12 in</td></tr>
+          <tr><td>8 ft</td><td>10–12 ft</td><td>30–36 in</td><td>12 in</td></tr>
+        </tbody>
+      </table>
+      <p><strong>Cold climates:</strong> Posts must be set below the frost line (36–48 inches in northern states) to prevent heaving.</p>
+
+      <h3>Wood Fence Construction Tips</h3>
+      <ol>
+        <li><strong>Set corner and end posts first.</strong> Run a string line between them to align intermediate posts perfectly.</li>
+        <li><strong>Use pressure-treated 4×4 posts</strong> (or 6×6 for gates and corners). Set in concrete — not gravel — for maximum stability.</li>
+        <li><strong>Two bags of concrete per post</strong> (80-lb bags) for standard 6-ft fences. Three bags per post for 8-ft privacy fences or gate posts.</li>
+        <li><strong>Use 2×4 rails</strong> (top, middle, bottom for 6-ft fences). Pre-cut 8-ft rails work perfectly with 8-ft post spacing.</li>
+        <li><strong>Pickets should sit 2 inches above ground</strong> to prevent rot and allow drainage.</li>
+        <li><strong>Use ring-shank or spiral nails</strong> — smooth nails will back out within 2 years. Screws are even better.</li>
+      </ol>
+
+      <h3>Money-Saving Tips</h3>
+      <ul>
+        <li><strong>DIY labor saves 40–60%.</strong> A 150-ft fence that costs $4,500 installed can be built for $1,800–$2,200 in materials.</li>
+        <li><strong>Pressure-treated pine is half the cost of cedar</strong> and lasts nearly as long when stained. Cedar looks better but costs 30–50% more.</li>
+        <li><strong>Buy lumber in bulk.</strong> Many yards offer 10–15% discounts on orders over $500.</li>
+        <li><strong>Rent a post hole digger</strong> ($50–$80/day) instead of buying or digging by hand. It'll save hours.</li>
+        <li><strong>Check property surveys.</strong> Building on your neighbor's property means tearing it down. Know your lot lines before you dig.</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer><div class="container"><p>© 2026 <a href="/">BuiltRight Academy</a> — Free tools for contractors and tradespeople.</p></div></footer>
+
+  <script>
+    function updateFields() {
+      const type = document.getElementById('fenceType').value;
+      const hasGaps = type.includes('picket');
+      document.getElementById('gapGroup').style.display = hasGaps ? 'block' : 'none';
+    }
+
+    function calculate() {
+      const totalLen = parseFloat(document.getElementById('totalLength').value);
+      const numGates = parseInt(document.getElementById('numGates').value) || 0;
+      if (!totalLen) return alert('Please enter total fence length.');
+
+      const fenceSelect = document.getElementById('fenceType');
+      const sel = fenceSelect.options[fenceSelect.selectedIndex];
+      const height = parseInt(sel.dataset.height);
+      const railCount = parseInt(sel.dataset.rails);
+      const postSpacing = parseInt(document.getElementById('postSpacing').value);
+      const picketWidthIn = parseFloat(document.getElementById('picketWidth').value);
+      const isPicket = fenceSelect.value.includes('picket');
+      const isBoardOnBoard = fenceSelect.value === 'boardonboard';
+      const gapIn = isPicket ? (parseFloat(document.getElementById('picketGap').value) || 2) : 0;
+
+      const gateWidth = 3.5; // feet per gate
+      const fenceLen = totalLen - (numGates * gateWidth);
+
+      // Posts
+      const numSections = Math.ceil(fenceLen / postSpacing);
+      const numPosts = numSections + 1 + numGates * 2; // extra posts for each gate
+
+      // Rails (2×4×8ft)
+      const totalRails = numSections * railCount;
+
+      // Pickets
+      const picketWidthFt = picketWidthIn / 12;
+      const gapFt = gapIn / 12;
+      let numPickets;
+      if (isBoardOnBoard) {
+        // Board-on-board uses ~1.6x pickets (overlapping)
+        numPickets = Math.ceil(fenceLen / picketWidthFt * 1.1); // front + overlap back
+        numPickets = Math.ceil(numPickets * 1.6);
+      } else if (isPicket) {
+        numPickets = Math.ceil(fenceLen / (picketWidthFt + gapFt));
+      } else {
+        numPickets = Math.ceil(fenceLen / picketWidthFt);
+      }
+      numPickets = Math.ceil(numPickets * 1.05); // 5% waste
+
+      // Concrete (2 bags per post for standard, 3 for tall/gate)
+      const bagsPerPost = height >= 6 ? 2 : 1.5;
+      const gateBags = numGates * 2 * 3; // gate posts get 3 bags each
+      const concreteBags = Math.ceil((numPosts - numGates * 2) * bagsPerPost + gateBags);
+
+      document.getElementById('posts').textContent = numPosts;
+      document.getElementById('pickets').textContent = numPickets;
+      document.getElementById('rails').textContent = totalRails;
+      document.getElementById('concrete').textContent = concreteBags;
+
+      // Cost estimates (pressure-treated pine)
+      const postLen = height <= 4 ? 6 : 8;
+      const postCost = postLen === 8 ? 14 : 10; // per post
+      const picketCost = height <= 4 ? 2.50 : 3.50; // per picket
+      const railCost = 6; // per 2×4×8
+      const concreteCost = 6.50; // per 80-lb bag
+      const nailsScrews = Math.ceil(numPickets * 0.15); // box of nails per ~7 pickets
+      const hardwareCost = numPosts * 1.50 + 25; // brackets, misc
+      const gateCost = numGates * 65; // gate kit
+
+      const totalMaterials = numPosts * postCost + numPickets * picketCost + totalRails * railCost + concreteBags * concreteCost + hardwareCost + gateCost;
+      const perFoot = totalMaterials / totalLen;
+
+      document.getElementById('costBody').innerHTML = `
+        <tr><td>Posts (4×4×${postLen}ft, pressure-treated)</td><td>${numPosts}</td><td>$${(numPosts * postCost).toFixed(0)}</td></tr>
+        <tr><td>Pickets (1×${picketWidthIn >= 5 ? '6' : '4'}×${height}ft)</td><td>${numPickets}</td><td>$${(numPickets * picketCost).toFixed(0)}</td></tr>
+        <tr><td>Rails (2×4×8ft)</td><td>${totalRails}</td><td>$${(totalRails * railCost).toFixed(0)}</td></tr>
+        <tr><td>Concrete (80-lb bags)</td><td>${concreteBags}</td><td>$${(concreteBags * concreteCost).toFixed(0)}</td></tr>
+        ${numGates > 0 ? `<tr><td>Gate kits</td><td>${numGates}</td><td>$${gateCost.toFixed(0)}</td></tr>` : ''}
+        <tr><td>Hardware, nails/screws</td><td>—</td><td>$${hardwareCost.toFixed(0)}</td></tr>
+        <tr style="font-weight:700;border-top:2px solid var(--orange);"><td>Total Materials</td><td></td><td style="color:var(--orange);">$${totalMaterials.toFixed(0)}</td></tr>
+        <tr><td>Per linear foot (materials)</td><td></td><td>$${perFoot.toFixed(2)}/ft</td></tr>
+        <tr><td>Estimated installed cost</td><td></td><td>$${(totalLen * (perFoot + 12)).toFixed(0)}–$${(totalLen * (perFoot + 20)).toFixed(0)}</td></tr>
+      `;
+      document.getElementById('results').classList.add('show');
+      document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gravel Calculator — How Much Gravel Do I Need? | BuiltRight Academy</title>
+  <meta name="description" content="Free gravel calculator. Enter your area dimensions and depth to get tons, cubic yards, and estimated cost. Works for driveways, paths, landscaping, and drainage. 2026 pricing.">
+  <meta name="keywords" content="gravel calculator, how much gravel do I need, gravel estimator, driveway gravel calculator, crushed stone calculator, gravel cost calculator">
+  <link rel="canonical" href="https://builtright-academy.vercel.app/tools/gravel-calculator">
+  <meta property="og:title" content="Gravel Calculator — How Much Gravel Do I Need?">
+  <meta property="og:description" content="Free interactive gravel calculator. Get tons, cubic yards, and cost estimate for driveways, paths, and landscaping.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Gravel Calculator",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "description": "Calculate how much gravel you need in tons and cubic yards. Get cost estimates for driveways, paths, landscaping, and drainage projects."
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How much gravel do I need for a driveway?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For a standard single-car driveway (10 ft × 50 ft) with 4 inches of gravel, you need about 2.5 tons or 0.62 cubic yards. A two-car driveway (20 ft × 50 ft) needs roughly 5 tons. Always add 10% extra for compaction and settling."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much does a ton of gravel cost?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Gravel costs $15–$75 per ton depending on the type. Crushed limestone runs $30–$45/ton, pea gravel $25–$55/ton, and decorative gravel $50–$100/ton. Delivery typically adds $50–$150 per load. Buying by the truckload (10–20 tons) gets the best per-ton pricing."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How many tons of gravel are in a cubic yard?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Gravel weighs approximately 1.3 to 1.5 tons per cubic yard, depending on the type and moisture content. Crushed stone averages about 1.4 tons per cubic yard. Pea gravel is slightly lighter at about 1.3 tons per cubic yard."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How deep should gravel be for a driveway?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A gravel driveway should be 4–6 inches deep, typically built in 3 layers: 4 inches of #3 crushed stone base, 2 inches of #57 stone middle layer, and 2 inches of #411 or pea gravel top layer. For light foot traffic paths, 2–3 inches is sufficient."
+        }
+      }
+    ]
+  }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root { --orange: #F97316; --orange-dark: #EA580C; --darker: #0F0F1A; --dark-card: #1A1A2E; --gray: #94A3B8; --light: #F8FAFC; --green: #22C55E; --border: rgba(255,255,255,0.08); }
+    body { font-family: 'Inter', -apple-system, sans-serif; background: var(--darker); color: var(--light); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+    nav { padding: 20px 0; border-bottom: 1px solid var(--border); }
+    nav .container { display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.3rem; color: var(--orange); text-decoration: none; letter-spacing: -0.5px; }
+    .logo span { color: var(--light); }
+    .nav-links a { color: var(--gray); text-decoration: none; font-size: 0.9rem; margin-left: 24px; }
+    .nav-links a:hover { color: var(--light); }
+    .hero { padding: 48px 0 32px; text-align: center; }
+    .hero .badge { display: inline-block; background: rgba(249,115,22,0.1); border: 1px solid rgba(249,115,22,0.3); color: var(--orange); font-size: 0.8rem; font-weight: 600; padding: 6px 16px; border-radius: 100px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .hero h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 800; line-height: 1.15; letter-spacing: -1px; margin-bottom: 12px; }
+    .hero h1 .highlight { color: var(--orange); }
+    .hero p { color: var(--gray); font-size: 1.05rem; max-width: 600px; margin: 0 auto; }
+    .calc-section { padding: 24px 0 60px; }
+    .calc-card { background: var(--dark-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; margin-bottom: 24px; }
+    .calc-card h2 { font-size: 1.2rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+    .calc-card h2 .icon { font-size: 1.4rem; }
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-size: 0.85rem; color: var(--gray); margin-bottom: 6px; font-weight: 500; }
+    .form-group input, .form-group select { width: 100%; padding: 12px 16px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 10px; color: var(--light); font-size: 1rem; font-family: inherit; outline: none; transition: border 0.2s; }
+    .form-group input:focus, .form-group select:focus { border-color: var(--orange); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    @media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
+    .btn { display: inline-block; padding: 14px 32px; background: var(--orange); color: #fff; font-weight: 700; font-size: 1rem; border: none; border-radius: 10px; cursor: pointer; transition: background 0.2s, transform 0.1s; font-family: inherit; width: 100%; }
+    .btn:hover { background: var(--orange-dark); transform: translateY(-1px); }
+    .results { display: none; margin-top: 24px; }
+    .results.show { display: block; }
+    .result-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-bottom: 16px; }
+    .result-item { background: rgba(249,115,22,0.08); border: 1px solid rgba(249,115,22,0.2); border-radius: 12px; padding: 16px; text-align: center; }
+    .result-item .value { font-size: 1.6rem; font-weight: 800; color: var(--orange); }
+    .result-item .label { font-size: 0.8rem; color: var(--gray); margin-top: 4px; }
+    .cost-table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+    .cost-table th, .cost-table td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+    .cost-table th { color: var(--gray); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; }
+    .cost-table td:last-child { text-align: right; font-weight: 600; }
+    .seo-content { padding: 40px 0 60px; }
+    .seo-content h2 { font-size: 1.5rem; font-weight: 800; margin-bottom: 16px; letter-spacing: -0.5px; }
+    .seo-content h3 { font-size: 1.1rem; font-weight: 700; margin: 24px 0 10px; color: var(--orange); }
+    .seo-content p { color: var(--gray); margin-bottom: 14px; line-height: 1.8; }
+    .seo-content ul, .seo-content ol { color: var(--gray); margin: 10px 0 16px 24px; }
+    .seo-content li { margin-bottom: 6px; }
+    .seo-content table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+    .seo-content table th, .seo-content table td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+    .seo-content table th { color: var(--gray); font-weight: 600; }
+    footer { border-top: 1px solid var(--border); padding: 32px 0; text-align: center; color: var(--gray); font-size: 0.85rem; }
+    footer a { color: var(--orange); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <nav><div class="container"><a href="/" class="logo">Built<span>Right</span></a><div class="nav-links"><a href="/blog/">Blog</a><a href="/tools/">Tools</a><a href="/templates/">Templates</a></div></div></nav>
+
+  <section class="hero">
+    <div class="container">
+      <span class="badge">Free Calculator</span>
+      <h1>Gravel Calculator — How Much <span class="highlight">Gravel</span> Do I Need?</h1>
+      <p>Enter your project dimensions to instantly calculate cubic yards, tons, and estimated cost for driveways, paths, landscaping, and drainage.</p>
+    </div>
+  </section>
+
+  <section class="calc-section">
+    <div class="container">
+      <div class="calc-card">
+        <h2><span class="icon">🪨</span> Project Dimensions</h2>
+        <div class="form-group">
+          <label>Project Type</label>
+          <select id="projectType">
+            <option value="rectangle">Rectangular Area (Driveway, Patio, Path)</option>
+            <option value="circle">Circular Area (Tree Ring, Fire Pit)</option>
+          </select>
+        </div>
+        <div id="rectFields">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Length (feet)</label>
+              <input type="number" id="length" placeholder="e.g., 50" step="0.1">
+            </div>
+            <div class="form-group">
+              <label>Width (feet)</label>
+              <input type="number" id="width" placeholder="e.g., 12" step="0.1">
+            </div>
+          </div>
+        </div>
+        <div id="circFields" style="display:none;">
+          <div class="form-group">
+            <label>Diameter (feet)</label>
+            <input type="number" id="diameter" placeholder="e.g., 8" step="0.1">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Depth (inches)</label>
+            <input type="number" id="depth" placeholder="e.g., 4" step="0.5" value="4">
+          </div>
+          <div class="form-group">
+            <label>Gravel Type</label>
+            <select id="gravelType">
+              <option value="crushed-stone" data-density="1.4" data-low="30" data-high="45">Crushed Stone / Limestone</option>
+              <option value="pea-gravel" data-density="1.3" data-low="25" data-high="55">Pea Gravel</option>
+              <option value="river-rock" data-density="1.35" data-low="40" data-high="75">River Rock</option>
+              <option value="decomposed-granite" data-density="1.35" data-low="35" data-high="50">Decomposed Granite</option>
+              <option value="crushed-concrete" data-density="1.3" data-low="15" data-high="30">Crushed / Recycled Concrete</option>
+              <option value="decorative" data-density="1.4" data-low="50" data-high="100">Decorative Gravel</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Add extra for compaction & waste</label>
+          <select id="extra">
+            <option value="1.0">No extra</option>
+            <option value="1.05">5% extra</option>
+            <option value="1.10" selected>10% extra (recommended)</option>
+            <option value="1.15">15% extra</option>
+          </select>
+        </div>
+        <button class="btn" onclick="calculate()">Calculate Gravel Needed</button>
+
+        <div class="results" id="results">
+          <div class="result-grid">
+            <div class="result-item"><div class="value" id="cubicYards">—</div><div class="label">Cubic Yards</div></div>
+            <div class="result-item"><div class="value" id="tons">—</div><div class="label">Tons</div></div>
+            <div class="result-item"><div class="value" id="cubicFeet">—</div><div class="label">Cubic Feet</div></div>
+            <div class="result-item"><div class="value" id="coverage">—</div><div class="label">Sq Ft Covered</div></div>
+          </div>
+          <h3 style="font-size:1rem; margin-bottom:12px; color:var(--gray);">Estimated Cost</h3>
+          <table class="cost-table">
+            <thead><tr><th>Material</th><th>Amount</th><th>Cost Range</th></tr></thead>
+            <tbody id="costBody"></tbody>
+          </table>
+          <p style="font-size:0.8rem; color:var(--gray); margin-top:8px;">*Prices are 2026 national averages. Local pricing varies. Delivery typically adds $50–$150 per load.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="seo-content">
+    <div class="container">
+      <h2>How to Calculate Gravel for Any Project</h2>
+      <p>Whether you're building a gravel driveway, filling a walkway, or laying a drainage bed, getting the right amount of gravel is essential. Too little means a second delivery trip (and double the delivery fee). Too much means wasted money sitting in your yard.</p>
+      <p>The formula is straightforward: <strong>Length × Width × Depth = Cubic Feet</strong>. Divide by 27 to get cubic yards. Multiply by the gravel density (about 1.4 tons per cubic yard for most types) to get tons.</p>
+
+      <h3>Gravel Depth Guide by Project</h3>
+      <table>
+        <thead><tr><th>Project</th><th>Recommended Depth</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td>Driveway</td><td>4–6 inches</td><td>Use 3 layers: base, middle, surface</td></tr>
+          <tr><td>Walking Path</td><td>2–3 inches</td><td>Lighter traffic needs less depth</td></tr>
+          <tr><td>Patio Base</td><td>4 inches</td><td>Compact thoroughly before paving</td></tr>
+          <tr><td>French Drain</td><td>6–12 inches</td><td>Use clean washed stone for drainage</td></tr>
+          <tr><td>Landscaping Bed</td><td>2–3 inches</td><td>Decorative gravel or river rock</td></tr>
+          <tr><td>Retaining Wall Backfill</td><td>12+ inches</td><td>Critical for drainage behind wall</td></tr>
+          <tr><td>Shed / Building Pad</td><td>4–6 inches</td><td>Level and compact with plate compactor</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Gravel Types and Cost Comparison (2026)</h3>
+      <table>
+        <thead><tr><th>Type</th><th>Cost per Ton</th><th>Best For</th></tr></thead>
+        <tbody>
+          <tr><td>Crushed Limestone</td><td>$30–$45</td><td>Driveways, base layers, parking areas</td></tr>
+          <tr><td>Pea Gravel</td><td>$25–$55</td><td>Walkways, patios, around pavers</td></tr>
+          <tr><td>River Rock</td><td>$40–$75</td><td>Landscaping, dry creek beds, decorative</td></tr>
+          <tr><td>Decomposed Granite</td><td>$35–$50</td><td>Pathways, xeriscape, rustic patios</td></tr>
+          <tr><td>Crushed Concrete</td><td>$15–$30</td><td>Budget driveways, base material</td></tr>
+          <tr><td>Decorative Gravel</td><td>$50–$100</td><td>Accent areas, high-visibility landscaping</td></tr>
+        </tbody>
+      </table>
+
+      <h3>How to Build a Proper Gravel Driveway</h3>
+      <p>A driveway that lasts requires three layers, each serving a different purpose:</p>
+      <ol>
+        <li><strong>Base layer (4 inches):</strong> #3 crushed stone (1.5–2 inch pieces). Provides structure and drainage. Compact with a plate compactor or roller.</li>
+        <li><strong>Middle layer (2 inches):</strong> #57 stone (¾–1 inch pieces). Fills gaps in the base and creates a stable transition layer.</li>
+        <li><strong>Surface layer (2 inches):</strong> #411 crusher run or pea gravel. Provides the finished driving surface. Fine material locks together and reduces rutting.</li>
+      </ol>
+      <p>Total depth should be 6–8 inches. Expect roughly 1.5 tons of gravel per 100 square feet at 4 inches deep. For a 12 × 50 ft driveway, budget 7–9 tons total.</p>
+
+      <h3>Money-Saving Tips for Gravel Projects</h3>
+      <ul>
+        <li><strong>Buy by the truckload:</strong> Buying 10+ tons at once typically saves 20–30% per ton compared to small loads.</li>
+        <li><strong>Use recycled concrete:</strong> At $15–$30/ton, it's the cheapest option and works great for base layers and low-visibility areas.</li>
+        <li><strong>Get multiple delivery quotes:</strong> Delivery fees vary wildly. Some yards include delivery over a certain tonnage.</li>
+        <li><strong>Compact properly:</strong> Well-compacted gravel needs less material to achieve the same depth and lasts longer.</li>
+        <li><strong>Add fabric underneath:</strong> Landscape fabric ($0.10–$0.30/sq ft) prevents gravel from sinking into soil, saving you from having to add more later.</li>
+      </ul>
+
+      <h3>Coverage: How Far Does a Ton of Gravel Go?</h3>
+      <p>One ton of gravel covers approximately:</p>
+      <ul>
+        <li><strong>2 inches deep:</strong> 100 sq ft</li>
+        <li><strong>3 inches deep:</strong> 70 sq ft</li>
+        <li><strong>4 inches deep:</strong> 50 sq ft</li>
+        <li><strong>6 inches deep:</strong> 35 sq ft</li>
+      </ul>
+      <p>These are approximate figures for typical crushed stone. Lighter materials like pea gravel cover slightly more area per ton.</p>
+    </div>
+  </section>
+
+  <footer><div class="container"><p>© 2026 <a href="/">BuiltRight Academy</a> — Free tools for contractors and tradespeople.</p></div></footer>
+
+  <script>
+    document.getElementById('projectType').addEventListener('change', function() {
+      document.getElementById('rectFields').style.display = this.value === 'rectangle' ? 'block' : 'none';
+      document.getElementById('circFields').style.display = this.value === 'circle' ? 'block' : 'none';
+    });
+
+    function calculate() {
+      const type = document.getElementById('projectType').value;
+      const depthIn = parseFloat(document.getElementById('depth').value);
+      const extra = parseFloat(document.getElementById('extra').value);
+      const gravelSelect = document.getElementById('gravelType');
+      const selected = gravelSelect.options[gravelSelect.selectedIndex];
+      const density = parseFloat(selected.dataset.density);
+      const priceLow = parseFloat(selected.dataset.low);
+      const priceHigh = parseFloat(selected.dataset.high);
+
+      let sqft;
+      if (type === 'rectangle') {
+        const l = parseFloat(document.getElementById('length').value);
+        const w = parseFloat(document.getElementById('width').value);
+        if (!l || !w || !depthIn) return alert('Please fill in all fields.');
+        sqft = l * w;
+      } else {
+        const d = parseFloat(document.getElementById('diameter').value);
+        if (!d || !depthIn) return alert('Please fill in all fields.');
+        sqft = Math.PI * Math.pow(d / 2, 2);
+      }
+
+      const depthFt = depthIn / 12;
+      const cubicFeet = sqft * depthFt * extra;
+      const cubicYards = cubicFeet / 27;
+      const tons = cubicYards * density;
+
+      document.getElementById('cubicYards').textContent = cubicYards.toFixed(2);
+      document.getElementById('tons').textContent = tons.toFixed(2);
+      document.getElementById('cubicFeet').textContent = cubicFeet.toFixed(1);
+      document.getElementById('coverage').textContent = sqft.toFixed(0);
+
+      const costLow = tons * priceLow;
+      const costHigh = tons * priceHigh;
+      const deliveryLow = 50;
+      const deliveryHigh = 150;
+
+      const costBody = document.getElementById('costBody');
+      costBody.innerHTML = `
+        <tr><td>${selected.textContent}</td><td>${tons.toFixed(2)} tons</td><td>$${costLow.toFixed(0)} – $${costHigh.toFixed(0)}</td></tr>
+        <tr><td>Delivery (estimated)</td><td>1 load</td><td>$${deliveryLow} – $${deliveryHigh}</td></tr>
+        <tr style="font-weight:700;border-top:2px solid var(--orange);"><td>Total Estimated Cost</td><td></td><td style="color:var(--orange);">$${(costLow + deliveryLow).toFixed(0)} – $${(costHigh + deliveryHigh).toFixed(0)}</td></tr>
+      `;
+      document.getElementById('results').classList.add('show');
+      document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
+</body>
+</html>

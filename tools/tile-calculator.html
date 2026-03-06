@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tile Calculator — How Much Tile Do I Need? | BuiltRight Academy</title>
+  <meta name="description" content="Free tile calculator. Enter room dimensions and tile size to get exact quantity, boxes, and cost. Accounts for waste, grout lines, and cuts. For floors, walls, backsplashes, and showers.">
+  <meta name="keywords" content="tile calculator, how much tile do I need, tile estimator, floor tile calculator, backsplash tile calculator, tile cost calculator, tile square footage calculator">
+  <link rel="canonical" href="https://builtright-academy.vercel.app/tools/tile-calculator">
+  <meta property="og:title" content="Tile Calculator — How Much Tile Do I Need?">
+  <meta property="og:description" content="Free tile calculator. Get exact tile count, boxes, and cost estimate for any project. Accounts for waste and cuts.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Tile Calculator",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "description": "Calculate how many tiles you need for floors, walls, and backsplashes. Get tile count, boxes needed, and cost estimates with waste factor."
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do I calculate how many tiles I need?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Measure the area in square feet (length × width). Calculate the area of one tile in square feet (tile length × tile width ÷ 144 for inch measurements). Divide the room area by the tile area to get the number of tiles. Add 10% for straight layouts or 15% for diagonal/pattern layouts to account for cuts and waste."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much extra tile should I buy for waste?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For straight/grid layouts, add 10% extra. For diagonal layouts, add 15%. For herringbone or complex patterns, add 15–20%. For rooms with many cuts (around cabinets, doorways, toilet flanges), add 15% minimum. Always keep a few extra tiles for future repairs."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much does tile installation cost?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Tile installation costs $5–$15 per square foot for labor in 2026. Materials (tile, thinset, grout, backer board) add another $2–$15+ per square foot depending on tile quality. Total installed cost ranges from $7–$30/sq ft for standard projects. Large-format tiles and complex patterns cost more to install."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I calculate tile for a backsplash?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Measure the width and height of each section of backsplash in inches. Multiply to get square inches, then divide by 144 to convert to square feet. Subtract any areas you won't tile (behind the stove hood, windows). Add 15% for waste since backsplashes involve many cuts around outlets and corners."
+        }
+      }
+    ]
+  }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root { --orange: #F97316; --orange-dark: #EA580C; --darker: #0F0F1A; --dark-card: #1A1A2E; --gray: #94A3B8; --light: #F8FAFC; --green: #22C55E; --border: rgba(255,255,255,0.08); }
+    body { font-family: 'Inter', -apple-system, sans-serif; background: var(--darker); color: var(--light); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+    nav { padding: 20px 0; border-bottom: 1px solid var(--border); }
+    nav .container { display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.3rem; color: var(--orange); text-decoration: none; letter-spacing: -0.5px; }
+    .logo span { color: var(--light); }
+    .nav-links a { color: var(--gray); text-decoration: none; font-size: 0.9rem; margin-left: 24px; }
+    .nav-links a:hover { color: var(--light); }
+    .hero { padding: 48px 0 32px; text-align: center; }
+    .hero .badge { display: inline-block; background: rgba(249,115,22,0.1); border: 1px solid rgba(249,115,22,0.3); color: var(--orange); font-size: 0.8rem; font-weight: 600; padding: 6px 16px; border-radius: 100px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .hero h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 800; line-height: 1.15; letter-spacing: -1px; margin-bottom: 12px; }
+    .hero h1 .highlight { color: var(--orange); }
+    .hero p { color: var(--gray); font-size: 1.05rem; max-width: 600px; margin: 0 auto; }
+    .calc-section { padding: 24px 0 60px; }
+    .calc-card { background: var(--dark-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; margin-bottom: 24px; }
+    .calc-card h2 { font-size: 1.2rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+    .calc-card h2 .icon { font-size: 1.4rem; }
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-size: 0.85rem; color: var(--gray); margin-bottom: 6px; font-weight: 500; }
+    .form-group input, .form-group select { width: 100%; padding: 12px 16px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 10px; color: var(--light); font-size: 1rem; font-family: inherit; outline: none; transition: border 0.2s; }
+    .form-group input:focus, .form-group select:focus { border-color: var(--orange); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    @media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
+    .btn { display: inline-block; padding: 14px 32px; background: var(--orange); color: #fff; font-weight: 700; font-size: 1rem; border: none; border-radius: 10px; cursor: pointer; transition: background 0.2s, transform 0.1s; font-family: inherit; width: 100%; }
+    .btn:hover { background: var(--orange-dark); transform: translateY(-1px); }
+    .results { display: none; margin-top: 24px; }
+    .results.show { display: block; }
+    .result-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; margin-bottom: 16px; }
+    .result-item { background: rgba(249,115,22,0.08); border: 1px solid rgba(249,115,22,0.2); border-radius: 12px; padding: 16px; text-align: center; }
+    .result-item .value { font-size: 1.4rem; font-weight: 800; color: var(--orange); }
+    .result-item .label { font-size: 0.78rem; color: var(--gray); margin-top: 4px; }
+    .cost-table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+    .cost-table th, .cost-table td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+    .cost-table th { color: var(--gray); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; }
+    .cost-table td:last-child { text-align: right; font-weight: 600; }
+    .seo-content { padding: 40px 0 60px; }
+    .seo-content h2 { font-size: 1.5rem; font-weight: 800; margin-bottom: 16px; letter-spacing: -0.5px; }
+    .seo-content h3 { font-size: 1.1rem; font-weight: 700; margin: 24px 0 10px; color: var(--orange); }
+    .seo-content p { color: var(--gray); margin-bottom: 14px; line-height: 1.8; }
+    .seo-content ul, .seo-content ol { color: var(--gray); margin: 10px 0 16px 24px; }
+    .seo-content li { margin-bottom: 6px; }
+    .seo-content table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+    .seo-content table th, .seo-content table td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+    .seo-content table th { color: var(--gray); font-weight: 600; }
+    footer { border-top: 1px solid var(--border); padding: 32px 0; text-align: center; color: var(--gray); font-size: 0.85rem; }
+    footer a { color: var(--orange); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <nav><div class="container"><a href="/" class="logo">Built<span>Right</span></a><div class="nav-links"><a href="/blog/">Blog</a><a href="/tools/">Tools</a><a href="/templates/">Templates</a></div></div></nav>
+
+  <section class="hero">
+    <div class="container">
+      <span class="badge">Free Calculator</span>
+      <h1>Tile Calculator — How Many <span class="highlight">Tiles</span> Do I Need?</h1>
+      <p>Enter room dimensions and tile size to get exact tile count, boxes needed, and cost estimate. Accounts for waste, grout lines, and layout pattern.</p>
+    </div>
+  </section>
+
+  <section class="calc-section">
+    <div class="container">
+      <div class="calc-card">
+        <h2><span class="icon">🔲</span> Room / Area Dimensions</h2>
+        <div class="form-group">
+          <label>Project Type</label>
+          <select id="projectType" onchange="toggleFields()">
+            <option value="floor">Floor (length × width)</option>
+            <option value="wall">Wall / Backsplash (width × height)</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label id="dim1Label">Room Length (feet)</label>
+            <input type="number" id="dim1" placeholder="e.g., 12" step="0.1">
+          </div>
+          <div class="form-group">
+            <label id="dim2Label">Room Width (feet)</label>
+            <input type="number" id="dim2" placeholder="e.g., 10" step="0.1">
+          </div>
+        </div>
+      </div>
+
+      <div class="calc-card">
+        <h2><span class="icon">📏</span> Tile Details</h2>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Tile Size</label>
+            <select id="tileSize">
+              <option value="1x1">1" × 1" (Mosaic)</option>
+              <option value="2x2">2" × 2" (Mosaic)</option>
+              <option value="3x6">3" × 6" (Subway)</option>
+              <option value="4x4">4" × 4"</option>
+              <option value="4x12">4" × 12" (Subway)</option>
+              <option value="6x6">6" × 6"</option>
+              <option value="6x24">6" × 24" (Plank)</option>
+              <option value="8x8">8" × 8"</option>
+              <option value="12x12" selected>12" × 12"</option>
+              <option value="12x24">12" × 24"</option>
+              <option value="13x13">13" × 13"</option>
+              <option value="16x16">16" × 16"</option>
+              <option value="18x18">18" × 18"</option>
+              <option value="24x24">24" × 24"</option>
+              <option value="custom">Custom Size</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Grout Line Width (inches)</label>
+            <select id="groutWidth">
+              <option value="0.0625">1/16" (minimal)</option>
+              <option value="0.125" selected>1/8" (standard)</option>
+              <option value="0.1875">3/16"</option>
+              <option value="0.25">1/4" (wide)</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row" id="customTileFields" style="display:none;">
+          <div class="form-group">
+            <label>Tile Width (inches)</label>
+            <input type="number" id="customW" placeholder="e.g., 12" step="0.25">
+          </div>
+          <div class="form-group">
+            <label>Tile Height (inches)</label>
+            <input type="number" id="customH" placeholder="e.g., 12" step="0.25">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Layout Pattern</label>
+            <select id="layout">
+              <option value="straight">Straight / Grid (10% waste)</option>
+              <option value="diagonal">Diagonal / 45° (15% waste)</option>
+              <option value="herringbone">Herringbone (15% waste)</option>
+              <option value="brick">Brick / Offset (12% waste)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Tiles Per Box</label>
+            <input type="number" id="tilesPerBox" placeholder="e.g., 12" value="12">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Tile Cost (per sq ft)</label>
+            <input type="number" id="tileCostSqft" placeholder="e.g., 5" step="0.01" value="5">
+          </div>
+          <div class="form-group">
+            <label>Installation Cost (per sq ft, optional)</label>
+            <input type="number" id="installCost" placeholder="e.g., 8" step="0.01" value="8">
+          </div>
+        </div>
+        <button class="btn" onclick="calculate()">Calculate Tiles Needed</button>
+
+        <div class="results" id="results">
+          <div class="result-grid">
+            <div class="result-item"><div class="value" id="totalTiles">—</div><div class="label">Total Tiles</div></div>
+            <div class="result-item"><div class="value" id="totalBoxes">—</div><div class="label">Boxes</div></div>
+            <div class="result-item"><div class="value" id="totalSqft">—</div><div class="label">Area (sq ft)</div></div>
+            <div class="result-item"><div class="value" id="wasteTiles">—</div><div class="label">Waste Tiles</div></div>
+          </div>
+          <h3 style="font-size:1rem; margin-bottom:12px; color:var(--gray);">Cost Breakdown</h3>
+          <table class="cost-table">
+            <thead><tr><th>Item</th><th>Details</th><th>Cost</th></tr></thead>
+            <tbody id="costBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="seo-content">
+    <div class="container">
+      <h2>How to Calculate Tile for Any Project</h2>
+      <p>Getting the right amount of tile is crucial — running short mid-project means a trip back to the store and risking a different dye lot. Buying too much wastes money. This guide covers the exact math for floors, walls, backsplashes, and showers.</p>
+
+      <h3>The Basic Formula</h3>
+      <p><strong>Area (sq ft) = Length × Width</strong></p>
+      <p>Then: <strong>Number of Tiles = Area ÷ Tile Size (in sq ft)</strong> + waste percentage</p>
+      <p>For grout lines, add the grout width to each tile dimension before calculating coverage. A 12×12 tile with 1/8" grout lines effectively covers 12.125 × 12.125 inches — which adds up over large areas.</p>
+
+      <h3>Waste Percentages by Layout</h3>
+      <table>
+        <thead><tr><th>Layout Pattern</th><th>Waste %</th><th>Why</th></tr></thead>
+        <tbody>
+          <tr><td>Straight / Grid</td><td>10%</td><td>Simplest cuts, least waste</td></tr>
+          <tr><td>Brick / Running Bond</td><td>12%</td><td>Offset cuts at walls</td></tr>
+          <tr><td>Diagonal (45°)</td><td>15%</td><td>Every edge requires an angle cut</td></tr>
+          <tr><td>Herringbone</td><td>15–20%</td><td>Complex cuts at all edges</td></tr>
+          <tr><td>Chevron</td><td>18–20%</td><td>Mitered cuts, high precision needed</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Tile Sizes: What Works Where</h3>
+      <table>
+        <thead><tr><th>Size</th><th>Best For</th><th>Price Range/sq ft</th></tr></thead>
+        <tbody>
+          <tr><td>1"×1" – 2"×2" Mosaic</td><td>Shower floors, accents, backsplashes</td><td>$5–$25</td></tr>
+          <tr><td>3"×6" Subway</td><td>Backsplashes, shower walls, classic look</td><td>$2–$10</td></tr>
+          <tr><td>12"×12"</td><td>Floors, walls — the versatile standard</td><td>$2–$12</td></tr>
+          <tr><td>12"×24"</td><td>Modern floors, fewer grout lines, spacious feel</td><td>$3–$15</td></tr>
+          <tr><td>6"×24" – 8"×48" Planks</td><td>Wood-look floors, trending in 2026</td><td>$3–$12</td></tr>
+          <tr><td>24"×24" Large Format</td><td>Open floor plans, commercial spaces</td><td>$5–$20</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Materials Checklist Beyond Tile</h3>
+      <p>Don't forget these essential supplies when estimating your project budget:</p>
+      <ul>
+        <li><strong>Thinset morite:</strong> 1 bag (50 lb) covers ~60–80 sq ft. Budget $15–$30/bag.</li>
+        <li><strong>Grout:</strong> 1 bag (25 lb) covers ~75–200 sq ft depending on tile size and joint width. $12–$25/bag.</li>
+        <li><strong>Backer board:</strong> Required over plywood subfloors. $10–$15 per 3×5 sheet. You need one sheet per 15 sq ft.</li>
+        <li><strong>Tile spacers:</strong> $3–$8 per bag. Get the size matching your grout line width.</li>
+        <li><strong>Sealer:</strong> For natural stone and unglazed porcelain. $15–$30 per quart.</li>
+        <li><strong>Transition strips:</strong> Where tile meets other flooring. $5–$20 each.</li>
+      </ul>
+
+      <h3>Pro Tips for Accurate Tile Estimation</h3>
+      <ul>
+        <li><strong>Measure each wall or section separately</strong> — especially for backsplashes with windows, outlets, and varied heights.</li>
+        <li><strong>Subtract areas you won't tile:</strong> vanity footprint, toilet flange, window openings. But keep the waste factor — it already accounts for this.</li>
+        <li><strong>Always round up to full boxes.</strong> You can't buy partial boxes, and leftover tiles are cheap insurance for future repairs.</li>
+        <li><strong>Check the dye lot.</strong> Tiles from different manufacturing batches may have slight color differences. Buy everything at once.</li>
+        <li><strong>Large-format tiles cost more to install</strong> because they require a flat substrate, more thinset, and careful handling.</li>
+      </ul>
+
+      <h3>DIY vs. Professional Installation</h3>
+      <table>
+        <thead><tr><th></th><th>DIY</th><th>Professional</th></tr></thead>
+        <tbody>
+          <tr><td>Cost (per sq ft)</td><td>$2–$8 (materials only)</td><td>$7–$25 (materials + labor)</td></tr>
+          <tr><td>Time (100 sq ft bathroom)</td><td>2–4 days</td><td>1–2 days</td></tr>
+          <tr><td>Tools Needed</td><td>Wet saw, trowels, spacers, level</td><td>Included</td></tr>
+          <tr><td>Best For</td><td>Simple floors, subway backsplashes</td><td>Complex patterns, large format, showers</td></tr>
+          <tr><td>Risk</td><td>Lippage, uneven grout, waterproofing errors</td><td>Low (if contractor is qualified)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer><div class="container"><p>© 2026 <a href="/">BuiltRight Academy</a> — Free tools for contractors and tradespeople.</p></div></footer>
+
+  <script>
+    function toggleFields() {
+      const type = document.getElementById('projectType').value;
+      document.getElementById('dim1Label').textContent = type === 'floor' ? 'Room Length (feet)' : 'Wall Width (feet)';
+      document.getElementById('dim2Label').textContent = type === 'floor' ? 'Room Width (feet)' : 'Wall Height (feet)';
+    }
+
+    document.getElementById('tileSize').addEventListener('change', function() {
+      document.getElementById('customTileFields').style.display = this.value === 'custom' ? 'grid' : 'none';
+    });
+
+    function calculate() {
+      const d1 = parseFloat(document.getElementById('dim1').value);
+      const d2 = parseFloat(document.getElementById('dim2').value);
+      if (!d1 || !d2) return alert('Please enter dimensions.');
+
+      const areaSqft = d1 * d2;
+      const groutWidth = parseFloat(document.getElementById('groutWidth').value);
+
+      let tileW, tileH;
+      const sizeVal = document.getElementById('tileSize').value;
+      if (sizeVal === 'custom') {
+        tileW = parseFloat(document.getElementById('customW').value);
+        tileH = parseFloat(document.getElementById('customH').value);
+        if (!tileW || !tileH) return alert('Please enter custom tile dimensions.');
+      } else {
+        const parts = sizeVal.split('x');
+        tileW = parseFloat(parts[0]);
+        tileH = parseFloat(parts[1]);
+      }
+
+      // Tile area with grout
+      const effectiveW = (tileW + groutWidth) / 12; // in feet
+      const effectiveH = (tileH + groutWidth) / 12;
+      const tileAreaSqft = effectiveW * effectiveH;
+
+      const layout = document.getElementById('layout').value;
+      const wasteMap = { straight: 0.10, diagonal: 0.15, herringbone: 0.15, brick: 0.12 };
+      const wastePct = wasteMap[layout] || 0.10;
+
+      const tilesNeeded = Math.ceil(areaSqft / tileAreaSqft);
+      const wasteTiles = Math.ceil(tilesNeeded * wastePct);
+      const totalTiles = tilesNeeded + wasteTiles;
+      const tilesPerBox = parseInt(document.getElementById('tilesPerBox').value) || 12;
+      const totalBoxes = Math.ceil(totalTiles / tilesPerBox);
+
+      const tileCost = parseFloat(document.getElementById('tileCostSqft').value) || 0;
+      const installCost = parseFloat(document.getElementById('installCost').value) || 0;
+
+      const materialCost = areaSqft * tileCost * (1 + wastePct);
+      const laborCost = areaSqft * installCost;
+      const thinsetBags = Math.ceil(areaSqft / 70);
+      const groutBags = Math.ceil(areaSqft / 100);
+      const supplyCost = thinsetBags * 22 + groutBags * 18 + 15; // spacers etc.
+
+      document.getElementById('totalTiles').textContent = totalTiles;
+      document.getElementById('totalBoxes').textContent = totalBoxes;
+      document.getElementById('totalSqft').textContent = areaSqft.toFixed(1);
+      document.getElementById('wasteTiles').textContent = wasteTiles + ` (${Math.round(wastePct * 100)}%)`;
+
+      document.getElementById('costBody').innerHTML = `
+        <tr><td>Tile (${areaSqft.toFixed(0)} sq ft + ${Math.round(wastePct*100)}% waste)</td><td>${totalTiles} tiles / ${totalBoxes} boxes</td><td>$${materialCost.toFixed(0)}</td></tr>
+        <tr><td>Thinset (50 lb bags)</td><td>${thinsetBags} bags</td><td>$${(thinsetBags * 22).toFixed(0)}</td></tr>
+        <tr><td>Grout (25 lb bags)</td><td>${groutBags} bags</td><td>$${(groutBags * 18).toFixed(0)}</td></tr>
+        <tr><td>Spacers, sealer, misc</td><td>—</td><td>~$15</td></tr>
+        ${installCost > 0 ? `<tr><td>Installation labor</td><td>${areaSqft.toFixed(0)} sq ft × $${installCost}/sqft</td><td>$${laborCost.toFixed(0)}</td></tr>` : ''}
+        <tr style="font-weight:700;border-top:2px solid var(--orange);"><td>Total Estimated Cost</td><td></td><td style="color:var(--orange);">$${(materialCost + supplyCost + laborCost).toFixed(0)}</td></tr>
+      `;
+      document.getElementById('results').classList.add('show');
+      document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
+</body>
+</html>
