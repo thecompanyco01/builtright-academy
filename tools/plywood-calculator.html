@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plywood Calculator — Sheets, Waste & Cost Estimator | BuiltRight Academy</title>
+  <meta name="description" content="Free plywood calculator. Enter area dimensions to get number of 4×8 sheets needed, waste factor, and cost by grade. CDX, sanded, marine, OSB — 2026 pricing.">
+  <meta name="keywords" content="plywood calculator, how many sheets of plywood, plywood cost calculator, plywood sheet calculator, how much plywood do I need, OSB calculator">
+  <link rel="canonical" href="https://builtright-academy.vercel.app/tools/plywood-calculator">
+  <meta property="og:title" content="Plywood Calculator — Sheets, Waste & Cost Estimator">
+  <meta property="og:description" content="Free plywood calculator. Get exact sheet counts and cost estimates for CDX, sanded, marine plywood, and OSB.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Plywood Calculator",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "description": "Calculate how many 4×8 plywood sheets you need for any project. Includes waste factor and cost estimates for CDX, sanded, marine plywood, and OSB."
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the difference between CDX, sanded, and marine plywood?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "CDX plywood is construction-grade with a rough surface, rated for exposure to moisture during construction (the 'X' stands for exposure). It's the most affordable and used for subfloors, roof sheathing, and wall sheathing. Sanded plywood (A/B or B/C grade) has a smooth face suitable for cabinets, shelving, and furniture. Marine plywood uses waterproof glue and void-free cores — it's designed for boat building and permanent moisture exposure. Marine costs 3–4× more than CDX but won't delaminate in wet conditions."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What thickness of plywood do I need?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Thickness depends on the application: 1/4-inch for cabinet backs, drawer bottoms, and paneling; 3/8-inch for light shelving and wall sheathing; 1/2-inch for standard shelving, cabinet sides, and light subfloor; 5/8-inch for roof sheathing (most code-required minimum); 3/4-inch for subfloors, heavy shelving, workbenches, and structural applications; 1-inch for heavy-duty countertops and industrial use. When in doubt, go thicker — it's stronger and holds screws better."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is OSB cheaper than plywood? Which should I use?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "OSB (oriented strand board) is typically 15–30% cheaper than CDX plywood. For wall and roof sheathing, OSB performs equally well and meets all building codes. However, OSB swells more when exposed to moisture and takes longer to dry, so plywood is better for subfloors in moisture-prone areas (bathrooms, kitchens). For structural sheathing where cost matters and moisture isn't a concern, OSB is the smart choice. For subfloors, most contractors prefer plywood."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How many sheets of plywood do I need for a 10×10 room?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A 10×10 room is 100 square feet. Each 4×8 sheet covers 32 square feet. So 100 ÷ 32 = 3.13 sheets. Add 10% waste: 3.13 × 1.10 = 3.44, round up to 4 sheets. For subfloor, you'd need four 3/4-inch sheets. For wall sheathing, you'd calculate wall area instead — four 8-foot walls at 10 feet wide = 320 sq ft = 10 sheets of 1/2-inch sheathing."
+        }
+      }
+    ]
+  }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root { --orange: #F97316; --orange-dark: #EA580C; --darker: #0F0F1A; --dark-card: #1A1A2E; --gray: #94A3B8; --light: #F8FAFC; --green: #22C55E; --border: rgba(255,255,255,0.08); }
+    body { font-family: 'Inter', -apple-system, sans-serif; background: var(--darker); color: var(--light); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+    nav { padding: 20px 0; border-bottom: 1px solid var(--border); }
+    nav .container { display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.3rem; color: var(--orange); text-decoration: none; letter-spacing: -0.5px; }
+    .logo span { color: var(--light); }
+    .nav-links a { color: var(--gray); text-decoration: none; font-size: 0.9rem; margin-left: 24px; }
+    .nav-links a:hover { color: var(--light); }
+    .hero { padding: 48px 0 32px; text-align: center; }
+    .hero .badge { display: inline-block; background: rgba(249,115,22,0.1); border: 1px solid rgba(249,115,22,0.3); color: var(--orange); font-size: 0.8rem; font-weight: 600; padding: 6px 16px; border-radius: 100px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .hero h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 800; line-height: 1.15; letter-spacing: -1px; margin-bottom: 12px; }
+    .hero h1 .highlight { color: var(--orange); }
+    .hero p { color: var(--gray); font-size: 1.05rem; max-width: 600px; margin: 0 auto; }
+    .calc-section { padding: 24px 0 60px; }
+    .calc-card { background: var(--dark-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; margin-bottom: 24px; }
+    .calc-card h2 { font-size: 1.2rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-size: 0.85rem; color: var(--gray); margin-bottom: 6px; font-weight: 500; }
+    .form-group input, .form-group select { width: 100%; padding: 12px 16px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 10px; color: var(--light); font-size: 1rem; font-family: inherit; outline: none; }
+    .form-group input:focus, .form-group select:focus { border-color: var(--orange); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    @media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
+    .btn { display: inline-block; padding: 14px 32px; background: var(--orange); color: #fff; font-weight: 700; font-size: 1rem; border: none; border-radius: 10px; cursor: pointer; font-family: inherit; width: 100%; }
+    .btn:hover { background: var(--orange-dark); }
+    .results { display: none; margin-top: 24px; }
+    .results.show { display: block; }
+    .result-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; margin-bottom: 16px; }
+    .result-item { background: rgba(249,115,22,0.08); border: 1px solid rgba(249,115,22,0.2); border-radius: 12px; padding: 16px; text-align: center; }
+    .result-item .value { font-size: 1.4rem; font-weight: 800; color: var(--orange); }
+    .result-item .label { font-size: 0.78rem; color: var(--gray); margin-top: 4px; }
+    .cost-table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+    .cost-table th, .cost-table td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+    .cost-table th { color: var(--gray); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; }
+    .cost-table td:last-child { text-align: right; font-weight: 600; }
+    .input-mode { display: flex; gap: 8px; margin-bottom: 16px; }
+    .input-mode button { flex: 1; padding: 10px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 10px; color: var(--gray); font-size: 0.9rem; font-family: inherit; cursor: pointer; }
+    .input-mode button.active { background: rgba(249,115,22,0.15); border-color: var(--orange); color: var(--orange); font-weight: 600; }
+    .seo-content { padding: 40px 0 60px; }
+    .seo-content h2 { font-size: 1.5rem; font-weight: 800; margin-bottom: 16px; }
+    .seo-content h3 { font-size: 1.1rem; font-weight: 700; margin: 24px 0 10px; color: var(--orange); }
+    .seo-content p { color: var(--gray); margin-bottom: 14px; line-height: 1.8; }
+    .seo-content ul, .seo-content ol { color: var(--gray); margin: 10px 0 16px 24px; }
+    .seo-content li { margin-bottom: 6px; }
+    .seo-content table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+    .seo-content table th, .seo-content table td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+    .seo-content table th { color: var(--gray); font-weight: 600; }
+    footer { border-top: 1px solid var(--border); padding: 32px 0; text-align: center; color: var(--gray); font-size: 0.85rem; }
+    footer a { color: var(--orange); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <nav><div class="container"><a href="/" class="logo">Built<span>Right</span></a><div class="nav-links"><a href="/blog/">Blog</a><a href="/tools/">Tools</a><a href="/templates/">Templates</a></div></div></nav>
+
+  <section class="hero">
+    <div class="container">
+      <span class="badge">Free Calculator</span>
+      <h1>Plywood Calculator — <span class="highlight">Sheets</span> & Cost Estimator</h1>
+      <p>Enter your project dimensions to get the exact number of 4×8 sheets, waste factor, and cost estimate by plywood grade and thickness.</p>
+    </div>
+  </section>
+
+  <section class="calc-section">
+    <div class="container">
+      <div class="calc-card">
+        <h2>🪵 Project Details</h2>
+        <div class="input-mode">
+          <button class="active" onclick="setMode('dims')" id="modeDims">Length × Width</button>
+          <button onclick="setMode('sqft')" id="modeSqft">Total Sq Ft</button>
+        </div>
+        <div id="dimsInput">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Length (feet)</label>
+              <input type="number" id="length" placeholder="e.g., 12" step="0.5">
+            </div>
+            <div class="form-group">
+              <label>Width (feet)</label>
+              <input type="number" id="width" placeholder="e.g., 10" step="0.5">
+            </div>
+          </div>
+        </div>
+        <div id="sqftInput" style="display:none;">
+          <div class="form-group">
+            <label>Total Area (square feet)</label>
+            <input type="number" id="totalSqft" placeholder="e.g., 120" step="1">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Plywood Thickness</label>
+            <select id="thickness">
+              <option value="0.25">1/4" (6mm)</option>
+              <option value="0.375">3/8" (9mm)</option>
+              <option value="0.5">1/2" (12mm)</option>
+              <option value="0.625">5/8" (15mm)</option>
+              <option value="0.75" selected>3/4" (18mm)</option>
+              <option value="1.0">1" (25mm)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Plywood Grade</label>
+            <select id="grade">
+              <option value="cdx">CDX (construction/sheathing)</option>
+              <option value="sanded">Sanded (A/B or B/C)</option>
+              <option value="marine">Marine Grade</option>
+              <option value="osb">OSB (oriented strand board)</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Waste Factor</label>
+          <select id="waste">
+            <option value="0.05">5% — Simple rectangular cuts</option>
+            <option value="0.10" selected>10% — Standard (recommended)</option>
+            <option value="0.15">15% — Complex cuts, angles, or L-shapes</option>
+            <option value="0.20">20% — Irregular shapes, lots of cutouts</option>
+          </select>
+        </div>
+        <button class="btn" onclick="calculate()">Calculate Plywood Needed</button>
+
+        <div class="results" id="results">
+          <div class="result-grid">
+            <div class="result-item"><div class="value" id="totalArea">—</div><div class="label">Total Sq Ft</div></div>
+            <div class="result-item"><div class="value" id="sheetsNeeded">—</div><div class="label">Sheets Needed</div></div>
+            <div class="result-item"><div class="value" id="wasteArea">—</div><div class="label">Waste (sq ft)</div></div>
+            <div class="result-item"><div class="value" id="estCost">—</div><div class="label">Est. Cost</div></div>
+          </div>
+          <h3 style="font-size:1rem; margin-bottom:12px; color:var(--gray);">Cost Breakdown</h3>
+          <table class="cost-table">
+            <thead><tr><th>Item</th><th>Details</th><th>Est. Cost</th></tr></thead>
+            <tbody id="costBody"></tbody>
+          </table>
+          <p style="font-size:0.8rem; color:var(--gray); margin-top:8px;">*2026 national average pricing. Prices vary by region, supplier, and market conditions. Marine plywood may require special order.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="seo-content">
+    <div class="container">
+      <h2>How to Calculate Plywood for Your Project</h2>
+      <p>Whether you're sheathing a roof, building a subfloor, or making cabinets, getting the right amount of plywood saves money and trips to the lumber yard. Each standard plywood sheet is 4 feet × 8 feet (32 square feet). Divide your total area by 32, add waste, and round up.</p>
+
+      <h3>Plywood Price Comparison (2026, per 4×8 sheet)</h3>
+      <table>
+        <thead><tr><th>Grade</th><th>1/4"</th><th>3/8"</th><th>1/2"</th><th>5/8"</th><th>3/4"</th><th>1"</th></tr></thead>
+        <tbody>
+          <tr><td>CDX (construction)</td><td>$18</td><td>$24</td><td>$32</td><td>$38</td><td>$45</td><td>$62</td></tr>
+          <tr><td>Sanded (A/B, B/C)</td><td>$28</td><td>$35</td><td>$45</td><td>$52</td><td>$60</td><td>$82</td></tr>
+          <tr><td>Marine Grade</td><td>$55</td><td>$68</td><td>$85</td><td>$98</td><td>$115</td><td>$155</td></tr>
+          <tr><td>OSB</td><td>—</td><td>$16</td><td>$22</td><td>$26</td><td>$32</td><td>—</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Plywood Thickness Guide — Which to Use</h3>
+      <table>
+        <thead><tr><th>Thickness</th><th>Common Uses</th><th>Max Joist/Stud Spacing</th></tr></thead>
+        <tbody>
+          <tr><td>1/4" (6mm)</td><td>Cabinet backs, drawer bottoms, paneling, underlayment</td><td>Must be glued to substrate</td></tr>
+          <tr><td>3/8" (9mm)</td><td>Wall sheathing, light shelving, craft projects</td><td>16" on center</td></tr>
+          <tr><td>1/2" (12mm)</td><td>Shelving, cabinet sides, wall sheathing, underlayment</td><td>16" on center</td></tr>
+          <tr><td>5/8" (15mm)</td><td>Roof sheathing, subfloor (light-duty), heavy shelving</td><td>24" on center</td></tr>
+          <tr><td>3/4" (18mm)</td><td>Subfloors, workbenches, cabinets, structural use</td><td>24" on center</td></tr>
+          <tr><td>1" (25mm)</td><td>Heavy-duty countertops, industrial shelving, specialty</td><td>32"+ on center</td></tr>
+        </tbody>
+      </table>
+
+      <h3>CDX vs Sanded vs Marine — How to Choose</h3>
+      <p><strong>CDX plywood</strong> is the workhorse of construction. The "C" and "D" refer to face grades (C is the better side, D is rougher), and "X" means exterior-rated glue. Use it for anything behind walls or under floors — subfloors, roof sheathing, wall sheathing. It's not pretty, but it's strong and cheap.</p>
+      <p><strong>Sanded plywood</strong> (cabinet-grade) has at least one smooth face. A/B grade means one near-perfect side (A) and one decent side (B). Use it for visible applications: cabinets, shelving, furniture, built-ins. It takes paint and stain beautifully.</p>
+      <p><strong>Marine plywood</strong> is the premium choice. It uses waterproof adhesive (not just water-resistant like CDX) and has void-free cores — no gaps or knotholes in the inner plies. This makes it ideal for boat building, outdoor furniture, docks, and anything permanently exposed to moisture. It costs 2–3× more than CDX.</p>
+
+      <h3>OSB vs Plywood — Which Is Better?</h3>
+      <p>OSB (oriented strand board) is made from compressed wood strands bonded with resin. It's cheaper than plywood and has more uniform strength because it doesn't have knots or grain direction. However:</p>
+      <ul>
+        <li><strong>OSB absorbs more moisture</strong> and swells along edges. Once wet, it takes much longer to dry than plywood.</li>
+        <li><strong>For roof and wall sheathing,</strong> OSB is perfectly acceptable and meets all building codes. Most new construction uses OSB here.</li>
+        <li><strong>For subfloors,</strong> plywood is generally better — especially in kitchens, bathrooms, and basements where moisture is a risk.</li>
+        <li><strong>OSB is NOT available</strong> in 1/4" or 1" thicknesses. Common sizes are 7/16", 1/2", 5/8", and 3/4".</li>
+        <li><strong>Price advantage:</strong> OSB typically costs 15–30% less than equivalent CDX plywood.</li>
+      </ul>
+
+      <h3>Pro Tips for Buying Plywood</h3>
+      <ol>
+        <li><strong>Always overestimate slightly.</strong> Running out mid-project means a trip to the store and possibly a different dye lot. 10% waste factor covers most projects.</li>
+        <li><strong>Check sheets for warping</strong> before buying. Sight down the edge like a rifle — any twist or bow means rejected cuts and wasted material.</li>
+        <li><strong>Actual thickness is smaller than nominal.</strong> A "3/4-inch" sheet is really 23/32" (about 18mm). This matters for joinery and dado cuts.</li>
+        <li><strong>Buy in bulk for discounts.</strong> Most lumber yards offer 5–10% off orders of 10+ sheets.</li>
+        <li><strong>Have sheets delivered for large orders.</strong> Delivery costs $50–$100 but saves your back and car — a single 3/4" sheet weighs 60–70 lbs.</li>
+        <li><strong>Store flat, not on edge.</strong> Leaning plywood against a wall causes it to warp within days.</li>
+      </ol>
+    </div>
+  </section>
+
+  <footer><div class="container"><p>© 2026 <a href="/">BuiltRight Academy</a> — Free tools for contractors and tradespeople.</p></div></footer>
+
+  <script>
+    // Price lookup: [grade][thickness]
+    const prices = {
+      cdx:    { '0.25': 18, '0.375': 24, '0.5': 32, '0.625': 38, '0.75': 45, '1': 62 },
+      sanded: { '0.25': 28, '0.375': 35, '0.5': 45, '0.625': 52, '0.75': 60, '1': 82 },
+      marine: { '0.25': 55, '0.375': 68, '0.5': 85, '0.625': 98, '0.75': 115, '1': 155 },
+      osb:    { '0.25': null, '0.375': 16, '0.5': 22, '0.625': 26, '0.75': 32, '1': null }
+    };
+
+    const thicknessLabels = { '0.25': '1/4"', '0.375': '3/8"', '0.5': '1/2"', '0.625': '5/8"', '0.75': '3/4"', '1': '1"' };
+    const gradeLabels = { cdx: 'CDX', sanded: 'Sanded', marine: 'Marine', osb: 'OSB' };
+
+    let mode = 'dims';
+
+    function setMode(m) {
+      mode = m;
+      document.getElementById('modeDims').classList.toggle('active', m === 'dims');
+      document.getElementById('modeSqft').classList.toggle('active', m === 'sqft');
+      document.getElementById('dimsInput').style.display = m === 'dims' ? 'block' : 'none';
+      document.getElementById('sqftInput').style.display = m === 'sqft' ? 'block' : 'none';
+    }
+
+    function calculate() {
+      let area;
+      if (mode === 'dims') {
+        const l = parseFloat(document.getElementById('length').value);
+        const w = parseFloat(document.getElementById('width').value);
+        if (!l || !w) return alert('Please enter length and width.');
+        area = l * w;
+      } else {
+        area = parseFloat(document.getElementById('totalSqft').value);
+        if (!area) return alert('Please enter total square feet.');
+      }
+
+      const thickness = document.getElementById('thickness').value;
+      const grade = document.getElementById('grade').value;
+      const wastePct = parseFloat(document.getElementById('waste').value);
+
+      const sheetArea = 32; // 4×8 = 32 sq ft
+      const wasteArea = area * wastePct;
+      const totalAreaWithWaste = area + wasteArea;
+      const sheets = Math.ceil(totalAreaWithWaste / sheetArea);
+
+      const pricePerSheet = prices[grade][thickness];
+      if (pricePerSheet === null) {
+        alert('OSB is not available in that thickness. Common OSB sizes are 3/8" through 3/4".');
+        return;
+      }
+      const totalCost = sheets * pricePerSheet;
+
+      document.getElementById('totalArea').textContent = area.toFixed(0);
+      document.getElementById('sheetsNeeded').textContent = sheets;
+      document.getElementById('wasteArea').textContent = wasteArea.toFixed(0);
+      document.getElementById('estCost').textContent = '$' + totalCost.toFixed(0);
+
+      const thickLabel = thicknessLabels[thickness];
+      const gradeLabel = gradeLabels[grade];
+
+      document.getElementById('costBody').innerHTML = `
+        <tr><td>${gradeLabel} Plywood (${thickLabel}, 4×8 sheets)</td><td>${sheets} sheets</td><td>$${totalCost.toFixed(0)}</td></tr>
+        <tr><td>Coverage area (before waste)</td><td>${area.toFixed(0)} sq ft</td><td>—</td></tr>
+        <tr><td>Waste factor (${(wastePct * 100).toFixed(0)}%)</td><td>${wasteArea.toFixed(0)} sq ft</td><td>—</td></tr>
+        <tr><td>Total coverage needed</td><td>${totalAreaWithWaste.toFixed(0)} sq ft</td><td>—</td></tr>
+        <tr><td>Actual coverage (${sheets} sheets × 32 sq ft)</td><td>${(sheets * sheetArea)} sq ft</td><td>—</td></tr>
+        <tr><td>Price per sheet</td><td>${thickLabel} ${gradeLabel}</td><td>$${pricePerSheet.toFixed(2)}</td></tr>
+        <tr><td>Price per sq ft</td><td>—</td><td>$${(pricePerSheet / sheetArea).toFixed(2)}/sq ft</td></tr>
+        <tr style="font-weight:700;border-top:2px solid var(--orange);"><td>Total Estimated Cost</td><td>${sheets} sheets</td><td style="color:var(--orange);">$${totalCost.toFixed(0)}</td></tr>
+      `;
+      document.getElementById('results').classList.add('show');
+      document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cubic Yard Calculator — Volume, Weight & Material Estimates | BuiltRight Academy</title>
+  <meta name="description" content="Free cubic yard calculator. Calculate cubic yards from dimensions or cubic feet. Get weight in tons for concrete, gravel, sand, soil, mulch, and asphalt. Includes conversion tables.">
+  <meta name="keywords" content="cubic yard calculator, cubic yards calculator, how many cubic yards, cubic feet to cubic yards, yards of concrete calculator, gravel calculator, mulch calculator">
+  <link rel="canonical" href="https://builtright-academy.vercel.app/tools/cubic-yard-calculator">
+  <meta property="og:title" content="Cubic Yard Calculator — Volume, Weight & Material Estimates">
+  <meta property="og:description" content="Free cubic yard calculator. Convert dimensions to cubic yards and get tonnage for concrete, gravel, sand, soil, mulch, and asphalt.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Cubic Yard Calculator",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "description": "Calculate cubic yards from length, width, and depth. Supports rectangular, circular, and triangular areas. Converts to tons for concrete, gravel, sand, soil, mulch, and asphalt."
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How many cubic feet in a cubic yard?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "There are 27 cubic feet in one cubic yard. A cubic yard is 3 feet × 3 feet × 3 feet = 27 cubic feet. To convert cubic feet to cubic yards, divide by 27. For example, 135 cubic feet ÷ 27 = 5 cubic yards."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How many wheelbarrows per cubic yard?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A standard 3-cubic-foot wheelbarrow holds about 1/9 of a cubic yard, so you need approximately 9 wheelbarrow loads per cubic yard. A larger 6-cubic-foot wheelbarrow requires about 5 loads per yard. For a typical driveway project of 10 cubic yards, that's 90 trips with a standard wheelbarrow — which is why most people opt for delivery."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How many bags of concrete per cubic yard?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You need approximately 45 bags of 80-lb concrete mix or 60 bags of 60-lb mix to make one cubic yard of concrete. At roughly $5–$7 per 80-lb bag, that's $225–$315 per yard using bagged concrete. Ready-mix concrete delivered by truck costs $125–$175 per yard — significantly cheaper for anything over 1 yard. For projects requiring more than 2 cubic yards, always order ready-mix."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much does a cubic yard weigh?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Weight per cubic yard varies by material: concrete weighs about 4,050 lbs (2.0 tons), gravel is 2,800 lbs (1.4 tons), sand is 2,700 lbs (1.35 tons), topsoil is 2,200 lbs (1.1 tons), mulch is 400–800 lbs (0.2–0.4 tons), and asphalt is 2,700 lbs (1.35 tons). Wet materials weigh 20–30% more than dry."
+        }
+      }
+    ]
+  }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root { --orange: #F97316; --orange-dark: #EA580C; --darker: #0F0F1A; --dark-card: #1A1A2E; --gray: #94A3B8; --light: #F8FAFC; --green: #22C55E; --border: rgba(255,255,255,0.08); }
+    body { font-family: 'Inter', -apple-system, sans-serif; background: var(--darker); color: var(--light); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+    nav { padding: 20px 0; border-bottom: 1px solid var(--border); }
+    nav .container { display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.3rem; color: var(--orange); text-decoration: none; letter-spacing: -0.5px; }
+    .logo span { color: var(--light); }
+    .nav-links a { color: var(--gray); text-decoration: none; font-size: 0.9rem; margin-left: 24px; }
+    .nav-links a:hover { color: var(--light); }
+    .hero { padding: 48px 0 32px; text-align: center; }
+    .hero .badge { display: inline-block; background: rgba(249,115,22,0.1); border: 1px solid rgba(249,115,22,0.3); color: var(--orange); font-size: 0.8rem; font-weight: 600; padding: 6px 16px; border-radius: 100px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .hero h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 800; line-height: 1.15; letter-spacing: -1px; margin-bottom: 12px; }
+    .hero h1 .highlight { color: var(--orange); }
+    .hero p { color: var(--gray); font-size: 1.05rem; max-width: 600px; margin: 0 auto; }
+    .calc-section { padding: 24px 0 60px; }
+    .calc-card { background: var(--dark-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; margin-bottom: 24px; }
+    .calc-card h2 { font-size: 1.2rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-size: 0.85rem; color: var(--gray); margin-bottom: 6px; font-weight: 500; }
+    .form-group input, .form-group select { width: 100%; padding: 12px 16px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 10px; color: var(--light); font-size: 1rem; font-family: inherit; outline: none; }
+    .form-group input:focus, .form-group select:focus { border-color: var(--orange); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .form-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+    @media (max-width: 600px) { .form-row, .form-row-3 { grid-template-columns: 1fr; } }
+    .btn { display: inline-block; padding: 14px 32px; background: var(--orange); color: #fff; font-weight: 700; font-size: 1rem; border: none; border-radius: 10px; cursor: pointer; font-family: inherit; width: 100%; }
+    .btn:hover { background: var(--orange-dark); }
+    .results { display: none; margin-top: 24px; }
+    .results.show { display: block; }
+    .result-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; margin-bottom: 16px; }
+    .result-item { background: rgba(249,115,22,0.08); border: 1px solid rgba(249,115,22,0.2); border-radius: 12px; padding: 16px; text-align: center; }
+    .result-item .value { font-size: 1.4rem; font-weight: 800; color: var(--orange); }
+    .result-item .label { font-size: 0.78rem; color: var(--gray); margin-top: 4px; }
+    .cost-table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+    .cost-table th, .cost-table td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+    .cost-table th { color: var(--gray); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; }
+    .cost-table td:last-child { text-align: right; font-weight: 600; }
+    .tab-group { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+    .tab-btn { padding: 8px 16px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 8px; color: var(--gray); font-size: 0.85rem; cursor: pointer; font-family: inherit; }
+    .tab-btn.active { background: rgba(249,115,22,0.15); border-color: var(--orange); color: var(--orange); font-weight: 600; }
+    .shape-fields { display: none; }
+    .shape-fields.active { display: block; }
+    .or-divider { text-align: center; color: var(--gray); font-size: 0.85rem; padding: 12px 0; font-weight: 600; }
+    .seo-content { padding: 40px 0 60px; }
+    .seo-content h2 { font-size: 1.5rem; font-weight: 800; margin-bottom: 16px; }
+    .seo-content h3 { font-size: 1.1rem; font-weight: 700; margin: 24px 0 10px; color: var(--orange); }
+    .seo-content p { color: var(--gray); margin-bottom: 14px; line-height: 1.8; }
+    .seo-content ul, .seo-content ol { color: var(--gray); margin: 10px 0 16px 24px; }
+    .seo-content li { margin-bottom: 6px; }
+    .seo-content table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+    .seo-content table th, .seo-content table td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+    .seo-content table th { color: var(--gray); font-weight: 600; }
+    footer { border-top: 1px solid var(--border); padding: 32px 0; text-align: center; color: var(--gray); font-size: 0.85rem; }
+    footer a { color: var(--orange); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <nav><div class="container"><a href="/" class="logo">Built<span>Right</span></a><div class="nav-links"><a href="/blog/">Blog</a><a href="/tools/">Tools</a><a href="/templates/">Templates</a></div></div></nav>
+
+  <section class="hero">
+    <div class="container">
+      <span class="badge">Free Calculator</span>
+      <h1>Cubic Yard Calculator — <span class="highlight">Volume</span> & Weight Estimator</h1>
+      <p>Calculate cubic yards from dimensions or cubic feet. Get weight in tons for concrete, gravel, sand, soil, mulch, and asphalt.</p>
+    </div>
+  </section>
+
+  <section class="calc-section">
+    <div class="container">
+      <div class="calc-card">
+        <h2>📐 Calculate from Dimensions</h2>
+        <div class="tab-group">
+          <button class="tab-btn active" onclick="setShape('rect')">▭ Rectangle</button>
+          <button class="tab-btn" onclick="setShape('circle')">○ Circle</button>
+          <button class="tab-btn" onclick="setShape('triangle')">△ Triangle</button>
+        </div>
+
+        <div id="shape-rect" class="shape-fields active">
+          <div class="form-row-3">
+            <div class="form-group">
+              <label>Length (feet)</label>
+              <input type="number" id="rectLength" placeholder="e.g., 20" step="0.5">
+            </div>
+            <div class="form-group">
+              <label>Width (feet)</label>
+              <input type="number" id="rectWidth" placeholder="e.g., 10" step="0.5">
+            </div>
+            <div class="form-group">
+              <label>Depth (inches)</label>
+              <input type="number" id="rectDepth" placeholder="e.g., 4" step="0.5">
+            </div>
+          </div>
+        </div>
+
+        <div id="shape-circle" class="shape-fields">
+          <div class="form-row-3">
+            <div class="form-group">
+              <label>Diameter (feet)</label>
+              <input type="number" id="circleDia" placeholder="e.g., 12" step="0.5">
+            </div>
+            <div class="form-group">
+              <label>Depth (inches)</label>
+              <input type="number" id="circleDepth" placeholder="e.g., 4" step="0.5">
+            </div>
+            <div class="form-group"></div>
+          </div>
+        </div>
+
+        <div id="shape-triangle" class="shape-fields">
+          <div class="form-row-3">
+            <div class="form-group">
+              <label>Base (feet)</label>
+              <input type="number" id="triBase" placeholder="e.g., 15" step="0.5">
+            </div>
+            <div class="form-group">
+              <label>Height (feet)</label>
+              <input type="number" id="triHeight" placeholder="e.g., 10" step="0.5">
+            </div>
+            <div class="form-group">
+              <label>Depth (inches)</label>
+              <input type="number" id="triDepth" placeholder="e.g., 4" step="0.5">
+            </div>
+          </div>
+        </div>
+
+        <div class="or-divider">— OR enter cubic feet directly —</div>
+        <div class="form-group">
+          <label>Cubic Feet (if already known)</label>
+          <input type="number" id="directCuFt" placeholder="e.g., 135" step="0.1">
+        </div>
+
+        <div class="form-group">
+          <label>Material (for weight estimate)</label>
+          <select id="material">
+            <option value="none">None — volume only</option>
+            <option value="concrete">Concrete (4,050 lbs/yd³)</option>
+            <option value="gravel">Gravel (2,800 lbs/yd³)</option>
+            <option value="sand">Sand (2,700 lbs/yd³)</option>
+            <option value="topsoil">Topsoil (2,200 lbs/yd³)</option>
+            <option value="mulch">Mulch — wood (600 lbs/yd³)</option>
+            <option value="crushedstone">Crushed Stone (2,700 lbs/yd³)</option>
+            <option value="asphalt">Asphalt (2,700 lbs/yd³)</option>
+            <option value="fill">Fill Dirt (2,150 lbs/yd³)</option>
+          </select>
+        </div>
+
+        <button class="btn" onclick="calculate()">Calculate Cubic Yards</button>
+
+        <div class="results" id="results">
+          <div class="result-grid" id="resultGrid"></div>
+          <div id="extraInfo"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="seo-content">
+    <div class="container">
+      <h2>How to Calculate Cubic Yards</h2>
+      <p>A <strong>cubic yard</strong> is a unit of volume equal to 27 cubic feet (3 ft × 3 ft × 3 ft). It's the standard measurement for ordering bulk materials like concrete, gravel, sand, topsoil, and mulch. Getting the right quantity saves money and prevents project delays from short orders or wasted material.</p>
+
+      <h3>Cubic Yard Formula</h3>
+      <p>For rectangular areas (the most common):</p>
+      <p><strong>Cubic Yards = (Length × Width × Depth) ÷ 27</strong></p>
+      <p>All dimensions must be in feet. If depth is in inches, divide by 12 first. For example: a 20 ft × 10 ft patio with 4 inches of gravel = (20 × 10 × 0.333) ÷ 27 = <strong>2.47 cubic yards</strong>.</p>
+
+      <h3>Cubic Feet to Cubic Yards Conversion</h3>
+      <table>
+        <thead><tr><th>Cubic Feet</th><th>Cubic Yards</th><th>Cubic Feet</th><th>Cubic Yards</th></tr></thead>
+        <tbody>
+          <tr><td>27</td><td>1.00</td><td>189</td><td>7.00</td></tr>
+          <tr><td>54</td><td>2.00</td><td>216</td><td>8.00</td></tr>
+          <tr><td>81</td><td>3.00</td><td>243</td><td>9.00</td></tr>
+          <tr><td>108</td><td>4.00</td><td>270</td><td>10.00</td></tr>
+          <tr><td>135</td><td>5.00</td><td>540</td><td>20.00</td></tr>
+          <tr><td>162</td><td>6.00</td><td>810</td><td>30.00</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Material Weight per Cubic Yard</h3>
+      <table>
+        <thead><tr><th>Material</th><th>Lbs/yd³</th><th>Tons/yd³</th><th>Typical Cost/yd³</th></tr></thead>
+        <tbody>
+          <tr><td>Concrete (ready-mix)</td><td>4,050</td><td>2.03</td><td>$125–$175</td></tr>
+          <tr><td>Gravel (loose)</td><td>2,800</td><td>1.40</td><td>$20–$50</td></tr>
+          <tr><td>Crushed Stone</td><td>2,700</td><td>1.35</td><td>$30–$60</td></tr>
+          <tr><td>Sand</td><td>2,700</td><td>1.35</td><td>$25–$55</td></tr>
+          <tr><td>Topsoil</td><td>2,200</td><td>1.10</td><td>$20–$50</td></tr>
+          <tr><td>Fill Dirt</td><td>2,150</td><td>1.08</td><td>$8–$20</td></tr>
+          <tr><td>Mulch (wood)</td><td>400–800</td><td>0.20–0.40</td><td>$25–$45</td></tr>
+          <tr><td>Asphalt (hot mix)</td><td>2,700</td><td>1.35</td><td>$100–$200</td></tr>
+          <tr><td>Pea Gravel</td><td>2,600</td><td>1.30</td><td>$30–$55</td></tr>
+          <tr><td>River Rock</td><td>2,700</td><td>1.35</td><td>$40–$80</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Common Project Calculations</h3>
+      <table>
+        <thead><tr><th>Project</th><th>Typical Depth</th><th>10×10 ft</th><th>20×20 ft</th><th>50×50 ft</th></tr></thead>
+        <tbody>
+          <tr><td>Concrete slab</td><td>4 inches</td><td>1.23 yd³</td><td>4.94 yd³</td><td>30.9 yd³</td></tr>
+          <tr><td>Gravel driveway</td><td>6 inches</td><td>1.85 yd³</td><td>7.41 yd³</td><td>46.3 yd³</td></tr>
+          <tr><td>Mulch bed</td><td>3 inches</td><td>0.93 yd³</td><td>3.70 yd³</td><td>23.1 yd³</td></tr>
+          <tr><td>Topsoil (lawn)</td><td>4 inches</td><td>1.23 yd³</td><td>4.94 yd³</td><td>30.9 yd³</td></tr>
+          <tr><td>Paver base</td><td>6 inches</td><td>1.85 yd³</td><td>7.41 yd³</td><td>46.3 yd³</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Wheelbarrow Loads per Cubic Yard</h3>
+      <table>
+        <thead><tr><th>Wheelbarrow Size</th><th>Capacity</th><th>Loads per Yard</th></tr></thead>
+        <tbody>
+          <tr><td>2 cubic foot (small)</td><td>0.074 yd³</td><td>~14 loads</td></tr>
+          <tr><td>3 cubic foot (standard)</td><td>0.111 yd³</td><td>~9 loads</td></tr>
+          <tr><td>6 cubic foot (large contractor)</td><td>0.222 yd³</td><td>~5 loads</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Concrete Bags per Cubic Yard</h3>
+      <table>
+        <thead><tr><th>Bag Size</th><th>Bags per Yard</th><th>Bags per 0.5 yd³</th><th>Cost per Yard</th></tr></thead>
+        <tbody>
+          <tr><td>40-lb bag</td><td>~86 bags</td><td>~43 bags</td><td>$345–$430</td></tr>
+          <tr><td>60-lb bag</td><td>~60 bags</td><td>~30 bags</td><td>$300–$360</td></tr>
+          <tr><td>80-lb bag</td><td>~45 bags</td><td>~23 bags</td><td>$225–$315</td></tr>
+        </tbody>
+      </table>
+      <p><strong>Pro tip:</strong> For anything over 1 cubic yard, order ready-mix concrete from a batch plant. It's cheaper ($125–$175/yd vs. $225–$315/yd for bags), stronger (consistent mix), and saves hours of manual mixing.</p>
+
+      <h3>Ordering Tips</h3>
+      <ul>
+        <li><strong>Always order 5–10% extra.</strong> Uneven ground, compaction, and waste mean you'll use more than calculated. Running short mid-project is worse than having a little extra.</li>
+        <li><strong>Ask about minimum delivery.</strong> Most suppliers require a minimum order (often 2–3 yards) or charge a small-load fee for under-minimum orders.</li>
+        <li><strong>Wet materials weigh more.</strong> Rain-soaked topsoil or wet sand can weigh 20–30% more, which matters for truck weight limits and structural calculations.</li>
+        <li><strong>Compaction factor:</strong> Loose gravel and soil compact 10–15% when tamped. Add that to your order quantity.</li>
+        <li><strong>Delivery access:</strong> Ensure a dump truck can reach your site. Standard trucks need 10 ft width and 14 ft overhead clearance.</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer><div class="container"><p>© 2026 <a href="/">BuiltRight Academy</a> — Free tools for contractors and tradespeople.</p></div></footer>
+
+  <script>
+    const materialWeights = {
+      none: 0,
+      concrete: 4050,
+      gravel: 2800,
+      sand: 2700,
+      topsoil: 2200,
+      mulch: 600,
+      crushedstone: 2700,
+      asphalt: 2700,
+      fill: 2150
+    };
+
+    const materialNames = {
+      none: '', concrete: 'Concrete', gravel: 'Gravel', sand: 'Sand',
+      topsoil: 'Topsoil', mulch: 'Mulch', crushedstone: 'Crushed Stone',
+      asphalt: 'Asphalt', fill: 'Fill Dirt'
+    };
+
+    let currentShape = 'rect';
+
+    function setShape(shape) {
+      currentShape = shape;
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.shape-fields').forEach(f => f.classList.remove('active'));
+      event.target.classList.add('active');
+      document.getElementById('shape-' + shape).classList.add('active');
+    }
+
+    function calculate() {
+      let cuFt = parseFloat(document.getElementById('directCuFt').value) || 0;
+
+      if (!cuFt) {
+        if (currentShape === 'rect') {
+          const l = parseFloat(document.getElementById('rectLength').value);
+          const w = parseFloat(document.getElementById('rectWidth').value);
+          const d = parseFloat(document.getElementById('rectDepth').value);
+          if (!l || !w || !d) return alert('Please enter length, width, and depth.');
+          cuFt = l * w * (d / 12);
+        } else if (currentShape === 'circle') {
+          const dia = parseFloat(document.getElementById('circleDia').value);
+          const d = parseFloat(document.getElementById('circleDepth').value);
+          if (!dia || !d) return alert('Please enter diameter and depth.');
+          const r = dia / 2;
+          cuFt = Math.PI * r * r * (d / 12);
+        } else if (currentShape === 'triangle') {
+          const b = parseFloat(document.getElementById('triBase').value);
+          const h = parseFloat(document.getElementById('triHeight').value);
+          const d = parseFloat(document.getElementById('triDepth').value);
+          if (!b || !h || !d) return alert('Please enter base, height, and depth.');
+          cuFt = 0.5 * b * h * (d / 12);
+        }
+      }
+
+      const cuYd = cuFt / 27;
+      const mat = document.getElementById('material').value;
+      const lbsPerYd = materialWeights[mat];
+      const totalLbs = cuYd * lbsPerYd;
+      const tons = totalLbs / 2000;
+
+      let html = `
+        <div class="result-item"><div class="value">${cuYd.toFixed(2)}</div><div class="label">Cubic Yards</div></div>
+        <div class="result-item"><div class="value">${cuFt.toFixed(1)}</div><div class="label">Cubic Feet</div></div>
+      `;
+      if (mat !== 'none') {
+        html += `<div class="result-item"><div class="value">${tons.toFixed(2)}</div><div class="label">Tons (${materialNames[mat]})</div></div>`;
+        html += `<div class="result-item"><div class="value">${totalLbs.toFixed(0)}</div><div class="label">Pounds</div></div>`;
+      }
+      document.getElementById('resultGrid').innerHTML = html;
+
+      let extra = '';
+      if (mat === 'concrete') {
+        const bags80 = Math.ceil(cuYd * 45);
+        const bags60 = Math.ceil(cuYd * 60);
+        extra = `<table class="cost-table">
+          <thead><tr><th>Detail</th><th style="text-align:right;">Value</th></tr></thead>
+          <tbody>
+            <tr><td>80-lb concrete bags needed</td><td style="text-align:right;">${bags80} bags</td></tr>
+            <tr><td>60-lb concrete bags needed</td><td style="text-align:right;">${bags60} bags</td></tr>
+            <tr><td>Est. cost (80-lb bags @ $6.50)</td><td style="text-align:right;">$${(bags80 * 6.5).toFixed(0)}</td></tr>
+            <tr><td>Est. cost (ready-mix delivered)</td><td style="text-align:right; color:var(--green);">$${(cuYd * 150).toFixed(0)}</td></tr>
+            <tr><td>Wheelbarrow loads (3 cu ft)</td><td style="text-align:right;">${Math.ceil(cuFt / 3)}</td></tr>
+          </tbody>
+        </table>`;
+      } else if (mat !== 'none') {
+        extra = `<table class="cost-table">
+          <thead><tr><th>Detail</th><th style="text-align:right;">Value</th></tr></thead>
+          <tbody>
+            <tr><td>Wheelbarrow loads (3 cu ft)</td><td style="text-align:right;">${Math.ceil(cuFt / 3)}</td></tr>
+            <tr><td>Wheelbarrow loads (6 cu ft)</td><td style="text-align:right;">${Math.ceil(cuFt / 6)}</td></tr>
+            <tr><td>Order with 10% extra</td><td style="text-align:right;">${(cuYd * 1.1).toFixed(2)} yd³</td></tr>
+          </tbody>
+        </table>`;
+      }
+      document.getElementById('extraInfo').innerHTML = extra;
+
+      document.getElementById('results').classList.add('show');
+      document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
+</body>
+</html>

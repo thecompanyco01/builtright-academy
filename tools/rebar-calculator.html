@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rebar Calculator — Pieces, Weight & Cost | BuiltRight Academy</title>
+  <meta name="description" content="Free rebar calculator. Enter slab dimensions and spacing to get rebar pieces, total linear feet, weight, tie wire, and chairs needed. Includes rebar size reference table. 2026 pricing.">
+  <meta name="keywords" content="rebar calculator, how much rebar do I need, rebar spacing calculator, rebar weight calculator, rebar for concrete slab, rebar estimator">
+  <link rel="canonical" href="https://builtright-academy.vercel.app/tools/rebar-calculator">
+  <meta property="og:title" content="Rebar Calculator — Pieces, Weight & Cost">
+  <meta property="og:description" content="Free rebar calculator. Get exact rebar count, weight, tie wire, and chairs for concrete slabs, footings, and walls.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Rebar Calculator",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "description": "Calculate rebar pieces, total linear feet, weight, tie wire, and bar chairs for concrete slabs, footings, and walls. Supports #3 through #8 rebar sizes with multiple spacing options."
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How much rebar do I need for a concrete slab?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For a standard 4-inch residential slab, use #4 rebar on 18-inch centers both ways. For a 20×20 ft slab, that's approximately 27 bars (14 lengthwise + 13 crosswise), totaling about 540 linear feet and weighing roughly 360 lbs. Add 10% for overlap splices and waste. Rebar should be positioned in the lower third of the slab with 3 inches of cover from the bottom."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What size rebar for a 4 inch slab?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "#3 (3/8 inch) or #4 (1/2 inch) rebar is standard for 4-inch residential slabs. Use #3 at 18-inch spacing for light-duty slabs like patios and walkways. Use #4 at 18-inch spacing for garage floors and driveways. For slabs carrying heavy loads (workshops, equipment pads), step up to #4 at 12-inch spacing or #5 rebar."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How far apart should rebar be spaced?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Common rebar spacing is 12, 16, 18, or 24 inches on center. For residential slabs: 18–24 inches for light duty (patios), 12–18 inches for driveways and garage floors. For structural footings: 6–12 inches. A general rule is that rebar spacing should not exceed 3 times the slab thickness or 18 inches, whichever is less (per ACI 318). Tighter spacing = stronger slab but more material cost."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need rebar chairs?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes — rebar chairs (supports) are essential. They hold rebar at the correct height within the slab during the pour. Without chairs, rebar sinks to the bottom and provides almost no structural benefit. Use plastic or wire chairs spaced every 3–4 feet in each direction. For a 20×20 slab, you need approximately 25–36 chairs. They cost $0.25–$0.75 each — a tiny investment that prevents catastrophic slab failure."
+        }
+      }
+    ]
+  }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root { --orange: #F97316; --orange-dark: #EA580C; --darker: #0F0F1A; --dark-card: #1A1A2E; --gray: #94A3B8; --light: #F8FAFC; --green: #22C55E; --border: rgba(255,255,255,0.08); }
+    body { font-family: 'Inter', -apple-system, sans-serif; background: var(--darker); color: var(--light); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+    nav { padding: 20px 0; border-bottom: 1px solid var(--border); }
+    nav .container { display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.3rem; color: var(--orange); text-decoration: none; letter-spacing: -0.5px; }
+    .logo span { color: var(--light); }
+    .nav-links a { color: var(--gray); text-decoration: none; font-size: 0.9rem; margin-left: 24px; }
+    .nav-links a:hover { color: var(--light); }
+    .hero { padding: 48px 0 32px; text-align: center; }
+    .hero .badge { display: inline-block; background: rgba(249,115,22,0.1); border: 1px solid rgba(249,115,22,0.3); color: var(--orange); font-size: 0.8rem; font-weight: 600; padding: 6px 16px; border-radius: 100px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .hero h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 800; line-height: 1.15; letter-spacing: -1px; margin-bottom: 12px; }
+    .hero h1 .highlight { color: var(--orange); }
+    .hero p { color: var(--gray); font-size: 1.05rem; max-width: 600px; margin: 0 auto; }
+    .calc-section { padding: 24px 0 60px; }
+    .calc-card { background: var(--dark-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; margin-bottom: 24px; }
+    .calc-card h2 { font-size: 1.2rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-size: 0.85rem; color: var(--gray); margin-bottom: 6px; font-weight: 500; }
+    .form-group input, .form-group select { width: 100%; padding: 12px 16px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 10px; color: var(--light); font-size: 1rem; font-family: inherit; outline: none; }
+    .form-group input:focus, .form-group select:focus { border-color: var(--orange); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    @media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
+    .btn { display: inline-block; padding: 14px 32px; background: var(--orange); color: #fff; font-weight: 700; font-size: 1rem; border: none; border-radius: 10px; cursor: pointer; font-family: inherit; width: 100%; }
+    .btn:hover { background: var(--orange-dark); }
+    .results { display: none; margin-top: 24px; }
+    .results.show { display: block; }
+    .result-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; margin-bottom: 16px; }
+    .result-item { background: rgba(249,115,22,0.08); border: 1px solid rgba(249,115,22,0.2); border-radius: 12px; padding: 16px; text-align: center; }
+    .result-item .value { font-size: 1.4rem; font-weight: 800; color: var(--orange); }
+    .result-item .label { font-size: 0.78rem; color: var(--gray); margin-top: 4px; }
+    .cost-table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+    .cost-table th, .cost-table td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+    .cost-table th { color: var(--gray); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; }
+    .cost-table td:last-child { text-align: right; font-weight: 600; }
+    .seo-content { padding: 40px 0 60px; }
+    .seo-content h2 { font-size: 1.5rem; font-weight: 800; margin-bottom: 16px; }
+    .seo-content h3 { font-size: 1.1rem; font-weight: 700; margin: 24px 0 10px; color: var(--orange); }
+    .seo-content p { color: var(--gray); margin-bottom: 14px; line-height: 1.8; }
+    .seo-content ul, .seo-content ol { color: var(--gray); margin: 10px 0 16px 24px; }
+    .seo-content li { margin-bottom: 6px; }
+    .seo-content table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+    .seo-content table th, .seo-content table td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+    .seo-content table th { color: var(--gray); font-weight: 600; }
+    footer { border-top: 1px solid var(--border); padding: 32px 0; text-align: center; color: var(--gray); font-size: 0.85rem; }
+    footer a { color: var(--orange); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <nav><div class="container"><a href="/" class="logo">Built<span>Right</span></a><div class="nav-links"><a href="/blog/">Blog</a><a href="/tools/">Tools</a><a href="/templates/">Templates</a></div></div></nav>
+
+  <section class="hero">
+    <div class="container">
+      <span class="badge">Free Calculator</span>
+      <h1>Rebar Calculator — <span class="highlight">Pieces</span>, Weight & Cost</h1>
+      <p>Enter slab dimensions, rebar size, and spacing to get exact piece count, total linear feet, weight, tie wire, and chair supports needed.</p>
+    </div>
+  </section>
+
+  <section class="calc-section">
+    <div class="container">
+      <div class="calc-card">
+        <h2>🔩 Slab & Rebar Details</h2>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Slab Length (feet)</label>
+            <input type="number" id="slabLength" placeholder="e.g., 20" step="0.1">
+          </div>
+          <div class="form-group">
+            <label>Slab Width (feet)</label>
+            <input type="number" id="slabWidth" placeholder="e.g., 20" step="0.1">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Rebar Size</label>
+            <select id="rebarSize">
+              <option value="3">#3 (⅜" / 10mm) — light duty</option>
+              <option value="4" selected>#4 (½" / 13mm) — standard slabs</option>
+              <option value="5">#5 (⅝" / 16mm) — heavy duty</option>
+              <option value="6">#6 (¾" / 19mm) — structural</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Spacing (on center)</label>
+            <select id="spacing">
+              <option value="12">12" o.c. (heavy duty)</option>
+              <option value="16">16" o.c. (standard structural)</option>
+              <option value="18" selected>18" o.c. (standard residential)</option>
+              <option value="24">24" o.c. (light duty)</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Rebar Length Available</label>
+            <select id="rebarLength">
+              <option value="20" selected>20 ft (standard)</option>
+              <option value="30">30 ft</option>
+              <option value="40">40 ft</option>
+              <option value="60">60 ft</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Include Chairs / Supports?</label>
+            <select id="includeChairs">
+              <option value="yes" selected>Yes — include bar chairs</option>
+              <option value="no">No — rebar only</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn" onclick="calculate()">Calculate Rebar Needed</button>
+
+        <div class="results" id="results">
+          <div class="result-grid">
+            <div class="result-item"><div class="value" id="totalPieces">—</div><div class="label">Rebar Pieces</div></div>
+            <div class="result-item"><div class="value" id="totalLinFt">—</div><div class="label">Total Linear Ft</div></div>
+            <div class="result-item"><div class="value" id="totalWeight">—</div><div class="label">Total Weight (lbs)</div></div>
+            <div class="result-item"><div class="value" id="tieWire">—</div><div class="label">Tie Wire (rolls)</div></div>
+          </div>
+          <h3 style="font-size:1rem; margin-bottom:12px; color:var(--gray);">Materials & Cost Estimate</h3>
+          <table class="cost-table">
+            <thead><tr><th>Material</th><th>Qty</th><th>Est. Cost</th></tr></thead>
+            <tbody id="costBody"></tbody>
+          </table>
+          <p style="font-size:0.8rem; color:var(--gray); margin-top:8px;">*2026 national average pricing. Rebar prices fluctuate with steel markets. Buy from a rebar supplier, not big-box stores, for best pricing on quantity.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="seo-content">
+    <div class="container">
+      <h2>How to Calculate Rebar for Concrete Slabs</h2>
+      <p>Rebar transforms a brittle concrete slab into a reinforced structure that can handle loads, temperature swings, and ground movement. Getting the right amount — size, spacing, and accessories — is critical. Here's everything you need to know.</p>
+
+      <h3>Rebar Size Reference Table</h3>
+      <table>
+        <thead><tr><th>Rebar Size</th><th>Diameter</th><th>Metric</th><th>Weight/ft</th><th>Weight/20ft bar</th><th>Common Uses</th></tr></thead>
+        <tbody>
+          <tr><td>#3</td><td>⅜"</td><td>10mm</td><td>0.376 lbs</td><td>7.5 lbs</td><td>Patios, walkways, thin slabs, stirrups</td></tr>
+          <tr><td>#4</td><td>½"</td><td>13mm</td><td>0.668 lbs</td><td>13.4 lbs</td><td>Driveways, garage floors, standard slabs</td></tr>
+          <tr><td>#5</td><td>⅝"</td><td>16mm</td><td>1.043 lbs</td><td>20.9 lbs</td><td>Footings, retaining walls, heavy slabs</td></tr>
+          <tr><td>#6</td><td>¾"</td><td>19mm</td><td>1.502 lbs</td><td>30.0 lbs</td><td>Structural footings, columns, beams</td></tr>
+          <tr><td>#7</td><td>⅞"</td><td>22mm</td><td>2.044 lbs</td><td>40.9 lbs</td><td>Bridge decks, commercial foundations</td></tr>
+          <tr><td>#8</td><td>1"</td><td>25mm</td><td>2.670 lbs</td><td>53.4 lbs</td><td>Heavy structural, bridge piers, dams</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Rebar Spacing Guide by Application</h3>
+      <table>
+        <thead><tr><th>Application</th><th>Rebar Size</th><th>Spacing</th><th>Slab Thickness</th></tr></thead>
+        <tbody>
+          <tr><td>Sidewalk / patio</td><td>#3</td><td>18–24" o.c.</td><td>4"</td></tr>
+          <tr><td>Residential driveway</td><td>#4</td><td>16–18" o.c.</td><td>4–5"</td></tr>
+          <tr><td>Garage floor</td><td>#4</td><td>16–18" o.c.</td><td>4–6"</td></tr>
+          <tr><td>Equipment pad / shop floor</td><td>#4 or #5</td><td>12–16" o.c.</td><td>5–6"</td></tr>
+          <tr><td>Continuous footing</td><td>#4 or #5</td><td>12" o.c. (longitudinal)</td><td>8–12"</td></tr>
+          <tr><td>Retaining wall</td><td>#5 or #6</td><td>8–12" o.c.</td><td>8–12"</td></tr>
+          <tr><td>Commercial slab</td><td>#5</td><td>12" o.c.</td><td>6–8"</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Rebar Placement Rules</h3>
+      <ol>
+        <li><strong>Minimum concrete cover:</strong> 3 inches from the bottom of the slab to the rebar (for slabs on grade). This protects the steel from moisture and corrosion.</li>
+        <li><strong>Overlap (lap splice):</strong> When rebar isn't long enough to span the full slab, overlap pieces by at least 40 bar diameters. For #4 rebar: 40 × 0.5" = 20 inches minimum overlap.</li>
+        <li><strong>Edge setback:</strong> Rebar should stop 3 inches from the slab edge. Don't run it all the way to the form.</li>
+        <li><strong>Position in slab:</strong> For a 4" slab, rebar should sit at roughly 1.5–2 inches from the bottom — supported by chairs. For thicker slabs (6"+), you may need two layers (top and bottom mat).</li>
+        <li><strong>Tie every intersection:</strong> Use tie wire at every point where bars cross. Alternating is acceptable on large slabs but every intersection is better.</li>
+      </ol>
+
+      <h3>Rebar vs. Wire Mesh</h3>
+      <table>
+        <thead><tr><th>Factor</th><th>Rebar</th><th>Welded Wire Mesh (WWF)</th></tr></thead>
+        <tbody>
+          <tr><td>Strength</td><td>Much stronger</td><td>Light reinforcement only</td></tr>
+          <tr><td>Best for</td><td>Driveways, garages, structural</td><td>Patios, sidewalks, light slabs</td></tr>
+          <tr><td>Cost per sq ft</td><td>$0.50–$1.50</td><td>$0.15–$0.40</td></tr>
+          <tr><td>Placement</td><td>Tied to chairs, stays in position</td><td>Often sinks during pour</td></tr>
+          <tr><td>Crack control</td><td>Excellent</td><td>Moderate</td></tr>
+          <tr><td>Code requirement</td><td>Required for structural</td><td>Acceptable for non-structural</td></tr>
+        </tbody>
+      </table>
+      <p>For any slab that carries vehicle traffic or structural loads, use rebar — not wire mesh. Mesh is fine for decorative patios and sidewalks.</p>
+
+      <h3>Money-Saving Tips</h3>
+      <ul>
+        <li><strong>Buy from a rebar supplier, not Home Depot.</strong> Big-box stores charge $8–$15 per 20-ft bar. Rebar yards charge $0.40–$0.70/lb — typically 30–50% less.</li>
+        <li><strong>Order pre-cut and pre-bent rebar</strong> for footings and walls. It saves hours of cutting and bending on site. Most suppliers offer this at minimal extra cost.</li>
+        <li><strong>Use #4 at 18" spacing for most residential work.</strong> It's the most cost-effective combination that meets code for standard slabs.</li>
+        <li><strong>Don't skip the chairs.</strong> Rebar sitting on the ground is worse than no rebar — it creates a corrosion path. Chairs cost pennies and prevent thousands in future repairs.</li>
+        <li><strong>Tie wire goes fast.</strong> Budget 2–3 lbs of tie wire per 100 intersections. Buy an extra roll — you'll use it.</li>
+      </ul>
+
+      <h3>Common Rebar Mistakes</h3>
+      <ul>
+        <li><strong>No chairs:</strong> Rebar on the ground = no reinforcement. It must be elevated to the correct position within the slab.</li>
+        <li><strong>Insufficient overlap:</strong> Bars that barely touch don't transfer load. Overlap must be 40× the bar diameter minimum.</li>
+        <li><strong>Too close to edges:</strong> Rebar within 1–2 inches of the surface will corrode and crack the concrete. Maintain 3" cover.</li>
+        <li><strong>Walking on rebar mat:</strong> Workers walking on the rebar grid push chairs out of position and bend bars. Place plywood walking paths during the pour.</li>
+        <li><strong>Wrong size for the job:</strong> Using #3 rebar where #4 or #5 is needed will result in a structurally deficient slab. Follow engineering specs.</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer><div class="container"><p>© 2026 <a href="/">BuiltRight Academy</a> — Free tools for contractors and tradespeople.</p></div></footer>
+
+  <script>
+    function calculate() {
+      const slabL = parseFloat(document.getElementById('slabLength').value);
+      const slabW = parseFloat(document.getElementById('slabWidth').value);
+      if (!slabL || !slabW) return alert('Please enter slab length and width.');
+
+      const rebarSize = parseInt(document.getElementById('rebarSize').value);
+      const spacingIn = parseInt(document.getElementById('spacing').value);
+      const barLength = parseInt(document.getElementById('rebarLength').value);
+      const includeChairs = document.getElementById('includeChairs').value === 'yes';
+
+      const spacingFt = spacingIn / 12;
+
+      // Rebar weight per foot
+      const weightPerFt = {
+        3: 0.376,
+        4: 0.668,
+        5: 1.043,
+        6: 1.502
+      };
+      const wPerFt = weightPerFt[rebarSize];
+
+      // Number of bars in each direction
+      // Bars run along length: spaced across width
+      const barsAlongLength = Math.floor(slabW / spacingFt) + 1;
+      // Bars run along width: spaced across length
+      const barsAlongWidth = Math.floor(slabL / spacingFt) + 1;
+
+      // Linear feet per bar direction (subtract 6" from each end for 3" cover)
+      const effectiveL = slabL - 0.5; // 3" from each end
+      const effectiveW = slabW - 0.5;
+
+      // Total linear feet
+      const linFtLength = barsAlongLength * effectiveL;
+      const linFtWidth = barsAlongWidth * effectiveW;
+      const totalLinFt = linFtLength + linFtWidth;
+
+      // Number of physical bars (accounting for bar length and splices)
+      const barsNeededLength = barsAlongLength * Math.ceil(effectiveL / barLength);
+      const barsNeededWidth = barsAlongWidth * Math.ceil(effectiveW / barLength);
+      const totalBars = barsNeededLength + barsNeededWidth;
+
+      // Add 10% for splices and waste
+      const totalBarsWithWaste = Math.ceil(totalBars * 1.10);
+      const totalLinFtWithWaste = totalLinFt * 1.10;
+
+      // Weight
+      const totalWeight = totalLinFtWithWaste * wPerFt;
+
+      // Tie wire: ~1 tie per intersection, ~1 ft of wire per tie, 3.5 lbs per roll (340 ft)
+      const intersections = barsAlongLength * barsAlongWidth;
+      const tieWireFt = intersections * 1.2; // 1.2 ft per tie
+      const tieWireRolls = Math.ceil(tieWireFt / 340);
+
+      // Chairs: 1 per ~12 sq ft (every 3-4 ft grid)
+      const chairCount = includeChairs ? Math.ceil((slabL * slabW) / 12) : 0;
+
+      // Cost estimates
+      const rebarCostPerFt = wPerFt * 0.55; // ~$0.55/lb avg
+      const rebarTotalCost = totalLinFtWithWaste * rebarCostPerFt;
+      const tieWireCostPerRoll = 8.50;
+      const tieWireCost = tieWireRolls * tieWireCostPerRoll;
+      const chairCostEach = 0.50;
+      const chairTotalCost = chairCount * chairCostEach;
+      const totalCost = rebarTotalCost + tieWireCost + chairTotalCost;
+
+      document.getElementById('totalPieces').textContent = totalBarsWithWaste;
+      document.getElementById('totalLinFt').textContent = Math.ceil(totalLinFtWithWaste).toLocaleString();
+      document.getElementById('totalWeight').textContent = Math.ceil(totalWeight).toLocaleString();
+      document.getElementById('tieWire').textContent = tieWireRolls;
+
+      const sizeLabels = { 3: '#3 (⅜")', 4: '#4 (½")', 5: '#5 (⅝")', 6: '#6 (¾")' };
+
+      document.getElementById('costBody').innerHTML = `
+        <tr><td>Rebar ${sizeLabels[rebarSize]} × ${barLength}ft</td><td>${totalBarsWithWaste} pcs (${Math.ceil(totalLinFtWithWaste).toLocaleString()} lin ft)</td><td>$${rebarTotalCost.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</td></tr>
+        <tr><td>Weight</td><td>${Math.ceil(totalWeight).toLocaleString()} lbs</td><td>—</td></tr>
+        <tr><td>Tie wire (3.5 lb rolls)</td><td>${tieWireRolls} roll(s)</td><td>$${tieWireCost.toFixed(0)}</td></tr>
+        ${includeChairs ? `<tr><td>Bar chairs / supports</td><td>${chairCount} pcs</td><td>$${chairTotalCost.toFixed(0)}</td></tr>` : ''}
+        <tr><td>Intersections to tie</td><td>${intersections}</td><td>—</td></tr>
+        <tr style="font-weight:700;border-top:2px solid var(--orange);"><td>Total Materials</td><td></td><td style="color:var(--orange);">$${totalCost.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</td></tr>
+        <tr><td>Per square foot</td><td></td><td>$${(totalCost / (slabL * slabW)).toFixed(2)}/sf</td></tr>
+        <tr><td>Bars along length (${barsAlongLength})</td><td>${effectiveL.toFixed(1)} ft each</td><td>—</td></tr>
+        <tr><td>Bars along width (${barsAlongWidth})</td><td>${effectiveW.toFixed(1)} ft each</td><td>—</td></tr>
+      `;
+      document.getElementById('results').classList.add('show');
+      document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
+</body>
+</html>

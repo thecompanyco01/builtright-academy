@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Siding Calculator — Squares, Trim & Cost | BuiltRight Academy</title>
+  <meta name="description" content="Free siding calculator. Enter wall dimensions and openings to get squares of siding, trim, J-channel, corner posts, and cost. Vinyl, fiber cement, wood siding. 2026 pricing.">
+  <meta name="keywords" content="siding calculator, how much siding do I need, vinyl siding calculator, siding cost calculator, siding estimator, hardie board calculator">
+  <link rel="canonical" href="https://builtright-academy.vercel.app/tools/siding-calculator">
+  <meta property="og:title" content="Siding Calculator — Squares, Trim & Cost">
+  <meta property="og:description" content="Free siding calculator. Get exact squares, trim, accessories, and cost for vinyl, fiber cement, and wood siding.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Siding Calculator",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "description": "Calculate siding squares, trim pieces, J-channel, corner posts, starter strip, and nails for any siding project. Supports vinyl, fiber cement, wood, and engineered wood."
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How much does siding cost per square foot?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Vinyl siding costs $2–$5 per sq ft installed, fiber cement (HardiPlank) $6–$13, engineered wood (LP SmartSide) $5–$10, and natural wood siding $6–$15. For a 1,500 sq ft house exterior, vinyl runs $3,000–$7,500 installed, fiber cement $9,000–$19,500, and wood $9,000–$22,500. Material alone is typically 30–40% of the installed price."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How many squares of siding do I need?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "One 'square' of siding covers 100 square feet. Measure total wall area (height × perimeter), subtract window and door openings, then divide by 100. Add 10% for waste on standard walls and 15% for gabled walls with lots of cuts. A typical 1,500 sq ft home has 1,200–1,800 sq ft of wall area (12–18 squares) after subtracting openings."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the best siding material?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Fiber cement (James Hardie) is widely considered the best overall siding for durability, fire resistance, and resale value — it lasts 40–50 years with minimal maintenance. Vinyl is the best budget option at half the cost with 20–30 year life. Engineered wood (LP SmartSide) offers a real wood look with better moisture resistance than natural wood. Natural cedar or redwood looks beautiful but requires staining every 3–5 years and costs the most."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long does it take to install siding on a house?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A professional crew of 3–4 installers can side a typical 1,500 sq ft home in 3–5 days for vinyl, 5–7 days for fiber cement, and 7–10 days for wood siding. Fiber cement takes longer because it requires pre-drilling and is heavier. Adding removal of old siding adds 1–2 days. DIY projects typically take 2–3 times longer."
+        }
+      }
+    ]
+  }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root { --orange: #F97316; --orange-dark: #EA580C; --darker: #0F0F1A; --dark-card: #1A1A2E; --gray: #94A3B8; --light: #F8FAFC; --green: #22C55E; --border: rgba(255,255,255,0.08); }
+    body { font-family: 'Inter', -apple-system, sans-serif; background: var(--darker); color: var(--light); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+    nav { padding: 20px 0; border-bottom: 1px solid var(--border); }
+    nav .container { display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.3rem; color: var(--orange); text-decoration: none; letter-spacing: -0.5px; }
+    .logo span { color: var(--light); }
+    .nav-links a { color: var(--gray); text-decoration: none; font-size: 0.9rem; margin-left: 24px; }
+    .nav-links a:hover { color: var(--light); }
+    .hero { padding: 48px 0 32px; text-align: center; }
+    .hero .badge { display: inline-block; background: rgba(249,115,22,0.1); border: 1px solid rgba(249,115,22,0.3); color: var(--orange); font-size: 0.8rem; font-weight: 600; padding: 6px 16px; border-radius: 100px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .hero h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 800; line-height: 1.15; letter-spacing: -1px; margin-bottom: 12px; }
+    .hero h1 .highlight { color: var(--orange); }
+    .hero p { color: var(--gray); font-size: 1.05rem; max-width: 600px; margin: 0 auto; }
+    .calc-section { padding: 24px 0 60px; }
+    .calc-card { background: var(--dark-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; margin-bottom: 24px; }
+    .calc-card h2 { font-size: 1.2rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-size: 0.85rem; color: var(--gray); margin-bottom: 6px; font-weight: 500; }
+    .form-group input, .form-group select { width: 100%; padding: 12px 16px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 10px; color: var(--light); font-size: 1rem; font-family: inherit; outline: none; }
+    .form-group input:focus, .form-group select:focus { border-color: var(--orange); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    @media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
+    .btn { display: inline-block; padding: 14px 32px; background: var(--orange); color: #fff; font-weight: 700; font-size: 1rem; border: none; border-radius: 10px; cursor: pointer; font-family: inherit; width: 100%; }
+    .btn:hover { background: var(--orange-dark); }
+    .results { display: none; margin-top: 24px; }
+    .results.show { display: block; }
+    .result-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; margin-bottom: 16px; }
+    .result-item { background: rgba(249,115,22,0.08); border: 1px solid rgba(249,115,22,0.2); border-radius: 12px; padding: 16px; text-align: center; }
+    .result-item .value { font-size: 1.4rem; font-weight: 800; color: var(--orange); }
+    .result-item .label { font-size: 0.78rem; color: var(--gray); margin-top: 4px; }
+    .cost-table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+    .cost-table th, .cost-table td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+    .cost-table th { color: var(--gray); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; }
+    .cost-table td:last-child { text-align: right; font-weight: 600; }
+    .seo-content { padding: 40px 0 60px; }
+    .seo-content h2 { font-size: 1.5rem; font-weight: 800; margin-bottom: 16px; }
+    .seo-content h3 { font-size: 1.1rem; font-weight: 700; margin: 24px 0 10px; color: var(--orange); }
+    .seo-content p { color: var(--gray); margin-bottom: 14px; line-height: 1.8; }
+    .seo-content ul, .seo-content ol { color: var(--gray); margin: 10px 0 16px 24px; }
+    .seo-content li { margin-bottom: 6px; }
+    .seo-content table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+    .seo-content table th, .seo-content table td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+    .seo-content table th { color: var(--gray); font-weight: 600; }
+    footer { border-top: 1px solid var(--border); padding: 32px 0; text-align: center; color: var(--gray); font-size: 0.85rem; }
+    footer a { color: var(--orange); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <nav><div class="container"><a href="/" class="logo">Built<span>Right</span></a><div class="nav-links"><a href="/blog/">Blog</a><a href="/tools/">Tools</a><a href="/templates/">Templates</a></div></div></nav>
+
+  <section class="hero">
+    <div class="container">
+      <span class="badge">Free Calculator</span>
+      <h1>Siding Calculator — <span class="highlight">Squares</span>, Trim & Cost</h1>
+      <p>Enter wall dimensions and openings to get exact squares of siding, trim, J-channel, corner posts, starter strip, and cost estimate.</p>
+    </div>
+  </section>
+
+  <section class="calc-section">
+    <div class="container">
+      <div class="calc-card">
+        <h2>🏠 Wall Dimensions</h2>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Wall Height (feet)</label>
+            <input type="number" id="wallHeight" placeholder="e.g., 9" value="9" step="0.1">
+          </div>
+          <div class="form-group">
+            <label>Total Wall Length / Perimeter (feet)</label>
+            <input type="number" id="wallLength" placeholder="e.g., 160" step="0.1">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Number of Windows</label>
+            <input type="number" id="numWindows" placeholder="e.g., 10" value="10" step="1">
+          </div>
+          <div class="form-group">
+            <label>Avg Window Size</label>
+            <select id="windowSize">
+              <option value="12">3' × 4' (12 sq ft — standard)</option>
+              <option value="8">2' × 4' (8 sq ft — small)</option>
+              <option value="20">4' × 5' (20 sq ft — large)</option>
+              <option value="30">5' × 6' (30 sq ft — picture window)</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Number of Doors</label>
+            <input type="number" id="numDoors" placeholder="e.g., 2" value="2" step="1">
+          </div>
+          <div class="form-group">
+            <label>Door Size</label>
+            <select id="doorSize">
+              <option value="21" selected>3' × 7' (21 sq ft — standard)</option>
+              <option value="28">4' × 7' (28 sq ft — wide/double)</option>
+              <option value="42">6' × 7' (42 sq ft — sliding glass)</option>
+              <option value="56">8' × 7' (56 sq ft — garage door)</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Outside Corners</label>
+            <input type="number" id="corners" placeholder="e.g., 4" value="4" step="1">
+          </div>
+          <div class="form-group">
+            <label>Siding Type</label>
+            <select id="sidingType">
+              <option value="vinyl" selected>Vinyl Siding</option>
+              <option value="fibercement">Fiber Cement (HardiPlank)</option>
+              <option value="wood">Natural Wood (cedar/redwood)</option>
+              <option value="engineered">Engineered Wood (LP SmartSide)</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn" onclick="calculate()">Calculate Siding Materials</button>
+
+        <div class="results" id="results">
+          <div class="result-grid">
+            <div class="result-item"><div class="value" id="squares">—</div><div class="label">Squares of Siding</div></div>
+            <div class="result-item"><div class="value" id="jChannel">—</div><div class="label">J-Channel (pcs)</div></div>
+            <div class="result-item"><div class="value" id="cornerPosts">—</div><div class="label">Corner Posts</div></div>
+            <div class="result-item"><div class="value" id="starterStrip">—</div><div class="label">Starter Strip (pcs)</div></div>
+          </div>
+          <h3 style="font-size:1rem; margin-bottom:12px; color:var(--gray);">Materials & Cost Estimate</h3>
+          <table class="cost-table">
+            <thead><tr><th>Material</th><th>Qty</th><th>Est. Cost</th></tr></thead>
+            <tbody id="costBody"></tbody>
+          </table>
+          <p style="font-size:0.8rem; color:var(--gray); margin-top:8px;">*2026 national average pricing. Fiber cement and wood costs vary significantly by region.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="seo-content">
+    <div class="container">
+      <h2>How to Calculate Siding for Your House</h2>
+      <p>Siding is sold in "squares" — each square covers 100 square feet. Getting the right count means measuring total wall area, subtracting openings, and adding waste. Here's how to do it accurately without overpaying.</p>
+
+      <h3>Siding Cost Comparison (2026)</h3>
+      <table>
+        <thead><tr><th>Siding Type</th><th>Material/sq ft</th><th>Installed/sq ft</th><th>1,500 sq ft Home</th><th>Lifespan</th></tr></thead>
+        <tbody>
+          <tr><td>Vinyl siding</td><td>$1.50–$3.50</td><td>$3–$7</td><td>$3,600–$8,400</td><td>20–30 years</td></tr>
+          <tr><td>Fiber cement (HardiPlank)</td><td>$3–$6</td><td>$6–$13</td><td>$7,200–$15,600</td><td>40–50 years</td></tr>
+          <tr><td>Engineered wood (LP SmartSide)</td><td>$2.50–$5</td><td>$5–$10</td><td>$6,000–$12,000</td><td>25–35 years</td></tr>
+          <tr><td>Natural wood (cedar)</td><td>$3–$8</td><td>$6–$15</td><td>$7,200–$18,000</td><td>20–40 years*</td></tr>
+          <tr><td>Board & batten (vinyl)</td><td>$2–$4</td><td>$4–$8</td><td>$4,800–$9,600</td><td>20–30 years</td></tr>
+          <tr><td>Board & batten (wood)</td><td>$4–$10</td><td>$8–$18</td><td>$9,600–$21,600</td><td>25–40 years*</td></tr>
+        </tbody>
+      </table>
+      <p>*Wood lifespan depends heavily on maintenance (staining every 3–5 years).</p>
+
+      <h3>What's Included in a Siding Job</h3>
+      <ul>
+        <li><strong>Siding panels/planks:</strong> The main material, measured in squares (100 sq ft each).</li>
+        <li><strong>J-channel:</strong> Trim used around windows, doors, and where siding meets soffits. Standard 12.5-ft lengths.</li>
+        <li><strong>Corner posts:</strong> Outside and inside corner pieces, typically 10-ft lengths matched to siding height.</li>
+        <li><strong>Starter strip:</strong> Installed at the bottom of the wall to hold the first row. 10-ft lengths along the full perimeter.</li>
+        <li><strong>Utility trim (undersill):</strong> Installed under windows and at the top of walls. Similar to J-channel.</li>
+        <li><strong>Nails:</strong> Galvanized or stainless steel ring-shank nails, 1.5–2 inches. About 2 lbs per square for vinyl.</li>
+        <li><strong>House wrap:</strong> Tyvek or equivalent, installed under siding for moisture protection. Sold in 9-ft × 150-ft rolls.</li>
+      </ul>
+
+      <h3>Siding Measurement Tips</h3>
+      <ol>
+        <li><strong>Measure each wall separately</strong> if heights vary (common with split-level homes and gable ends).</li>
+        <li><strong>For gable ends,</strong> measure the rectangular portion plus the triangular peak (base × height ÷ 2).</li>
+        <li><strong>Standard deduction per opening:</strong> 3×4 ft window = 12 sq ft, entry door = 21 sq ft, garage door = 56 sq ft, sliding glass = 42 sq ft.</li>
+        <li><strong>Add 10% waste for standard walls</strong> and 15% for walls with many openings or complex geometry.</li>
+        <li><strong>J-channel needs:</strong> Measure the perimeter of every window and door, plus the top of every wall where siding meets soffit.</li>
+      </ol>
+
+      <h3>Vinyl vs. Fiber Cement vs. Wood: Which to Choose</h3>
+      <table>
+        <thead><tr><th>Factor</th><th>Vinyl</th><th>Fiber Cement</th><th>Wood</th></tr></thead>
+        <tbody>
+          <tr><td>Cost (installed)</td><td>$3–$7/sf</td><td>$6–$13/sf</td><td>$6–$15/sf</td></tr>
+          <tr><td>Maintenance</td><td>Almost none</td><td>Repaint every 10–15 yrs</td><td>Stain every 3–5 yrs</td></tr>
+          <tr><td>Fire resistance</td><td>Melts, not fire rated</td><td>Non-combustible</td><td>Combustible</td></tr>
+          <tr><td>Insect resistance</td><td>Excellent</td><td>Excellent</td><td>Poor (needs treatment)</td></tr>
+          <tr><td>Appearance</td><td>Good (can look plastic)</td><td>Excellent (paintable)</td><td>Best (natural grain)</td></tr>
+          <tr><td>Resale value boost</td><td>Moderate</td><td>High</td><td>High</td></tr>
+          <tr><td>DIY friendly</td><td>Yes (lightweight)</td><td>Moderate (heavy, dusty)</td><td>Moderate</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Money-Saving Tips</h3>
+      <ul>
+        <li><strong>Vinyl siding is the best ROI for budget projects.</strong> At $3–$7/sq ft installed, it recoups 70–80% of cost at resale.</li>
+        <li><strong>Install over existing siding</strong> if the old siding is flat and in decent condition. Saves $1–$3/sq ft in removal costs.</li>
+        <li><strong>DIY vinyl siding</strong> is realistic for a handy homeowner. Vinyl is lightweight, cuts with tin snips, and has a forgiving fastener system.</li>
+        <li><strong>Buy during winter.</strong> Siding contractors are slowest Nov–Feb. You can save 10–20% on installation.</li>
+        <li><strong>Fiber cement pays for itself</strong> over 40+ years with virtually zero maintenance. If you plan to stay 10+ years, the extra upfront cost is worth it.</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer><div class="container"><p>© 2026 <a href="/">BuiltRight Academy</a> — Free tools for contractors and tradespeople.</p></div></footer>
+
+  <script>
+    function calculate() {
+      const wallHeight = parseFloat(document.getElementById('wallHeight').value);
+      const wallLength = parseFloat(document.getElementById('wallLength').value);
+      if (!wallHeight || !wallLength) return alert('Please enter wall height and total wall length.');
+
+      const numWindows = parseInt(document.getElementById('numWindows').value) || 0;
+      const windowSize = parseInt(document.getElementById('windowSize').value);
+      const numDoors = parseInt(document.getElementById('numDoors').value) || 0;
+      const doorSize = parseInt(document.getElementById('doorSize').value);
+      const corners = parseInt(document.getElementById('corners').value) || 4;
+      const sidingType = document.getElementById('sidingType').value;
+
+      // Total wall area
+      const grossArea = wallHeight * wallLength;
+      const openingsArea = (numWindows * windowSize) + (numDoors * doorSize);
+      const netArea = grossArea - openingsArea;
+      const wasteMultiplier = 1.10; // 10% waste
+      const sidingArea = netArea * wasteMultiplier;
+      const squares = sidingArea / 100;
+
+      // J-channel: around each window (perimeter) + each door (3 sides) + top of all walls
+      const avgWindowPerim = Math.sqrt(windowSize) * 4; // approximate
+      const avgDoorPerim = Math.sqrt(doorSize) * 3; // 3 sides (not bottom)
+      const jChannelFt = (numWindows * avgWindowPerim) + (numDoors * avgDoorPerim) + wallLength; // soffit line
+      const jChannelPcs = Math.ceil(jChannelFt / 12.5); // 12.5-ft pieces
+
+      // Corner posts: outside corners, height determines pieces
+      const cornerPostPcs = Math.ceil(corners * (wallHeight / 10)); // 10-ft posts
+      const insideCorners = Math.max(0, corners - 4); // assume 4 outside, rest inside
+
+      // Starter strip: full perimeter, 10-ft pieces
+      const starterStripPcs = Math.ceil(wallLength / 10);
+
+      // Utility trim (undersill): under each window + top of wall
+      const utilityTrimFt = (numWindows * Math.sqrt(windowSize)) + wallLength;
+      const utilityTrimPcs = Math.ceil(utilityTrimFt / 12.5);
+
+      // Nails: ~2 lbs per square for vinyl, ~4 lbs for fiber cement
+      const nailLbsPerSquare = sidingType === 'fibercement' ? 4 : sidingType === 'wood' ? 3 : 2;
+      const nailLbs = Math.ceil(squares * nailLbsPerSquare);
+
+      // House wrap: 9ft × 150ft rolls = 1,350 sq ft per roll
+      const houseWrapRolls = Math.ceil(grossArea / 1350);
+
+      // Costs by siding type
+      const costs = {
+        'vinyl': { perSqFt: 2.50, jChannel: 4.50, corner: 18, starter: 5, utilityTrim: 4.50, nailsPerLb: 3, wrapPerRoll: 150, laborPerSqFt: 3 },
+        'fibercement': { perSqFt: 4.50, jChannel: 8, corner: 28, starter: 7, utilityTrim: 8, nailsPerLb: 4, wrapPerRoll: 150, laborPerSqFt: 6 },
+        'wood': { perSqFt: 5.50, jChannel: 0, corner: 0, starter: 0, utilityTrim: 0, nailsPerLb: 4, wrapPerRoll: 150, laborPerSqFt: 7 },
+        'engineered': { perSqFt: 3.75, jChannel: 6, corner: 22, starter: 6, utilityTrim: 6, nailsPerLb: 3.50, wrapPerRoll: 150, laborPerSqFt: 5 }
+      };
+      const c = costs[sidingType];
+
+      const sidingCost = sidingArea * c.perSqFt;
+      const jChannelCost = jChannelPcs * c.jChannel;
+      const cornerCost = cornerPostPcs * c.corner;
+      const starterCost = starterStripPcs * c.starter;
+      const utilityCost = utilityTrimPcs * c.utilityTrim;
+      const nailCost = nailLbs * c.nailsPerLb;
+      const wrapCost = houseWrapRolls * c.wrapPerRoll;
+      const totalMaterials = sidingCost + jChannelCost + cornerCost + starterCost + utilityCost + nailCost + wrapCost;
+      const laborCost = netArea * c.laborPerSqFt;
+
+      document.getElementById('squares').textContent = squares.toFixed(1);
+      document.getElementById('jChannel').textContent = jChannelPcs;
+      document.getElementById('cornerPosts').textContent = cornerPostPcs;
+      document.getElementById('starterStrip').textContent = starterStripPcs;
+
+      const sidingTypeLabel = { vinyl: 'Vinyl', fibercement: 'Fiber Cement', wood: 'Wood', engineered: 'Engineered Wood' };
+      const isWood = sidingType === 'wood';
+
+      document.getElementById('costBody').innerHTML = `
+        <tr><td>${sidingTypeLabel[sidingType]} siding (${squares.toFixed(1)} squares)</td><td>${sidingArea.toFixed(0)} sq ft</td><td>$${sidingCost.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</td></tr>
+        ${!isWood ? `<tr><td>J-channel (12.5 ft pcs)</td><td>${jChannelPcs} pcs</td><td>$${jChannelCost.toFixed(0)}</td></tr>` : ''}
+        ${!isWood ? `<tr><td>Corner posts (10 ft)</td><td>${cornerPostPcs} pcs</td><td>$${cornerCost.toFixed(0)}</td></tr>` : ''}
+        ${!isWood ? `<tr><td>Starter strip (10 ft)</td><td>${starterStripPcs} pcs</td><td>$${starterCost.toFixed(0)}</td></tr>` : ''}
+        ${!isWood ? `<tr><td>Utility trim (12.5 ft pcs)</td><td>${utilityTrimPcs} pcs</td><td>$${utilityCost.toFixed(0)}</td></tr>` : ''}
+        ${isWood ? `<tr><td>Corner boards, trim, flashing</td><td>—</td><td>$${(netArea * 0.50).toFixed(0)}</td></tr>` : ''}
+        <tr><td>Nails / fasteners</td><td>${nailLbs} lbs</td><td>$${nailCost.toFixed(0)}</td></tr>
+        <tr><td>House wrap (Tyvek or equiv)</td><td>${houseWrapRolls} roll(s)</td><td>$${wrapCost.toFixed(0)}</td></tr>
+        <tr style="font-weight:700;border-top:2px solid var(--orange);"><td>Total Materials</td><td></td><td style="color:var(--orange);">$${(isWood ? sidingCost + netArea*0.50 + nailCost + wrapCost : totalMaterials).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</td></tr>
+        <tr><td>Per square foot (materials)</td><td></td><td>$${((isWood ? sidingCost + netArea*0.50 + nailCost + wrapCost : totalMaterials) / netArea).toFixed(2)}/sf</td></tr>
+        <tr><td>Estimated labor</td><td></td><td>$${laborCost.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</td></tr>
+        <tr><td>Estimated installed total</td><td></td><td>$${((isWood ? sidingCost + netArea*0.50 + nailCost + wrapCost : totalMaterials) + laborCost).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</td></tr>
+      `;
+      document.getElementById('results').classList.add('show');
+      document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carpet Calculator — Sq Yards, Padding & Cost | BuiltRight Academy</title>
+  <meta name="description" content="Free carpet calculator. Enter room dimensions to get square yards, padding, tack strip, and seam tape needed. Add multiple rooms, closets, and stairs. 2026 pricing.">
+  <meta name="keywords" content="carpet calculator, how much carpet do I need, carpet cost calculator, carpet square yard calculator, carpet estimator, carpet for stairs calculator">
+  <link rel="canonical" href="https://builtright-academy.vercel.app/tools/carpet-calculator">
+  <meta property="og:title" content="Carpet Calculator — Sq Yards, Padding & Cost">
+  <meta property="og:description" content="Free carpet calculator. Get square yards, padding, tack strip, and cost for any room — including stairs and closets.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Carpet Calculator",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "description": "Calculate how much carpet you need in square yards, including padding, tack strip, and seam tape. Supports multiple rooms, closets, and stairs."
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Why is carpet sold in square yards instead of square feet?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Carpet has been sold in square yards since the industry started — it's simply tradition. Carpet rolls are typically 12 feet wide, and pricing per square yard makes the numbers smaller (and psychologically cheaper). To convert square feet to square yards, divide by 9. For example, a 12×15 room is 180 sq ft ÷ 9 = 20 square yards. Most retailers quote prices per sq yd, though some big-box stores now also show per sq ft pricing."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much extra carpet should I order for waste?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Order 10% extra for rectangular rooms with simple layouts. For L-shaped rooms, rooms with closets, or homes with multiple rooms, order 15–20% extra to account for seams, pattern matching, and cut-off waste. Carpet comes in 12-foot-wide rolls, so any room wider than 12 feet will have a seam — and the leftover strip from that seam is often unusable. Patterned carpet requires even more waste (15–25%) because patterns must align at seams."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I calculate carpet for stairs?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For standard stairs, each step needs about 2.5 feet of carpet length (tread depth + riser height + tuck-under). Multiply by the stair width (typically 36 inches or 3 feet). So each step = 2.5 ft × 3 ft = 7.5 sq ft. For 13 standard stairs: 13 × 7.5 = 97.5 sq ft. Add 10% waste. A waterfall installation (carpet drapes over the nose) uses the same amount. A cap-and-band or Hollywood wrap uses about 20% more carpet per step."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much does it cost to carpet a room in 2026?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For a 12×12 room (144 sq ft = 16 sq yd): budget carpet runs $5–$8/sq yd ($80–$128), mid-range plush $15–$25/sq yd ($240–$400), and luxury carpet $30–$50/sq yd ($480–$800). Add padding at $3–$6/sq yd ($48–$96) and professional installation at $4–$8/sq yd ($64–$128). Total installed cost for a 12×12 room: $250–$1,000+ depending on carpet quality."
+        }
+      }
+    ]
+  }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root { --orange: #F97316; --orange-dark: #EA580C; --darker: #0F0F1A; --dark-card: #1A1A2E; --gray: #94A3B8; --light: #F8FAFC; --green: #22C55E; --border: rgba(255,255,255,0.08); }
+    body { font-family: 'Inter', -apple-system, sans-serif; background: var(--darker); color: var(--light); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+    nav { padding: 20px 0; border-bottom: 1px solid var(--border); }
+    nav .container { display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.3rem; color: var(--orange); text-decoration: none; letter-spacing: -0.5px; }
+    .logo span { color: var(--light); }
+    .nav-links a { color: var(--gray); text-decoration: none; font-size: 0.9rem; margin-left: 24px; }
+    .nav-links a:hover { color: var(--light); }
+    .hero { padding: 48px 0 32px; text-align: center; }
+    .hero .badge { display: inline-block; background: rgba(249,115,22,0.1); border: 1px solid rgba(249,115,22,0.3); color: var(--orange); font-size: 0.8rem; font-weight: 600; padding: 6px 16px; border-radius: 100px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .hero h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 800; line-height: 1.15; letter-spacing: -1px; margin-bottom: 12px; }
+    .hero h1 .highlight { color: var(--orange); }
+    .hero p { color: var(--gray); font-size: 1.05rem; max-width: 600px; margin: 0 auto; }
+    .calc-section { padding: 24px 0 60px; }
+    .calc-card { background: var(--dark-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; margin-bottom: 24px; }
+    .calc-card h2 { font-size: 1.2rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-size: 0.85rem; color: var(--gray); margin-bottom: 6px; font-weight: 500; }
+    .form-group input, .form-group select { width: 100%; padding: 12px 16px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 10px; color: var(--light); font-size: 1rem; font-family: inherit; outline: none; }
+    .form-group input:focus, .form-group select:focus { border-color: var(--orange); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    @media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
+    .btn { display: inline-block; padding: 14px 32px; background: var(--orange); color: #fff; font-weight: 700; font-size: 1rem; border: none; border-radius: 10px; cursor: pointer; font-family: inherit; width: 100%; }
+    .btn:hover { background: var(--orange-dark); }
+    .btn-secondary { background: rgba(255,255,255,0.08); color: var(--light); margin-top: 8px; }
+    .btn-secondary:hover { background: rgba(255,255,255,0.15); }
+    .results { display: none; margin-top: 24px; }
+    .results.show { display: block; }
+    .result-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; margin-bottom: 16px; }
+    .result-item { background: rgba(249,115,22,0.08); border: 1px solid rgba(249,115,22,0.2); border-radius: 12px; padding: 16px; text-align: center; }
+    .result-item .value { font-size: 1.4rem; font-weight: 800; color: var(--orange); }
+    .result-item .label { font-size: 0.78rem; color: var(--gray); margin-top: 4px; }
+    .cost-table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+    .cost-table th, .cost-table td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+    .cost-table th { color: var(--gray); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; }
+    .cost-table td:last-child { text-align: right; font-weight: 600; }
+    .room-entry { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 12px; padding: 16px; margin-bottom: 12px; position: relative; }
+    .room-entry .room-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+    .room-entry .room-header span { font-weight: 600; font-size: 0.9rem; }
+    .room-entry .remove-btn { background: none; border: none; color: #ef4444; cursor: pointer; font-size: 1.1rem; padding: 4px 8px; }
+    .seo-content { padding: 40px 0 60px; }
+    .seo-content h2 { font-size: 1.5rem; font-weight: 800; margin-bottom: 16px; }
+    .seo-content h3 { font-size: 1.1rem; font-weight: 700; margin: 24px 0 10px; color: var(--orange); }
+    .seo-content p { color: var(--gray); margin-bottom: 14px; line-height: 1.8; }
+    .seo-content ul, .seo-content ol { color: var(--gray); margin: 10px 0 16px 24px; }
+    .seo-content li { margin-bottom: 6px; }
+    .seo-content table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+    .seo-content table th, .seo-content table td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+    .seo-content table th { color: var(--gray); font-weight: 600; }
+    footer { border-top: 1px solid var(--border); padding: 32px 0; text-align: center; color: var(--gray); font-size: 0.85rem; }
+    footer a { color: var(--orange); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <nav><div class="container"><a href="/" class="logo">Built<span>Right</span></a><div class="nav-links"><a href="/blog/">Blog</a><a href="/tools/">Tools</a><a href="/templates/">Templates</a></div></div></nav>
+
+  <section class="hero">
+    <div class="container">
+      <span class="badge">Free Calculator</span>
+      <h1>Carpet Calculator — <span class="highlight">Sq Yards</span> & Cost Estimator</h1>
+      <p>Add rooms, closets, and stairs to get total square yards, padding, tack strip, and seam tape needed — with cost estimates by carpet type.</p>
+    </div>
+  </section>
+
+  <section class="calc-section">
+    <div class="container">
+      <div class="calc-card">
+        <h2>🏠 Rooms & Areas</h2>
+        <div id="roomsList">
+          <div class="room-entry" data-index="0">
+            <div class="room-header"><span>Room 1</span></div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Length (feet)</label>
+                <input type="number" class="room-length" placeholder="e.g., 12" step="0.5">
+              </div>
+              <div class="form-group">
+                <label>Width (feet)</label>
+                <input type="number" class="room-width" placeholder="e.g., 15" step="0.5">
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="btn btn-secondary" onclick="addRoom()">+ Add Another Room / Closet</button>
+
+        <div style="margin-top: 20px;">
+          <h2 style="font-size: 1.1rem; margin-bottom: 14px;">🪜 Stairs (optional)</h2>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Number of Steps</label>
+              <input type="number" id="numSteps" placeholder="e.g., 13" value="0" step="1">
+            </div>
+            <div class="form-group">
+              <label>Stair Width (inches)</label>
+              <select id="stairWidth">
+                <option value="36" selected>36" (standard)</option>
+                <option value="42">42" (wider)</option>
+                <option value="48">48" (extra wide)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: 16px;">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Carpet Type</label>
+              <select id="carpetType">
+                <option value="budget">Budget / Builder Grade ($5–$10/sq yd)</option>
+                <option value="plush" selected>Plush / Textured ($15–$25/sq yd)</option>
+                <option value="berber">Berber / Loop ($12–$22/sq yd)</option>
+                <option value="frieze">Frieze / Twist ($18–$30/sq yd)</option>
+                <option value="luxury">Luxury / Wool Blend ($35–$60/sq yd)</option>
+                <option value="commercial">Commercial / Low Loop ($8–$18/sq yd)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Waste Factor</label>
+              <select id="waste">
+                <option value="0.10" selected>10% — Standard rooms</option>
+                <option value="0.15">15% — L-shaped or multiple seams</option>
+                <option value="0.20">20% — Patterned carpet or complex layout</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <button class="btn" onclick="calculate()" style="margin-top:8px;">Calculate Carpet Needed</button>
+
+        <div class="results" id="results">
+          <div class="result-grid">
+            <div class="result-item"><div class="value" id="totalSqft">—</div><div class="label">Total Sq Ft</div></div>
+            <div class="result-item"><div class="value" id="totalSqyd">—</div><div class="label">Sq Yards (carpet)</div></div>
+            <div class="result-item"><div class="value" id="paddingSqyd">—</div><div class="label">Sq Yards (padding)</div></div>
+            <div class="result-item"><div class="value" id="tackStrip">—</div><div class="label">Tack Strip (lin ft)</div></div>
+          </div>
+          <h3 style="font-size:1rem; margin-bottom:12px; color:var(--gray);">Materials & Cost Estimate</h3>
+          <table class="cost-table">
+            <thead><tr><th>Material</th><th>Qty</th><th>Est. Cost</th></tr></thead>
+            <tbody id="costBody"></tbody>
+          </table>
+          <p style="font-size:0.8rem; color:var(--gray); margin-top:8px;">*2026 national average pricing. Includes waste factor. Installation labor not included unless noted. Prices vary by region and retailer.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="seo-content">
+    <div class="container">
+      <h2>How to Calculate Carpet for Any Room</h2>
+      <p>Carpet is sold by the square yard, but most people measure rooms in feet. The math is simple: measure length × width in feet, then divide by 9 to convert to square yards. Add waste (10–20%), then multiply by the price per square yard. The tricky part is accounting for seams, closets, stairs, and roll widths.</p>
+
+      <h3>Carpet Cost Comparison (2026, per sq yd)</h3>
+      <table>
+        <thead><tr><th>Carpet Type</th><th>Material/sq yd</th><th>Padding/sq yd</th><th>Install/sq yd</th><th>Total/sq yd</th></tr></thead>
+        <tbody>
+          <tr><td>Budget / Builder Grade</td><td>$5–$10</td><td>$3–$4</td><td>$4–$6</td><td>$12–$20</td></tr>
+          <tr><td>Plush / Textured</td><td>$15–$25</td><td>$4–$6</td><td>$5–$8</td><td>$24–$39</td></tr>
+          <tr><td>Berber / Loop</td><td>$12–$22</td><td>$3–$5</td><td>$5–$7</td><td>$20–$34</td></tr>
+          <tr><td>Frieze / Twist</td><td>$18–$30</td><td>$4–$6</td><td>$5–$8</td><td>$27–$44</td></tr>
+          <tr><td>Luxury / Wool Blend</td><td>$35–$60</td><td>$5–$8</td><td>$6–$10</td><td>$46–$78</td></tr>
+          <tr><td>Commercial / Low Loop</td><td>$8–$18</td><td>$2–$4</td><td>$4–$6</td><td>$14–$28</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Understanding Carpet Roll Width</h3>
+      <p>Standard carpet rolls are <strong>12 feet wide</strong>. Some styles come in 13.5 ft or 15 ft widths. This matters because any room wider than 12 feet will require a <strong>seam</strong>. Seams add cost (seam tape), labor, and can be visible — especially with plush carpet.</p>
+      <p><strong>Pro tip:</strong> Orient the carpet so the roll width covers the longer wall when possible. A 10×14 room can be covered seamlessly if you run the 12-ft roll along the 14-ft wall (you'll waste a 2-ft strip, but no seam). Running it the other way would need a seam at 12 feet.</p>
+
+      <h3>Waste Factor: How Much Extra to Buy</h3>
+      <ul>
+        <li><strong>10% waste</strong> — Simple rectangular rooms, no pattern, standard 12-ft roll width covers the room</li>
+        <li><strong>15% waste</strong> — L-shaped rooms, closets, rooms wider than 12 ft (seam waste)</li>
+        <li><strong>20% waste</strong> — Patterned carpet (patterns must align at seams), complex room shapes, multiple doorways</li>
+        <li><strong>25% waste</strong> — Large patterns with long repeats, rooms with many angles or curves</li>
+      </ul>
+
+      <h3>How to Measure Stairs for Carpet</h3>
+      <p>Each stair step needs enough carpet to cover the <strong>tread</strong> (the flat part you step on), the <strong>riser</strong> (the vertical part), plus extra for tucking under the nose. The standard formula:</p>
+      <ol>
+        <li>Measure tread depth (typically 10–11 inches)</li>
+        <li>Measure riser height (typically 7–8 inches)</li>
+        <li>Add 1.5 inches for tuck-under at nose and base</li>
+        <li>Total per step: ~30 inches (2.5 feet) of carpet length</li>
+        <li>Multiply by stair width (typically 36 inches)</li>
+        <li>So each step ≈ 7.5 sq ft of carpet</li>
+        <li>Multiply by number of steps, add 10% waste</li>
+      </ol>
+
+      <h3>Padding Matters More Than You Think</h3>
+      <p>Good carpet padding extends carpet life by 50% or more. It absorbs impact, insulates, and makes carpet feel luxurious underfoot. Don't cheap out here.</p>
+      <ul>
+        <li><strong>6 lb, 7/16" pad</strong> — Minimum for residential. Fine for bedrooms with light traffic.</li>
+        <li><strong>8 lb, 7/16" pad</strong> — Best value for most homes. Good for living rooms and hallways.</li>
+        <li><strong>8–10 lb, 1/2" pad</strong> — Premium feel. Great for master bedrooms and stairs.</li>
+        <li><strong>Berber pad</strong> — Use firm, thin (3/8") padding under berber carpet. Thick, soft padding causes berber to buckle.</li>
+        <li><strong>Stairs:</strong> Use 8 lb minimum padding on stairs for durability and safety (cushions falls).</li>
+      </ul>
+
+      <h3>Money-Saving Tips</h3>
+      <ul>
+        <li><strong>Shop remnants.</strong> Carpet remnants (leftover roll ends) cost 50–70% less. Perfect for single rooms under 12×15.</li>
+        <li><strong>Buy carpet + padding + installation as a package.</strong> Most retailers offer better per-sq-yd pricing on bundled deals.</li>
+        <li><strong>Avoid the cheapest padding.</strong> Thin padding wears out fast, and you'll replace carpet 3–5 years sooner. Spending $2 more/sq yd on padding saves hundreds long-term.</li>
+        <li><strong>Time your purchase.</strong> Best carpet deals: Labor Day, Black Friday, and January (post-holiday clearance). Avoid spring — that's peak season.</li>
+        <li><strong>Measure carefully.</strong> Overestimating by 15% is fine (you want extra). Underestimating means a second roll from a different dye lot — and it won't match.</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer><div class="container"><p>© 2026 <a href="/">BuiltRight Academy</a> — Free tools for contractors and tradespeople.</p></div></footer>
+
+  <script>
+    let roomCount = 1;
+
+    const carpetPrices = {
+      budget:     { low: 5, high: 10 },
+      plush:      { low: 15, high: 25 },
+      berber:     { low: 12, high: 22 },
+      frieze:     { low: 18, high: 30 },
+      luxury:     { low: 35, high: 60 },
+      commercial: { low: 8, high: 18 }
+    };
+
+    const paddingPrices = {
+      budget: { low: 3, high: 4 },
+      plush: { low: 4, high: 6 },
+      berber: { low: 3, high: 5 },
+      frieze: { low: 4, high: 6 },
+      luxury: { low: 5, high: 8 },
+      commercial: { low: 2, high: 4 }
+    };
+
+    const installPrices = { low: 4, high: 8 };
+
+    function addRoom() {
+      roomCount++;
+      const div = document.createElement('div');
+      div.className = 'room-entry';
+      div.dataset.index = roomCount - 1;
+      div.innerHTML = `
+        <div class="room-header"><span>Room ${roomCount}</span><button class="remove-btn" onclick="this.closest('.room-entry').remove()">✕</button></div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Length (feet)</label>
+            <input type="number" class="room-length" placeholder="e.g., 12" step="0.5">
+          </div>
+          <div class="form-group">
+            <label>Width (feet)</label>
+            <input type="number" class="room-width" placeholder="e.g., 15" step="0.5">
+          </div>
+        </div>
+      `;
+      document.getElementById('roomsList').appendChild(div);
+    }
+
+    function calculate() {
+      // Calculate room areas
+      let totalSqft = 0;
+      let totalPerimeter = 0;
+      const rooms = document.querySelectorAll('.room-entry');
+      let hasRoom = false;
+      rooms.forEach(room => {
+        const l = parseFloat(room.querySelector('.room-length').value) || 0;
+        const w = parseFloat(room.querySelector('.room-width').value) || 0;
+        if (l > 0 && w > 0) {
+          hasRoom = true;
+          totalSqft += l * w;
+          totalPerimeter += 2 * (l + w);
+        }
+      });
+
+      // Stairs
+      const numSteps = parseInt(document.getElementById('numSteps').value) || 0;
+      const stairWidthIn = parseInt(document.getElementById('stairWidth').value) || 36;
+      const stairWidthFt = stairWidthIn / 12;
+      const sqftPerStep = 2.5 * stairWidthFt; // 2.5 ft carpet length × width
+      const stairSqft = numSteps * sqftPerStep;
+      totalSqft += stairSqft;
+
+      // Stair perimeter for tack strip (both sides of each step + top/bottom)
+      const stairTackStrip = numSteps > 0 ? (numSteps * stairWidthFt * 2) + (stairWidthFt * 2) : 0;
+
+      if (!hasRoom && numSteps === 0) return alert('Please enter at least one room or stair count.');
+
+      const wastePct = parseFloat(document.getElementById('waste').value);
+      const carpetType = document.getElementById('carpetType').value;
+
+      const wasteSqft = totalSqft * wastePct;
+      const totalWithWaste = totalSqft + wasteSqft;
+      const sqYards = totalWithWaste / 9;
+      const paddingSqyd = sqYards; // padding = carpet area
+
+      // Tack strip: around room perimeters minus doorways (~3ft per room)
+      const doorDeduction = rooms.length * 3;
+      const tackStripFt = Math.max(0, totalPerimeter - doorDeduction + stairTackStrip);
+
+      // Seam tape: estimate based on rooms wider than 12 ft
+      let seamTapeFt = 0;
+      rooms.forEach(room => {
+        const l = parseFloat(room.querySelector('.room-length').value) || 0;
+        const w = parseFloat(room.querySelector('.room-width').value) || 0;
+        if (w > 12) seamTapeFt += l;
+        else if (l > 12) seamTapeFt += w;
+      });
+
+      // Costs
+      const cp = carpetPrices[carpetType];
+      const pp = paddingPrices[carpetType];
+      const carpetCostLow = sqYards * cp.low;
+      const carpetCostHigh = sqYards * cp.high;
+      const paddingCostLow = sqYards * pp.low;
+      const paddingCostHigh = sqYards * pp.high;
+      const installCostLow = sqYards * installPrices.low;
+      const installCostHigh = sqYards * installPrices.high;
+      const tackStripCost = Math.ceil(tackStripFt / 4) * 1.50; // $1.50 per 4-ft strip
+      const seamTapeCost = seamTapeFt > 0 ? Math.ceil(seamTapeFt / 20) * 12 : 0; // ~$12 per 20-ft roll
+
+      const totalLow = carpetCostLow + paddingCostLow + tackStripCost + seamTapeCost;
+      const totalHigh = carpetCostHigh + paddingCostHigh + tackStripCost + seamTapeCost;
+      const totalInstalledLow = totalLow + installCostLow;
+      const totalInstalledHigh = totalHigh + installCostHigh;
+
+      document.getElementById('totalSqft').textContent = totalSqft.toFixed(0);
+      document.getElementById('totalSqyd').textContent = sqYards.toFixed(1);
+      document.getElementById('paddingSqyd').textContent = paddingSqyd.toFixed(1);
+      document.getElementById('tackStrip').textContent = tackStripFt.toFixed(0);
+
+      const typeLabel = document.getElementById('carpetType').options[document.getElementById('carpetType').selectedIndex].text.split('(')[0].trim();
+
+      document.getElementById('costBody').innerHTML = `
+        <tr><td>Carpet (${typeLabel})</td><td>${sqYards.toFixed(1)} sq yd</td><td>$${carpetCostLow.toFixed(0)}–$${carpetCostHigh.toFixed(0)}</td></tr>
+        <tr><td>Carpet padding</td><td>${paddingSqyd.toFixed(1)} sq yd</td><td>$${paddingCostLow.toFixed(0)}–$${paddingCostHigh.toFixed(0)}</td></tr>
+        <tr><td>Tack strip (4-ft pieces)</td><td>${Math.ceil(tackStripFt / 4)} pcs (${tackStripFt.toFixed(0)} lin ft)</td><td>$${tackStripCost.toFixed(0)}</td></tr>
+        ${seamTapeFt > 0 ? `<tr><td>Seam tape</td><td>${seamTapeFt.toFixed(0)} lin ft</td><td>$${seamTapeCost.toFixed(0)}</td></tr>` : ''}
+        ${numSteps > 0 ? `<tr><td>Stairs (${numSteps} steps)</td><td>${stairSqft.toFixed(0)} sq ft included above</td><td>—</td></tr>` : ''}
+        <tr><td>Waste factor (${(wastePct * 100).toFixed(0)}%)</td><td>${wasteSqft.toFixed(0)} sq ft</td><td>Included</td></tr>
+        <tr style="font-weight:700;border-top:2px solid var(--orange);"><td>Materials Total</td><td></td><td style="color:var(--orange);">$${totalLow.toFixed(0)}–$${totalHigh.toFixed(0)}</td></tr>
+        <tr><td>Professional installation</td><td>${sqYards.toFixed(1)} sq yd</td><td>$${installCostLow.toFixed(0)}–$${installCostHigh.toFixed(0)}</td></tr>
+        <tr style="font-weight:700;"><td>Total Installed</td><td></td><td style="color:var(--green);">$${totalInstalledLow.toFixed(0)}–$${totalInstalledHigh.toFixed(0)}</td></tr>
+      `;
+      document.getElementById('results').classList.add('show');
+      document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
+</body>
+</html>

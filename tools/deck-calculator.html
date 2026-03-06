@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Deck Calculator — Materials, Cost & Board Estimator | BuiltRight Academy</title>
+  <meta name="description" content="Free deck calculator. Enter dimensions and material type to get decking boards, joists, beams, posts, footings, fasteners, and railing. Pressure-treated, cedar, composite — 2026 pricing.">
+  <meta name="keywords" content="deck calculator, deck cost calculator, deck material calculator, how much does a deck cost, deck board calculator, deck estimator, composite deck calculator">
+  <link rel="canonical" href="https://builtright-academy.vercel.app/tools/deck-calculator">
+  <meta property="og:title" content="Deck Calculator — Materials, Cost & Board Estimator">
+  <meta property="og:description" content="Free deck calculator. Get exact material lists and costs for pressure-treated, cedar, composite, and hardwood decks.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Deck Calculator",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "description": "Calculate deck materials including decking boards, joists, beams, posts, concrete footings, fasteners, and railing components. Get cost estimates for pressure-treated, cedar, composite, and tropical hardwood decks."
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the correct joist spacing for a deck?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Standard joist spacing is 16 inches on center for most decking materials. Composite decking like Trex often requires 16-inch spacing (some products allow 12-inch for diagonal installations). For 5/4×6 pressure-treated decking run perpendicular to joists, 16-inch spacing works perfectly. If you're running decking at a 45-degree angle, reduce joist spacing to 12 inches on center. Always check the decking manufacturer's installation guide for their specific spacing requirements."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How deep do deck footings need to be?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Deck footings must extend below the frost line, which varies by region: 12 inches in the southern US, 36–48 inches in northern states, and up to 60 inches in parts of Minnesota and Alaska. Footing diameter should be 12–16 inches for most residential decks (check local code). Each footing typically uses 2–4 bags of 80-lb concrete depending on depth. A sonotube form makes the pour easier and cleaner. Always check your local building code — footing requirements vary significantly by jurisdiction."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need a permit to build a deck?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "In most US jurisdictions, yes — any deck over 30 inches above grade requires a building permit. Many cities also require permits for decks of any height if they're attached to the house. Permit costs range from $75–$500 depending on location and deck size. You'll typically need to submit a site plan, framing plan, and footing details. Some areas require engineer-stamped drawings for large or elevated decks. Building without a permit can result in fines, forced removal, and problems when selling your home."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much does it cost to build a deck in 2026?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A 12×16 deck (192 sq ft) costs approximately: $1,800–$3,200 DIY with pressure-treated lumber, $3,500–$5,500 DIY with composite (Trex), $4,500–$7,500 professionally installed with pressure-treated, or $7,000–$12,000 professionally installed with composite. Cedar falls between PT and composite. Tropical hardwood (IPE) costs $8,000–$15,000+ for the same size. Railings, stairs, and permits add 20–40% to the base cost."
+        }
+      }
+    ]
+  }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root { --orange: #F97316; --orange-dark: #EA580C; --darker: #0F0F1A; --dark-card: #1A1A2E; --gray: #94A3B8; --light: #F8FAFC; --green: #22C55E; --border: rgba(255,255,255,0.08); }
+    body { font-family: 'Inter', -apple-system, sans-serif; background: var(--darker); color: var(--light); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+    nav { padding: 20px 0; border-bottom: 1px solid var(--border); }
+    nav .container { display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.3rem; color: var(--orange); text-decoration: none; letter-spacing: -0.5px; }
+    .logo span { color: var(--light); }
+    .nav-links a { color: var(--gray); text-decoration: none; font-size: 0.9rem; margin-left: 24px; }
+    .nav-links a:hover { color: var(--light); }
+    .hero { padding: 48px 0 32px; text-align: center; }
+    .hero .badge { display: inline-block; background: rgba(249,115,22,0.1); border: 1px solid rgba(249,115,22,0.3); color: var(--orange); font-size: 0.8rem; font-weight: 600; padding: 6px 16px; border-radius: 100px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .hero h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 800; line-height: 1.15; letter-spacing: -1px; margin-bottom: 12px; }
+    .hero h1 .highlight { color: var(--orange); }
+    .hero p { color: var(--gray); font-size: 1.05rem; max-width: 600px; margin: 0 auto; }
+    .calc-section { padding: 24px 0 60px; }
+    .calc-card { background: var(--dark-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; margin-bottom: 24px; }
+    .calc-card h2 { font-size: 1.2rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-size: 0.85rem; color: var(--gray); margin-bottom: 6px; font-weight: 500; }
+    .form-group input, .form-group select { width: 100%; padding: 12px 16px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 10px; color: var(--light); font-size: 1rem; font-family: inherit; outline: none; }
+    .form-group input:focus, .form-group select:focus { border-color: var(--orange); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    @media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
+    .btn { display: inline-block; padding: 14px 32px; background: var(--orange); color: #fff; font-weight: 700; font-size: 1rem; border: none; border-radius: 10px; cursor: pointer; font-family: inherit; width: 100%; }
+    .btn:hover { background: var(--orange-dark); }
+    .results { display: none; margin-top: 24px; }
+    .results.show { display: block; }
+    .result-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; margin-bottom: 16px; }
+    .result-item { background: rgba(249,115,22,0.08); border: 1px solid rgba(249,115,22,0.2); border-radius: 12px; padding: 16px; text-align: center; }
+    .result-item .value { font-size: 1.4rem; font-weight: 800; color: var(--orange); }
+    .result-item .label { font-size: 0.78rem; color: var(--gray); margin-top: 4px; }
+    .cost-table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+    .cost-table th, .cost-table td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+    .cost-table th { color: var(--gray); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; }
+    .cost-table td:last-child { text-align: right; font-weight: 600; }
+    .section-divider { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
+    .seo-content { padding: 40px 0 60px; }
+    .seo-content h2 { font-size: 1.5rem; font-weight: 800; margin-bottom: 16px; }
+    .seo-content h3 { font-size: 1.1rem; font-weight: 700; margin: 24px 0 10px; color: var(--orange); }
+    .seo-content p { color: var(--gray); margin-bottom: 14px; line-height: 1.8; }
+    .seo-content ul, .seo-content ol { color: var(--gray); margin: 10px 0 16px 24px; }
+    .seo-content li { margin-bottom: 6px; }
+    .seo-content table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+    .seo-content table th, .seo-content table td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+    .seo-content table th { color: var(--gray); font-weight: 600; }
+    footer { border-top: 1px solid var(--border); padding: 32px 0; text-align: center; color: var(--gray); font-size: 0.85rem; }
+    footer a { color: var(--orange); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <nav><div class="container"><a href="/" class="logo">Built<span>Right</span></a><div class="nav-links"><a href="/blog/">Blog</a><a href="/tools/">Tools</a><a href="/templates/">Templates</a></div></div></nav>
+
+  <section class="hero">
+    <div class="container">
+      <span class="badge">Free Calculator</span>
+      <h1>Deck Calculator — <span class="highlight">Materials</span> & Cost Estimator</h1>
+      <p>Enter deck dimensions, material type, and options to get a complete material list with decking boards, joists, beams, posts, footings, fasteners, and railing.</p>
+    </div>
+  </section>
+
+  <section class="calc-section">
+    <div class="container">
+      <div class="calc-card">
+        <h2>🪵 Deck Dimensions</h2>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Deck Length (feet)</label>
+            <input type="number" id="deckLength" placeholder="e.g., 16" step="1">
+          </div>
+          <div class="form-group">
+            <label>Deck Width (feet)</label>
+            <input type="number" id="deckWidth" placeholder="e.g., 12" step="1">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Decking Material</label>
+            <select id="material">
+              <option value="pt">Pressure-Treated Pine (5/4×6)</option>
+              <option value="cedar">Western Red Cedar (5/4×6)</option>
+              <option value="composite" selected>Composite / Trex (1×6)</option>
+              <option value="ipe">Tropical Hardwood / IPE (5/4×6)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Joist Spacing</label>
+            <select id="joistSpacing">
+              <option value="12">12" on center (diagonal decking or composite)</option>
+              <option value="16" selected>16" on center (standard)</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Deck Height Above Grade (feet)</label>
+            <select id="deckHeight">
+              <option value="1">1 ft (ground level)</option>
+              <option value="2">2 ft (low deck)</option>
+              <option value="3" selected>3 ft (standard)</option>
+              <option value="4">4 ft (elevated)</option>
+              <option value="6">6 ft (high deck)</option>
+              <option value="8">8 ft (second story)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Frost Line Depth (inches)</label>
+            <select id="frostLine">
+              <option value="12">12" (Deep South, FL, TX, AZ)</option>
+              <option value="24">24" (Mid-Atlantic, Southeast)</option>
+              <option value="36" selected>36" (Midwest, Northeast)</option>
+              <option value="48">48" (Northern states, mountain)</option>
+              <option value="60">60" (Minnesota, Alaska)</option>
+            </select>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+        <h2 style="margin-top:8px;">🛡️ Railing & Stairs</h2>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Railing</label>
+            <select id="railingOption">
+              <option value="none">No railing</option>
+              <option value="3sides" selected>3 sides (attached to house on one side)</option>
+              <option value="4sides">All 4 sides</option>
+              <option value="custom">Custom length</option>
+            </select>
+          </div>
+          <div class="form-group" id="customRailGroup" style="display:none;">
+            <label>Custom Railing Length (linear feet)</label>
+            <input type="number" id="customRailLength" placeholder="e.g., 40" step="1">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Number of Stair Steps (0 = no stairs)</label>
+            <input type="number" id="numStairs" value="4" step="1" min="0">
+          </div>
+          <div class="form-group">
+            <label>Stair Width (inches)</label>
+            <select id="stairWidth">
+              <option value="36" selected>36" (standard / code minimum)</option>
+              <option value="48">48" (wide)</option>
+              <option value="60">60" (extra wide)</option>
+            </select>
+          </div>
+        </div>
+
+        <button class="btn" onclick="calculate()" style="margin-top:8px;">Calculate Deck Materials</button>
+
+        <div class="results" id="results">
+          <div class="result-grid">
+            <div class="result-item"><div class="value" id="deckArea">—</div><div class="label">Deck Sq Ft</div></div>
+            <div class="result-item"><div class="value" id="totalBoards">—</div><div class="label">Decking Boards</div></div>
+            <div class="result-item"><div class="value" id="totalJoists">—</div><div class="label">Joists</div></div>
+            <div class="result-item"><div class="value" id="totalPosts">—</div><div class="label">Posts</div></div>
+            <div class="result-item"><div class="value" id="totalFootings">—</div><div class="label">Footings</div></div>
+            <div class="result-item"><div class="value" id="estTotal">—</div><div class="label">Est. Cost</div></div>
+          </div>
+          <h3 style="font-size:1rem; margin-bottom:12px; color:var(--gray);">Complete Material List & Cost</h3>
+          <table class="cost-table">
+            <thead><tr><th>Material</th><th>Qty</th><th>Est. Cost</th></tr></thead>
+            <tbody id="costBody"></tbody>
+          </table>
+          <p style="font-size:0.8rem; color:var(--gray); margin-top:8px;">*2026 national average pricing. Substructure uses pressure-treated lumber regardless of decking choice. Prices vary by region and supplier. Add 15–25% for professional installation labor.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="seo-content">
+    <div class="container">
+      <h2>How to Estimate Deck Materials & Cost</h2>
+      <p>Building a deck is one of the best ROI home improvements — averaging 65–75% return on investment at resale. But getting the material estimate wrong means budget overruns and extra trips to the lumber yard. Here's how to plan it right.</p>
+
+      <h3>Deck Cost Comparison (2026, materials only, per sq ft)</h3>
+      <table>
+        <thead><tr><th>Material</th><th>Decking/sq ft</th><th>Total w/ Frame/sq ft</th><th>12×16 Deck (192 sq ft)</th><th>Lifespan</th></tr></thead>
+        <tbody>
+          <tr><td>Pressure-Treated Pine</td><td>$2.50–$4</td><td>$8–$15</td><td>$1,500–$2,900</td><td>15–25 years</td></tr>
+          <tr><td>Western Red Cedar</td><td>$4.50–$7</td><td>$12–$20</td><td>$2,300–$3,800</td><td>20–30 years</td></tr>
+          <tr><td>Composite (Trex, TimberTech)</td><td>$6–$12</td><td>$15–$28</td><td>$2,900–$5,400</td><td>25–50 years</td></tr>
+          <tr><td>Tropical Hardwood (IPE)</td><td>$10–$18</td><td>$22–$38</td><td>$4,200–$7,300</td><td>40–75 years</td></tr>
+        </tbody>
+      </table>
+      <p><strong>Note:</strong> Substructure (joists, beams, posts, footings) is always pressure-treated lumber regardless of decking material. This typically accounts for 30–40% of total materials cost.</p>
+
+      <h3>DIY vs Hired: What's the Real Cost?</h3>
+      <table>
+        <thead><tr><th>Scenario</th><th>12×16 PT Pine</th><th>12×16 Composite</th><th>16×20 PT Pine</th><th>16×20 Composite</th></tr></thead>
+        <tbody>
+          <tr><td>DIY (materials only)</td><td>$1,800–$3,200</td><td>$3,200–$5,500</td><td>$2,800–$5,000</td><td>$5,000–$8,500</td></tr>
+          <tr><td>Contractor (materials + labor)</td><td>$4,500–$7,500</td><td>$7,000–$12,000</td><td>$7,000–$12,000</td><td>$11,000–$18,000</td></tr>
+          <tr><td>DIY savings</td><td>~55%</td><td>~50%</td><td>~55%</td><td>~50%</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Joist Spacing Guide</h3>
+      <p>Joists are the horizontal framing members that support the decking boards. Proper spacing is critical for preventing bounce, sag, and premature decking failure.</p>
+      <ul>
+        <li><strong>16" on center</strong> — Standard for most decking materials run perpendicular to joists. Works for 5/4×6 PT pine, cedar, and most composites.</li>
+        <li><strong>12" on center</strong> — Required for diagonal decking patterns (45°), some thinner composite products, and decks that will hold heavy loads (hot tubs, large planters).</li>
+        <li><strong>24" on center</strong> — Only acceptable for 2×6 or thicker decking run perpendicular. Not recommended for composite.</li>
+        <li><strong>Always use 2×8 or 2×10 joists</strong> for spans over 8 feet. 2×6 joists max out at about 8 feet between supports.</li>
+      </ul>
+
+      <h3>Footing Requirements by Region</h3>
+      <table>
+        <thead><tr><th>Region</th><th>Frost Line</th><th>Min. Footing Depth</th><th>Concrete Bags/Footing</th></tr></thead>
+        <tbody>
+          <tr><td>Deep South (FL, coastal TX, AZ)</td><td>0–12"</td><td>12–18"</td><td>2 bags (80 lb)</td></tr>
+          <tr><td>Mid-Atlantic, Southeast</td><td>12–24"</td><td>24"</td><td>2–3 bags</td></tr>
+          <tr><td>Midwest, Northeast</td><td>30–42"</td><td>36"</td><td>3–4 bags</td></tr>
+          <tr><td>Northern states, mountains</td><td>42–60"</td><td>48–60"</td><td>4–5 bags</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Permit Requirements</h3>
+      <p>Most municipalities require a building permit for decks that are:</p>
+      <ul>
+        <li><strong>Over 30 inches above grade</strong> at any point (nearly universal requirement)</li>
+        <li><strong>Attached to the house</strong> (ledger board attachment affects house structure)</li>
+        <li><strong>Over 200 sq ft</strong> in some jurisdictions, even at ground level</li>
+        <li><strong>Near property lines</strong> — setback requirements typically 5–10 feet from property lines</li>
+      </ul>
+      <p>Permit costs: $75–$500 depending on jurisdiction and deck size. Plan 2–6 weeks for permit approval. Pro tip: call your local building department before you start — they'll tell you exactly what you need.</p>
+
+      <h3>Pro Tips for Deck Building</h3>
+      <ol>
+        <li><strong>Crown joists up.</strong> Every board has a slight curve (crown). Install joists with the crown facing up so weight pushes them straight, not into a deeper bow.</li>
+        <li><strong>Use joist tape</strong> on the tops of all joists. It costs $30–$50 per deck and prevents moisture rot where decking screws penetrate — doubling joist life.</li>
+        <li><strong>Pre-drill hardwood decking.</strong> IPE and similar hardwoods will split if you drive screws without pilot holes. Use a combination drill/countersink bit.</li>
+        <li><strong>Leave 1/8" gaps</strong> between decking boards for drainage and expansion. Use a 16d nail as a spacer.</li>
+        <li><strong>Stagger board ends.</strong> Never have two adjacent boards ending on the same joist — it looks bad and concentrates stress.</li>
+        <li><strong>Use structural screws, not nails,</strong> for all framing connections. Simpson Strong-Tie SD screws or GRK structural screws are code-approved and much easier than through-bolts.</li>
+      </ol>
+    </div>
+  </section>
+
+  <footer><div class="container"><p>© 2026 <a href="/">BuiltRight Academy</a> — Free tools for contractors and tradespeople.</p></div></footer>
+
+  <script>
+    // Show/hide custom rail length
+    document.getElementById('railingOption').addEventListener('change', function() {
+      document.getElementById('customRailGroup').style.display = this.value === 'custom' ? 'block' : 'none';
+    });
+
+    // Material pricing per linear foot of decking board (5/4×6 or 1×6, various lengths)
+    const deckingPricePerLF = { pt: 1.50, cedar: 3.00, composite: 5.00, ipe: 8.00 };
+    const materialLabels = { pt: 'Pressure-Treated Pine', cedar: 'Western Red Cedar', composite: 'Composite (Trex/TimberTech)', ipe: 'Tropical Hardwood (IPE)' };
+
+    // Railing pricing per linear foot
+    const railPricePerLF = { pt: 8, cedar: 14, composite: 25, ipe: 35 };
+
+    function calculate() {
+      const L = parseFloat(document.getElementById('deckLength').value);
+      const W = parseFloat(document.getElementById('deckWidth').value);
+      if (!L || !W) return alert('Please enter deck length and width.');
+
+      const material = document.getElementById('material').value;
+      const joistSpacingIn = parseInt(document.getElementById('joistSpacing').value);
+      const deckHeight = parseInt(document.getElementById('deckHeight').value);
+      const frostLine = parseInt(document.getElementById('frostLine').value);
+      const railOption = document.getElementById('railingOption').value;
+      const numStairs = parseInt(document.getElementById('numStairs').value) || 0;
+      const stairWidthIn = parseInt(document.getElementById('stairWidth').value);
+      const stairWidthFt = stairWidthIn / 12;
+
+      const area = L * W;
+
+      // === DECKING BOARDS ===
+      // Standard decking board: 5.5" actual width, sold in various lengths
+      // Board coverage per LF: 5.5" / 12 = 0.458 ft width, including 1/8" gap = ~0.469 ft
+      const boardWidthFt = (5.5 + 0.125) / 12; // 5.625" effective with gap
+      const boardRows = Math.ceil(W / boardWidthFt);
+      // Each row spans the length. Use 12ft or 16ft boards to cover L
+      const boardLength = L <= 12 ? 12 : 16; // common board lengths
+      const boardsPerRow = Math.ceil(L / boardLength);
+      let totalDeckingBoards = boardRows * boardsPerRow;
+      totalDeckingBoards = Math.ceil(totalDeckingBoards * 1.10); // 10% waste
+
+      // Stair treads: 2 boards per step
+      const stairTreadBoards = numStairs * 2;
+      totalDeckingBoards += stairTreadBoards;
+
+      // Total LF of decking
+      const totalDeckingLF = totalDeckingBoards * boardLength + (stairTreadBoards * (stairWidthFt + 0.5));
+
+      // === JOISTS (2×8 or 2×10 PT) ===
+      // Joists run perpendicular to decking (across the width W, spaced along L)
+      const joistSpacingFt = joistSpacingIn / 12;
+      const numJoists = Math.ceil(L / joistSpacingFt) + 1; // +1 for the end
+      // Joist length = W (deck width), buy next standard length up
+      const joistLength = W <= 8 ? 8 : W <= 10 ? 10 : W <= 12 ? 12 : W <= 14 ? 14 : 16;
+      // Use 2×10 for spans > 10 ft, 2×8 otherwise
+      const joistSize = W > 10 ? '2×10' : '2×8';
+
+      // === RIM JOISTS (band boards) ===
+      // 2 rim joists along the length (L), 2 along the width (W)
+      const rimJoistLF = (L * 2) + (W * 2);
+
+      // === BEAMS (double 2×10 or 2×12 PT) ===
+      // Beam runs along L, supporting joists. Need beam every 8ft of joist span.
+      const numBeamLines = Math.max(1, Math.ceil(W / 8) - 1) + (deckHeight > 1 ? 0 : 0);
+      // For ledger-attached decks (1 beam line for spans up to 14ft)
+      const beamLines = W <= 8 ? 0 : Math.ceil(W / 8); // 0 if joists span wall to beam within 8ft
+      const actualBeamLines = Math.max(1, beamLines);
+      const beamBoardsPerLine = 2; // doubled beam
+      const beamLength = L <= 12 ? 12 : 16;
+      const beamBoardsNeeded = Math.ceil(L / beamLength) * beamBoardsPerLine * actualBeamLines;
+
+      // === POSTS (6×6 or 4×4 PT) ===
+      // Posts every 8ft along each beam line
+      const postsPerBeam = Math.ceil(L / 8) + 1;
+      const numPosts = postsPerBeam * actualBeamLines;
+      const postLength = deckHeight <= 4 ? 8 : 12; // 8ft or 12ft posts
+      const postSize = deckHeight > 4 ? '6×6' : '4×4';
+
+      // === CONCRETE FOOTINGS ===
+      const numFootings = numPosts;
+      const bagsPerFooting = frostLine <= 18 ? 2 : frostLine <= 30 ? 3 : frostLine <= 42 ? 4 : 5;
+      const totalConcreteBags = numFootings * bagsPerFooting;
+
+      // === FASTENERS ===
+      // Deck screws: ~350 screws per 100 sq ft = ~1 box (5lb) per 100 sq ft
+      const screwBoxes = Math.ceil(area / 100);
+      // Joist hangers
+      const joistHangers = numJoists;
+      // Structural screws for framing
+      const structuralScrewBoxes = Math.ceil(numPosts / 4) + 1;
+
+      // === RAILING ===
+      let railingLF = 0;
+      if (railOption === '3sides') {
+        railingLF = L + W + W - 4; // 3 sides minus stair opening (~4ft)
+      } else if (railOption === '4sides') {
+        railingLF = (L + W) * 2 - 4;
+      } else if (railOption === 'custom') {
+        railingLF = parseFloat(document.getElementById('customRailLength').value) || 0;
+      }
+      // Stair railing (both sides)
+      const stairRailLF = numStairs > 0 ? Math.ceil(Math.sqrt(numStairs * 7.5 * 7.5 + numStairs * 10 * 10) / 12) * 2 : 0;
+      // Simplified: ~1.2 LF per step per side
+      const totalStairRailLF = numStairs > 0 ? Math.ceil(numStairs * 1.2) * 2 : 0;
+      const totalRailLF = railingLF + totalStairRailLF;
+
+      // Rail posts (every 6 ft)
+      const railPosts = totalRailLF > 0 ? Math.ceil(totalRailLF / 6) + 1 : 0;
+      // Balusters (every 4 inches — code requires <4" gaps)
+      const balusters = totalRailLF > 0 ? Math.ceil(totalRailLF * 12 / 4) : 0;
+
+      // === STAIR STRINGERS ===
+      const numStringers = numStairs > 0 ? (stairWidthIn <= 36 ? 3 : stairWidthIn <= 48 ? 4 : 5) : 0;
+
+      // === COST CALCULATIONS ===
+      const deckingCost = totalDeckingBoards * boardLength * deckingPricePerLF[material];
+      const joistCostPer = joistSize === '2×10' ? joistLength * 1.40 : joistLength * 1.10;
+      const joistCost = numJoists * joistCostPer;
+      const rimJoistCost = Math.ceil(rimJoistLF / 12) * (joistSize === '2×10' ? 16.80 : 13.20);
+      const beamCostPer = beamLength * 1.60; // 2×10/2×12 PT
+      const beamCost = beamBoardsNeeded * beamCostPer;
+      const postCostPer = postSize === '6×6' ? (postLength === 12 ? 42 : 28) : (postLength === 12 ? 22 : 15);
+      const postCost = numPosts * postCostPer;
+      const concreteCost = totalConcreteBags * 6.50;
+      const screwCost = screwBoxes * 55; // ~$55 per 5-lb box of deck screws
+      const hangerCost = joistHangers * 3.50;
+      const structScrewCost = structuralScrewBoxes * 35;
+      const hardwareCost = screwCost + hangerCost + structScrewCost;
+      const railingCost = totalRailLF * railPricePerLF[material];
+      const stringerCost = numStringers * 35; // pre-cut stringer ~$35 each
+      const sonotubeCost = numFootings * 12; // ~$12 per sonotube form
+
+      const totalMaterials = deckingCost + joistCost + rimJoistCost + beamCost + postCost + concreteCost + hardwareCost + railingCost + stringerCost + sonotubeCost;
+      const perSqft = totalMaterials / area;
+
+      // Update display
+      document.getElementById('deckArea').textContent = area;
+      document.getElementById('totalBoards').textContent = totalDeckingBoards;
+      document.getElementById('totalJoists').textContent = numJoists;
+      document.getElementById('totalPosts').textContent = numPosts;
+      document.getElementById('totalFootings').textContent = numFootings;
+      document.getElementById('estTotal').textContent = '$' + totalMaterials.toFixed(0);
+
+      const ml = materialLabels[material];
+
+      let rows = `
+        <tr><td colspan="3" style="color:var(--orange);font-weight:700;font-size:0.85rem;text-transform:uppercase;padding-top:16px;">Decking Surface</td></tr>
+        <tr><td>Decking boards (${ml}, ${boardLength}ft)</td><td>${totalDeckingBoards}</td><td>$${deckingCost.toFixed(0)}</td></tr>
+        <tr><td>Deck screws (5-lb boxes)</td><td>${screwBoxes}</td><td>$${screwCost.toFixed(0)}</td></tr>
+      `;
+
+      rows += `
+        <tr><td colspan="3" style="color:var(--orange);font-weight:700;font-size:0.85rem;text-transform:uppercase;padding-top:16px;">Framing (Pressure-Treated)</td></tr>
+        <tr><td>Joists (${joistSize}×${joistLength}ft PT)</td><td>${numJoists}</td><td>$${joistCost.toFixed(0)}</td></tr>
+        <tr><td>Rim joists / band boards</td><td>${Math.ceil(rimJoistLF / 12)} pcs</td><td>$${rimJoistCost.toFixed(0)}</td></tr>
+        <tr><td>Beam boards (doubled 2×10, ${beamLength}ft PT)</td><td>${beamBoardsNeeded}</td><td>$${beamCost.toFixed(0)}</td></tr>
+        <tr><td>Joist hangers</td><td>${joistHangers}</td><td>$${hangerCost.toFixed(0)}</td></tr>
+        <tr><td>Structural screws (boxes)</td><td>${structuralScrewBoxes}</td><td>$${structScrewCost.toFixed(0)}</td></tr>
+      `;
+
+      rows += `
+        <tr><td colspan="3" style="color:var(--orange);font-weight:700;font-size:0.85rem;text-transform:uppercase;padding-top:16px;">Foundation</td></tr>
+        <tr><td>Posts (${postSize}×${postLength}ft PT)</td><td>${numPosts}</td><td>$${postCost.toFixed(0)}</td></tr>
+        <tr><td>Concrete (80-lb bags, ${bagsPerFooting}/footing)</td><td>${totalConcreteBags}</td><td>$${concreteCost.toFixed(0)}</td></tr>
+        <tr><td>Sonotube forms (12" dia)</td><td>${numFootings}</td><td>$${sonotubeCost.toFixed(0)}</td></tr>
+      `;
+
+      if (totalRailLF > 0) {
+        rows += `
+          <tr><td colspan="3" style="color:var(--orange);font-weight:700;font-size:0.85rem;text-transform:uppercase;padding-top:16px;">Railing</td></tr>
+          <tr><td>Railing system (${totalRailLF} lin ft)</td><td>${railPosts} posts, ${balusters} balusters</td><td>$${railingCost.toFixed(0)}</td></tr>
+        `;
+      }
+
+      if (numStairs > 0) {
+        rows += `
+          <tr><td colspan="3" style="color:var(--orange);font-weight:700;font-size:0.85rem;text-transform:uppercase;padding-top:16px;">Stairs</td></tr>
+          <tr><td>Stair stringers (pre-cut)</td><td>${numStringers}</td><td>$${stringerCost.toFixed(0)}</td></tr>
+          <tr><td>Stair treads</td><td>${stairTreadBoards} boards (incl. above)</td><td>Included</td></tr>
+        `;
+      }
+
+      rows += `
+        <tr style="font-weight:700;border-top:2px solid var(--orange);"><td>Total Materials</td><td>${area} sq ft deck</td><td style="color:var(--orange);">$${totalMaterials.toFixed(0)}</td></tr>
+        <tr><td>Per square foot (materials)</td><td></td><td>$${perSqft.toFixed(2)}/sq ft</td></tr>
+        <tr><td>Estimated installed cost (with labor)</td><td></td><td>$${(totalMaterials * 1.8).toFixed(0)}–$${(totalMaterials * 2.3).toFixed(0)}</td></tr>
+      `;
+
+      document.getElementById('costBody').innerHTML = rows;
+      document.getElementById('results').classList.add('show');
+      document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
+</body>
+</html>

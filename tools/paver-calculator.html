@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Paver Calculator — Count, Sand, Gravel & Cost | BuiltRight Academy</title>
+  <meta name="description" content="Free paver calculator. Enter area and paver size to get exact count, sand, gravel base, and edging needed. Supports running bond, herringbone, and basketweave patterns. 2026 pricing.">
+  <meta name="keywords" content="paver calculator, how many pavers do I need, paver cost calculator, patio paver calculator, paver sand calculator, paver base calculator">
+  <link rel="canonical" href="https://builtright-academy.vercel.app/tools/paver-calculator">
+  <meta property="og:title" content="Paver Calculator — Count, Sand, Gravel & Cost">
+  <meta property="og:description" content="Free paver calculator. Get exact paver count, base materials, and cost for patios, walkways, and driveways.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Paver Calculator",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "description": "Calculate number of pavers, sand, gravel base, and edging for patios, walkways, and driveways. Supports multiple paver sizes and layout patterns."
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How many pavers do I need per square foot?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The number of pavers per square foot depends on paver size: 4×8 inch pavers = 4.5 per sq ft, 6×6 inch = 4 per sq ft, 6×9 inch = 2.67 per sq ft, and 12×12 inch = 1 per sq ft. Add 5% extra for straight cuts and 10% for diagonal patterns like herringbone. These counts assume standard 3/16-inch joint spacing."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much sand do I need under pavers?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You need two types of sand for a paver project: bedding sand (1 inch thick layer under the pavers) at about 100 lbs per 15 sq ft, and polymeric jointing sand to fill joints at about 1 bag (50 lbs) per 30–75 sq ft depending on paver size and joint width. For a 200 sq ft patio, plan on approximately 0.6 tons of bedding sand and 3–7 bags of polymeric sand."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How deep should a paver base be?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Paver base depth depends on use: patios and walkways need 4–6 inches of compacted gravel, residential driveways need 8–12 inches, and commercial areas need 12+ inches. Always use angular crushed stone (not round gravel) for the base — it compacts and interlocks much better. The base should be compacted in 2-inch lifts with a plate compactor."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the cheapest type of paver?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Standard concrete pavers are the cheapest at $2–$5 per square foot for materials. Brick pavers cost $4–$8/sq ft, permeable pavers $5–$10/sq ft, and natural stone (flagstone, travertine, bluestone) costs $8–$25/sq ft. Installed costs add $6–$12/sq ft for labor. A 300 sq ft patio with concrete pavers runs $2,400–$5,100 installed."
+        }
+      }
+    ]
+  }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root { --orange: #F97316; --orange-dark: #EA580C; --darker: #0F0F1A; --dark-card: #1A1A2E; --gray: #94A3B8; --light: #F8FAFC; --green: #22C55E; --border: rgba(255,255,255,0.08); }
+    body { font-family: 'Inter', -apple-system, sans-serif; background: var(--darker); color: var(--light); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+    nav { padding: 20px 0; border-bottom: 1px solid var(--border); }
+    nav .container { display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.3rem; color: var(--orange); text-decoration: none; letter-spacing: -0.5px; }
+    .logo span { color: var(--light); }
+    .nav-links a { color: var(--gray); text-decoration: none; font-size: 0.9rem; margin-left: 24px; }
+    .nav-links a:hover { color: var(--light); }
+    .hero { padding: 48px 0 32px; text-align: center; }
+    .hero .badge { display: inline-block; background: rgba(249,115,22,0.1); border: 1px solid rgba(249,115,22,0.3); color: var(--orange); font-size: 0.8rem; font-weight: 600; padding: 6px 16px; border-radius: 100px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .hero h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 800; line-height: 1.15; letter-spacing: -1px; margin-bottom: 12px; }
+    .hero h1 .highlight { color: var(--orange); }
+    .hero p { color: var(--gray); font-size: 1.05rem; max-width: 600px; margin: 0 auto; }
+    .calc-section { padding: 24px 0 60px; }
+    .calc-card { background: var(--dark-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; margin-bottom: 24px; }
+    .calc-card h2 { font-size: 1.2rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-size: 0.85rem; color: var(--gray); margin-bottom: 6px; font-weight: 500; }
+    .form-group input, .form-group select { width: 100%; padding: 12px 16px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 10px; color: var(--light); font-size: 1rem; font-family: inherit; outline: none; }
+    .form-group input:focus, .form-group select:focus { border-color: var(--orange); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    @media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
+    .btn { display: inline-block; padding: 14px 32px; background: var(--orange); color: #fff; font-weight: 700; font-size: 1rem; border: none; border-radius: 10px; cursor: pointer; font-family: inherit; width: 100%; }
+    .btn:hover { background: var(--orange-dark); }
+    .results { display: none; margin-top: 24px; }
+    .results.show { display: block; }
+    .result-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; margin-bottom: 16px; }
+    .result-item { background: rgba(249,115,22,0.08); border: 1px solid rgba(249,115,22,0.2); border-radius: 12px; padding: 16px; text-align: center; }
+    .result-item .value { font-size: 1.4rem; font-weight: 800; color: var(--orange); }
+    .result-item .label { font-size: 0.78rem; color: var(--gray); margin-top: 4px; }
+    .cost-table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+    .cost-table th, .cost-table td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+    .cost-table th { color: var(--gray); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; }
+    .cost-table td:last-child { text-align: right; font-weight: 600; }
+    .seo-content { padding: 40px 0 60px; }
+    .seo-content h2 { font-size: 1.5rem; font-weight: 800; margin-bottom: 16px; }
+    .seo-content h3 { font-size: 1.1rem; font-weight: 700; margin: 24px 0 10px; color: var(--orange); }
+    .seo-content p { color: var(--gray); margin-bottom: 14px; line-height: 1.8; }
+    .seo-content ul, .seo-content ol { color: var(--gray); margin: 10px 0 16px 24px; }
+    .seo-content li { margin-bottom: 6px; }
+    .seo-content table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+    .seo-content table th, .seo-content table td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+    .seo-content table th { color: var(--gray); font-weight: 600; }
+    footer { border-top: 1px solid var(--border); padding: 32px 0; text-align: center; color: var(--gray); font-size: 0.85rem; }
+    footer a { color: var(--orange); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <nav><div class="container"><a href="/" class="logo">Built<span>Right</span></a><div class="nav-links"><a href="/blog/">Blog</a><a href="/tools/">Tools</a><a href="/templates/">Templates</a></div></div></nav>
+
+  <section class="hero">
+    <div class="container">
+      <span class="badge">Free Calculator</span>
+      <h1>Paver Calculator — <span class="highlight">Count</span>, Sand & Cost</h1>
+      <p>Enter your patio, walkway, or driveway dimensions and paver size to get exact quantities for pavers, sand, gravel base, and edging.</p>
+    </div>
+  </section>
+
+  <section class="calc-section">
+    <div class="container">
+      <div class="calc-card">
+        <h2>🧱 Paver Project Details</h2>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Area Length (feet)</label>
+            <input type="number" id="length" placeholder="e.g., 20" step="0.1">
+          </div>
+          <div class="form-group">
+            <label>Area Width (feet)</label>
+            <input type="number" id="width" placeholder="e.g., 15" step="0.1">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Paver Size</label>
+            <select id="paverSize">
+              <option value="4x8">4" × 8" (standard brick)</option>
+              <option value="6x6">6" × 6"</option>
+              <option value="6x9">6" × 9"</option>
+              <option value="12x12">12" × 12" (large format)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Layout Pattern</label>
+            <select id="pattern">
+              <option value="running">Running Bond (standard)</option>
+              <option value="herringbone">Herringbone (45°)</option>
+              <option value="basketweave">Basketweave</option>
+              <option value="stack">Stack Bond (grid)</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Base Depth</label>
+            <select id="baseDepth">
+              <option value="4">4" (walkways, light use)</option>
+              <option value="6" selected>6" (patios, standard)</option>
+              <option value="8">8" (residential driveways)</option>
+              <option value="12">12" (heavy traffic)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Paver Type (for cost estimate)</label>
+            <select id="paverType">
+              <option value="concrete" selected>Concrete Pavers</option>
+              <option value="brick">Clay Brick Pavers</option>
+              <option value="stone">Natural Stone</option>
+              <option value="permeable">Permeable Pavers</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn" onclick="calculate()">Calculate Pavers Needed</button>
+
+        <div class="results" id="results">
+          <div class="result-grid">
+            <div class="result-item"><div class="value" id="paverCount">—</div><div class="label">Pavers Needed</div></div>
+            <div class="result-item"><div class="value" id="sandTons">—</div><div class="label">Bedding Sand (tons)</div></div>
+            <div class="result-item"><div class="value" id="gravelTons">—</div><div class="label">Gravel Base (tons)</div></div>
+            <div class="result-item"><div class="value" id="edgingFt">—</div><div class="label">Edging (lin ft)</div></div>
+          </div>
+          <h3 style="font-size:1rem; margin-bottom:12px; color:var(--gray);">Materials & Cost Estimate</h3>
+          <table class="cost-table">
+            <thead><tr><th>Material</th><th>Qty</th><th>Est. Cost</th></tr></thead>
+            <tbody id="costBody"></tbody>
+          </table>
+          <p style="font-size:0.8rem; color:var(--gray); margin-top:8px;">*2026 national average pricing. Paver prices vary significantly by style, color, and region.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="seo-content">
+    <div class="container">
+      <h2>How to Calculate Pavers for Any Project</h2>
+      <p>Ordering the right number of pavers means less waste and fewer trips to the supply yard. Here's everything you need to know to estimate pavers, base materials, and sand for patios, walkways, and driveways.</p>
+
+      <h3>Paver Count by Size</h3>
+      <table>
+        <thead><tr><th>Paver Size</th><th>Pavers per Sq Ft</th><th>100 Sq Ft</th><th>200 Sq Ft</th><th>500 Sq Ft</th></tr></thead>
+        <tbody>
+          <tr><td>4" × 8"</td><td>4.5</td><td>473</td><td>945</td><td>2,363</td></tr>
+          <tr><td>6" × 6"</td><td>4.0</td><td>420</td><td>840</td><td>2,100</td></tr>
+          <tr><td>6" × 9"</td><td>2.67</td><td>280</td><td>561</td><td>1,402</td></tr>
+          <tr><td>12" × 12"</td><td>1.0</td><td>105</td><td>210</td><td>525</td></tr>
+        </tbody>
+      </table>
+      <p>*Counts include 5% waste factor for running bond/stack patterns.</p>
+
+      <h3>Paver Cost Comparison (2026, materials only)</h3>
+      <table>
+        <thead><tr><th>Paver Type</th><th>Cost per Sq Ft</th><th>200 Sq Ft Patio</th><th>Pros</th><th>Cons</th></tr></thead>
+        <tbody>
+          <tr><td>Concrete pavers</td><td>$2–$5</td><td>$400–$1,000</td><td>Cheapest, many colors/shapes</td><td>Can fade over time</td></tr>
+          <tr><td>Clay brick pavers</td><td>$4–$8</td><td>$800–$1,600</td><td>Classic look, color-through</td><td>Limited shapes, heavier</td></tr>
+          <tr><td>Permeable pavers</td><td>$5–$10</td><td>$1,000–$2,000</td><td>Drainage, eco-friendly</td><td>More expensive, special base</td></tr>
+          <tr><td>Travertine</td><td>$8–$15</td><td>$1,600–$3,000</td><td>Elegant, cool underfoot</td><td>Porous, needs sealing</td></tr>
+          <tr><td>Bluestone</td><td>$10–$20</td><td>$2,000–$4,000</td><td>Beautiful, very durable</td><td>Expensive, heavy</td></tr>
+          <tr><td>Flagstone (irregular)</td><td>$8–$25</td><td>$1,600–$5,000</td><td>Natural look, unique</td><td>Uneven, harder to lay</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Layout Pattern Waste Factors</h3>
+      <ul>
+        <li><strong>Running bond / stack bond:</strong> 5% waste — straight cuts only, very efficient.</li>
+        <li><strong>Herringbone (45°):</strong> 10% waste — diagonal cuts at all edges, but strongest interlock pattern. Best for driveways.</li>
+        <li><strong>Basketweave:</strong> 5–8% waste — pairs of pavers alternating direction. Classic look, moderate cuts.</li>
+        <li><strong>Circular / fan patterns:</strong> 15–20% waste — lots of cuts. Beautiful but expensive.</li>
+      </ul>
+
+      <h3>Base Material Guide</h3>
+      <table>
+        <thead><tr><th>Application</th><th>Gravel Base</th><th>Bedding Sand</th><th>Total Depth</th></tr></thead>
+        <tbody>
+          <tr><td>Walkway (foot traffic only)</td><td>4"</td><td>1"</td><td>5" + paver</td></tr>
+          <tr><td>Patio (standard)</td><td>6"</td><td>1"</td><td>7" + paver</td></tr>
+          <tr><td>Residential driveway</td><td>8–10"</td><td>1"</td><td>9–11" + paver</td></tr>
+          <tr><td>Commercial / heavy traffic</td><td>12"</td><td>1"</td><td>13" + paver</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Step-by-Step Paver Installation</h3>
+      <ol>
+        <li><strong>Excavate to full depth</strong> (base + sand + paver thickness). For a patio with 6" base, 1" sand, and 2.375" pavers, dig 9.5" deep.</li>
+        <li><strong>Compact the subgrade</strong> with a plate compactor. If soil is soft or clay, add geotextile fabric to prevent migration.</li>
+        <li><strong>Install edge restraints</strong> first — they hold everything in place. Use aluminum or plastic paver edging staked every 12 inches.</li>
+        <li><strong>Spread and compact gravel base</strong> in 2" lifts. Each lift gets compacted separately. Use ¾" minus crushed stone (not round gravel).</li>
+        <li><strong>Screed 1" of bedding sand.</strong> Use 1" diameter pipes as screed guides. Sand should be coarse, not play sand.</li>
+        <li><strong>Lay pavers</strong> from one corner, working outward. Pull pavers from multiple pallets to mix color variation.</li>
+        <li><strong>Cut edge pavers</strong> with a wet saw or splitter. Mark cuts with chalk, cut with diamond blade.</li>
+        <li><strong>Compact pavers</strong> with a plate compactor (use a rubber pad to prevent scratching). This sets them into the sand bed.</li>
+        <li><strong>Sweep polymeric sand</strong> into joints, mist with water to activate. This locks pavers together and prevents weed growth.</li>
+      </ol>
+
+      <h3>Money-Saving Tips</h3>
+      <ul>
+        <li><strong>Concrete pavers are 50–70% cheaper than natural stone</strong> and modern manufacturing makes them nearly indistinguishable at a glance.</li>
+        <li><strong>Buy pavers by the pallet.</strong> Per-paver pricing drops 20–30% when buying full pallets vs. individual pieces.</li>
+        <li><strong>DIY saves $6–$12/sq ft</strong> in labor. A 300 sq ft patio saves $1,800–$3,600 in labor costs.</li>
+        <li><strong>Rent a plate compactor</strong> ($60–$90/day) and wet saw ($50–$75/day) rather than buying.</li>
+        <li><strong>Order 10% extra pavers.</strong> Getting a color-matched batch later is often impossible. Store extras for future repairs.</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer><div class="container"><p>© 2026 <a href="/">BuiltRight Academy</a> — Free tools for contractors and tradespeople.</p></div></footer>
+
+  <script>
+    function calculate() {
+      const l = parseFloat(document.getElementById('length').value);
+      const w = parseFloat(document.getElementById('width').value);
+      if (!l || !w) return alert('Please enter length and width.');
+
+      const area = l * w;
+      const perimeter = 2 * (l + w);
+      const paverSize = document.getElementById('paverSize').value;
+      const pattern = document.getElementById('pattern').value;
+      const baseDepthIn = parseInt(document.getElementById('baseDepth').value);
+      const paverType = document.getElementById('paverType').value;
+
+      // Paver sizes in inches
+      const sizes = {
+        '4x8': { w: 4, l: 8, perSqFt: 4.5 },
+        '6x6': { w: 6, l: 6, perSqFt: 4.0 },
+        '6x9': { w: 6, l: 9, perSqFt: 2.67 },
+        '12x12': { w: 12, l: 12, perSqFt: 1.0 }
+      };
+      const paver = sizes[paverSize];
+
+      // Waste factor by pattern
+      const wasteFactor = {
+        'running': 1.05,
+        'herringbone': 1.10,
+        'basketweave': 1.07,
+        'stack': 1.05
+      };
+      const waste = wasteFactor[pattern];
+
+      // Paver count
+      const paverCount = Math.ceil(area * paver.perSqFt * waste);
+
+      // Bedding sand: 1" thick, ~100 lbs per 15 sq ft, ~1 ton per 300 sq ft
+      const beddingSandTons = (area * 1 / 12) / 27 * 1.35; // cu ft → cu yd → tons (sand ~1.35 tons/cy)
+
+      // Polymeric jointing sand: ~1 bag (50 lbs) per 40 sq ft avg
+      const jointingSandBags = Math.ceil(area / 40);
+
+      // Gravel base
+      const gravelCuYd = (area * baseDepthIn / 12) / 27;
+      const gravelTons = gravelCuYd * 1.4; // crushed stone ~1.4 tons/cy
+
+      // Edging (perimeter)
+      const edgingFt = Math.ceil(perimeter);
+      const edgingPieces = Math.ceil(edgingFt / 8); // 8-ft sections
+      const edgeSpikes = Math.ceil(edgingFt / 1); // 1 spike per foot
+
+      // Cost by paver type (per sq ft for pavers only)
+      const paverCosts = {
+        'concrete': 3.5,
+        'brick': 6,
+        'stone': 14,
+        'permeable': 7.5
+      };
+      const paverCostPerSqFt = paverCosts[paverType];
+      const paverTotalCost = area * paverCostPerSqFt * waste;
+      const beddingSandCost = beddingSandTons * 45; // ~$45/ton
+      const jointingSandCost = jointingSandBags * 25; // ~$25/bag polymeric
+      const gravelCost = gravelTons * 25; // ~$25/ton
+      const edgingCost = edgingPieces * 12 + edgeSpikes * 0.75; // $12/8ft piece + spikes
+      const geofabricCost = area > 0 ? Math.ceil(area / 162) * 55 : 0; // ~$55 per roll (162 sq ft)
+      const totalMaterials = paverTotalCost + beddingSandCost + jointingSandCost + gravelCost + edgingCost + geofabricCost;
+
+      document.getElementById('paverCount').textContent = paverCount.toLocaleString();
+      document.getElementById('sandTons').textContent = beddingSandTons.toFixed(1);
+      document.getElementById('gravelTons').textContent = gravelTons.toFixed(1);
+      document.getElementById('edgingFt').textContent = edgingFt;
+
+      const laborLow = area * 6;
+      const laborHigh = area * 12;
+
+      document.getElementById('costBody').innerHTML = `
+        <tr><td>Pavers (${paverSize.replace('x','×')}", ${paverType})</td><td>${paverCount.toLocaleString()} pcs</td><td>$${paverTotalCost.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</td></tr>
+        <tr><td>Bedding sand (1" layer)</td><td>${beddingSandTons.toFixed(1)} tons</td><td>$${beddingSandCost.toFixed(0)}</td></tr>
+        <tr><td>Polymeric jointing sand</td><td>${jointingSandBags} bags</td><td>$${jointingSandCost.toFixed(0)}</td></tr>
+        <tr><td>Gravel base (${baseDepthIn}" deep)</td><td>${gravelTons.toFixed(1)} tons</td><td>$${gravelCost.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</td></tr>
+        <tr><td>Edge restraint (${edgingPieces} pcs × 8ft)</td><td>${edgingFt} lin ft</td><td>$${edgingCost.toFixed(0)}</td></tr>
+        <tr><td>Geotextile fabric</td><td>${Math.ceil(area / 162)} roll(s)</td><td>$${geofabricCost.toFixed(0)}</td></tr>
+        <tr style="font-weight:700;border-top:2px solid var(--orange);"><td>Total Materials</td><td></td><td style="color:var(--orange);">$${totalMaterials.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</td></tr>
+        <tr><td>Per square foot (materials)</td><td></td><td>$${(totalMaterials / area).toFixed(2)}/sf</td></tr>
+        <tr><td>Estimated installed cost</td><td></td><td>$${(totalMaterials + laborLow).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}–$${(totalMaterials + laborHigh).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</td></tr>
+      `;
+      document.getElementById('results').classList.add('show');
+      document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
+</body>
+</html>

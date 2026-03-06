@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Board Foot Calculator — Lumber Volume & Cost | BuiltRight Academy</title>
+  <meta name="description" content="Free board foot calculator. Enter thickness, width, and length to calculate board feet and total lumber cost. Supports multiple boards with different dimensions. Includes hardwood pricing.">
+  <meta name="keywords" content="board foot calculator, how to calculate board feet, lumber board foot, board feet calculator, lumber calculator, hardwood calculator, wood calculator">
+  <link rel="canonical" href="https://builtright-academy.vercel.app/tools/board-foot-calculator">
+  <meta property="og:title" content="Board Foot Calculator — Lumber Volume & Cost">
+  <meta property="og:description" content="Free board foot calculator. Calculate board feet for any lumber dimensions and get cost estimates with hardwood pricing.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Board Foot Calculator",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "description": "Calculate board feet for lumber. Enter thickness, width, and length for any number of boards. Get total board feet and cost estimates with hardwood pricing tables."
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is a board foot?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A board foot is a unit of volume used to measure lumber. One board foot equals a piece of wood 1 inch thick, 12 inches wide, and 12 inches long — or 144 cubic inches. The formula is: Board Feet = (Thickness × Width × Length) ÷ 144, where thickness and width are in inches and length is in inches. For length in feet: Board Feet = (Thickness × Width × Length) ÷ 12."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How many board feet in a 2×4?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "An 8-foot 2×4 contains 5.33 board feet. The calculation uses nominal dimensions: (2\" × 4\" × 8') ÷ 12 = 5.33 BF. A 10-foot 2×4 has 6.67 BF, and a 12-foot 2×4 has 8 BF. Note: lumber yards price softwood (pine, fir) by the linear foot, but hardwood is almost always sold by the board foot."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why is lumber sold by the board foot?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Hardwood lumber is sold by the board foot because each board has unique dimensions. Unlike dimensional softwood (2×4s, 2×6s) which comes in standard sizes, hardwood boards vary in width and thickness depending on how the log was milled. Board foot pricing lets buyers compare costs across different-sized boards fairly. A board foot is the industry standard for hardwood — one BF equals 144 cubic inches of wood regardless of the board's shape."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do you convert nominal to actual lumber dimensions?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Board foot calculations use nominal (stated) dimensions, not actual dimensions. A 1×6 is actually 3/4\" × 5-1/2\", and a 2×4 is actually 1-1/2\" × 3-1/2\". When buying hardwood by the board foot, the thickness is expressed in quarters: 4/4 (four-quarter) means 1 inch thick nominal, 8/4 means 2 inches thick. Pricing is always based on nominal dimensions."
+        }
+      }
+    ]
+  }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root { --orange: #F97316; --orange-dark: #EA580C; --darker: #0F0F1A; --dark-card: #1A1A2E; --gray: #94A3B8; --light: #F8FAFC; --green: #22C55E; --border: rgba(255,255,255,0.08); }
+    body { font-family: 'Inter', -apple-system, sans-serif; background: var(--darker); color: var(--light); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+    nav { padding: 20px 0; border-bottom: 1px solid var(--border); }
+    nav .container { display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.3rem; color: var(--orange); text-decoration: none; letter-spacing: -0.5px; }
+    .logo span { color: var(--light); }
+    .nav-links a { color: var(--gray); text-decoration: none; font-size: 0.9rem; margin-left: 24px; }
+    .nav-links a:hover { color: var(--light); }
+    .hero { padding: 48px 0 32px; text-align: center; }
+    .hero .badge { display: inline-block; background: rgba(249,115,22,0.1); border: 1px solid rgba(249,115,22,0.3); color: var(--orange); font-size: 0.8rem; font-weight: 600; padding: 6px 16px; border-radius: 100px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .hero h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 800; line-height: 1.15; letter-spacing: -1px; margin-bottom: 12px; }
+    .hero h1 .highlight { color: var(--orange); }
+    .hero p { color: var(--gray); font-size: 1.05rem; max-width: 600px; margin: 0 auto; }
+    .calc-section { padding: 24px 0 60px; }
+    .calc-card { background: var(--dark-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; margin-bottom: 24px; }
+    .calc-card h2 { font-size: 1.2rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-size: 0.85rem; color: var(--gray); margin-bottom: 6px; font-weight: 500; }
+    .form-group input, .form-group select { width: 100%; padding: 12px 16px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 10px; color: var(--light); font-size: 1rem; font-family: inherit; outline: none; }
+    .form-group input:focus, .form-group select:focus { border-color: var(--orange); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .form-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+    @media (max-width: 600px) { .form-row, .form-row-3 { grid-template-columns: 1fr; } }
+    .btn { display: inline-block; padding: 14px 32px; background: var(--orange); color: #fff; font-weight: 700; font-size: 1rem; border: none; border-radius: 10px; cursor: pointer; font-family: inherit; width: 100%; }
+    .btn:hover { background: var(--orange-dark); }
+    .btn-secondary { background: transparent; border: 1px solid var(--border); color: var(--gray); margin-top: 8px; }
+    .btn-secondary:hover { border-color: var(--orange); color: var(--light); background: transparent; }
+    .btn-remove { background: transparent; border: none; color: #EF4444; font-size: 0.85rem; cursor: pointer; padding: 4px 8px; font-family: inherit; }
+    .results { display: none; margin-top: 24px; }
+    .results.show { display: block; }
+    .result-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; margin-bottom: 16px; }
+    .result-item { background: rgba(249,115,22,0.08); border: 1px solid rgba(249,115,22,0.2); border-radius: 12px; padding: 16px; text-align: center; }
+    .result-item .value { font-size: 1.4rem; font-weight: 800; color: var(--orange); }
+    .result-item .label { font-size: 0.78rem; color: var(--gray); margin-top: 4px; }
+    .cost-table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+    .cost-table th, .cost-table td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+    .cost-table th { color: var(--gray); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; }
+    .cost-table td:last-child { text-align: right; font-weight: 600; }
+    .board-entry { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 10px; padding: 16px; margin-bottom: 12px; position: relative; }
+    .board-entry .entry-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+    .board-entry .entry-header span { font-size: 0.85rem; font-weight: 600; color: var(--gray); }
+    .seo-content { padding: 40px 0 60px; }
+    .seo-content h2 { font-size: 1.5rem; font-weight: 800; margin-bottom: 16px; }
+    .seo-content h3 { font-size: 1.1rem; font-weight: 700; margin: 24px 0 10px; color: var(--orange); }
+    .seo-content p { color: var(--gray); margin-bottom: 14px; line-height: 1.8; }
+    .seo-content ul, .seo-content ol { color: var(--gray); margin: 10px 0 16px 24px; }
+    .seo-content li { margin-bottom: 6px; }
+    .seo-content table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+    .seo-content table th, .seo-content table td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+    .seo-content table th { color: var(--gray); font-weight: 600; }
+    .formula-box { background: rgba(249,115,22,0.08); border: 1px solid rgba(249,115,22,0.2); border-radius: 12px; padding: 20px; margin: 16px 0; text-align: center; }
+    .formula-box .formula { font-size: 1.2rem; font-weight: 700; color: var(--orange); margin-bottom: 8px; }
+    .formula-box .formula-note { font-size: 0.85rem; color: var(--gray); }
+    footer { border-top: 1px solid var(--border); padding: 32px 0; text-align: center; color: var(--gray); font-size: 0.85rem; }
+    footer a { color: var(--orange); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <nav><div class="container"><a href="/" class="logo">Built<span>Right</span></a><div class="nav-links"><a href="/blog/">Blog</a><a href="/tools/">Tools</a><a href="/templates/">Templates</a></div></div></nav>
+
+  <section class="hero">
+    <div class="container">
+      <span class="badge">Free Calculator</span>
+      <h1>Board Foot Calculator — <span class="highlight">Lumber Volume</span> & Cost</h1>
+      <p>Calculate board feet for any lumber dimensions. Add multiple boards with different sizes and get total board feet with cost estimates.</p>
+    </div>
+  </section>
+
+  <section class="calc-section">
+    <div class="container">
+      <div class="calc-card">
+        <h2>🪵 Board Foot Calculator</h2>
+        <div class="formula-box">
+          <div class="formula">Board Feet = (Thickness × Width × Length) ÷ 12</div>
+          <div class="formula-note">Thickness &amp; width in inches, length in feet</div>
+        </div>
+        <div id="boardEntries">
+          <div class="board-entry" data-index="0">
+            <div class="entry-header"><span>Board #1</span></div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Number of Boards</label>
+                <input type="number" class="board-qty" placeholder="e.g., 10" value="1" min="1" step="1">
+              </div>
+              <div class="form-group">
+                <label>Thickness (inches)</label>
+                <select class="board-thickness">
+                  <option value="0.5">1/2" (2/4)</option>
+                  <option value="0.75">3/4" (3/4)</option>
+                  <option value="1" selected>1" (4/4)</option>
+                  <option value="1.25">1-1/4" (5/4)</option>
+                  <option value="1.5">1-1/2" (6/4)</option>
+                  <option value="2">2" (8/4)</option>
+                  <option value="2.5">2-1/2" (10/4)</option>
+                  <option value="3">3" (12/4)</option>
+                  <option value="4">4" (16/4)</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row-3">
+              <div class="form-group">
+                <label>Width (inches)</label>
+                <input type="number" class="board-width" placeholder="e.g., 6" step="0.25">
+              </div>
+              <div class="form-group">
+                <label>Length (feet)</label>
+                <input type="number" class="board-length-ft" placeholder="e.g., 8" step="1">
+              </div>
+              <div class="form-group">
+                <label>+ Inches</label>
+                <input type="number" class="board-length-in" placeholder="0" value="0" step="1">
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="btn btn-secondary" onclick="addBoard()">+ Add Another Board</button>
+        <div class="form-group" style="margin-top: 16px;">
+          <label>Price per Board Foot (optional, $)</label>
+          <input type="number" id="pricePerBF" placeholder="e.g., 8.50" step="0.01">
+        </div>
+        <button class="btn" onclick="calculate()">Calculate Board Feet</button>
+
+        <div class="results" id="results">
+          <div class="result-grid" id="resultGrid"></div>
+          <table class="cost-table">
+            <thead><tr><th>Board</th><th>Dimensions</th><th>BF/Piece</th><th>Total BF</th></tr></thead>
+            <tbody id="costBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="seo-content">
+    <div class="container">
+      <h2>How to Calculate Board Feet</h2>
+      <p>A <strong>board foot</strong> is the standard unit of measurement for hardwood lumber in the United States. One board foot equals 144 cubic inches of wood — equivalent to a board that is 1 inch thick, 12 inches wide, and 12 inches long. Understanding board feet is essential for buying hardwood lumber, estimating project costs, and comparing prices between suppliers.</p>
+
+      <h3>Board Foot Formula</h3>
+      <p>The formula to calculate board feet is straightforward:</p>
+      <div class="formula-box">
+        <div class="formula">BF = (T × W × L) ÷ 144</div>
+        <div class="formula-note">All dimensions in inches</div>
+      </div>
+      <p>Or, if length is in feet:</p>
+      <div class="formula-box">
+        <div class="formula">BF = (T × W × L) ÷ 12</div>
+        <div class="formula-note">Thickness &amp; width in inches, length in feet</div>
+      </div>
+
+      <h3>Common Lumber Dimensions — Board Feet</h3>
+      <table>
+        <thead><tr><th>Lumber Size</th><th>6 ft</th><th>8 ft</th><th>10 ft</th><th>12 ft</th></tr></thead>
+        <tbody>
+          <tr><td>1×4 (4/4)</td><td>2.0 BF</td><td>2.67 BF</td><td>3.33 BF</td><td>4.0 BF</td></tr>
+          <tr><td>1×6 (4/4)</td><td>3.0 BF</td><td>4.0 BF</td><td>5.0 BF</td><td>6.0 BF</td></tr>
+          <tr><td>1×8 (4/4)</td><td>4.0 BF</td><td>5.33 BF</td><td>6.67 BF</td><td>8.0 BF</td></tr>
+          <tr><td>1×10 (4/4)</td><td>5.0 BF</td><td>6.67 BF</td><td>8.33 BF</td><td>10.0 BF</td></tr>
+          <tr><td>1×12 (4/4)</td><td>6.0 BF</td><td>8.0 BF</td><td>10.0 BF</td><td>12.0 BF</td></tr>
+          <tr><td>2×4 (8/4)</td><td>4.0 BF</td><td>5.33 BF</td><td>6.67 BF</td><td>8.0 BF</td></tr>
+          <tr><td>2×6 (8/4)</td><td>6.0 BF</td><td>8.0 BF</td><td>10.0 BF</td><td>12.0 BF</td></tr>
+          <tr><td>2×8 (8/4)</td><td>8.0 BF</td><td>10.67 BF</td><td>13.33 BF</td><td>16.0 BF</td></tr>
+          <tr><td>2×10 (8/4)</td><td>10.0 BF</td><td>13.33 BF</td><td>16.67 BF</td><td>20.0 BF</td></tr>
+          <tr><td>2×12 (8/4)</td><td>12.0 BF</td><td>16.0 BF</td><td>20.0 BF</td><td>24.0 BF</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Hardwood Lumber Pricing (2026, per board foot)</h3>
+      <table>
+        <thead><tr><th>Species</th><th>4/4 (1")</th><th>8/4 (2")</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td>Red Oak</td><td>$4.50–$7.00</td><td>$6.00–$9.00</td><td>Most popular, widely available</td></tr>
+          <tr><td>White Oak</td><td>$5.50–$8.50</td><td>$7.00–$11.00</td><td>Water-resistant, great for outdoor</td></tr>
+          <tr><td>Hard Maple</td><td>$5.00–$8.00</td><td>$7.00–$10.00</td><td>Extremely hard, light color</td></tr>
+          <tr><td>Black Cherry</td><td>$5.00–$8.00</td><td>$6.50–$10.00</td><td>Darkens with age, fine furniture</td></tr>
+          <tr><td>Black Walnut</td><td>$8.00–$14.00</td><td>$10.00–$18.00</td><td>Premium, limited supply</td></tr>
+          <tr><td>Ash</td><td>$4.00–$6.50</td><td>$5.50–$8.50</td><td>Strong, great for tools/sports</td></tr>
+          <tr><td>Poplar</td><td>$2.50–$4.50</td><td>$3.50–$6.00</td><td>Budget-friendly, paints well</td></tr>
+          <tr><td>Mahogany (Sapele)</td><td>$7.00–$11.00</td><td>$9.00–$14.00</td><td>Tropical, rot-resistant</td></tr>
+          <tr><td>Hickory</td><td>$5.00–$8.00</td><td>$7.00–$10.00</td><td>Hardest domestic wood</td></tr>
+          <tr><td>White Pine (soft)</td><td>$2.00–$3.50</td><td>$3.00–$5.00</td><td>Softwood, easy to work</td></tr>
+        </tbody>
+      </table>
+      <p><strong>Note:</strong> Prices vary significantly by region, supplier, grade (FAS, Select, #1 Common), and whether the lumber is kiln-dried or rough-sawn. The prices above represent typical retail prices for kiln-dried, surfaced lumber.</p>
+
+      <h3>Quarter System for Hardwood Thickness</h3>
+      <p>Hardwood thickness is expressed in quarters of an inch. This system tells you the rough-sawn thickness before surfacing:</p>
+      <table>
+        <thead><tr><th>Quarter</th><th>Rough Thickness</th><th>Surfaced (S2S)</th></tr></thead>
+        <tbody>
+          <tr><td>4/4 (four-quarter)</td><td>1"</td><td>13/16"</td></tr>
+          <tr><td>5/4 (five-quarter)</td><td>1-1/4"</td><td>1-1/16"</td></tr>
+          <tr><td>6/4 (six-quarter)</td><td>1-1/2"</td><td>1-5/16"</td></tr>
+          <tr><td>8/4 (eight-quarter)</td><td>2"</td><td>1-13/16"</td></tr>
+          <tr><td>12/4 (twelve-quarter)</td><td>3"</td><td>2-13/16"</td></tr>
+          <tr><td>16/4 (sixteen-quarter)</td><td>4"</td><td>3-13/16"</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Tips for Buying Hardwood Lumber</h3>
+      <ul>
+        <li><strong>Buy rough-sawn to save money.</strong> Surfaced lumber (S2S or S4S) costs 10–20% more because the mill has already planed it smooth. If you have a planer, buy rough and save.</li>
+        <li><strong>Buy wider boards.</strong> Narrow boards (under 4") cost more per board foot because they require more handling. Boards 6"+ wide are usually the best value.</li>
+        <li><strong>Add 15–25% for waste.</strong> Defects, knots, and cutting waste mean you'll use less than you buy. For complex projects, add 25%. For simple cuts, 15% is usually enough.</li>
+        <li><strong>Check moisture content.</strong> Kiln-dried lumber (6–8% MC) is ready to use. Air-dried lumber (12–15% MC) may need further drying before fine woodworking.</li>
+        <li><strong>Ask about FAS grade</strong> for the best clear boards. #1 Common is significantly cheaper and perfect for projects where you can cut around defects.</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer><div class="container"><p>© 2026 <a href="/">BuiltRight Academy</a> — Free tools for contractors and tradespeople.</p></div></footer>
+
+  <script>
+    let boardCount = 1;
+
+    function addBoard() {
+      boardCount++;
+      const entry = document.createElement('div');
+      entry.className = 'board-entry';
+      entry.dataset.index = boardCount - 1;
+      entry.innerHTML = `
+        <div class="entry-header"><span>Board #${boardCount}</span><button class="btn-remove" onclick="removeBoard(this)">✕ Remove</button></div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Number of Boards</label>
+            <input type="number" class="board-qty" placeholder="e.g., 10" value="1" min="1" step="1">
+          </div>
+          <div class="form-group">
+            <label>Thickness (inches)</label>
+            <select class="board-thickness">
+              <option value="0.5">1/2" (2/4)</option>
+              <option value="0.75">3/4" (3/4)</option>
+              <option value="1" selected>1" (4/4)</option>
+              <option value="1.25">1-1/4" (5/4)</option>
+              <option value="1.5">1-1/2" (6/4)</option>
+              <option value="2">2" (8/4)</option>
+              <option value="2.5">2-1/2" (10/4)</option>
+              <option value="3">3" (12/4)</option>
+              <option value="4">4" (16/4)</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row-3">
+          <div class="form-group">
+            <label>Width (inches)</label>
+            <input type="number" class="board-width" placeholder="e.g., 6" step="0.25">
+          </div>
+          <div class="form-group">
+            <label>Length (feet)</label>
+            <input type="number" class="board-length-ft" placeholder="e.g., 8" step="1">
+          </div>
+          <div class="form-group">
+            <label>+ Inches</label>
+            <input type="number" class="board-length-in" placeholder="0" value="0" step="1">
+          </div>
+        </div>
+      `;
+      document.getElementById('boardEntries').appendChild(entry);
+    }
+
+    function removeBoard(btn) {
+      btn.closest('.board-entry').remove();
+      renumberBoards();
+    }
+
+    function renumberBoards() {
+      const entries = document.querySelectorAll('.board-entry');
+      entries.forEach((e, i) => {
+        e.querySelector('.entry-header span').textContent = `Board #${i + 1}`;
+      });
+      boardCount = entries.length;
+    }
+
+    function calculate() {
+      const entries = document.querySelectorAll('.board-entry');
+      const price = parseFloat(document.getElementById('pricePerBF').value) || 0;
+      let totalBF = 0;
+      let rows = '';
+      let valid = false;
+
+      entries.forEach((entry, i) => {
+        const qty = parseInt(entry.querySelector('.board-qty').value) || 1;
+        const thickness = parseFloat(entry.querySelector('.board-thickness').value);
+        const width = parseFloat(entry.querySelector('.board-width').value);
+        const lengthFt = parseFloat(entry.querySelector('.board-length-ft').value) || 0;
+        const lengthIn = parseFloat(entry.querySelector('.board-length-in').value) || 0;
+        const totalLengthFt = lengthFt + lengthIn / 12;
+
+        if (!width || !totalLengthFt) return;
+        valid = true;
+
+        const bfPerPiece = (thickness * width * totalLengthFt) / 12;
+        const lineBF = bfPerPiece * qty;
+        totalBF += lineBF;
+
+        const dimStr = `${thickness}" × ${width}" × ${lengthFt}'${lengthIn > 0 ? ` ${lengthIn}"` : ''}`;
+        rows += `<tr><td>${qty}× Board #${i + 1}</td><td>${dimStr}</td><td>${bfPerPiece.toFixed(2)}</td><td>${lineBF.toFixed(2)}</td></tr>`;
+      });
+
+      if (!valid) return alert('Please enter width and length for at least one board.');
+
+      const totalCost = price > 0 ? totalBF * price : 0;
+
+      let gridHTML = `
+        <div class="result-item"><div class="value">${totalBF.toFixed(2)}</div><div class="label">Total Board Feet</div></div>
+      `;
+      if (price > 0) {
+        gridHTML += `<div class="result-item"><div class="value">$${totalCost.toFixed(2)}</div><div class="label">Total Cost</div></div>`;
+        gridHTML += `<div class="result-item"><div class="value">$${price.toFixed(2)}</div><div class="label">Price / BF</div></div>`;
+      }
+      document.getElementById('resultGrid').innerHTML = gridHTML;
+
+      if (price > 0) {
+        rows += `<tr style="font-weight:700;border-top:2px solid var(--orange);"><td colspan="3">Total</td><td style="color:var(--orange);">${totalBF.toFixed(2)} BF — $${totalCost.toFixed(2)}</td></tr>`;
+      } else {
+        rows += `<tr style="font-weight:700;border-top:2px solid var(--orange);"><td colspan="3">Total</td><td style="color:var(--orange);">${totalBF.toFixed(2)} BF</td></tr>`;
+      }
+
+      document.getElementById('costBody').innerHTML = rows;
+      document.getElementById('results').classList.add('show');
+      document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Asphalt Calculator — Tons, Truckloads & Cost | BuiltRight Academy</title>
+  <meta name="description" content="Free asphalt calculator. Enter area and thickness to get tons needed, truckloads, and cost estimate for driveways, parking lots, and overlays. 2026 pricing.">
+  <meta name="keywords" content="asphalt calculator, asphalt driveway cost, how much asphalt do I need, blacktop calculator, asphalt tonnage calculator, asphalt cost per ton">
+  <link rel="canonical" href="https://builtright-academy.vercel.app/tools/asphalt-calculator">
+  <meta property="og:title" content="Asphalt Calculator — Tons, Truckloads & Cost">
+  <meta property="og:description" content="Free asphalt calculator. Get exact tonnage and cost for driveways, parking lots, and overlays.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Asphalt Calculator",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "description": "Calculate asphalt tonnage, truckloads, and cost for driveways, parking lots, and overlay projects. Supports hot mix and cold patch asphalt types."
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How much does an asphalt driveway cost?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "An asphalt driveway costs $3–$7 per square foot installed in 2026, or $2,500–$6,500 for a standard 600 sq ft (12×50 ft) two-car driveway. Materials alone run $1,200–$3,000. Hot mix asphalt costs $80–$120 per ton delivered, and a typical driveway requires 5–10 tons depending on thickness."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much asphalt do I need per square foot?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Asphalt weighs approximately 145 pounds per cubic foot (hot mix). For a 2-inch thick layer, you need about 24 pounds per square foot, or roughly 0.012 tons per square foot. A 3-inch layer requires about 36 lbs/sq ft (0.018 tons). The formula is: tons = (area in sq ft × thickness in inches × 145) / (12 × 2000)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How thick should an asphalt driveway be?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Residential driveways need 2–3 inches of asphalt over a 6–8 inch compacted gravel base. Commercial parking lots require 3–4 inches, and heavy truck areas need 4–6 inches. Overlay (resurfacing) typically adds 1.5–2 inches over existing pavement. Thicker asphalt lasts longer — each additional inch adds 3–5 years of life."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between hot mix and cold patch asphalt?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Hot mix asphalt (HMA) is heated to 300°F and used for new driveways, roads, and parking lots. It's stronger, more durable, and costs $80–$120/ton. Cold patch asphalt comes in bags, doesn't need heating, and is used for pothole repairs and small patches. Cold patch costs $10–$15 per 50-lb bag but isn't suitable for full installations — it's a temporary repair material."
+        }
+      }
+    ]
+  }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root { --orange: #F97316; --orange-dark: #EA580C; --darker: #0F0F1A; --dark-card: #1A1A2E; --gray: #94A3B8; --light: #F8FAFC; --green: #22C55E; --border: rgba(255,255,255,0.08); }
+    body { font-family: 'Inter', -apple-system, sans-serif; background: var(--darker); color: var(--light); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+    nav { padding: 20px 0; border-bottom: 1px solid var(--border); }
+    nav .container { display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.3rem; color: var(--orange); text-decoration: none; letter-spacing: -0.5px; }
+    .logo span { color: var(--light); }
+    .nav-links a { color: var(--gray); text-decoration: none; font-size: 0.9rem; margin-left: 24px; }
+    .nav-links a:hover { color: var(--light); }
+    .hero { padding: 48px 0 32px; text-align: center; }
+    .hero .badge { display: inline-block; background: rgba(249,115,22,0.1); border: 1px solid rgba(249,115,22,0.3); color: var(--orange); font-size: 0.8rem; font-weight: 600; padding: 6px 16px; border-radius: 100px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .hero h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 800; line-height: 1.15; letter-spacing: -1px; margin-bottom: 12px; }
+    .hero h1 .highlight { color: var(--orange); }
+    .hero p { color: var(--gray); font-size: 1.05rem; max-width: 600px; margin: 0 auto; }
+    .calc-section { padding: 24px 0 60px; }
+    .calc-card { background: var(--dark-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; margin-bottom: 24px; }
+    .calc-card h2 { font-size: 1.2rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-size: 0.85rem; color: var(--gray); margin-bottom: 6px; font-weight: 500; }
+    .form-group input, .form-group select { width: 100%; padding: 12px 16px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 10px; color: var(--light); font-size: 1rem; font-family: inherit; outline: none; }
+    .form-group input:focus, .form-group select:focus { border-color: var(--orange); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    @media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
+    .btn { display: inline-block; padding: 14px 32px; background: var(--orange); color: #fff; font-weight: 700; font-size: 1rem; border: none; border-radius: 10px; cursor: pointer; font-family: inherit; width: 100%; }
+    .btn:hover { background: var(--orange-dark); }
+    .results { display: none; margin-top: 24px; }
+    .results.show { display: block; }
+    .result-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; margin-bottom: 16px; }
+    .result-item { background: rgba(249,115,22,0.08); border: 1px solid rgba(249,115,22,0.2); border-radius: 12px; padding: 16px; text-align: center; }
+    .result-item .value { font-size: 1.4rem; font-weight: 800; color: var(--orange); }
+    .result-item .label { font-size: 0.78rem; color: var(--gray); margin-top: 4px; }
+    .cost-table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+    .cost-table th, .cost-table td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+    .cost-table th { color: var(--gray); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; }
+    .cost-table td:last-child { text-align: right; font-weight: 600; }
+    .seo-content { padding: 40px 0 60px; }
+    .seo-content h2 { font-size: 1.5rem; font-weight: 800; margin-bottom: 16px; }
+    .seo-content h3 { font-size: 1.1rem; font-weight: 700; margin: 24px 0 10px; color: var(--orange); }
+    .seo-content p { color: var(--gray); margin-bottom: 14px; line-height: 1.8; }
+    .seo-content ul, .seo-content ol { color: var(--gray); margin: 10px 0 16px 24px; }
+    .seo-content li { margin-bottom: 6px; }
+    .seo-content table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+    .seo-content table th, .seo-content table td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+    .seo-content table th { color: var(--gray); font-weight: 600; }
+    footer { border-top: 1px solid var(--border); padding: 32px 0; text-align: center; color: var(--gray); font-size: 0.85rem; }
+    footer a { color: var(--orange); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <nav><div class="container"><a href="/" class="logo">Built<span>Right</span></a><div class="nav-links"><a href="/blog/">Blog</a><a href="/tools/">Tools</a><a href="/templates/">Templates</a></div></div></nav>
+
+  <section class="hero">
+    <div class="container">
+      <span class="badge">Free Calculator</span>
+      <h1>Asphalt Calculator — <span class="highlight">Tons</span> & Cost Estimator</h1>
+      <p>Enter your area dimensions and thickness to get exact asphalt tonnage, truckloads, and material cost for driveways, parking lots, and overlays.</p>
+    </div>
+  </section>
+
+  <section class="calc-section">
+    <div class="container">
+      <div class="calc-card">
+        <h2>🛣️ Asphalt Project Details</h2>
+        <div class="form-group">
+          <label>Area Input Method</label>
+          <select id="areaMethod" onchange="toggleAreaMethod()">
+            <option value="lw">Length × Width</option>
+            <option value="sqft">Total Square Feet</option>
+          </select>
+        </div>
+        <div class="form-row" id="lwInputs">
+          <div class="form-group">
+            <label>Length (feet)</label>
+            <input type="number" id="length" placeholder="e.g., 50" step="0.1">
+          </div>
+          <div class="form-group">
+            <label>Width (feet)</label>
+            <input type="number" id="width" placeholder="e.g., 12" step="0.1">
+          </div>
+        </div>
+        <div class="form-group" id="sqftInput" style="display:none;">
+          <label>Total Area (square feet)</label>
+          <input type="number" id="totalSqft" placeholder="e.g., 600" step="1">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Thickness (inches)</label>
+            <select id="thickness">
+              <option value="1.5">1.5" (overlay / resurfacing)</option>
+              <option value="2" selected>2" (standard residential)</option>
+              <option value="3">3" (heavy residential / light commercial)</option>
+              <option value="4">4" (commercial parking lot)</option>
+              <option value="6">6" (heavy truck areas)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Asphalt Type</label>
+            <select id="asphaltType">
+              <option value="hotmix" selected>Hot Mix Asphalt (HMA)</option>
+              <option value="coldpatch">Cold Patch (repairs only)</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn" onclick="calculate()">Calculate Asphalt Needed</button>
+
+        <div class="results" id="results">
+          <div class="result-grid">
+            <div class="result-item"><div class="value" id="tons">—</div><div class="label">Tons Needed</div></div>
+            <div class="result-item"><div class="value" id="trucks">—</div><div class="label">Truckloads</div></div>
+            <div class="result-item"><div class="value" id="sqftOut">—</div><div class="label">Square Feet</div></div>
+            <div class="result-item"><div class="value" id="costEst">—</div><div class="label">Material Cost</div></div>
+          </div>
+          <h3 style="font-size:1rem; margin-bottom:12px; color:var(--gray);">Cost Breakdown</h3>
+          <table class="cost-table">
+            <thead><tr><th>Item</th><th>Details</th><th>Est. Cost</th></tr></thead>
+            <tbody id="costBody"></tbody>
+          </table>
+          <p style="font-size:0.8rem; color:var(--gray); margin-top:8px;">*2026 national average pricing. Hot mix asphalt $80–$120/ton delivered. Prices vary by region and fuel costs.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="seo-content">
+    <div class="container">
+      <h2>How to Calculate Asphalt for Your Project</h2>
+      <p>Getting the right amount of asphalt is critical — order too little and your paving crew sits idle while you wait for another truck. Order too much and you're paying $100+ per ton for material you can't return. Here's exactly how to estimate asphalt tonnage for any project.</p>
+
+      <h3>Asphalt Tonnage Formula</h3>
+      <p>The standard formula for calculating asphalt tonnage is:</p>
+      <p><strong>Tons = (Length × Width × Thickness in inches × 145) ÷ (12 × 2,000)</strong></p>
+      <p>Hot mix asphalt weighs approximately 145 lbs per cubic foot (compacted). The 12 converts inches to feet, and 2,000 converts pounds to tons. Always add 5–10% extra for waste and compaction variance.</p>
+
+      <h3>Asphalt Cost by Project Type (2026)</h3>
+      <table>
+        <thead><tr><th>Project Type</th><th>Typical Size</th><th>Thickness</th><th>Tons</th><th>Material Cost</th><th>Installed Cost</th></tr></thead>
+        <tbody>
+          <tr><td>Single-car driveway</td><td>300 sq ft</td><td>2"</td><td>4.4</td><td>$350–$525</td><td>$900–$2,100</td></tr>
+          <tr><td>Two-car driveway</td><td>600 sq ft</td><td>2"</td><td>8.7</td><td>$700–$1,050</td><td>$1,800–$4,200</td></tr>
+          <tr><td>Large driveway</td><td>1,000 sq ft</td><td>2.5"</td><td>18.1</td><td>$1,450–$2,175</td><td>$3,000–$7,000</td></tr>
+          <tr><td>Small parking lot (10 cars)</td><td>3,000 sq ft</td><td>3"</td><td>54.4</td><td>$4,350–$6,525</td><td>$9,000–$21,000</td></tr>
+          <tr><td>Medium parking lot (50 cars)</td><td>15,000 sq ft</td><td>3"</td><td>271.9</td><td>$21,750–$32,625</td><td>$45,000–$105,000</td></tr>
+          <tr><td>Overlay / resurfacing</td><td>600 sq ft</td><td>1.5"</td><td>6.5</td><td>$525–$787</td><td>$1,200–$3,000</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Asphalt Thickness Guide</h3>
+      <table>
+        <thead><tr><th>Application</th><th>Asphalt Thickness</th><th>Gravel Base</th><th>Expected Life</th></tr></thead>
+        <tbody>
+          <tr><td>Overlay / resurfacing</td><td>1.5–2"</td><td>Existing pavement</td><td>8–12 years</td></tr>
+          <tr><td>Residential driveway</td><td>2–3"</td><td>6–8" compacted</td><td>15–20 years</td></tr>
+          <tr><td>Commercial parking lot</td><td>3–4"</td><td>8–12" compacted</td><td>20–25 years</td></tr>
+          <tr><td>Heavy truck / loading areas</td><td>4–6"</td><td>12–18" compacted</td><td>25–30 years</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Hot Mix vs. Cold Patch Asphalt</h3>
+      <ul>
+        <li><strong>Hot mix asphalt (HMA)</strong> is heated to 275–325°F and delivered in dump trucks. It must be placed and compacted while hot. It's the standard for all new paving — driveways, roads, and parking lots. Costs $80–$120 per ton delivered.</li>
+        <li><strong>Cold patch</strong> comes in bags (50 lbs) and doesn't require heating. It's designed for pothole repairs and small patches only. It's not suitable for full installations — it won't bond or compact like hot mix. Costs $10–$15 per bag.</li>
+        <li><strong>Warm mix asphalt (WMA)</strong> is placed at lower temperatures (200–275°F), reducing emissions and allowing longer haul distances. Costs about the same as hot mix.</li>
+      </ul>
+
+      <h3>Pro Tips for Asphalt Projects</h3>
+      <ol>
+        <li><strong>Get the base right.</strong> 90% of asphalt failures come from a poor base. Compact 6–8 inches of crushed stone before paving. Use a plate compactor or roller — hand tamping isn't enough.</li>
+        <li><strong>Pave in warm weather.</strong> Asphalt needs to be compacted while hot. Ambient temperatures below 50°F make it set too fast. Best paving weather is 60–85°F.</li>
+        <li><strong>Order 5–10% extra.</strong> Asphalt compresses during rolling, and you'll lose some to edges and transitions. Running short mid-job creates a cold joint — the weakest point in any asphalt surface.</li>
+        <li><strong>Sealcoat after 6–12 months.</strong> New asphalt needs time to cure. Sealcoating too early traps oils and causes softening. After the first application, reseal every 2–3 years.</li>
+        <li><strong>Minimum 2 inches compacted.</strong> Anything less than 2 inches will crack and crumble within 1–2 years. Go 3 inches if the area sees regular vehicle traffic.</li>
+        <li><strong>Grade for drainage.</strong> Asphalt should slope at least 1% (⅛" per foot) away from buildings. Standing water is asphalt's worst enemy — it seeps into cracks and destroys the base.</li>
+      </ol>
+
+      <h3>Money-Saving Tips</h3>
+      <ul>
+        <li><strong>Get quotes from 3+ paving contractors.</strong> Prices vary 30–50% for the same job. Always get at least three written quotes.</li>
+        <li><strong>Pave in fall or late spring.</strong> Paving companies are busiest in summer. Off-season work can save 10–20%.</li>
+        <li><strong>Overlay instead of replace</strong> if existing asphalt is structurally sound (no base failures). An overlay costs 40–60% less than full removal and replacement.</li>
+        <li><strong>Combine with neighbors.</strong> If your neighbor also needs paving, getting both done together saves on mobilization costs ($500–$1,000 per job).</li>
+        <li><strong>DIY is rarely practical.</strong> Unlike concrete, asphalt requires specialized equipment (pavers, rollers) and arrives at 300°F. This is a job for professionals.</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer><div class="container"><p>© 2026 <a href="/">BuiltRight Academy</a> — Free tools for contractors and tradespeople.</p></div></footer>
+
+  <script>
+    function toggleAreaMethod() {
+      const method = document.getElementById('areaMethod').value;
+      document.getElementById('lwInputs').style.display = method === 'lw' ? 'grid' : 'none';
+      document.getElementById('sqftInput').style.display = method === 'sqft' ? 'block' : 'none';
+    }
+
+    function calculate() {
+      const method = document.getElementById('areaMethod').value;
+      let area;
+      if (method === 'lw') {
+        const l = parseFloat(document.getElementById('length').value);
+        const w = parseFloat(document.getElementById('width').value);
+        if (!l || !w) return alert('Please enter length and width.');
+        area = l * w;
+      } else {
+        area = parseFloat(document.getElementById('totalSqft').value);
+        if (!area) return alert('Please enter total square feet.');
+      }
+
+      const thickness = parseFloat(document.getElementById('thickness').value);
+      const type = document.getElementById('asphaltType').value;
+
+      // Asphalt density: ~145 lbs/cu ft compacted for hot mix
+      const density = type === 'hotmix' ? 145 : 110; // cold patch is lighter
+      const cubicFeet = (area * thickness) / 12;
+      const weightLbs = cubicFeet * density;
+      const tons = weightLbs / 2000;
+      const tonsWithWaste = tons * 1.05; // 5% waste factor
+
+      // Truckloads: standard dump truck carries 15-20 tons
+      const truckloads = Math.ceil(tonsWithWaste / 18);
+
+      // Cost
+      let costPerTon, costPerSqFtInstalled;
+      if (type === 'hotmix') {
+        costPerTon = 100; // avg $80-120
+        costPerSqFtInstalled = thickness <= 2 ? 4.5 : thickness <= 3 ? 5.5 : 7;
+      } else {
+        // Cold patch - sold in bags
+        const bags50lb = Math.ceil(weightLbs / 50);
+        costPerTon = 250; // much more expensive per ton in bag form
+        costPerSqFtInstalled = 0; // DIY only
+      }
+
+      const materialCost = tonsWithWaste * costPerTon;
+      const installedCostLow = area * (costPerSqFtInstalled * 0.7);
+      const installedCostHigh = area * (costPerSqFtInstalled * 1.3);
+
+      document.getElementById('tons').textContent = tonsWithWaste.toFixed(1);
+      document.getElementById('trucks').textContent = truckloads;
+      document.getElementById('sqftOut').textContent = area.toLocaleString();
+      document.getElementById('costEst').textContent = '$' + materialCost.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+      let costHTML;
+      if (type === 'hotmix') {
+        const gravelTons = (area * 0.5 / 27) * 1.4; // ~6" base, 1.4 tons/cy
+        const gravelCost = gravelTons * 25;
+        const tackCoatGal = area / 100; // 1 gal per 100 sq ft
+        const tackCost = tackCoatGal * 8;
+
+        costHTML = `
+          <tr><td>Hot mix asphalt (${thickness}" thick)</td><td>${tonsWithWaste.toFixed(1)} tons</td><td>$${materialCost.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</td></tr>
+          <tr><td>Gravel base (6" compacted)</td><td>${gravelTons.toFixed(1)} tons</td><td>$${gravelCost.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</td></tr>
+          <tr><td>Tack coat</td><td>${tackCoatGal.toFixed(1)} gal</td><td>$${tackCost.toFixed(0)}</td></tr>
+          <tr style="font-weight:700;border-top:2px solid var(--orange);"><td>Total Materials</td><td></td><td style="color:var(--orange);">$${(materialCost + gravelCost + tackCost).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</td></tr>
+          <tr><td>Per square foot (materials)</td><td></td><td>$${((materialCost + gravelCost + tackCost) / area).toFixed(2)}/sf</td></tr>
+          <tr><td>Estimated installed cost</td><td></td><td>$${installedCostLow.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}–$${installedCostHigh.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</td></tr>
+          <tr><td>Truckloads (18-ton avg)</td><td></td><td>${truckloads} truck${truckloads > 1 ? 's' : ''}</td></tr>
+        `;
+      } else {
+        const bags50lb = Math.ceil(weightLbs / 50);
+        const bagCost = bags50lb * 12;
+        costHTML = `
+          <tr><td>Cold patch bags (50 lb)</td><td>${bags50lb} bags</td><td>$${bagCost.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</td></tr>
+          <tr style="font-weight:700;border-top:2px solid var(--orange);"><td>Total Materials</td><td></td><td style="color:var(--orange);">$${bagCost.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</td></tr>
+          <tr><td>Per square foot</td><td></td><td>$${(bagCost / area).toFixed(2)}/sf</td></tr>
+        `;
+      }
+
+      document.getElementById('costBody').innerHTML = costHTML;
+      document.getElementById('results').classList.add('show');
+      document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
+</body>
+</html>
