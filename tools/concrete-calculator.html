@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Concrete Calculator — How Much Concrete Do I Need? | BuiltRight Academy</title>
+  <meta name="description" content="Free concrete calculator. Enter dimensions to get cubic yards, bags needed, and estimated cost. Works for slabs, footings, columns, and stairs. Updated for 2026 pricing.">
+  <meta name="keywords" content="concrete calculator, concrete estimator, how much concrete do I need, concrete slab calculator, cubic yards calculator">
+  <link rel="canonical" href="https://builtright-academy.vercel.app/tools/concrete-calculator">
+  <meta property="og:title" content="Concrete Calculator — How Much Concrete Do I Need?">
+  <meta property="og:description" content="Free interactive concrete calculator. Get cubic yards, bag count, and cost estimate instantly.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Concrete Calculator",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "description": "Calculate how much concrete you need for slabs, footings, columns, and stairs. Get cubic yards, number of bags, and cost estimates."
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How many bags of concrete do I need?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Divide total cubic feet by the bag yield. An 80-lb bag covers about 0.6 cubic feet, a 60-lb bag about 0.45 cubic feet. For a 10×10 ft slab that's 4 inches thick, you need about 1.24 cubic yards or roughly 56 bags of 80-lb concrete."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much does a cubic yard of concrete cost?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Ready-mix concrete costs $125–$165 per cubic yard delivered in 2026, depending on your location and mix strength. Bagged concrete from a hardware store runs about $6–$8 per 80-lb bag, which works out to roughly $340–$450 per cubic yard — significantly more expensive for larger jobs."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I calculate cubic yards of concrete?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Multiply length × width × depth (all in feet), then divide by 27 to convert cubic feet to cubic yards. For example: 20 ft × 10 ft × 0.33 ft (4 inches) = 66 cubic feet ÷ 27 = 2.44 cubic yards. Always add 5–10% for waste."
+        }
+      }
+    ]
+  }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root { --orange: #F97316; --orange-dark: #EA580C; --darker: #0F0F1A; --dark-card: #1A1A2E; --gray: #94A3B8; --light: #F8FAFC; --green: #22C55E; --border: rgba(255,255,255,0.08); }
+    body { font-family: 'Inter', -apple-system, sans-serif; background: var(--darker); color: var(--light); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+    nav { padding: 20px 0; border-bottom: 1px solid var(--border); }
+    nav .container { display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.3rem; color: var(--orange); text-decoration: none; letter-spacing: -0.5px; }
+    .logo span { color: var(--light); }
+    .nav-links a { color: var(--gray); text-decoration: none; font-size: 0.9rem; margin-left: 24px; }
+    .nav-links a:hover { color: var(--light); }
+
+    .hero { padding: 48px 0 32px; text-align: center; }
+    .hero .badge { display: inline-block; background: rgba(249,115,22,0.1); border: 1px solid rgba(249,115,22,0.3); color: var(--orange); font-size: 0.8rem; font-weight: 600; padding: 6px 16px; border-radius: 100px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .hero h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 800; line-height: 1.15; letter-spacing: -1px; margin-bottom: 12px; }
+    .hero h1 .highlight { color: var(--orange); }
+    .hero p { color: var(--gray); font-size: 1.05rem; max-width: 600px; margin: 0 auto; }
+
+    .calc-section { padding: 24px 0 60px; }
+    .calc-card { background: var(--dark-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; margin-bottom: 24px; }
+    .calc-card h2 { font-size: 1.2rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+    .calc-card h2 .icon { font-size: 1.4rem; }
+
+    .tabs { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
+    .tab { background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: var(--gray); padding: 10px 20px; border-radius: 8px; cursor: pointer; font-size: 0.9rem; font-weight: 500; transition: all 0.2s; }
+    .tab:hover { border-color: var(--orange); color: var(--light); }
+    .tab.active { background: rgba(249,115,22,0.15); border-color: var(--orange); color: var(--orange); }
+
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 500px) { .form-grid { grid-template-columns: 1fr; } }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group.full { grid-column: 1 / -1; }
+    label { font-size: 0.85rem; font-weight: 600; color: var(--gray); text-transform: uppercase; letter-spacing: 0.5px; }
+    input, select { background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: var(--light); padding: 12px 16px; border-radius: 8px; font-size: 1rem; font-family: inherit; outline: none; transition: border-color 0.2s; }
+    input:focus, select:focus { border-color: var(--orange); }
+    select option { background: var(--darker); }
+
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: var(--orange); color: #fff; font-weight: 700; font-size: 1rem; padding: 14px 28px; border-radius: 10px; border: none; cursor: pointer; width: 100%; margin-top: 16px; transition: background 0.2s; }
+    .btn:hover { background: var(--orange-dark); }
+
+    .results { display: none; margin-top: 24px; }
+    .results.show { display: block; }
+    .result-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; }
+    .result-item { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 12px; padding: 20px; text-align: center; }
+    .result-item .number { font-size: 2rem; font-weight: 800; color: var(--orange); letter-spacing: -1px; }
+    .result-item .label { font-size: 0.8rem; color: var(--gray); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .result-item .detail { font-size: 0.85rem; color: var(--light); margin-top: 8px; opacity: 0.8; }
+
+    .waste-note { background: rgba(249,115,22,0.08); border: 1px solid rgba(249,115,22,0.2); border-radius: 10px; padding: 16px 20px; margin-top: 20px; font-size: 0.9rem; color: var(--gray); }
+    .waste-note strong { color: var(--orange); }
+
+    .info-section { padding: 40px 0 60px; }
+    .info-card { background: var(--dark-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; margin-bottom: 24px; }
+    .info-card h2 { font-size: 1.4rem; font-weight: 700; margin-bottom: 16px; }
+    .info-card h3 { font-size: 1.1rem; font-weight: 600; margin: 20px 0 8px; color: var(--orange); }
+    .info-card p { color: var(--gray); margin-bottom: 12px; line-height: 1.8; }
+    .info-card ul, .info-card ol { color: var(--gray); margin-left: 20px; margin-bottom: 12px; }
+    .info-card li { margin-bottom: 6px; }
+    .info-card table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+    .info-card th, .info-card td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+    .info-card th { color: var(--orange); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; }
+    .info-card td { color: var(--gray); }
+
+    footer { padding: 40px 0; border-top: 1px solid var(--border); text-align: center; }
+    footer p { color: var(--gray); font-size: 0.85rem; }
+    footer a { color: var(--orange); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <nav><div class="container"><a href="/" class="logo">Built<span>Right</span></a><div class="nav-links"><a href="/blog">Blog</a><a href="/templates">Templates</a><a href="/tools">Tools</a></div></div></nav>
+
+  <section class="hero"><div class="container">
+    <div class="badge">Free Tool</div>
+    <h1>Concrete <span class="highlight">Calculator</span></h1>
+    <p>Calculate cubic yards, number of bags, and estimated cost for any project — slabs, footings, columns, or stairs.</p>
+  </div></section>
+
+  <section class="calc-section"><div class="container">
+    <div class="calc-card">
+      <h2><span class="icon">🧱</span> Choose Your Project Type</h2>
+      <div class="tabs">
+        <div class="tab active" data-type="slab">Slab / Patio</div>
+        <div class="tab" data-type="footing">Footing / Wall</div>
+        <div class="tab" data-type="column">Column / Post</div>
+        <div class="tab" data-type="stairs">Stairs</div>
+      </div>
+
+      <!-- Slab -->
+      <div id="form-slab" class="calc-form">
+        <div class="form-grid">
+          <div class="form-group"><label>Length</label><input type="number" id="slab-length" placeholder="e.g. 20" step="any"></div>
+          <div class="form-group"><label>Width</label><input type="number" id="slab-width" placeholder="e.g. 10" step="any"></div>
+          <div class="form-group"><label>Thickness</label><input type="number" id="slab-depth" placeholder="e.g. 4" step="any"></div>
+          <div class="form-group"><label>Unit</label>
+            <select id="slab-unit"><option value="in">Inches (thickness)</option><option value="ft">Feet</option></select>
+          </div>
+        </div>
+        <button class="btn" onclick="calcSlab()">Calculate Concrete</button>
+      </div>
+
+      <!-- Footing -->
+      <div id="form-footing" class="calc-form" style="display:none">
+        <div class="form-grid">
+          <div class="form-group"><label>Length (ft)</label><input type="number" id="foot-length" placeholder="e.g. 40" step="any"></div>
+          <div class="form-group"><label>Width (in)</label><input type="number" id="foot-width" placeholder="e.g. 16" step="any"></div>
+          <div class="form-group"><label>Depth (in)</label><input type="number" id="foot-depth" placeholder="e.g. 8" step="any"></div>
+          <div class="form-group"><label>Quantity</label><input type="number" id="foot-qty" placeholder="1" value="1"></div>
+        </div>
+        <button class="btn" onclick="calcFooting()">Calculate Concrete</button>
+      </div>
+
+      <!-- Column -->
+      <div id="form-column" class="calc-form" style="display:none">
+        <div class="form-grid">
+          <div class="form-group"><label>Diameter (in)</label><input type="number" id="col-dia" placeholder="e.g. 12" step="any"></div>
+          <div class="form-group"><label>Height (ft)</label><input type="number" id="col-height" placeholder="e.g. 4" step="any"></div>
+          <div class="form-group"><label>Quantity</label><input type="number" id="col-qty" placeholder="1" value="1"></div>
+        </div>
+        <button class="btn" onclick="calcColumn()">Calculate Concrete</button>
+      </div>
+
+      <!-- Stairs -->
+      <div id="form-stairs" class="calc-form" style="display:none">
+        <div class="form-grid">
+          <div class="form-group"><label>Width (ft)</label><input type="number" id="stair-width" placeholder="e.g. 4" step="any"></div>
+          <div class="form-group"><label>Riser Height (in)</label><input type="number" id="stair-riser" placeholder="e.g. 7" step="any"></div>
+          <div class="form-group"><label>Tread Depth (in)</label><input type="number" id="stair-tread" placeholder="e.g. 11" step="any"></div>
+          <div class="form-group"><label>Number of Steps</label><input type="number" id="stair-steps" placeholder="e.g. 5"></div>
+          <div class="form-group"><label>Platform Depth (in)</label><input type="number" id="stair-platform" placeholder="e.g. 36" step="any"></div>
+        </div>
+        <button class="btn" onclick="calcStairs()">Calculate Concrete</button>
+      </div>
+
+      <div class="results" id="results">
+        <div class="result-grid">
+          <div class="result-item"><div class="number" id="r-yards">—</div><div class="label">Cubic Yards</div><div class="detail" id="r-cuft"></div></div>
+          <div class="result-item"><div class="number" id="r-bags80">—</div><div class="label">80-lb Bags</div><div class="detail">≈ 0.6 cu ft each</div></div>
+          <div class="result-item"><div class="number" id="r-bags60">—</div><div class="label">60-lb Bags</div><div class="detail">≈ 0.45 cu ft each</div></div>
+          <div class="result-item"><div class="number" id="r-cost">—</div><div class="label">Ready-Mix Cost</div><div class="detail">$125–$165 / yd³</div></div>
+        </div>
+        <div class="waste-note"><strong>Pro Tip:</strong> Always order <strong>5–10% extra</strong> for waste, spillage, and slight variations in grade. For irregular shapes, round up to the next half-yard when ordering ready-mix.</div>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="info-section"><div class="container">
+    <div class="info-card">
+      <h2>How to Calculate Concrete: Complete Guide</h2>
+      <p>Ordering the right amount of concrete saves money and prevents delays. Too little means an emergency order mid-pour; too much means paying for concrete you dump. Here's everything you need to know.</p>
+
+      <h3>The Basic Formula</h3>
+      <p>For rectangular areas (slabs, footings, walls):</p>
+      <p><strong>Cubic Yards = (Length × Width × Depth) ÷ 27</strong></p>
+      <p>All measurements must be in feet. If your thickness is in inches, divide by 12 first. The ÷ 27 converts cubic feet to cubic yards (1 yard = 3 feet, so 3×3×3 = 27 cubic feet per cubic yard).</p>
+
+      <h3>For Columns and Round Forms</h3>
+      <p><strong>Cubic Yards = π × (radius²) × height ÷ 27</strong></p>
+      <p>Radius is half the diameter. A 12-inch diameter Sonotube has a 6-inch (0.5 ft) radius.</p>
+
+      <h3>How Many Bags of Concrete Do I Need?</h3>
+      <table>
+        <tr><th>Bag Size</th><th>Yield (cu ft)</th><th>Bags per Cubic Yard</th><th>Typical Price</th></tr>
+        <tr><td>40 lb</td><td>0.30</td><td>90 bags</td><td>$3.50–$4.50</td></tr>
+        <tr><td>50 lb</td><td>0.375</td><td>72 bags</td><td>$4.00–$5.50</td></tr>
+        <tr><td>60 lb</td><td>0.45</td><td>60 bags</td><td>$4.50–$6.00</td></tr>
+        <tr><td>80 lb</td><td>0.60</td><td>45 bags</td><td>$6.00–$8.00</td></tr>
+      </table>
+      <p><strong>Rule of thumb:</strong> For anything over 1 cubic yard, order ready-mix delivery. Mixing 45+ bags by hand is brutally slow and the results are less consistent.</p>
+
+      <h3>Concrete Cost in 2026</h3>
+      <table>
+        <tr><th>Type</th><th>Cost Range</th><th>Best For</th></tr>
+        <tr><td>Ready-mix (delivered)</td><td>$125–$165 / yd³</td><td>Any job over 1 yard</td></tr>
+        <tr><td>Short-load fee</td><td>$50–$100 extra</td><td>Orders under 5 yards</td></tr>
+        <tr><td>Bagged (80-lb)</td><td>$340–$450 / yd³</td><td>Small repairs, post holes</td></tr>
+        <tr><td>High-strength (4000+ PSI)</td><td>$150–$190 / yd³</td><td>Structural, driveways</td></tr>
+        <tr><td>Fiber-reinforced</td><td>$160–$200 / yd³</td><td>Crack-resistant slabs</td></tr>
+      </table>
+
+      <h3>Common Slab Thicknesses</h3>
+      <ul>
+        <li><strong>4 inches</strong> — Patios, sidewalks, shed floors (most common residential)</li>
+        <li><strong>5 inches</strong> — Residential driveways, light vehicle traffic</li>
+        <li><strong>6 inches</strong> — Heavy vehicle driveways, garage floors</li>
+        <li><strong>8+ inches</strong> — Commercial floors, equipment pads</li>
+      </ul>
+
+      <h3>5 Mistakes That Waste Concrete (and Money)</h3>
+      <ol>
+        <li><strong>Not accounting for grade variations.</strong> Measure depth at multiple points — uneven ground means you'll need more than the formula suggests.</li>
+        <li><strong>Forgetting the waste factor.</strong> Always add 5–10%. Formwork isn't perfectly straight, ground isn't perfectly flat.</li>
+        <li><strong>Ordering too many short loads.</strong> Most plants charge a short-load fee for under 5 yards. If you need 4.5 yards, consider ordering 5 to avoid the fee.</li>
+        <li><strong>Mixing bag concrete for large pours.</strong> Once you're past 1 cubic yard (45 bags of 80-lb), ready-mix is cheaper and much faster.</li>
+        <li><strong>Not checking the delivery truck's reach.</strong> Standard chutes reach about 18 feet. If the pour site is farther, you'll need a pump truck ($150–$300 extra).</li>
+      </ol>
+    </div>
+
+    <div class="info-card">
+      <h2>Ready-Mix vs. Bagged Concrete: When to Use Each</h2>
+      <table>
+        <tr><th>Factor</th><th>Bagged Concrete</th><th>Ready-Mix Delivery</th></tr>
+        <tr><td>Best for</td><td>Under 0.5 cubic yards</td><td>Over 1 cubic yard</td></tr>
+        <tr><td>Cost per yard</td><td>$340–$450</td><td>$125–$165</td></tr>
+        <tr><td>Convenience</td><td>Buy anytime at hardware store</td><td>Schedule 1-2 days ahead</td></tr>
+        <tr><td>Consistency</td><td>Varies by mixing technique</td><td>Factory-mixed, consistent</td></tr>
+        <tr><td>Speed</td><td>Slow — 1 bag at a time</td><td>Fast — full load in minutes</td></tr>
+        <tr><td>Minimum order</td><td>1 bag</td><td>Usually 1 yard (fees for less)</td></tr>
+      </table>
+      <p><strong>The gray zone (0.5–1 yard):</strong> This is where it gets tricky. Bagged concrete means mixing 22–45 bags — hard work but no scheduling hassle. Ready-mix means a short-load fee but faster, more consistent results. If you have help and a mixer, bags work. If you're solo, call for delivery.</p>
+    </div>
+  </div></section>
+
+  <footer><div class="container"><p>© 2026 <a href="/">BuiltRight Academy</a>. Free tools for tradespeople who mean business.</p></div></footer>
+
+  <script>
+    // Tab switching
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.calc-form').forEach(f => f.style.display = 'none');
+        tab.classList.add('active');
+        document.getElementById('form-' + tab.dataset.type).style.display = 'block';
+        document.getElementById('results').classList.remove('show');
+      });
+    });
+
+    function showResults(cuFt) {
+      const yards = cuFt / 27;
+      const bags80 = Math.ceil(cuFt / 0.6);
+      const bags60 = Math.ceil(cuFt / 0.45);
+      const costLow = yards * 125;
+      const costHigh = yards * 165;
+
+      document.getElementById('r-yards').textContent = yards.toFixed(2);
+      document.getElementById('r-cuft').textContent = cuFt.toFixed(1) + ' cu ft';
+      document.getElementById('r-bags80').textContent = bags80;
+      document.getElementById('r-bags60').textContent = bags60;
+      document.getElementById('r-cost').textContent = '$' + Math.round(costLow) + '–$' + Math.round(costHigh);
+      document.getElementById('results').classList.add('show');
+      document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function calcSlab() {
+      const l = parseFloat(document.getElementById('slab-length').value);
+      const w = parseFloat(document.getElementById('slab-width').value);
+      let d = parseFloat(document.getElementById('slab-depth').value);
+      const unit = document.getElementById('slab-unit').value;
+      if (!l || !w || !d) return alert('Please fill in all dimensions.');
+      if (unit === 'in') d = d / 12;
+      showResults(l * w * d);
+    }
+
+    function calcFooting() {
+      const l = parseFloat(document.getElementById('foot-length').value);
+      const w = parseFloat(document.getElementById('foot-width').value) / 12;
+      const d = parseFloat(document.getElementById('foot-depth').value) / 12;
+      const qty = parseInt(document.getElementById('foot-qty').value) || 1;
+      if (!l || !w || !d) return alert('Please fill in all dimensions.');
+      showResults(l * w * d * qty);
+    }
+
+    function calcColumn() {
+      const dia = parseFloat(document.getElementById('col-dia').value) / 12;
+      const h = parseFloat(document.getElementById('col-height').value);
+      const qty = parseInt(document.getElementById('col-qty').value) || 1;
+      if (!dia || !h) return alert('Please fill in diameter and height.');
+      const r = dia / 2;
+      showResults(Math.PI * r * r * h * qty);
+    }
+
+    function calcStairs() {
+      const w = parseFloat(document.getElementById('stair-width').value);
+      const riser = parseFloat(document.getElementById('stair-riser').value) / 12;
+      const tread = parseFloat(document.getElementById('stair-tread').value) / 12;
+      const steps = parseInt(document.getElementById('stair-steps').value);
+      const platform = parseFloat(document.getElementById('stair-platform').value) / 12 || 0;
+      if (!w || !riser || !tread || !steps) return alert('Please fill in all stair dimensions.');
+      // Each step is a triangular prism stacked
+      let totalCuFt = 0;
+      for (let i = 1; i <= steps; i++) {
+        totalCuFt += w * tread * (riser * i);
+      }
+      // Platform
+      if (platform > 0) {
+        totalCuFt += w * platform * (riser * steps);
+      }
+      showResults(totalCuFt);
+    }
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
+</body>
+</html>

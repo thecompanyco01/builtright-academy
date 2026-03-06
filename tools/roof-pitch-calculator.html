@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Roof Pitch Calculator — Find Slope, Angle & Rafter Length | BuiltRight Academy</title>
+  <meta name="description" content="Free roof pitch calculator. Enter rise and run to get pitch ratio, slope angle, and rafter length. Visual diagram included. Works for roofing, framing, and estimating.">
+  <meta name="keywords" content="roof pitch calculator, roof slope calculator, roof angle calculator, how to calculate roof pitch, rafter length calculator">
+  <link rel="canonical" href="https://builtright-academy.vercel.app/tools/roof-pitch-calculator">
+  <meta property="og:title" content="Roof Pitch Calculator — Find Slope, Angle & Rafter Length">
+  <meta property="og:description" content="Free interactive roof pitch calculator with visual diagram. Get pitch, angle, and rafter length instantly.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Roof Pitch Calculator",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is a normal roof pitch?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Most residential roofs in the US have a pitch between 4/12 and 9/12. A 4/12 pitch (18.4°) is the minimum for standard asphalt shingles. A 6/12 pitch (26.6°) is the most common. Anything above 9/12 (36.9°) is considered a steep roof and requires special safety equipment."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I measure roof pitch from the ground?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Stand back from the house and hold a speed square or pitch gauge app at arm's length, aligning it with the roof slope. Alternatively, measure from inside the attic: place a level horizontally against a rafter, mark 12 inches, then measure the vertical distance from that mark to the rafter — that's your rise per 12 inches of run."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the pitch multiplier for roofing?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The pitch multiplier converts flat (footprint) area to actual roof area. For a 4/12 pitch it's 1.054, for 6/12 it's 1.118, for 8/12 it's 1.202, and for 12/12 it's 1.414. Multiply your footprint square footage by the pitch multiplier to get the actual roof area for ordering materials."
+        }
+      }
+    ]
+  }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root { --orange: #F97316; --orange-dark: #EA580C; --darker: #0F0F1A; --dark-card: #1A1A2E; --gray: #94A3B8; --light: #F8FAFC; --green: #22C55E; --border: rgba(255,255,255,0.08); }
+    body { font-family: 'Inter', -apple-system, sans-serif; background: var(--darker); color: var(--light); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+    nav { padding: 20px 0; border-bottom: 1px solid var(--border); }
+    nav .container { display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.3rem; color: var(--orange); text-decoration: none; letter-spacing: -0.5px; }
+    .logo span { color: var(--light); }
+    .nav-links a { color: var(--gray); text-decoration: none; font-size: 0.9rem; margin-left: 24px; }
+    .nav-links a:hover { color: var(--light); }
+    .hero { padding: 48px 0 32px; text-align: center; }
+    .hero .badge { display: inline-block; background: rgba(249,115,22,0.1); border: 1px solid rgba(249,115,22,0.3); color: var(--orange); font-size: 0.8rem; font-weight: 600; padding: 6px 16px; border-radius: 100px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .hero h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 800; line-height: 1.15; letter-spacing: -1px; margin-bottom: 12px; }
+    .hero h1 .highlight { color: var(--orange); }
+    .hero p { color: var(--gray); font-size: 1.05rem; max-width: 600px; margin: 0 auto; }
+    .calc-section { padding: 24px 0 40px; }
+    .calc-card { background: var(--dark-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; margin-bottom: 24px; }
+    .calc-card h2 { font-size: 1.2rem; margin-bottom: 20px; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 500px) { .form-grid { grid-template-columns: 1fr; } }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    label { font-size: 0.85rem; font-weight: 600; color: var(--gray); text-transform: uppercase; letter-spacing: 0.5px; }
+    input { background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: var(--light); padding: 12px 16px; border-radius: 8px; font-size: 1rem; font-family: inherit; outline: none; }
+    input:focus { border-color: var(--orange); }
+    .btn { display: inline-flex; align-items: center; justify-content: center; background: var(--orange); color: #fff; font-weight: 700; font-size: 1rem; padding: 14px 28px; border-radius: 10px; border: none; cursor: pointer; width: 100%; margin-top: 16px; }
+    .btn:hover { background: var(--orange-dark); }
+    .results { display: none; margin-top: 24px; }
+    .results.show { display: block; }
+    .result-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px; }
+    .result-item { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 12px; padding: 20px; text-align: center; }
+    .result-item .number { font-size: 1.8rem; font-weight: 800; color: var(--orange); }
+    .result-item .label { font-size: 0.78rem; color: var(--gray); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .result-item .detail { font-size: 0.85rem; color: var(--light); margin-top: 6px; opacity: 0.8; }
+
+    .diagram { margin-top: 24px; text-align: center; }
+    .diagram canvas { max-width: 100%; border-radius: 12px; background: rgba(0,0,0,0.3); }
+
+    .pitch-table { margin-top: 24px; }
+    .info-section { padding: 20px 0 60px; }
+    .info-card { background: var(--dark-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; margin-bottom: 24px; }
+    .info-card h2 { font-size: 1.4rem; font-weight: 700; margin-bottom: 16px; }
+    .info-card h3 { font-size: 1.1rem; font-weight: 600; margin: 20px 0 8px; color: var(--orange); }
+    .info-card p { color: var(--gray); margin-bottom: 12px; line-height: 1.8; }
+    .info-card ul { color: var(--gray); margin-left: 20px; margin-bottom: 12px; }
+    .info-card li { margin-bottom: 6px; }
+    .info-card table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+    .info-card th, .info-card td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+    .info-card th { color: var(--orange); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; }
+    .info-card td { color: var(--gray); }
+
+    footer { padding: 40px 0; border-top: 1px solid var(--border); text-align: center; }
+    footer p { color: var(--gray); font-size: 0.85rem; }
+    footer a { color: var(--orange); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <nav><div class="container"><a href="/" class="logo">Built<span>Right</span></a><div class="nav-links"><a href="/blog">Blog</a><a href="/templates">Templates</a><a href="/tools">Tools</a></div></div></nav>
+
+  <section class="hero"><div class="container">
+    <div class="badge">Free Tool</div>
+    <h1>Roof Pitch <span class="highlight">Calculator</span></h1>
+    <p>Enter rise and run to get pitch ratio, slope angle, rafter length, and area multiplier — with a visual diagram.</p>
+  </div></section>
+
+  <section class="calc-section"><div class="container">
+    <div class="calc-card">
+      <h2>📐 Enter Your Measurements</h2>
+      <div class="form-grid">
+        <div class="form-group"><label>Rise (inches per 12" run)</label><input type="number" id="rise" placeholder="e.g. 6" step="any"></div>
+        <div class="form-group"><label>Total Span / Run (ft, optional)</label><input type="number" id="total-run" placeholder="e.g. 15" step="any"></div>
+      </div>
+      <button class="btn" onclick="calcPitch()">Calculate Roof Pitch</button>
+
+      <div class="results" id="results">
+        <div class="result-grid">
+          <div class="result-item"><div class="number" id="r-pitch">—</div><div class="label">Pitch</div></div>
+          <div class="result-item"><div class="number" id="r-angle">—</div><div class="label">Angle (degrees)</div></div>
+          <div class="result-item"><div class="number" id="r-percent">—</div><div class="label">Slope %</div></div>
+          <div class="result-item"><div class="number" id="r-multiplier">—</div><div class="label">Area Multiplier</div></div>
+          <div class="result-item" id="rafter-result" style="display:none"><div class="number" id="r-rafter">—</div><div class="label">Rafter Length</div><div class="detail">(one side)</div></div>
+        </div>
+        <div class="diagram"><canvas id="pitchCanvas" width="500" height="250"></canvas></div>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="info-section"><div class="container">
+    <div class="info-card">
+      <h2>Common Roof Pitches Reference Table</h2>
+      <table>
+        <tr><th>Pitch</th><th>Angle</th><th>Multiplier</th><th>Category</th><th>Common Use</th></tr>
+        <tr><td>1/12</td><td>4.8°</td><td>1.003</td><td>Flat</td><td>Commercial, membrane roofing</td></tr>
+        <tr><td>2/12</td><td>9.5°</td><td>1.014</td><td>Low slope</td><td>Standing seam metal, rubber</td></tr>
+        <tr><td>3/12</td><td>14.0°</td><td>1.031</td><td>Low slope</td><td>Minimum for most shingles</td></tr>
+        <tr><td>4/12</td><td>18.4°</td><td>1.054</td><td>Standard</td><td>Shingles, metal panels</td></tr>
+        <tr><td>5/12</td><td>22.6°</td><td>1.083</td><td>Standard</td><td>Shingles, tile</td></tr>
+        <tr><td>6/12</td><td>26.6°</td><td>1.118</td><td>Standard</td><td>Most common residential</td></tr>
+        <tr><td>7/12</td><td>30.3°</td><td>1.158</td><td>Standard</td><td>Shingles, tile, slate</td></tr>
+        <tr><td>8/12</td><td>33.7°</td><td>1.202</td><td>Moderate</td><td>Shingles, slate, tile</td></tr>
+        <tr><td>9/12</td><td>36.9°</td><td>1.250</td><td>Steep</td><td>Architectural shingles, slate</td></tr>
+        <tr><td>10/12</td><td>39.8°</td><td>1.302</td><td>Steep</td><td>Slate, cedar shake</td></tr>
+        <tr><td>12/12</td><td>45.0°</td><td>1.414</td><td>Very steep</td><td>Victorian, A-frame, decorative</td></tr>
+      </table>
+    </div>
+
+    <div class="info-card">
+      <h2>How Roof Pitch Affects Roofing Cost</h2>
+      <p>Steeper roofs cost more — not just because of extra materials (higher multiplier), but because of labor. Here's what to account for when estimating:</p>
+      <h3>Material Multiplier Impact</h3>
+      <p>A 2,000 sq ft footprint at 4/12 pitch = 2,108 sq ft of actual roof area. At 12/12 pitch = 2,828 sq ft. That's a <strong>34% increase</strong> in materials for the same house footprint.</p>
+      <h3>Labor Cost by Pitch</h3>
+      <ul>
+        <li><strong>0-6/12:</strong> Standard labor rates. Workers can walk the roof comfortably.</li>
+        <li><strong>7-9/12:</strong> 15-25% labor premium. Roof jacks and toe boards required.</li>
+        <li><strong>10-12/12:</strong> 25-50% labor premium. Full harness systems, slower work pace.</li>
+        <li><strong>Over 12/12:</strong> 50%+ premium. Specialized equipment, significantly slower production.</li>
+      </ul>
+      <h3>Material Compatibility</h3>
+      <ul>
+        <li><strong>Below 2/12:</strong> Built-up roofing, TPO, EPDM, or modified bitumen only</li>
+        <li><strong>2/12 to 4/12:</strong> Standing seam metal, some low-slope shingles with ice/water shield</li>
+        <li><strong>4/12 and above:</strong> Standard asphalt shingles, metal panels, tile, slate, wood shake</li>
+      </ul>
+    </div>
+  </div></section>
+
+  <footer><div class="container"><p>© 2026 <a href="/">BuiltRight Academy</a>. Free tools for tradespeople who mean business.</p></div></footer>
+
+  <script>
+    function calcPitch() {
+      const rise = parseFloat(document.getElementById('rise').value);
+      const totalRun = parseFloat(document.getElementById('total-run').value) || 0;
+      if (!rise && rise !== 0) return alert('Please enter the rise (inches per 12" of run).');
+
+      const run = 12; // standard
+      const angle = Math.atan(rise / run) * (180 / Math.PI);
+      const percent = (rise / run) * 100;
+      const multiplier = Math.sqrt(1 + Math.pow(rise / run, 2));
+      const pitchStr = rise + '/12';
+
+      document.getElementById('r-pitch').textContent = pitchStr;
+      document.getElementById('r-angle').textContent = angle.toFixed(1) + '°';
+      document.getElementById('r-percent').textContent = percent.toFixed(1) + '%';
+      document.getElementById('r-multiplier').textContent = multiplier.toFixed(3);
+
+      if (totalRun > 0) {
+        const halfSpan = totalRun / 2; // assume span means total width
+        const rafterLen = halfSpan * multiplier;
+        document.getElementById('r-rafter').textContent = rafterLen.toFixed(1) + ' ft';
+        document.getElementById('rafter-result').style.display = 'block';
+      } else {
+        document.getElementById('rafter-result').style.display = 'none';
+      }
+
+      document.getElementById('results').classList.add('show');
+      drawPitch(rise);
+    }
+
+    function drawPitch(rise) {
+      const canvas = document.getElementById('pitchCanvas');
+      const ctx = canvas.getContext('2d');
+      const w = canvas.width, h = canvas.height;
+      ctx.clearRect(0, 0, w, h);
+
+      const pad = 50;
+      const baseLen = w - 2 * pad;
+      const maxRise = Math.min(rise * (baseLen / 12), h - 2 * pad);
+      const riseScaled = Math.max(maxRise, 10);
+
+      const x0 = pad, y0 = h - pad;
+      const x1 = w - pad, y1 = h - pad;
+      const xPeak = pad, yPeak = h - pad - riseScaled;
+
+      // Base (run)
+      ctx.beginPath();
+      ctx.moveTo(x0, y0);
+      ctx.lineTo(x1, y1);
+      ctx.strokeStyle = '#94A3B8';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+      // Rise
+      ctx.beginPath();
+      ctx.moveTo(x0, y0);
+      ctx.lineTo(x0, yPeak);
+      ctx.strokeStyle = '#22C55E';
+      ctx.lineWidth = 2;
+      ctx.setLineDash([6, 4]);
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      // Slope (rafter)
+      ctx.beginPath();
+      ctx.moveTo(x0, yPeak);
+      ctx.lineTo(x1, y1);
+      ctx.strokeStyle = '#F97316';
+      ctx.lineWidth = 3;
+      ctx.stroke();
+
+      // Fill triangle
+      ctx.beginPath();
+      ctx.moveTo(x0, y0);
+      ctx.lineTo(x0, yPeak);
+      ctx.lineTo(x1, y1);
+      ctx.closePath();
+      ctx.fillStyle = 'rgba(249, 115, 22, 0.08)';
+      ctx.fill();
+
+      // Labels
+      ctx.font = '600 14px Inter, sans-serif';
+      ctx.fillStyle = '#22C55E';
+      ctx.textAlign = 'right';
+      ctx.fillText('Rise: ' + rise + '"', x0 - 8, (y0 + yPeak) / 2 + 5);
+
+      ctx.fillStyle = '#94A3B8';
+      ctx.textAlign = 'center';
+      ctx.fillText('Run: 12"', (x0 + x1) / 2, y0 + 24);
+
+      ctx.fillStyle = '#F97316';
+      ctx.textAlign = 'center';
+      const mx = (x0 + x1) / 2, my = (yPeak + y1) / 2;
+      ctx.fillText(rise + '/12 pitch', mx + 30, my - 10);
+
+      // Angle arc
+      const arcR = 40;
+      const endAngle = 0;
+      const startAngle = -Math.atan(riseScaled / baseLen);
+      ctx.beginPath();
+      ctx.arc(x1, y1, arcR, Math.PI + startAngle, Math.PI);
+      ctx.strokeStyle = 'rgba(249,115,22,0.5)';
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+
+      const angle = Math.atan(rise / 12) * (180 / Math.PI);
+      ctx.fillStyle = 'rgba(249,115,22,0.7)';
+      ctx.font = '500 12px Inter, sans-serif';
+      ctx.textAlign = 'right';
+      ctx.fillText(angle.toFixed(1) + '°', x1 - arcR - 8, y1 - 8);
+    }
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
+</body>
+</html>

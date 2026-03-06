@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Drywall Calculator — Sheets, Mud, Tape & Cost | BuiltRight Academy</title>
+  <meta name="description" content="Free drywall calculator. Enter room dimensions to get sheets needed, joint compound, tape, screws, and estimated cost. Works for 4×8 and 4×12 sheets.">
+  <meta name="keywords" content="drywall calculator, sheetrock calculator, how many sheets of drywall do I need, drywall cost calculator, drywall installation cost calculator">
+  <link rel="canonical" href="https://builtright-academy.vercel.app/tools/drywall-calculator">
+  <meta property="og:title" content="Drywall Calculator — Sheets, Mud, Tape & Cost Estimator">
+  <meta property="og:description" content="Free interactive drywall calculator. Get exact sheets, joint compound, tape, screws, and installation cost.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Drywall Calculator",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How many sheets of drywall do I need?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Divide the total square footage of walls (and ceiling if applicable) by the sheet size — 32 sq ft for a 4×8 sheet or 48 sq ft for a 4×12 sheet. Add 10-15% for waste and cuts. For a 12×12 room with 8-foot ceilings: walls = 384 sq ft → 12 sheets of 4×8. Add ceiling (144 sq ft) → 4.5 more sheets. Total: about 18 sheets with waste."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much does it cost to drywall a room?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "DIY materials cost $0.40–$0.65 per sq ft (drywall, mud, tape, screws). Professional installation runs $1.50–$3.50 per sq ft including labor and materials. A 12×12 room (walls + ceiling = ~530 sq ft) costs roughly $210–$340 DIY or $800–$1,850 professionally installed and finished."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much joint compound do I need?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Plan for about 0.053 gallons (roughly 1 pint) of joint compound per sheet of drywall. A 3.5-gallon bucket covers approximately 65–70 sheets. This accounts for three coats on all joints and screw heads with light sanding between coats."
+        }
+      }
+    ]
+  }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root { --orange: #F97316; --orange-dark: #EA580C; --darker: #0F0F1A; --dark-card: #1A1A2E; --gray: #94A3B8; --light: #F8FAFC; --green: #22C55E; --border: rgba(255,255,255,0.08); }
+    body { font-family: 'Inter', -apple-system, sans-serif; background: var(--darker); color: var(--light); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+    nav { padding: 20px 0; border-bottom: 1px solid var(--border); }
+    nav .container { display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.3rem; color: var(--orange); text-decoration: none; letter-spacing: -0.5px; }
+    .logo span { color: var(--light); }
+    .nav-links a { color: var(--gray); text-decoration: none; font-size: 0.9rem; margin-left: 24px; }
+    .nav-links a:hover { color: var(--light); }
+    .hero { padding: 48px 0 32px; text-align: center; }
+    .hero .badge { display: inline-block; background: rgba(249,115,22,0.1); border: 1px solid rgba(249,115,22,0.3); color: var(--orange); font-size: 0.8rem; font-weight: 600; padding: 6px 16px; border-radius: 100px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .hero h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 800; line-height: 1.15; letter-spacing: -1px; margin-bottom: 12px; }
+    .hero h1 .highlight { color: var(--orange); }
+    .hero p { color: var(--gray); font-size: 1.05rem; max-width: 600px; margin: 0 auto; }
+    .calc-section { padding: 24px 0 40px; }
+    .calc-card { background: var(--dark-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; margin-bottom: 24px; }
+    .calc-card h2 { font-size: 1.2rem; margin-bottom: 20px; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 500px) { .form-grid { grid-template-columns: 1fr; } }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    label { font-size: 0.85rem; font-weight: 600; color: var(--gray); text-transform: uppercase; letter-spacing: 0.5px; }
+    input, select { background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: var(--light); padding: 12px 16px; border-radius: 8px; font-size: 1rem; font-family: inherit; outline: none; }
+    input:focus, select:focus { border-color: var(--orange); }
+    select option { background: var(--darker); }
+    .checkbox-group { display: flex; align-items: center; gap: 10px; margin-top: 8px; }
+    .checkbox-group input[type="checkbox"] { width: 20px; height: 20px; accent-color: var(--orange); }
+    .btn { display: inline-flex; align-items: center; justify-content: center; background: var(--orange); color: #fff; font-weight: 700; font-size: 1rem; padding: 14px 28px; border-radius: 10px; border: none; cursor: pointer; width: 100%; margin-top: 16px; }
+    .btn:hover { background: var(--orange-dark); }
+    .results { display: none; margin-top: 24px; }
+    .results.show { display: block; }
+    .result-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px; }
+    .result-item { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 12px; padding: 20px; text-align: center; }
+    .result-item .number { font-size: 1.8rem; font-weight: 800; color: var(--orange); }
+    .result-item .label { font-size: 0.78rem; color: var(--gray); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .result-item .detail { font-size: 0.85rem; color: var(--light); margin-top: 6px; opacity: 0.8; }
+    .materials-list { margin-top: 20px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 10px; padding: 20px; }
+    .materials-list h3 { font-size: 0.9rem; color: var(--orange); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .mat-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+    .mat-row:last-child { border-bottom: none; }
+    .mat-row .name { color: var(--light); }
+    .mat-row .qty { color: var(--orange); font-weight: 700; }
+    .mat-row .cost { color: var(--gray); font-size: 0.85rem; }
+    .waste-note { background: rgba(249,115,22,0.08); border: 1px solid rgba(249,115,22,0.2); border-radius: 10px; padding: 16px 20px; margin-top: 20px; font-size: 0.9rem; color: var(--gray); }
+    .waste-note strong { color: var(--orange); }
+    .info-section { padding: 20px 0 60px; }
+    .info-card { background: var(--dark-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; margin-bottom: 24px; }
+    .info-card h2 { font-size: 1.4rem; font-weight: 700; margin-bottom: 16px; }
+    .info-card h3 { font-size: 1.1rem; font-weight: 600; margin: 20px 0 8px; color: var(--orange); }
+    .info-card p { color: var(--gray); margin-bottom: 12px; line-height: 1.8; }
+    .info-card ul { color: var(--gray); margin-left: 20px; margin-bottom: 12px; }
+    .info-card li { margin-bottom: 6px; }
+    .info-card table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+    .info-card th, .info-card td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+    .info-card th { color: var(--orange); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; }
+    .info-card td { color: var(--gray); }
+    footer { padding: 40px 0; border-top: 1px solid var(--border); text-align: center; }
+    footer p { color: var(--gray); font-size: 0.85rem; }
+    footer a { color: var(--orange); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <nav><div class="container"><a href="/" class="logo">Built<span>Right</span></a><div class="nav-links"><a href="/blog">Blog</a><a href="/templates">Templates</a><a href="/tools">Tools</a></div></div></nav>
+
+  <section class="hero"><div class="container">
+    <div class="badge">Free Tool</div>
+    <h1>Drywall <span class="highlight">Calculator</span></h1>
+    <p>Get exact sheet count, joint compound, tape, screws, and total cost — for walls, ceilings, or both.</p>
+  </div></section>
+
+  <section class="calc-section"><div class="container">
+    <div class="calc-card">
+      <h2>📏 Room Dimensions</h2>
+      <div class="form-grid">
+        <div class="form-group"><label>Room Length (ft)</label><input type="number" id="room-length" placeholder="e.g. 15" step="any"></div>
+        <div class="form-group"><label>Room Width (ft)</label><input type="number" id="room-width" placeholder="e.g. 12" step="any"></div>
+        <div class="form-group"><label>Ceiling Height (ft)</label><input type="number" id="ceiling-height" placeholder="8" value="8" step="any"></div>
+        <div class="form-group"><label>Sheet Size</label>
+          <select id="sheet-size"><option value="32">4 × 8 ft (32 sq ft)</option><option value="48">4 × 12 ft (48 sq ft)</option></select>
+        </div>
+        <div class="form-group"><label>Drywall Thickness</label>
+          <select id="thickness"><option value="0.5">½" (standard)</option><option value="0.625">⅝" (fire-rated / ceiling)</option></select>
+        </div>
+        <div class="form-group"><label>Waste Factor</label>
+          <select id="waste"><option value="10">10% (rectangular room)</option><option value="15">15% (some cuts/openings)</option><option value="20">20% (complex layout)</option></select>
+        </div>
+        <div class="form-group"><label>Doors (standard)</label><input type="number" id="doors" placeholder="1" value="1"></div>
+        <div class="form-group"><label>Windows (standard)</label><input type="number" id="windows" placeholder="2" value="2"></div>
+        <div class="form-group">
+          <label>Include</label>
+          <div class="checkbox-group"><input type="checkbox" id="include-ceiling" checked><label for="include-ceiling" style="text-transform:none;font-weight:400;font-size:0.95rem;">Ceiling</label></div>
+        </div>
+      </div>
+      <button class="btn" onclick="calcDrywall()">Calculate Drywall</button>
+
+      <div class="results" id="results">
+        <div class="result-grid">
+          <div class="result-item"><div class="number" id="r-sheets">—</div><div class="label">Sheets Needed</div><div class="detail" id="r-sheet-detail"></div></div>
+          <div class="result-item"><div class="number" id="r-sqft">—</div><div class="label">Total Sq Ft</div></div>
+          <div class="result-item"><div class="number" id="r-mat-cost">—</div><div class="label">Materials Cost</div></div>
+          <div class="result-item"><div class="number" id="r-install-cost">—</div><div class="label">Installed Cost</div><div class="detail">labor + materials</div></div>
+        </div>
+
+        <div class="materials-list">
+          <h3>Complete Materials List</h3>
+          <div class="mat-row"><span class="name">Drywall sheets</span><span class="qty" id="m-sheets">—</span><span class="cost" id="m-sheets-cost">—</span></div>
+          <div class="mat-row"><span class="name">Joint compound (gal)</span><span class="qty" id="m-mud">—</span><span class="cost" id="m-mud-cost">—</span></div>
+          <div class="mat-row"><span class="name">Paper tape (rolls)</span><span class="qty" id="m-tape">—</span><span class="cost" id="m-tape-cost">—</span></div>
+          <div class="mat-row"><span class="name">Drywall screws (lbs)</span><span class="qty" id="m-screws">—</span><span class="cost" id="m-screws-cost">—</span></div>
+          <div class="mat-row"><span class="name">Corner bead (8ft pcs)</span><span class="qty" id="m-corner">—</span><span class="cost" id="m-corner-cost">—</span></div>
+          <div class="mat-row" style="border-top: 2px solid var(--orange); margin-top: 8px; padding-top: 12px;"><span class="name" style="font-weight:700;color:var(--orange);">TOTAL MATERIALS</span><span class="qty" id="m-total">—</span></div>
+        </div>
+
+        <div class="waste-note"><strong>Pro Tip:</strong> For 8-foot ceilings, use 4×8 sheets hung horizontally. For 9 or 10-foot ceilings, 4×12 sheets hung horizontally minimize joints. Fewer joints = less taping = faster finish = higher profit.</div>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="info-section"><div class="container">
+    <div class="info-card">
+      <h2>Drywall Cost Breakdown (2026)</h2>
+      <table>
+        <tr><th>Item</th><th>DIY Cost</th><th>Pro Cost (Installed)</th></tr>
+        <tr><td>½" standard (4×8)</td><td>$10–$14/sheet</td><td>$1.50–$2.50/sq ft</td></tr>
+        <tr><td>½" standard (4×12)</td><td>$14–$20/sheet</td><td>$1.50–$2.50/sq ft</td></tr>
+        <tr><td>⅝" fire-rated (4×8)</td><td>$13–$18/sheet</td><td>$1.75–$3.00/sq ft</td></tr>
+        <tr><td>Moisture-resistant (green board)</td><td>$14–$20/sheet</td><td>$2.00–$3.50/sq ft</td></tr>
+        <tr><td>Mold-resistant (purple board)</td><td>$16–$24/sheet</td><td>$2.25–$3.75/sq ft</td></tr>
+      </table>
+      <p><strong>Pro installed cost includes:</strong> hanging, taping, mudding (3 coats), sanding, and cleanup. Does not include painting, texture, or demo of existing walls.</p>
+
+      <h3>Pricing Drywall Jobs as a Contractor</h3>
+      <ul>
+        <li><strong>Hang only:</strong> $0.75–$1.25/sq ft</li>
+        <li><strong>Tape & finish only:</strong> $0.75–$1.50/sq ft</li>
+        <li><strong>Hang + tape + finish:</strong> $1.50–$3.00/sq ft</li>
+        <li><strong>Level 5 finish (skim coat):</strong> add $0.50–$1.00/sq ft</li>
+        <li><strong>Texture (knockdown, orange peel):</strong> add $0.30–$0.75/sq ft</li>
+      </ul>
+      <p>A standard 12×12 room (walls + ceiling ≈ 528 sq ft) should take 1 person about 2 days to hang and 3 days to tape/finish (waiting for mud to dry between coats). Price accordingly — if you're fast, you make more per hour.</p>
+    </div>
+  </div></section>
+
+  <footer><div class="container"><p>© 2026 <a href="/">BuiltRight Academy</a>. Free tools for tradespeople who mean business.</p></div></footer>
+
+  <script>
+    function calcDrywall() {
+      const l = parseFloat(document.getElementById('room-length').value);
+      const w = parseFloat(document.getElementById('room-width').value);
+      const h = parseFloat(document.getElementById('ceiling-height').value) || 8;
+      const sheetSqFt = parseInt(document.getElementById('sheet-size').value);
+      const waste = parseInt(document.getElementById('waste').value) / 100;
+      const doors = parseInt(document.getElementById('doors').value) || 0;
+      const windows = parseInt(document.getElementById('windows').value) || 0;
+      const incCeiling = document.getElementById('include-ceiling').checked;
+      const thickness = parseFloat(document.getElementById('thickness').value);
+
+      if (!l || !w) return alert('Please enter room length and width.');
+
+      const perimeter = 2 * (l + w);
+      const wallArea = perimeter * h;
+      const doorArea = doors * 21;
+      const windowArea = windows * 15;
+      const netWall = Math.max(wallArea - doorArea - windowArea, 0);
+      const ceilingArea = incCeiling ? l * w : 0;
+      const totalSqFt = netWall + ceilingArea;
+      const totalWithWaste = totalSqFt * (1 + waste);
+
+      const sheets = Math.ceil(totalWithWaste / sheetSqFt);
+      const sheetLabel = sheetSqFt === 32 ? '4×8' : '4×12';
+
+      // Materials calculations
+      const sheetPrice = thickness === 0.5 ? (sheetSqFt === 32 ? 12 : 17) : (sheetSqFt === 32 ? 15.5 : 22);
+      const sheetCost = sheets * sheetPrice;
+
+      const mudGal = Math.ceil(sheets * 0.053 * 10) / 10; // ~0.053 gal per sheet
+      const mudBuckets = Math.ceil(mudGal / 3.5); // 3.5 gal buckets
+      const mudCost = mudBuckets * 18;
+
+      const tapeFt = perimeter * h / 2 + (incCeiling ? perimeter : 0); // rough estimate
+      const tapeRolls = Math.ceil(tapeFt / 250); // 250ft per roll
+      const tapeCost = tapeRolls * 5;
+
+      const screwsLbs = Math.ceil(sheets * 0.5); // ~0.5 lbs per sheet
+      const screwCost = Math.ceil(screwsLbs / 5) * 12; // $12 per 5lb box
+
+      const corners = incCeiling ? 4 : 0; // inside corners of ceiling
+      const cornerCost = corners * 4;
+
+      const totalMat = sheetCost + mudCost + tapeCost + screwCost + cornerCost;
+      const installLow = totalSqFt * 1.5;
+      const installHigh = totalSqFt * 3;
+
+      // Display
+      document.getElementById('r-sheets').textContent = sheets;
+      document.getElementById('r-sheet-detail').textContent = sheetLabel + ' sheets';
+      document.getElementById('r-sqft').textContent = Math.round(totalSqFt);
+      document.getElementById('r-mat-cost').textContent = '$' + Math.round(totalMat);
+      document.getElementById('r-install-cost').textContent = '$' + Math.round(installLow) + '–$' + Math.round(installHigh);
+
+      document.getElementById('m-sheets').textContent = sheets + ' sheets';
+      document.getElementById('m-sheets-cost').textContent = '$' + Math.round(sheetCost);
+      document.getElementById('m-mud').textContent = mudBuckets + ' bucket' + (mudBuckets > 1 ? 's' : '') + ' (' + mudGal.toFixed(1) + ' gal)';
+      document.getElementById('m-mud-cost').textContent = '$' + mudCost;
+      document.getElementById('m-tape').textContent = tapeRolls + ' roll' + (tapeRolls > 1 ? 's' : '');
+      document.getElementById('m-tape-cost').textContent = '$' + tapeCost;
+      document.getElementById('m-screws').textContent = screwsLbs + ' lbs';
+      document.getElementById('m-screws-cost').textContent = '$' + screwCost;
+      document.getElementById('m-corner').textContent = corners;
+      document.getElementById('m-corner-cost').textContent = '$' + cornerCost;
+      document.getElementById('m-total').textContent = '$' + Math.round(totalMat);
+
+      document.getElementById('results').classList.add('show');
+      document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
+</body>
+</html>

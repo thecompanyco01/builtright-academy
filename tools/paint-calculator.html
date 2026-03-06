@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Paint Calculator — How Much Paint Do I Need? | BuiltRight Academy</title>
+  <meta name="description" content="Free paint calculator for contractors and homeowners. Enter room dimensions to get gallons needed for walls and ceilings. Accounts for doors, windows, and coats.">
+  <meta name="keywords" content="paint calculator, how much paint do I need, paint estimator, room paint calculator, gallons of paint calculator">
+  <link rel="canonical" href="https://builtright-academy.vercel.app/tools/paint-calculator">
+  <meta property="og:title" content="Paint Calculator — How Much Paint Do I Need?">
+  <meta property="og:description" content="Free interactive paint calculator. Get exact gallons needed for any room or exterior project.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Paint Calculator",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "description": "Calculate how many gallons of paint you need for any room or exterior project. Accounts for doors, windows, ceiling, and number of coats."
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How much paint do I need for a 12x12 room?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A 12×12 room with 8-foot ceilings has about 384 sq ft of wall area. Subtract ~50 sq ft for a door and window, leaving ~334 sq ft. At 350 sq ft per gallon, you need about 1 gallon for one coat, or 2 gallons for two coats."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How many square feet does a gallon of paint cover?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "One gallon of paint covers approximately 350–400 square feet on smooth surfaces with one coat. Rough or textured surfaces may reduce coverage to 250–300 sq ft per gallon. Primer typically covers 200–300 sq ft per gallon."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need one coat or two coats of paint?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Two coats is standard for most jobs. You might get away with one coat if you're painting the same color over a well-prepared surface. Always use two coats when: changing from dark to light, painting over patched areas, or using a new color. Some premium paints advertise one-coat coverage, but professionals almost always do two."
+        }
+      }
+    ]
+  }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root { --orange: #F97316; --orange-dark: #EA580C; --darker: #0F0F1A; --dark-card: #1A1A2E; --gray: #94A3B8; --light: #F8FAFC; --green: #22C55E; --border: rgba(255,255,255,0.08); }
+    body { font-family: 'Inter', -apple-system, sans-serif; background: var(--darker); color: var(--light); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+    nav { padding: 20px 0; border-bottom: 1px solid var(--border); }
+    nav .container { display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.3rem; color: var(--orange); text-decoration: none; letter-spacing: -0.5px; }
+    .logo span { color: var(--light); }
+    .nav-links a { color: var(--gray); text-decoration: none; font-size: 0.9rem; margin-left: 24px; }
+    .nav-links a:hover { color: var(--light); }
+    .hero { padding: 48px 0 32px; text-align: center; }
+    .hero .badge { display: inline-block; background: rgba(249,115,22,0.1); border: 1px solid rgba(249,115,22,0.3); color: var(--orange); font-size: 0.8rem; font-weight: 600; padding: 6px 16px; border-radius: 100px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .hero h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 800; line-height: 1.15; letter-spacing: -1px; margin-bottom: 12px; }
+    .hero h1 .highlight { color: var(--orange); }
+    .hero p { color: var(--gray); font-size: 1.05rem; max-width: 600px; margin: 0 auto; }
+    .calc-section { padding: 24px 0 60px; }
+    .calc-card { background: var(--dark-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; margin-bottom: 24px; }
+    .calc-card h2 { font-size: 1.2rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 500px) { .form-grid { grid-template-columns: 1fr; } }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group.full { grid-column: 1 / -1; }
+    label { font-size: 0.85rem; font-weight: 600; color: var(--gray); text-transform: uppercase; letter-spacing: 0.5px; }
+    input, select { background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: var(--light); padding: 12px 16px; border-radius: 8px; font-size: 1rem; font-family: inherit; outline: none; transition: border-color 0.2s; }
+    input:focus, select:focus { border-color: var(--orange); }
+    select option { background: var(--darker); }
+    .checkbox-group { display: flex; align-items: center; gap: 10px; margin-top: 8px; }
+    .checkbox-group input[type="checkbox"] { width: 20px; height: 20px; accent-color: var(--orange); }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: var(--orange); color: #fff; font-weight: 700; font-size: 1rem; padding: 14px 28px; border-radius: 10px; border: none; cursor: pointer; width: 100%; margin-top: 16px; transition: background 0.2s; }
+    .btn:hover { background: var(--orange-dark); }
+    .results { display: none; margin-top: 24px; }
+    .results.show { display: block; }
+    .result-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; }
+    .result-item { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 12px; padding: 20px; text-align: center; }
+    .result-item .number { font-size: 2rem; font-weight: 800; color: var(--orange); letter-spacing: -1px; }
+    .result-item .label { font-size: 0.8rem; color: var(--gray); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .result-item .detail { font-size: 0.85rem; color: var(--light); margin-top: 8px; opacity: 0.8; }
+    .breakdown { margin-top: 20px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 10px; padding: 20px; }
+    .breakdown h3 { font-size: 0.9rem; color: var(--orange); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .breakdown-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+    .breakdown-row:last-child { border-bottom: none; }
+    .breakdown-row .label { color: var(--gray); }
+    .breakdown-row .value { color: var(--light); font-weight: 600; }
+    .waste-note { background: rgba(249,115,22,0.08); border: 1px solid rgba(249,115,22,0.2); border-radius: 10px; padding: 16px 20px; margin-top: 20px; font-size: 0.9rem; color: var(--gray); }
+    .waste-note strong { color: var(--orange); }
+    .info-section { padding: 40px 0 60px; }
+    .info-card { background: var(--dark-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; margin-bottom: 24px; }
+    .info-card h2 { font-size: 1.4rem; font-weight: 700; margin-bottom: 16px; }
+    .info-card h3 { font-size: 1.1rem; font-weight: 600; margin: 20px 0 8px; color: var(--orange); }
+    .info-card p { color: var(--gray); margin-bottom: 12px; line-height: 1.8; }
+    .info-card ul { color: var(--gray); margin-left: 20px; margin-bottom: 12px; }
+    .info-card li { margin-bottom: 6px; }
+    .info-card table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+    .info-card th, .info-card td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+    .info-card th { color: var(--orange); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; }
+    .info-card td { color: var(--gray); }
+    footer { padding: 40px 0; border-top: 1px solid var(--border); text-align: center; }
+    footer p { color: var(--gray); font-size: 0.85rem; }
+    footer a { color: var(--orange); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <nav><div class="container"><a href="/" class="logo">Built<span>Right</span></a><div class="nav-links"><a href="/blog">Blog</a><a href="/templates">Templates</a><a href="/tools">Tools</a></div></div></nav>
+
+  <section class="hero"><div class="container">
+    <div class="badge">Free Tool</div>
+    <h1>Paint <span class="highlight">Calculator</span></h1>
+    <p>Enter your room dimensions to find out exactly how many gallons of paint you need — walls, ceiling, and trim.</p>
+  </div></section>
+
+  <section class="calc-section"><div class="container">
+    <div class="calc-card">
+      <h2>🎨 Room Dimensions</h2>
+      <div class="form-grid">
+        <div class="form-group"><label>Room Length (ft)</label><input type="number" id="room-length" placeholder="e.g. 15" step="any"></div>
+        <div class="form-group"><label>Room Width (ft)</label><input type="number" id="room-width" placeholder="e.g. 12" step="any"></div>
+        <div class="form-group"><label>Ceiling Height (ft)</label><input type="number" id="ceiling-height" placeholder="8" value="8" step="any"></div>
+        <div class="form-group"><label>Number of Coats</label>
+          <select id="coats"><option value="1">1 Coat</option><option value="2" selected>2 Coats (recommended)</option><option value="3">3 Coats</option></select>
+        </div>
+        <div class="form-group"><label>Doors (standard 21 sq ft)</label><input type="number" id="doors" placeholder="1" value="1"></div>
+        <div class="form-group"><label>Windows (standard 15 sq ft)</label><input type="number" id="windows" placeholder="2" value="2"></div>
+        <div class="form-group"><label>Surface Type</label>
+          <select id="surface"><option value="350">Smooth / Previously Painted (350 sq ft/gal)</option><option value="300">Slightly Textured (300 sq ft/gal)</option><option value="250">Heavy Texture / Bare Drywall (250 sq ft/gal)</option></select>
+        </div>
+        <div class="form-group">
+          <label>Include</label>
+          <div class="checkbox-group"><input type="checkbox" id="include-ceiling"><label for="include-ceiling" style="text-transform:none;font-weight:400;font-size:0.95rem;">Ceiling</label></div>
+          <div class="checkbox-group"><input type="checkbox" id="include-trim"><label for="include-trim" style="text-transform:none;font-weight:400;font-size:0.95rem;">Trim / Baseboards</label></div>
+        </div>
+      </div>
+      <button class="btn" onclick="calcPaint()">Calculate Paint</button>
+
+      <div class="results" id="results">
+        <div class="result-grid">
+          <div class="result-item"><div class="number" id="r-gallons">—</div><div class="label">Gallons (Walls)</div></div>
+          <div class="result-item"><div class="number" id="r-ceiling-gal">—</div><div class="label">Gallons (Ceiling)</div></div>
+          <div class="result-item"><div class="number" id="r-trim-gal">—</div><div class="label">Gallons (Trim)</div></div>
+          <div class="result-item"><div class="number" id="r-total">—</div><div class="label">Total Gallons</div></div>
+        </div>
+        <div class="breakdown" id="breakdown">
+          <h3>Breakdown</h3>
+          <div class="breakdown-row"><span class="label">Total wall area</span><span class="value" id="b-wall-area">—</span></div>
+          <div class="breakdown-row"><span class="label">Minus doors & windows</span><span class="value" id="b-subtract">—</span></div>
+          <div class="breakdown-row"><span class="label">Paintable wall area</span><span class="value" id="b-paintable">—</span></div>
+          <div class="breakdown-row"><span class="label">Coverage per gallon</span><span class="value" id="b-coverage">—</span></div>
+          <div class="breakdown-row"><span class="label">Coats</span><span class="value" id="b-coats">—</span></div>
+          <div class="breakdown-row" id="b-ceiling-row" style="display:none"><span class="label">Ceiling area</span><span class="value" id="b-ceiling-area">—</span></div>
+          <div class="breakdown-row" id="b-trim-row" style="display:none"><span class="label">Trim (linear ft)</span><span class="value" id="b-trim-lf">—</span></div>
+          <div class="breakdown-row"><span class="label">Estimated cost (wall paint)</span><span class="value" id="b-cost">—</span></div>
+        </div>
+        <div class="waste-note"><strong>Pro Tip:</strong> Buy one extra quart as a touch-up reserve. Store it with the color code and room name written on the lid. You'll thank yourself in 6 months when you need to fix a scuff.</div>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="info-section"><div class="container">
+    <div class="info-card">
+      <h2>How to Estimate Paint: Contractor's Guide</h2>
+
+      <h3>The Basic Formula</h3>
+      <p><strong>Gallons = (Paintable Area × Coats) ÷ Coverage Rate</strong></p>
+      <p>Paintable area = total wall area minus doors and windows. Standard coverage is 350 sq ft per gallon for smooth walls. Textured surfaces use 250–300 sq ft per gallon.</p>
+
+      <h3>Paint Coverage by Type</h3>
+      <table>
+        <tr><th>Paint Type</th><th>Coverage (sq ft/gal)</th><th>Price Range</th></tr>
+        <tr><td>Flat / Matte</td><td>350–400</td><td>$25–$50</td></tr>
+        <tr><td>Eggshell</td><td>350–400</td><td>$30–$55</td></tr>
+        <tr><td>Satin</td><td>350–400</td><td>$30–$55</td></tr>
+        <tr><td>Semi-Gloss</td><td>350–400</td><td>$30–$60</td></tr>
+        <tr><td>High-Gloss</td><td>300–350</td><td>$35–$70</td></tr>
+        <tr><td>Primer</td><td>200–300</td><td>$20–$40</td></tr>
+        <tr><td>Exterior (latex)</td><td>250–350</td><td>$35–$70</td></tr>
+      </table>
+
+      <h3>Pricing Paint Jobs as a Contractor</h3>
+      <p>Most painting contractors charge <strong>$2–$6 per square foot</strong> for interior painting, including labor and materials. A typical 12×12 room with 8-foot ceilings costs $800–$2,000 depending on complexity, prep work, and finish quality.</p>
+      <ul>
+        <li><strong>Labor:</strong> 60–70% of total job cost</li>
+        <li><strong>Materials:</strong> 15–25% (paint, primer, tape, drop cloths)</li>
+        <li><strong>Overhead & profit:</strong> 15–25%</li>
+      </ul>
+      <p>Use a <strong>minimum 50% markup</strong> on materials and charge labor at $35–$65/hour per painter depending on your market.</p>
+
+      <h3>When to Use Primer</h3>
+      <ul>
+        <li>Painting over bare drywall or patches (always prime)</li>
+        <li>Going from dark to light colors</li>
+        <li>Covering stains or smoke damage (use shellac-based primer)</li>
+        <li>Painting over glossy surfaces (scuff sand + prime)</li>
+        <li>New wood trim or cabinets</li>
+      </ul>
+    </div>
+  </div></section>
+
+  <footer><div class="container"><p>© 2026 <a href="/">BuiltRight Academy</a>. Free tools for tradespeople who mean business.</p></div></footer>
+
+  <script>
+    function calcPaint() {
+      const l = parseFloat(document.getElementById('room-length').value);
+      const w = parseFloat(document.getElementById('room-width').value);
+      const h = parseFloat(document.getElementById('ceiling-height').value) || 8;
+      const coats = parseInt(document.getElementById('coats').value);
+      const doors = parseInt(document.getElementById('doors').value) || 0;
+      const windows = parseInt(document.getElementById('windows').value) || 0;
+      const coverage = parseInt(document.getElementById('surface').value);
+      const incCeiling = document.getElementById('include-ceiling').checked;
+      const incTrim = document.getElementById('include-trim').checked;
+
+      if (!l || !w) return alert('Please enter room length and width.');
+
+      const perimeter = 2 * (l + w);
+      const totalWall = perimeter * h;
+      const subtract = (doors * 21) + (windows * 15);
+      const paintable = Math.max(totalWall - subtract, 0);
+      const wallGal = (paintable * coats) / coverage;
+      const wallGalRound = Math.ceil(wallGal * 4) / 4; // round to nearest quarter gallon
+
+      let ceilingGal = 0;
+      if (incCeiling) {
+        ceilingGal = (l * w * coats) / coverage;
+        ceilingGal = Math.ceil(ceilingGal * 4) / 4;
+      }
+
+      let trimGal = 0;
+      const trimLF = perimeter; // baseboard runs the perimeter
+      if (incTrim) {
+        const trimSqFt = trimLF * 0.5; // ~6 inches tall
+        trimGal = (trimSqFt * coats) / 400; // trim paint covers ~400 sqft
+        trimGal = Math.ceil(trimGal * 4) / 4;
+        if (trimGal < 0.25) trimGal = 0.25;
+      }
+
+      const total = wallGalRound + ceilingGal + trimGal;
+
+      document.getElementById('r-gallons').textContent = wallGalRound.toFixed(1);
+      document.getElementById('r-ceiling-gal').textContent = incCeiling ? ceilingGal.toFixed(1) : '—';
+      document.getElementById('r-trim-gal').textContent = incTrim ? trimGal.toFixed(1) : '—';
+      document.getElementById('r-total').textContent = total.toFixed(1);
+
+      document.getElementById('b-wall-area').textContent = totalWall.toFixed(0) + ' sq ft';
+      document.getElementById('b-subtract').textContent = '−' + subtract + ' sq ft';
+      document.getElementById('b-paintable').textContent = paintable.toFixed(0) + ' sq ft';
+      document.getElementById('b-coverage').textContent = coverage + ' sq ft/gal';
+      document.getElementById('b-coats').textContent = coats;
+      document.getElementById('b-cost').textContent = '$' + Math.round(wallGalRound * 35) + '–$' + Math.round(wallGalRound * 60);
+
+      if (incCeiling) {
+        document.getElementById('b-ceiling-row').style.display = 'flex';
+        document.getElementById('b-ceiling-area').textContent = (l * w).toFixed(0) + ' sq ft';
+      } else {
+        document.getElementById('b-ceiling-row').style.display = 'none';
+      }
+      if (incTrim) {
+        document.getElementById('b-trim-row').style.display = 'flex';
+        document.getElementById('b-trim-lf').textContent = trimLF.toFixed(0) + ' ft';
+      } else {
+        document.getElementById('b-trim-row').style.display = 'none';
+      }
+
+      document.getElementById('results').classList.add('show');
+      document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
+</body>
+</html>
