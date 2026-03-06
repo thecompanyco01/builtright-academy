@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HVAC Hourly Rates: What to Charge in 2026 | BuiltRight Academy</title>
+  <meta name="description" content="What HVAC technicians should charge per hour in 2026. Covers residential vs commercial rates, regional differences, how to calculate your rate, and when to switch to flat-rate pricing.">
+  <meta name="keywords" content="HVAC hourly rate, what to charge HVAC, HVAC labor rate, HVAC pricing, HVAC technician rate 2026">
+  <link rel="canonical" href="https://builtright-academy.vercel.app/blog/hvac-hourly-rate">
+  <meta property="og:title" content="HVAC Hourly Rates: What to Charge in 2026">
+  <meta property="og:description" content="What HVAC techs should charge per hour in 2026. Regional rates, calculation methods, and when flat-rate makes more sense.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://builtright-academy.vercel.app/blog/hvac-hourly-rate">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root { --orange: #F97316; --orange-dark: #EA580C; --dark: #1A1A2E; --darker: #0F0F1A; --gray: #94A3B8; --light: #F8FAFC; }
+    body { font-family: 'Inter', -apple-system, sans-serif; background: var(--darker); color: var(--light); line-height: 1.8; -webkit-font-smoothing: antialiased; }
+    .container { max-width: 720px; margin: 0 auto; padding: 0 24px; }
+    nav { padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    nav .container { display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.3rem; color: var(--orange); text-decoration: none; letter-spacing: -0.5px; }
+    .logo span { color: var(--light); }
+    .nav-links a { color: var(--gray); text-decoration: none; font-size: 0.9rem; margin-left: 24px; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--light); }
+    article { padding: 60px 0; }
+    .article-meta { margin-bottom: 32px; }
+    .article-meta .category { display: inline-block; background: rgba(249,115,22,0.1); border: 1px solid rgba(249,115,22,0.3); color: var(--orange); font-size: 0.75rem; font-weight: 600; padding: 4px 12px; border-radius: 100px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 16px; }
+    .article-meta .date { color: var(--gray); font-size: 0.85rem; }
+    article h1 { font-size: clamp(2rem, 4.5vw, 2.8rem); font-weight: 800; line-height: 1.15; letter-spacing: -1.5px; margin-bottom: 16px; }
+    article .subtitle { font-size: 1.15rem; color: var(--gray); margin-bottom: 40px; line-height: 1.7; }
+    article h2 { font-size: 1.5rem; font-weight: 700; margin: 48px 0 16px; letter-spacing: -0.5px; }
+    article h3 { font-size: 1.15rem; font-weight: 600; margin: 32px 0 12px; }
+    article p { margin-bottom: 16px; font-size: 1.02rem; color: #CBD5E1; }
+    article ul, article ol { margin-bottom: 16px; padding-left: 24px; }
+    article li { margin-bottom: 8px; color: #CBD5E1; }
+    article strong { color: var(--light); }
+    .callout { background: rgba(249,115,22,0.08); border-left: 3px solid var(--orange); padding: 20px 24px; border-radius: 0 8px 8px 0; margin: 24px 0; }
+    .callout p { margin-bottom: 0; color: var(--light); }
+    .callout strong { color: var(--orange); }
+    .step-box { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 24px; margin: 16px 0; }
+    .step-box h4 { color: var(--orange); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+    .cta-box { background: linear-gradient(135deg, rgba(249,115,22,0.15), rgba(249,115,22,0.05)); border: 1px solid rgba(249,115,22,0.3); border-radius: 16px; padding: 40px; text-align: center; margin: 48px 0; }
+    .cta-box h3 { font-size: 1.4rem; margin: 0 0 12px; color: var(--light); }
+    .cta-box p { color: var(--gray); margin-bottom: 24px; }
+    .cta-btn { display: inline-block; padding: 14px 32px; background: var(--orange); color: white; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 1rem; transition: background 0.2s; }
+    .cta-btn:hover { background: var(--orange-dark); }
+    .toc { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 24px 32px; margin: 0 0 40px; }
+    .toc h4 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--gray); margin-bottom: 12px; }
+    .toc ol { padding-left: 20px; }
+    .toc li { margin-bottom: 6px; }
+    .toc a { color: var(--orange); text-decoration: none; }
+    .toc a:hover { text-decoration: underline; }
+    footer { padding: 24px 0; border-top: 1px solid rgba(255,255,255,0.06); text-align: center; font-size: 0.8rem; color: #334155; }
+    @media (max-width: 600px) { article { padding: 40px 0; } .cta-box { padding: 24px; } }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "HVAC Hourly Rates: What to Charge in 2026",
+    "description": "What HVAC technicians should charge per hour in 2026, including regional rates, calculation methods, and flat-rate alternatives.",
+    "author": { "@type": "Organization", "name": "BuiltRight Academy" },
+    "publisher": { "@type": "Organization", "name": "BuiltRight Academy" },
+    "datePublished": "2026-03-06",
+    "dateModified": "2026-03-06"
+  }
+  </script>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <a href="/" class="logo">Built<span>Right</span></a>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/blog/">Blog</a>
+      <a href="/templates/">Free Templates</a>
+    </div>
+  </div>
+</nav>
+
+<article>
+  <div class="container">
+    <div class="article-meta">
+      <div class="category">Pricing</div><br>
+      <span class="date">March 6, 2026 · 12 min read</span>
+    </div>
+
+    <h1>HVAC Hourly Rates: What to Charge in 2026</h1>
+    <p class="subtitle">Undercharging is the #1 reason HVAC businesses fail. This guide covers what HVAC techs actually charge in 2026, how to calculate your own rate, regional differences, and why flat-rate pricing might be a better model.</p>
+
+    <div class="toc">
+      <h4>In This Guide</h4>
+      <ol>
+        <li><a href="#current-rates">Current HVAC Hourly Rates by Region</a></li>
+        <li><a href="#calculate">How to Calculate YOUR Hourly Rate</a></li>
+        <li><a href="#factors">Factors That Should Adjust Your Rate</a></li>
+        <li><a href="#flat-rate">Hourly vs. Flat-Rate: The Real Debate</a></li>
+        <li><a href="#raise">How to Raise Your Rates Without Losing Customers</a></li>
+        <li><a href="#mistakes">Pricing Mistakes That Kill HVAC Businesses</a></li>
+      </ol>
+    </div>
+
+    <p>Ask 10 HVAC techs what they charge per hour and you'll get 10 wildly different answers — from $65 to $200+. The problem isn't that rates are inconsistent. The problem is most HVAC business owners <strong>never actually calculated their rate.</strong> They picked a number that "felt right" or matched a competitor, and never revisited it.</p>
+
+    <p>That's not pricing — that's gambling. And in a business with rising equipment costs, increasing insurance premiums, and EPA regulations tightening every year, gambling on pricing will put you out of business.</p>
+
+    <h2 id="current-rates">1. Current HVAC Hourly Rates by Region (2026)</h2>
+
+    <p>These are billing rates (what you charge the customer), not technician wages. They include labor only — parts and materials are additional.</p>
+
+    <div class="step-box">
+      <h4>Residential HVAC Service Rates</h4>
+      <p>
+      <strong>Southeast (FL, GA, AL, SC, NC):</strong> $85–$135/hour<br>
+      <strong>Midwest (OH, IN, IL, MI, MN, WI):</strong> $90–$140/hour<br>
+      <strong>Southwest (TX, AZ, NM, NV):</strong> $95–$150/hour<br>
+      <strong>Northeast (NY, NJ, CT, MA, PA):</strong> $110–$175/hour<br>
+      <strong>West Coast (CA, OR, WA):</strong> $120–$200/hour<br>
+      <strong>Mountain West (CO, UT, ID, MT):</strong> $100–$160/hour
+      </p>
+    </div>
+
+    <div class="step-box">
+      <h4>Commercial HVAC Service Rates</h4>
+      <p>
+      Commercial rates are typically <strong>20–40% higher</strong> than residential due to complexity, certifications required, and larger equipment. Expect $120–$250/hour depending on region and specialization. Industrial/critical systems (data centers, hospitals) can command $200–$350/hour.
+      </p>
+    </div>
+
+    <div class="step-box">
+      <h4>Emergency / After-Hours Rates</h4>
+      <p>
+      Standard practice: <strong>1.5x regular rate</strong> for evenings and weekends, <strong>2x regular rate</strong> for holidays and overnight. If your regular rate is $120/hour, your emergency rate should be $180–$240/hour. Never apologize for emergency rates — you're providing 24/7 availability, and that has value.
+      </p>
+    </div>
+
+    <h2 id="calculate">2. How to Calculate YOUR Hourly Rate</h2>
+
+    <p>Forget what competitors charge for a moment. Your rate needs to be based on YOUR costs, YOUR overhead, and YOUR profit goals. Here's the formula:</p>
+
+    <div class="step-box">
+      <h4>The Formula</h4>
+      <p><strong>Billing Rate = (Annual Costs + Target Profit) ÷ Annual Billable Hours</strong></p>
+    </div>
+
+    <h3>Step 1: Add Up ALL Annual Costs</h3>
+    <ul>
+      <li><strong>Technician wages</strong> (including your own salary): $45,000–$85,000 per tech</li>
+      <li><strong>Payroll taxes &amp; workers comp:</strong> Add 20–25% to wages</li>
+      <li><strong>Vehicle costs:</strong> $12,000–$20,000/year per truck (payment, fuel, maintenance, insurance)</li>
+      <li><strong>Insurance:</strong> General liability, professional liability, commercial auto — $6,000–$15,000/year</li>
+      <li><strong>Tools &amp; equipment:</strong> $2,000–$8,000/year per tech (including replacement and calibration)</li>
+      <li><strong>Office/admin:</strong> $3,000–$10,000/year (phone, software, bookkeeping, supplies)</li>
+      <li><strong>Marketing:</strong> $3,000–$15,000/year</li>
+      <li><strong>Licensing &amp; training:</strong> EPA certification, continuing ed, NATE certification — $1,000–$3,000/year</li>
+      <li><strong>Warranty &amp; callbacks:</strong> Budget 3–5% of revenue</li>
+    </ul>
+
+    <h3>Step 2: Determine Billable Hours</h3>
+    <p>This is where most HVAC business owners dramatically overestimate. You do NOT have 2,080 billable hours per year (40 hours × 52 weeks). After accounting for reality:</p>
+    <ul>
+      <li>Subtract holidays: -80 hours</li>
+      <li>Subtract PTO/sick days: -80 hours</li>
+      <li>Subtract training: -40 hours</li>
+      <li>Subtract admin/estimates/unbillable: -400 hours (at minimum)</li>
+      <li>Subtract drive time: -250 hours</li>
+    </ul>
+    <p><strong>Realistic billable hours per tech: 1,100–1,400 hours/year.</strong> Use 1,200 as a conservative baseline.</p>
+
+    <h3>Step 3: Calculate and Add Profit</h3>
+    <p>Target <strong>15–20% net profit</strong> on top of all costs. This isn't your salary (that's already in costs). This is actual business profit — what funds growth, emergencies, and eventually your retirement.</p>
+
+    <div class="callout">
+      <p><strong>Example calculation:</strong><br>
+      Total annual costs (solo HVAC tech): $95,000<br>
+      Target profit (18%): $17,100<br>
+      Revenue needed: $112,100<br>
+      Billable hours: 1,200<br>
+      <strong>Required billing rate: $93.42/hour</strong><br><br>
+      That's your floor — the minimum rate to cover costs and make a reasonable profit. Round up to $95 or $100 to give yourself a cushion. If you're charging less than this, you're working for free (or losing money).</p>
+    </div>
+
+    <h2 id="factors">3. Factors That Should Adjust Your Rate</h2>
+
+    <h3>Charge More For:</h3>
+    <ul>
+      <li><strong>Emergency/after-hours calls:</strong> 1.5–2x standard rate</li>
+      <li><strong>Specialized work:</strong> Boilers, chillers, VRF systems, mini-splits, commercial refrigeration</li>
+      <li><strong>High-demand seasons:</strong> July in Phoenix, January in Minnesota — you're booked 3 weeks out, prices should reflect that</li>
+      <li><strong>Difficult access:</strong> Attic work in July, crawl space units, rooftop commercial units</li>
+      <li><strong>Older/complex systems:</strong> 30-year-old boilers take longer and require more diagnostic skill</li>
+      <li><strong>Certifications:</strong> NATE-certified techs should charge $10–$20/hour more than non-certified competitors</li>
+    </ul>
+
+    <h3>Consider Discounting For:</h3>
+    <ul>
+      <li><strong>Maintenance agreement customers:</strong> 10–15% off labor for members (they provide predictable revenue)</li>
+      <li><strong>Multi-system jobs:</strong> If a homeowner has 2 systems, a small discount on the second is reasonable</li>
+      <li><strong>Slow season:</strong> January–March in warm climates, September–October in cold climates — a 10% discount to fill the schedule is smarter than empty trucks</li>
+    </ul>
+
+    <p><strong>Never discount for:</strong> Customers who pressure you on price ("the other guy quoted less"), scope negotiation ("can you just take a quick look for free?"), or social media exposure ("I'll post a great review!").</p>
+
+    <h2 id="flat-rate">4. Hourly vs. Flat-Rate: The Real Debate</h2>
+
+    <p>The HVAC industry has been moving toward flat-rate pricing for years, and for good reason. Here's an honest comparison:</p>
+
+    <h3>Hourly Pricing</h3>
+    <p><strong>Pros:</strong></p>
+    <ul>
+      <li>Simple to implement — no pricebook needed</li>
+      <li>Fair for unpredictable diagnostic work</li>
+      <li>Transparent for customers (they see exactly what they're paying for)</li>
+    </ul>
+    <p><strong>Cons:</strong></p>
+    <ul>
+      <li>Penalizes fast, experienced techs (you earn less for being better)</li>
+      <li>Creates customer anxiety ("is the clock running while they're in the truck?")</li>
+      <li>Revenue ceiling — there are only so many hours in a day</li>
+      <li>Difficult to give upfront pricing (customers want to know the total before saying yes)</li>
+    </ul>
+
+    <h3>Flat-Rate Pricing</h3>
+    <p><strong>Pros:</strong></p>
+    <ul>
+      <li>Customers know the price before work begins — higher close rates</li>
+      <li>Rewards efficiency — faster techs earn more per hour</li>
+      <li>Higher average tickets (20–40% higher than hourly)</li>
+      <li>Professional pricebook builds consistency across your team</li>
+    </ul>
+    <p><strong>Cons:</strong></p>
+    <ul>
+      <li>Requires building a comprehensive pricebook (significant upfront work)</li>
+      <li>Risk of underbidding complex jobs</li>
+      <li>Some customers perceive flat-rate as "too expensive" (even when it's the same cost)</li>
+    </ul>
+
+    <div class="callout">
+      <p><strong>The verdict:</strong> If you're a solo tech, hourly pricing is fine — keep it simple. If you have 2+ techs, switch to flat-rate. The consistency, higher tickets, and customer satisfaction improvements are worth the effort of building a pricebook. Most successful HVAC companies over $500K revenue use flat-rate.</p>
+    </div>
+
+    <h3>Building a Flat-Rate Pricebook</h3>
+    <p>Your pricebook should include every common repair and service at a fixed price. Calculate each task's price using:</p>
+    <ul>
+      <li>Average labor time for the task × your target hourly revenue</li>
+      <li>Parts at cost + 40–60% markup</li>
+      <li>Overhead allocation per task</li>
+      <li>Profit margin (15–20%)</li>
+    </ul>
+    <p>Start with your top 50 most common repairs/services. Add more over time. Use a platform like ServiceTitan, Housecall Pro, or even a spreadsheet to manage it.</p>
+
+    <h2 id="raise">5. How to Raise Your Rates Without Losing Customers</h2>
+
+    <p>If you haven't raised rates in the last 12 months, you've effectively taken a pay cut. Inflation, insurance increases, fuel costs, and material price hikes don't wait for you.</p>
+
+    <h3>How Much to Raise</h3>
+    <ul>
+      <li><strong>Annual cost-of-living adjustment:</strong> 3–5% per year is standard</li>
+      <li><strong>If you're significantly underpriced:</strong> Raise 10–15% at once, then 3–5% annually</li>
+      <li><strong>After adding certifications/capabilities:</strong> Raise 5–10% to reflect increased expertise</li>
+    </ul>
+
+    <h3>How to Communicate Rate Increases</h3>
+    <ol>
+      <li><strong>Give notice:</strong> Tell maintenance agreement customers 30 days in advance</li>
+      <li><strong>Explain the why:</strong> "Due to increased insurance costs and parts pricing, our rates will adjust by 5% effective [date]"</li>
+      <li><strong>Lead with value:</strong> Mention any improvements — new training, faster response times, better warranties</li>
+      <li><strong>Don't apologize:</strong> A rate increase is normal business. Present it confidently.</li>
+    </ol>
+
+    <div class="callout">
+      <p><strong>Reality check:</strong> You will lose some customers when you raise rates. That's okay. The customers most sensitive to small price increases are usually your least profitable, most demanding clients. The math almost always works out: losing 5% of customers while charging 10% more = more profit with less work.</p>
+    </div>
+
+    <h2 id="mistakes">6. Pricing Mistakes That Kill HVAC Businesses</h2>
+
+    <ol>
+      <li><strong>Charging "what everyone else charges" without calculating your own costs.</strong> Your overhead might be 30% higher than your competitor's. Or 30% lower. Either way, their rate is irrelevant to your business.</li>
+      <li><strong>Not charging for diagnostic time.</strong> Your diagnostic fee ($89–$150 is standard) covers the truck roll, the expertise, and the initial troubleshooting. If customers balk, explain: "The diagnostic fee covers my time and expertise to identify the problem. If you approve the repair, we apply it toward the total."</li>
+      <li><strong>Keeping the same rate year-round.</strong> Peak season demand should be reflected in pricing. You're not gouging — you're managing capacity. Airlines, hotels, and Uber all do this. So should you.</li>
+      <li><strong>Giving free estimates for service work.</strong> Estimates for system replacements? Sure, that's standard. But diagnostic/troubleshooting visits should always have a fee. You wouldn't expect your doctor to diagnose you for free.</li>
+      <li><strong>Discounting to match competitors.</strong> If your rate is $130/hour and someone says the other company charges $85/hour, that's not your problem to solve. Different rates reflect different overhead, insurance coverage, experience levels, and business quality.</li>
+      <li><strong>Not including profit in your rate.</strong> Too many HVAC owners pay themselves a salary and consider that their profit. Wrong. Business profit is separate from owner compensation. If you're not building profit above your salary, you don't have a business — you have a job.</li>
+    </ol>
+
+    <h2>The Bottom Line</h2>
+
+    <p>Your HVAC hourly rate isn't a number you pick from the air — it's a calculation based on your real costs, realistic billable hours, and a profit target that makes the business worth running.</p>
+
+    <p>If you run the numbers in this guide and your current rate is below your calculated minimum, <strong>raise it now.</strong> Not next month, not next year — now. Every day you operate below your true cost, you're paying your customers to let you work.</p>
+
+    <p>You invested years in learning HVAC. Your rates should reflect that expertise.</p>
+
+    <div class="cta-box">
+      <h3>Want a complete HVAC pricing &amp; business system?</h3>
+      <p>BuiltRight Academy teaches HVAC techs and tradespeople the business skills that trade school never covered — pricing, estimating, marketing, and financial management. Built by trades pros, for trades pros.</p>
+      <a href="/#waitlistForm" class="cta-btn">Join the Waitlist — Free</a>
+      <p style="margin-top: 12px; font-size: 0.85rem;">Launching Q2 2026. No credit card required.</p>
+    </div>
+
+  </div>
+</article>
+
+<footer>
+  <div class="container">
+    &copy; 2026 BuiltRight Academy. Business skills for tradespeople.<br>
+    <a href="/" style="color: var(--gray); text-decoration: none;">Home</a> &middot; <a href="/blog/" style="color: var(--gray); text-decoration: none;">Blog</a> &middot; <a href="/templates/" style="color: var(--gray); text-decoration: none;">Free Templates</a>
+  </div>
+</footer>
+
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/_vercel/speed-insights/script.js"></script>
+</body>
+</html>

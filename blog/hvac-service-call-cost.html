@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HVAC Service Call Cost: What Techs Should Charge | BuiltRight Academy</title>
+  <meta name="description" content="How much to charge for an HVAC service call in 2026. Covers diagnostic fees, trip charges, common repair pricing, and how to set your service call rates profitably.">
+  <meta name="keywords" content="HVAC service call cost, HVAC diagnostic fee, HVAC trip charge, how much to charge HVAC service call, HVAC repair pricing">
+  <link rel="canonical" href="https://builtright-academy.vercel.app/blog/hvac-service-call-cost">
+  <meta property="og:title" content="HVAC Service Call Cost: What Techs Should Charge">
+  <meta property="og:description" content="What HVAC techs should charge for service calls in 2026. Diagnostic fees, trip charges, and common repair pricing.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://builtright-academy.vercel.app/blog/hvac-service-call-cost">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root { --orange: #F97316; --orange-dark: #EA580C; --dark: #1A1A2E; --darker: #0F0F1A; --gray: #94A3B8; --light: #F8FAFC; }
+    body { font-family: 'Inter', -apple-system, sans-serif; background: var(--darker); color: var(--light); line-height: 1.8; -webkit-font-smoothing: antialiased; }
+    .container { max-width: 720px; margin: 0 auto; padding: 0 24px; }
+    nav { padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    nav .container { display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.3rem; color: var(--orange); text-decoration: none; letter-spacing: -0.5px; }
+    .logo span { color: var(--light); }
+    .nav-links a { color: var(--gray); text-decoration: none; font-size: 0.9rem; margin-left: 24px; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--light); }
+    article { padding: 60px 0; }
+    .article-meta { margin-bottom: 32px; }
+    .article-meta .category { display: inline-block; background: rgba(249,115,22,0.1); border: 1px solid rgba(249,115,22,0.3); color: var(--orange); font-size: 0.75rem; font-weight: 600; padding: 4px 12px; border-radius: 100px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 16px; }
+    .article-meta .date { color: var(--gray); font-size: 0.85rem; }
+    article h1 { font-size: clamp(2rem, 4.5vw, 2.8rem); font-weight: 800; line-height: 1.15; letter-spacing: -1.5px; margin-bottom: 16px; }
+    article .subtitle { font-size: 1.15rem; color: var(--gray); margin-bottom: 40px; line-height: 1.7; }
+    article h2 { font-size: 1.5rem; font-weight: 700; margin: 48px 0 16px; letter-spacing: -0.5px; }
+    article h3 { font-size: 1.15rem; font-weight: 600; margin: 32px 0 12px; }
+    article p { margin-bottom: 16px; font-size: 1.02rem; color: #CBD5E1; }
+    article ul, article ol { margin-bottom: 16px; padding-left: 24px; }
+    article li { margin-bottom: 8px; color: #CBD5E1; }
+    article strong { color: var(--light); }
+    .callout { background: rgba(249,115,22,0.08); border-left: 3px solid var(--orange); padding: 20px 24px; border-radius: 0 8px 8px 0; margin: 24px 0; }
+    .callout p { margin-bottom: 0; color: var(--light); }
+    .callout strong { color: var(--orange); }
+    .step-box { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 24px; margin: 16px 0; }
+    .step-box h4 { color: var(--orange); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+    .cta-box { background: linear-gradient(135deg, rgba(249,115,22,0.15), rgba(249,115,22,0.05)); border: 1px solid rgba(249,115,22,0.3); border-radius: 16px; padding: 40px; text-align: center; margin: 48px 0; }
+    .cta-box h3 { font-size: 1.4rem; margin: 0 0 12px; color: var(--light); }
+    .cta-box p { color: var(--gray); margin-bottom: 24px; }
+    .cta-btn { display: inline-block; padding: 14px 32px; background: var(--orange); color: white; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 1rem; transition: background 0.2s; }
+    .cta-btn:hover { background: var(--orange-dark); }
+    .toc { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 24px 32px; margin: 0 0 40px; }
+    .toc h4 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--gray); margin-bottom: 12px; }
+    .toc ol { padding-left: 20px; }
+    .toc li { margin-bottom: 6px; }
+    .toc a { color: var(--orange); text-decoration: none; }
+    .toc a:hover { text-decoration: underline; }
+    footer { padding: 24px 0; border-top: 1px solid rgba(255,255,255,0.06); text-align: center; font-size: 0.8rem; color: #334155; }
+    @media (max-width: 600px) { article { padding: 40px 0; } .cta-box { padding: 24px; } }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "HVAC Service Call Cost: What Techs Should Charge",
+    "description": "How much HVAC technicians should charge for service calls, diagnostic fees, and common repairs in 2026.",
+    "author": { "@type": "Organization", "name": "BuiltRight Academy" },
+    "publisher": { "@type": "Organization", "name": "BuiltRight Academy" },
+    "datePublished": "2026-03-06",
+    "dateModified": "2026-03-06"
+  }
+  </script>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <a href="/" class="logo">Built<span>Right</span></a>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/blog/">Blog</a>
+      <a href="/templates/">Free Templates</a>
+    </div>
+  </div>
+</nav>
+
+<article>
+  <div class="container">
+    <div class="article-meta">
+      <div class="category">Pricing</div><br>
+      <span class="date">March 6, 2026 · 12 min read</span>
+    </div>
+
+    <h1>HVAC Service Call Cost: What Techs Should Charge</h1>
+    <p class="subtitle">Most HVAC techs undercharge for service calls and lose money on every truck roll. Here's exactly what to charge for diagnostics, common repairs, and emergency calls — plus how to explain your pricing so customers say yes.</p>
+
+    <div class="toc">
+      <h4>In This Guide</h4>
+      <ol>
+        <li><a href="#anatomy">Anatomy of an HVAC Service Call</a></li>
+        <li><a href="#diagnostic">What to Charge for Diagnostics</a></li>
+        <li><a href="#common-repairs">Common Repair Pricing Guide</a></li>
+        <li><a href="#emergency">Emergency &amp; After-Hours Pricing</a></li>
+        <li><a href="#maintenance">Maintenance Visit Pricing</a></li>
+        <li><a href="#communicate">How to Communicate Pricing to Customers</a></li>
+        <li><a href="#profit">Making Every Service Call Profitable</a></li>
+      </ol>
+    </div>
+
+    <p>An HVAC service call is the bread and butter of most residential HVAC businesses. It's also where most techs leave the most money on the table. Between undercharging for diagnostics, giving away knowledge for free, and absorbing travel costs, a $89 service call can easily <em>cost</em> you $120 in real expenses.</p>
+
+    <p>This guide gives you the real numbers on what to charge — and more importantly, why those numbers make sense for your business.</p>
+
+    <h2 id="anatomy">1. Anatomy of an HVAC Service Call</h2>
+
+    <p>Before we talk pricing, let's break down what a service call actually costs you:</p>
+
+    <div class="step-box">
+      <h4>Your Real Cost Per Service Call</h4>
+      <p>
+      <strong>Drive time:</strong> Average 30 min each way = 1 hour at your loaded rate ($45–$70)<br>
+      <strong>Fuel:</strong> $8–$15 per trip<br>
+      <strong>Vehicle wear:</strong> $5–$10 per trip (tires, brakes, maintenance amortized)<br>
+      <strong>Insurance per trip:</strong> $3–$8 (annual premium ÷ estimated trips)<br>
+      <strong>Diagnostic time on-site:</strong> 30–60 minutes at loaded rate ($35–$70)<br>
+      <strong>Admin/dispatch/scheduling:</strong> 15 min at $25–$40/hour = $6–$10<br>
+      <strong>Total cost per service call: $102–$183 BEFORE any repair work</strong>
+      </p>
+    </div>
+
+    <p>Read that again. If you're charging an $89 diagnostic fee and the customer declines the repair, <strong>you just lost $13–$94 on that call.</strong> This is why your diagnostic fee matters so much.</p>
+
+    <h2 id="diagnostic">2. What to Charge for Diagnostics</h2>
+
+    <p>The diagnostic fee (also called a "service call fee" or "trip charge") covers getting to the customer's home and identifying the problem. It should NOT include the repair — that's quoted separately.</p>
+
+    <div class="step-box">
+      <h4>2026 Diagnostic Fee Ranges</h4>
+      <p>
+      <strong>Low-cost markets (rural, Southeast):</strong> $79–$109<br>
+      <strong>Mid-range markets (suburbs, Midwest, Southwest):</strong> $99–$139<br>
+      <strong>High-cost markets (major metros, Northeast, West Coast):</strong> $129–$189<br>
+      <strong>Emergency/after-hours diagnostic:</strong> $149–$299<br>
+      <strong>Commercial diagnostic:</strong> $149–$250
+      </p>
+    </div>
+
+    <h3>How to Structure Your Diagnostic Fee</h3>
+    <p>There are two common approaches:</p>
+
+    <p><strong>Option A: Diagnostic fee that applies toward repair</strong></p>
+    <p>"Our diagnostic fee is $129. If you approve the repair, we apply the $129 toward the total cost." This is the most common model and reduces customer objections. They feel like they're not "losing" the diagnostic fee.</p>
+
+    <p><strong>Option B: Diagnostic fee as a separate charge</strong></p>
+    <p>"Our diagnostic fee is $99 and covers the trip, inspection, and diagnosis. Repair pricing is provided separately." This is a cleaner model financially but some customers push back.</p>
+
+    <div class="callout">
+      <p><strong>Our recommendation:</strong> Use Option A with a slightly higher fee. Set the diagnostic at $129, apply it toward the repair. Your repair prices already account for this — you're just presenting it in a way that feels better to the customer. The psychology matters.</p>
+    </div>
+
+    <h3>What If They Only Want the Diagnostic?</h3>
+    <p>Sometimes a customer wants you to diagnose the issue but plans to fix it themselves or hire someone cheaper. That's fine — that's exactly what the diagnostic fee covers. You've been paid for your expertise and time. Don't feel guilty about collecting it.</p>
+
+    <h2 id="common-repairs">3. Common Repair Pricing Guide</h2>
+
+    <p>These are customer-facing prices (what they pay), including parts, labor, and your markup. Ranges account for regional variation and system complexity.</p>
+
+    <h3>Air Conditioning Repairs</h3>
+    <ul>
+      <li><strong>Capacitor replacement:</strong> $150–$300 (part costs $10–$30, takes 15–30 min)</li>
+      <li><strong>Contactor replacement:</strong> $150–$350</li>
+      <li><strong>Refrigerant recharge (R-410A, per pound):</strong> $50–$150/lb</li>
+      <li><strong>Refrigerant leak repair:</strong> $250–$1,500 (depends on location and severity)</li>
+      <li><strong>Blower motor replacement:</strong> $350–$800</li>
+      <li><strong>Condenser fan motor:</strong> $200–$500</li>
+      <li><strong>Compressor replacement:</strong> $1,500–$3,000 (often worth replacing the whole unit)</li>
+      <li><strong>Evaporator coil replacement:</strong> $800–$2,500</li>
+      <li><strong>Thermostat replacement (basic):</strong> $150–$300</li>
+      <li><strong>Thermostat replacement (smart, installed):</strong> $250–$500</li>
+      <li><strong>Drain line clearing:</strong> $100–$250</li>
+    </ul>
+
+    <h3>Heating Repairs</h3>
+    <ul>
+      <li><strong>Ignitor replacement:</strong> $150–$350</li>
+      <li><strong>Flame sensor cleaning/replacement:</strong> $100–$250</li>
+      <li><strong>Gas valve replacement:</strong> $300–$700</li>
+      <li><strong>Heat exchanger replacement:</strong> $1,500–$3,500 (often total system replacement territory)</li>
+      <li><strong>Inducer motor replacement:</strong> $350–$800</li>
+      <li><strong>Control board replacement:</strong> $300–$700</li>
+      <li><strong>Transformer replacement:</strong> $100–$250</li>
+    </ul>
+
+    <h3>How to Set Your Repair Prices</h3>
+    <div class="step-box">
+      <h4>The Repair Pricing Formula</h4>
+      <p><strong>Repair Price = Part Cost × Markup (1.4–1.6x) + Labor (time × billing rate) + Diagnostic Fee Application</strong></p>
+      <p>Example: Capacitor replacement<br>
+      Part: $15 × 1.5 markup = $22.50<br>
+      Labor: 0.5 hours × $130/hr = $65<br>
+      Overhead allocation: $50<br>
+      Profit: $37.50<br>
+      <strong>Customer price: $175</strong></p>
+    </div>
+
+    <h2 id="emergency">4. Emergency &amp; After-Hours Pricing</h2>
+
+    <p>Emergency HVAC service is a premium product. You're providing availability when no one else will — that has significant value. Price accordingly.</p>
+
+    <div class="step-box">
+      <h4>Emergency Rate Structure</h4>
+      <p>
+      <strong>Evenings (after 5 PM) &amp; Saturdays:</strong> 1.5x standard diagnostic fee + 1.5x labor<br>
+      <strong>Sundays &amp; holidays:</strong> 2x standard diagnostic fee + 2x labor<br>
+      <strong>Example:</strong> Standard diagnostic $129 → Evening emergency $194 → Holiday emergency $258
+      </p>
+    </div>
+
+    <p>Always quote the emergency rate on the phone BEFORE dispatching. "Our after-hours diagnostic fee is $194. If you'd like to wait until tomorrow, our standard fee is $129. Which would you prefer?" Give them the choice. Most people with a genuine emergency gladly pay the premium.</p>
+
+    <h3>Should You Offer Emergency Service?</h3>
+    <p>If you're a solo tech, offering 24/7 service will burn you out. Consider these alternatives:</p>
+    <ul>
+      <li><strong>Extended hours only:</strong> Available until 8 PM weekdays, 8 AM–2 PM Saturdays</li>
+      <li><strong>Emergency line with callback:</strong> "Leave a message and we'll call back within 30 minutes to schedule"</li>
+      <li><strong>Minimum charge:</strong> $250–$400 minimum for any after-hours call, regardless of repair complexity</li>
+    </ul>
+
+    <h2 id="maintenance">5. Maintenance Visit Pricing</h2>
+
+    <p>Maintenance tune-ups are the gateway to service agreements, which provide predictable recurring revenue. Price them as a loss-leader or break-even to build the maintenance agreement base.</p>
+
+    <div class="step-box">
+      <h4>Maintenance Pricing</h4>
+      <p>
+      <strong>Single AC tune-up:</strong> $89–$150<br>
+      <strong>Single furnace tune-up:</strong> $89–$150<br>
+      <strong>Combined AC + furnace (one visit):</strong> $129–$199<br>
+      <strong>Annual maintenance agreement (2 visits/year):</strong> $149–$299/year<br>
+      <strong>Premium agreement (priority scheduling, discount on repairs):</strong> $199–$399/year
+      </p>
+    </div>
+
+    <h3>Why Maintenance Agreements Matter</h3>
+    <p>Maintenance agreement customers are worth <strong>3–5x more</strong> over their lifetime than one-time service call customers. They:</p>
+    <ul>
+      <li>Call you first for repairs (no shopping around)</li>
+      <li>Replace equipment through you when the time comes ($5,000–$15,000 job)</li>
+      <li>Refer friends and family</li>
+      <li>Provide predictable monthly/annual revenue</li>
+    </ul>
+
+    <div class="callout">
+      <p><strong>Target:</strong> 200+ active maintenance agreements generates $30,000–$80,000/year in recurring revenue, plus $100,000+ in repair and replacement work from those same customers. It's the closest thing to a subscription model in HVAC.</p>
+    </div>
+
+    <h2 id="communicate">6. How to Communicate Pricing to Customers</h2>
+
+    <h3>On the Phone (Before the Visit)</h3>
+    <p>Always state your diagnostic fee before dispatching. Script: "Our diagnostic fee is $129, which covers the trip to your home and a full system diagnosis. If you approve the repair, we apply that $129 toward the total cost. Would you like to schedule?"</p>
+
+    <h3>On-Site (After Diagnosing)</h3>
+    <p>Present repair options clearly. Use the Good/Better/Best framework:</p>
+    <ul>
+      <li><strong>Good:</strong> Minimum repair to restore function — "Replace the capacitor: $185"</li>
+      <li><strong>Better:</strong> Repair plus preventive work — "Replace the capacitor and contactor, clean the condenser coil: $425"</li>
+      <li><strong>Best:</strong> Comprehensive service — "Full repair, tune-up, and 1-year maintenance agreement: $575"</li>
+    </ul>
+
+    <h3>Handling Price Objections</h3>
+    <p>When a customer says "that's expensive":</p>
+    <ul>
+      <li><strong>"I understand. Let me walk you through what's included."</strong> Often they don't realize the scope of work.</li>
+      <li><strong>"I can offer you the basic repair at $185 if you'd prefer to start there."</strong> Give them a lower option without discounting.</li>
+      <li><strong>"This repair comes with a 1-year parts and labor warranty, and we stand behind our work."</strong> Emphasize value, not price.</li>
+    </ul>
+    <p>Never discount on the spot. If you train customers to haggle, they'll haggle every time.</p>
+
+    <h2 id="profit">7. Making Every Service Call Profitable</h2>
+
+    <h3>Track Your Numbers</h3>
+    <p>For every service call, you should know:</p>
+    <ul>
+      <li><strong>Revenue per call:</strong> Total collected (diagnostic + repair)</li>
+      <li><strong>Average ticket:</strong> Your average total per service call (target: $350–$600 for residential)</li>
+      <li><strong>Close rate:</strong> % of diagnostics that convert to approved repairs (target: 65–80%)</li>
+      <li><strong>Revenue per hour in the field:</strong> Total daily revenue ÷ hours worked (target: $150–$250/hour)</li>
+    </ul>
+
+    <h3>Increase Your Average Ticket</h3>
+    <p>The easiest way to make service calls more profitable isn't raising prices — it's offering more services during each visit:</p>
+    <ul>
+      <li>Every repair visit should include a full system inspection and a maintenance agreement pitch</li>
+      <li>Present options (Good/Better/Best) on every repair</li>
+      <li>Offer add-on services: UV light installation, surge protector, thermostat upgrade, duct sealing</li>
+      <li>Identify equipment nearing end-of-life and plant the seed for replacement</li>
+    </ul>
+
+    <h3>Minimize Unprofitable Calls</h3>
+    <ul>
+      <li><strong>Phone screening:</strong> Train your dispatcher to identify non-starters before dispatching ("Is this a property you own?")</li>
+      <li><strong>Route optimization:</strong> Cluster service calls geographically to reduce drive time</li>
+      <li><strong>Minimum charge policy:</strong> Have a minimum that covers your costs even if the repair is a 5-minute fix</li>
+    </ul>
+
+    <h2>The Bottom Line</h2>
+
+    <p>Every HVAC service call should be profitable on its own. Not "profitable in aggregate" or "profitable when they lead to bigger jobs" — profitable on that individual truck roll.</p>
+
+    <p>Set your diagnostic fee to cover your real costs. Price repairs using the formula (parts markup + labor + overhead + profit). Offer tiered options. And track your average ticket religiously.</p>
+
+    <p>The HVAC techs who run profitable service departments aren't charging outrageous prices — they're just not giving their expertise away for free.</p>
+
+    <div class="cta-box">
+      <h3>Want a complete HVAC pricing system?</h3>
+      <p>BuiltRight Academy teaches HVAC techs the business skills that make the difference between surviving and thriving — pricing, flat-rate pricebook building, and financial management. Built for techs, by people who understand the trade.</p>
+      <a href="/#waitlistForm" class="cta-btn">Join the Waitlist — Free</a>
+      <p style="margin-top: 12px; font-size: 0.85rem;">Launching Q2 2026. No credit card required.</p>
+    </div>
+
+  </div>
+</article>
+
+<footer>
+  <div class="container">
+    &copy; 2026 BuiltRight Academy. Business skills for tradespeople.<br>
+    <a href="/" style="color: var(--gray); text-decoration: none;">Home</a> &middot; <a href="/blog/" style="color: var(--gray); text-decoration: none;">Blog</a> &middot; <a href="/templates/" style="color: var(--gray); text-decoration: none;">Free Templates</a>
+  </div>
+</footer>
+
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/_vercel/speed-insights/script.js"></script>
+</body>
+</html>
