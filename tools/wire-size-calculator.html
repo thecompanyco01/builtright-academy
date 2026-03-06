@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wire Size Calculator — AWG Gauge, Voltage Drop & Conduit | BuiltRight Academy</title>
+  <meta name="description" content="Free wire size calculator. Enter amperage, distance, and voltage to get the correct AWG wire gauge, conduit size, and voltage drop. Supports copper and aluminum. Includes NEC wire size chart.">
+  <meta name="keywords" content="wire size calculator, what size wire do I need, electrical wire gauge calculator, wire gauge calculator, awg wire size chart, voltage drop calculator, wire ampacity chart">
+  <link rel="canonical" href="https://builtright-academy.vercel.app/tools/wire-size-calculator">
+  <meta property="og:title" content="Wire Size Calculator — AWG Gauge, Voltage Drop &amp; Conduit">
+  <meta property="og:description" content="Free wire size calculator. Get the right AWG wire gauge for your amperage, distance, and voltage. Copper and aluminum with voltage drop analysis.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Wire Size Calculator",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "description": "Calculate the correct AWG wire gauge based on amperage, distance, voltage, and acceptable voltage drop. Supports copper and aluminum conductors. Includes conduit sizing and NEC reference tables."
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What wire size for 30 amps?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For a 30-amp circuit, you need a minimum of 10 AWG copper wire or 8 AWG aluminum wire for short runs (under 50 feet one-way). For longer distances, you may need to upsize to reduce voltage drop. For example, a 30-amp circuit running 100 feet one-way at 240V should use 8 AWG copper to keep voltage drop under 3%. Common 30-amp applications include dryer outlets, water heaters, and small AC units. Always verify with local codes and a licensed electrician."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What's the difference between copper and aluminum wire?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Copper wire has lower resistance (better conductivity), is more flexible, and is easier to work with, but costs 2–3× more than aluminum. Aluminum wire must be 1–2 sizes larger than copper for the same ampacity (e.g., #8 aluminum replaces #10 copper for 30 amps). Aluminum is common for service entrance cables, large feeders (100A+), and utility connections. Copper is preferred for branch circuits (15A–50A). Aluminum requires special connectors rated for AL/CU to prevent oxidation issues."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How far can you run 12 gauge wire?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "On a 20-amp, 120V circuit, 12 AWG copper wire can run approximately 50 feet one-way before voltage drop exceeds 3% (the NEC recommendation). For a 15-amp load on the same circuit, it can run about 65 feet. At 240V, the distance doubles because voltage drop is proportionally less. For longer runs, upsize to 10 AWG. The exact distance depends on the actual load — a 20-amp circuit rarely draws the full 20 amps continuously."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is voltage drop and why does it matter?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Voltage drop is the reduction in voltage as electricity travels through wire. All wire has resistance, and longer runs or thinner wire cause more voltage loss. The NEC recommends no more than 3% voltage drop for branch circuits and 5% total for feeder + branch circuits combined. Excessive voltage drop causes lights to dim, motors to overheat and run inefficiently, and sensitive electronics to malfunction. Upsizing wire gauge is the primary solution for voltage drop issues."
+        }
+      }
+    ]
+  }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root { --orange: #F97316; --orange-dark: #EA580C; --darker: #0F0F1A; --dark-card: #1A1A2E; --gray: #94A3B8; --light: #F8FAFC; --green: #22C55E; --red: #EF4444; --border: rgba(255,255,255,0.08); }
+    body { font-family: 'Inter', -apple-system, sans-serif; background: var(--darker); color: var(--light); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+    nav { padding: 20px 0; border-bottom: 1px solid var(--border); }
+    nav .container { display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.3rem; color: var(--orange); text-decoration: none; letter-spacing: -0.5px; }
+    .logo span { color: var(--light); }
+    .nav-links a { color: var(--gray); text-decoration: none; font-size: 0.9rem; margin-left: 24px; }
+    .nav-links a:hover { color: var(--light); }
+    .hero { padding: 48px 0 32px; text-align: center; }
+    .hero .badge { display: inline-block; background: rgba(249,115,22,0.1); border: 1px solid rgba(249,115,22,0.3); color: var(--orange); font-size: 0.8rem; font-weight: 600; padding: 6px 16px; border-radius: 100px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .hero h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 800; line-height: 1.15; letter-spacing: -1px; margin-bottom: 12px; }
+    .hero h1 .highlight { color: var(--orange); }
+    .hero p { color: var(--gray); font-size: 1.05rem; max-width: 600px; margin: 0 auto; }
+    .calc-section { padding: 24px 0 60px; }
+    .calc-card { background: var(--dark-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; margin-bottom: 24px; }
+    .calc-card h2 { font-size: 1.2rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-size: 0.85rem; color: var(--gray); margin-bottom: 6px; font-weight: 500; }
+    .form-group input, .form-group select { width: 100%; padding: 12px 16px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 10px; color: var(--light); font-size: 1rem; font-family: inherit; outline: none; }
+    .form-group input:focus, .form-group select:focus { border-color: var(--orange); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .form-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+    @media (max-width: 600px) { .form-row, .form-row-3 { grid-template-columns: 1fr; } }
+    .btn { display: inline-block; padding: 14px 32px; background: var(--orange); color: #fff; font-weight: 700; font-size: 1rem; border: none; border-radius: 10px; cursor: pointer; font-family: inherit; width: 100%; }
+    .btn:hover { background: var(--orange-dark); }
+    .results { display: none; margin-top: 24px; }
+    .results.show { display: block; }
+    .result-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 16px; }
+    .result-item { background: rgba(249,115,22,0.08); border: 1px solid rgba(249,115,22,0.2); border-radius: 12px; padding: 16px; text-align: center; }
+    .result-item .value { font-size: 1.4rem; font-weight: 800; color: var(--orange); }
+    .result-item .label { font-size: 0.78rem; color: var(--gray); margin-top: 4px; }
+    .result-item.green { background: rgba(34,197,94,0.08); border-color: rgba(34,197,94,0.2); }
+    .result-item.green .value { color: var(--green); }
+    .result-item.red { background: rgba(239,68,68,0.08); border-color: rgba(239,68,68,0.2); }
+    .result-item.red .value { color: var(--red); }
+    .cost-table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+    .cost-table th, .cost-table td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+    .cost-table th { color: var(--gray); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; }
+    .cost-table td:last-child { text-align: right; font-weight: 600; }
+    .disclaimer { background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); border-radius: 12px; padding: 16px; margin: 20px 0; font-size: 0.9rem; }
+    .disclaimer strong { color: var(--red); }
+    .disclaimer p { color: var(--gray); margin: 0; }
+    .seo-content { padding: 40px 0 60px; }
+    .seo-content h2 { font-size: 1.5rem; font-weight: 800; margin-bottom: 16px; }
+    .seo-content h3 { font-size: 1.1rem; font-weight: 700; margin: 24px 0 10px; color: var(--orange); }
+    .seo-content p { color: var(--gray); margin-bottom: 14px; line-height: 1.8; }
+    .seo-content ul, .seo-content ol { color: var(--gray); margin: 10px 0 16px 24px; }
+    .seo-content li { margin-bottom: 6px; }
+    .seo-content table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+    .seo-content table th, .seo-content table td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+    .seo-content table th { color: var(--gray); font-weight: 600; }
+    footer { border-top: 1px solid var(--border); padding: 32px 0; text-align: center; color: var(--gray); font-size: 0.85rem; }
+    footer a { color: var(--orange); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <nav><div class="container"><a href="/" class="logo">Built<span>Right</span></a><div class="nav-links"><a href="/blog/">Blog</a><a href="/tools/">Tools</a><a href="/templates/">Templates</a></div></div></nav>
+
+  <section class="hero">
+    <div class="container">
+      <span class="badge">Free Calculator</span>
+      <h1>Wire Size Calculator — <span class="highlight">AWG Gauge</span>, Voltage Drop & Conduit</h1>
+      <p>Enter amperage, distance, and voltage to find the correct wire gauge. Supports copper and aluminum with voltage drop analysis and conduit sizing.</p>
+    </div>
+  </section>
+
+  <section class="calc-section">
+    <div class="container">
+      <div class="disclaimer">
+        <strong>⚡ Electrical Safety Disclaimer</strong>
+        <p>This calculator is for <strong>reference and educational purposes only</strong>. All electrical work must comply with the National Electrical Code (NEC) and local building codes. Wire sizing depends on many factors not captured here, including ambient temperature, conduit fill, bundling, insulation type, and continuous vs. non-continuous loads. <strong>Always consult a licensed electrician</strong> before performing any electrical work.</p>
+      </div>
+
+      <div class="calc-card">
+        <h2>⚡ Wire Size Calculator</h2>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Amperage (amps)</label>
+            <input type="number" id="amps" placeholder="e.g., 30" step="1">
+          </div>
+          <div class="form-group">
+            <label>One-Way Distance (feet)</label>
+            <input type="number" id="distance" placeholder="e.g., 100" step="1">
+          </div>
+        </div>
+        <div class="form-row-3">
+          <div class="form-group">
+            <label>Voltage</label>
+            <select id="voltage">
+              <option value="120">120V (standard outlets)</option>
+              <option value="208">208V (commercial 3-phase)</option>
+              <option value="240" selected>240V (dryer, range, AC)</option>
+              <option value="277">277V (commercial lighting)</option>
+              <option value="480">480V (industrial)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Conductor Material</label>
+            <select id="material">
+              <option value="copper" selected>Copper</option>
+              <option value="aluminum">Aluminum</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Max Voltage Drop</label>
+            <select id="maxDrop">
+              <option value="3" selected>3% (NEC recommended)</option>
+              <option value="5">5% (NEC max total)</option>
+              <option value="2">2% (sensitive equipment)</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn" onclick="calculate()">Calculate Wire Size</button>
+
+        <div class="results" id="results">
+          <div class="result-grid" id="resultGrid"></div>
+          <table class="cost-table">
+            <thead><tr><th>Detail</th><th style="text-align:right;">Value</th></tr></thead>
+            <tbody id="costBody"></tbody>
+          </table>
+          <div class="disclaimer" style="margin-top:16px;">
+            <strong>⚠️ Important:</strong>
+            <p>This result is an estimate. Actual wire sizing must account for ambient temperature derating, conduit fill, continuous load factors (125% for continuous loads), insulation type (THHN, THWN, NM-B), and local code amendments. Have a licensed electrician verify before purchasing or installing wire.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="seo-content">
+    <div class="container">
+      <h2>How to Determine Wire Size for Electrical Circuits</h2>
+      <p>Choosing the correct wire size is critical for safety and performance. Undersized wire overheats, creating a fire hazard. Oversized wire wastes money. The right wire gauge depends on four factors: <strong>amperage</strong> (current draw), <strong>distance</strong> (wire run length), <strong>voltage</strong>, and <strong>acceptable voltage drop</strong>. This guide explains how electricians size wire for residential and commercial circuits.</p>
+
+      <h3>AWG Wire Size Chart — Ampacity (75°C, THWN/THHN)</h3>
+      <table>
+        <thead><tr><th>AWG Gauge</th><th>Diameter (in)</th><th>Copper Amps</th><th>Aluminum Amps</th><th>Typical Use</th></tr></thead>
+        <tbody>
+          <tr><td>14</td><td>0.064</td><td>15A</td><td>—</td><td>15A lighting circuits</td></tr>
+          <tr><td>12</td><td>0.081</td><td>20A</td><td>15A</td><td>20A outlets, kitchen</td></tr>
+          <tr><td>10</td><td>0.102</td><td>30A</td><td>25A</td><td>Dryers, water heaters</td></tr>
+          <tr><td>8</td><td>0.128</td><td>40A</td><td>30A</td><td>Range, large AC units</td></tr>
+          <tr><td>6</td><td>0.162</td><td>55A</td><td>40A</td><td>Sub-panels, large appliances</td></tr>
+          <tr><td>4</td><td>0.204</td><td>70A</td><td>55A</td><td>Feeders, sub-panels</td></tr>
+          <tr><td>3</td><td>0.229</td><td>85A</td><td>65A</td><td>Large sub-panels</td></tr>
+          <tr><td>2</td><td>0.258</td><td>95A</td><td>75A</td><td>Service entrance (100A AL)</td></tr>
+          <tr><td>1</td><td>0.289</td><td>110A</td><td>85A</td><td>Large feeders</td></tr>
+          <tr><td>1/0</td><td>0.325</td><td>125A</td><td>100A</td><td>Service entrance (100A CU)</td></tr>
+          <tr><td>2/0</td><td>0.365</td><td>145A</td><td>115A</td><td>150A sub-panels</td></tr>
+          <tr><td>3/0</td><td>0.410</td><td>165A</td><td>130A</td><td>200A service (AL)</td></tr>
+          <tr><td>4/0</td><td>0.460</td><td>195A</td><td>150A</td><td>200A service (CU)</td></tr>
+          <tr><td>250 MCM</td><td>0.500</td><td>215A</td><td>170A</td><td>Large commercial feeders</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Voltage Drop Reference Table (copper, 240V, 3% max)</h3>
+      <table>
+        <thead><tr><th>Wire Size</th><th>20A</th><th>30A</th><th>40A</th><th>50A</th></tr></thead>
+        <tbody>
+          <tr><td>14 AWG</td><td>34 ft</td><td>—</td><td>—</td><td>—</td></tr>
+          <tr><td>12 AWG</td><td>54 ft</td><td>36 ft</td><td>—</td><td>—</td></tr>
+          <tr><td>10 AWG</td><td>86 ft</td><td>57 ft</td><td>43 ft</td><td>34 ft</td></tr>
+          <tr><td>8 AWG</td><td>137 ft</td><td>91 ft</td><td>68 ft</td><td>55 ft</td></tr>
+          <tr><td>6 AWG</td><td>218 ft</td><td>145 ft</td><td>109 ft</td><td>87 ft</td></tr>
+          <tr><td>4 AWG</td><td>346 ft</td><td>231 ft</td><td>173 ft</td><td>138 ft</td></tr>
+          <tr><td>2 AWG</td><td>551 ft</td><td>367 ft</td><td>276 ft</td><td>220 ft</td></tr>
+        </tbody>
+      </table>
+      <p>*Maximum one-way distance before exceeding 3% voltage drop at 240V. At 120V, halve these distances.</p>
+
+      <h3>Common Circuit Sizing</h3>
+      <table>
+        <thead><tr><th>Application</th><th>Amps</th><th>Wire (Cu)</th><th>Wire (Al)</th><th>Breaker</th></tr></thead>
+        <tbody>
+          <tr><td>General lighting</td><td>15A</td><td>14 AWG</td><td>12 AWG</td><td>15A</td></tr>
+          <tr><td>Kitchen/bath outlets</td><td>20A</td><td>12 AWG</td><td>10 AWG</td><td>20A</td></tr>
+          <tr><td>Window AC (small)</td><td>20A</td><td>12 AWG</td><td>10 AWG</td><td>20A</td></tr>
+          <tr><td>Electric dryer</td><td>30A</td><td>10 AWG</td><td>8 AWG</td><td>30A</td></tr>
+          <tr><td>Water heater</td><td>30A</td><td>10 AWG</td><td>8 AWG</td><td>30A</td></tr>
+          <tr><td>Electric range/oven</td><td>40–50A</td><td>8–6 AWG</td><td>6–4 AWG</td><td>40–50A</td></tr>
+          <tr><td>Central AC (3 ton)</td><td>30–40A</td><td>10–8 AWG</td><td>8–6 AWG</td><td>30–40A</td></tr>
+          <tr><td>EV charger (Level 2)</td><td>40–50A</td><td>8–6 AWG</td><td>6–4 AWG</td><td>50–60A</td></tr>
+          <tr><td>Sub-panel (60A)</td><td>60A</td><td>6 AWG</td><td>4 AWG</td><td>60A</td></tr>
+          <tr><td>Sub-panel (100A)</td><td>100A</td><td>3 AWG</td><td>1 AWG</td><td>100A</td></tr>
+          <tr><td>Main service (200A)</td><td>200A</td><td>4/0 AWG</td><td>4/0 AWG</td><td>200A</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Conduit Sizing Guide</h3>
+      <table>
+        <thead><tr><th>Wire Size</th><th>2 Wires</th><th>3 Wires</th><th>4 Wires</th></tr></thead>
+        <tbody>
+          <tr><td>14–12 AWG</td><td>1/2" EMT</td><td>1/2" EMT</td><td>1/2" EMT</td></tr>
+          <tr><td>10 AWG</td><td>1/2" EMT</td><td>1/2" EMT</td><td>3/4" EMT</td></tr>
+          <tr><td>8 AWG</td><td>1/2" EMT</td><td>3/4" EMT</td><td>3/4" EMT</td></tr>
+          <tr><td>6 AWG</td><td>3/4" EMT</td><td>1" EMT</td><td>1" EMT</td></tr>
+          <tr><td>4 AWG</td><td>1" EMT</td><td>1" EMT</td><td>1-1/4" EMT</td></tr>
+          <tr><td>2 AWG</td><td>1" EMT</td><td>1-1/4" EMT</td><td>1-1/2" EMT</td></tr>
+          <tr><td>1/0–4/0</td><td>1-1/4"–2" EMT</td><td>1-1/2"–2" EMT</td><td>2"–2-1/2" EMT</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Copper vs. Aluminum Wire</h3>
+      <table>
+        <thead><tr><th>Factor</th><th>Copper</th><th>Aluminum</th></tr></thead>
+        <tbody>
+          <tr><td>Conductivity</td><td>100% (reference)</td><td>61% of copper</td></tr>
+          <tr><td>Weight</td><td>Heavier</td><td>30% lighter</td></tr>
+          <tr><td>Cost per foot</td><td>Higher ($$$)</td><td>Lower ($–$$)</td></tr>
+          <tr><td>Minimum gauge for 30A</td><td>10 AWG</td><td>8 AWG</td></tr>
+          <tr><td>Connectors</td><td>Standard</td><td>Must be AL/CU rated</td></tr>
+          <tr><td>Best for</td><td>Branch circuits, short runs</td><td>Service entrance, large feeders</td></tr>
+          <tr><td>Fire risk</td><td>Low</td><td>Higher if improperly connected</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Wire Sizing Tips</h3>
+      <ul>
+        <li><strong>Continuous loads require 125% sizing.</strong> If a load runs for 3+ hours (water heater, AC, EV charger), the NEC requires the circuit to be sized at 125% of the load. A 30A continuous load needs a 40A circuit.</li>
+        <li><strong>Voltage drop matters more at 120V.</strong> The same wire at 120V has twice the percentage voltage drop compared to 240V. Long 120V runs often need upsized wire.</li>
+        <li><strong>Use THHN/THWN in conduit.</strong> NM-B (Romex) can only be used in dry locations inside framing. For conduit runs, garages, and exposed wiring, use individual THHN or THWN conductors.</li>
+        <li><strong>Derate for bundling.</strong> More than 3 current-carrying conductors in conduit require ampacity derating per NEC Table 310.15(C)(1). This can reduce ampacity by 20–50%.</li>
+        <li><strong>Ground wire can be smaller.</strong> Equipment grounding conductors follow NEC Table 250.122 and are typically 1–2 sizes smaller than the circuit conductors.</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer><div class="container"><p>© 2026 <a href="/">BuiltRight Academy</a> — Free tools for contractors and tradespeople.</p></div></footer>
+
+  <script>
+    // Wire data: [awg label, copper amps 75°C, aluminum amps 75°C, resistance per 1000ft copper (ohms), resistance per 1000ft aluminum (ohms), conduit size for 3 wires, cost per ft copper, cost per ft aluminum]
+    const wireData = [
+      { awg: '14', cuAmp: 15, alAmp: 0, cuR: 3.14, alR: 5.17, conduit: '1/2"', cuCost: 0.25, alCost: 0.12 },
+      { awg: '12', cuAmp: 20, alAmp: 15, cuR: 1.98, alR: 3.25, conduit: '1/2"', cuCost: 0.40, alCost: 0.18 },
+      { awg: '10', cuAmp: 30, alAmp: 25, cuR: 1.24, alR: 2.04, conduit: '1/2"', cuCost: 0.65, alCost: 0.30 },
+      { awg: '8',  cuAmp: 40, alAmp: 30, cuR: 0.778, alR: 1.28, conduit: '3/4"', cuCost: 1.10, alCost: 0.50 },
+      { awg: '6',  cuAmp: 55, alAmp: 40, cuR: 0.491, alR: 0.808, conduit: '1"', cuCost: 1.75, alCost: 0.85 },
+      { awg: '4',  cuAmp: 70, alAmp: 55, cuR: 0.308, alR: 0.508, conduit: '1"', cuCost: 2.80, alCost: 1.30 },
+      { awg: '3',  cuAmp: 85, alAmp: 65, cuR: 0.245, alR: 0.403, conduit: '1-1/4"', cuCost: 3.50, alCost: 1.60 },
+      { awg: '2',  cuAmp: 95, alAmp: 75, cuR: 0.194, alR: 0.319, conduit: '1-1/4"', cuCost: 4.50, alCost: 2.00 },
+      { awg: '1',  cuAmp: 110, alAmp: 85, cuR: 0.154, alR: 0.253, conduit: '1-1/4"', cuCost: 5.50, alCost: 2.50 },
+      { awg: '1/0', cuAmp: 125, alAmp: 100, cuR: 0.122, alR: 0.201, conduit: '1-1/2"', cuCost: 7.00, alCost: 3.20 },
+      { awg: '2/0', cuAmp: 145, alAmp: 115, cuR: 0.0967, alR: 0.159, conduit: '1-1/2"', cuCost: 8.75, alCost: 4.00 },
+      { awg: '3/0', cuAmp: 165, alAmp: 130, cuR: 0.0766, alR: 0.126, conduit: '2"', cuCost: 11.00, alCost: 5.00 },
+      { awg: '4/0', cuAmp: 195, alAmp: 150, cuR: 0.0608, alR: 0.100, conduit: '2"', cuCost: 14.00, alCost: 6.50 },
+      { awg: '250 MCM', cuAmp: 215, alAmp: 170, cuR: 0.0515, alR: 0.0847, conduit: '2-1/2"', cuCost: 17.00, alCost: 8.00 },
+      { awg: '300 MCM', cuAmp: 240, alAmp: 190, cuR: 0.0429, alR: 0.0707, conduit: '2-1/2"', cuCost: 20.00, alCost: 9.50 },
+    ];
+
+    function calculate() {
+      const amps = parseFloat(document.getElementById('amps').value);
+      const dist = parseFloat(document.getElementById('distance').value);
+      const voltage = parseFloat(document.getElementById('voltage').value);
+      const mat = document.getElementById('material').value;
+      const maxDrop = parseFloat(document.getElementById('maxDrop').value) / 100;
+
+      if (!amps || !dist) return alert('Please enter amperage and distance.');
+
+      const isCu = mat === 'copper';
+      const maxDropVolts = voltage * maxDrop;
+
+      // Find wire that meets ampacity AND voltage drop
+      let selected = null;
+      let vDrop = 0;
+      let vDropPct = 0;
+
+      for (const w of wireData) {
+        const ampacity = isCu ? w.cuAmp : w.alAmp;
+        if (ampacity <= 0 || ampacity < amps) continue;
+
+        // Voltage drop = (2 × length × resistance × amps) / 1000
+        const resistance = isCu ? w.cuR : w.alR;
+        const drop = (2 * dist * resistance * amps) / 1000;
+        const dropPct = drop / voltage;
+
+        if (dropPct <= maxDrop) {
+          selected = w;
+          vDrop = drop;
+          vDropPct = dropPct;
+          break;
+        }
+      }
+
+      // If no wire meets voltage drop, find the one with ampacity match (largest we have)
+      if (!selected) {
+        for (let i = wireData.length - 1; i >= 0; i--) {
+          const w = wireData[i];
+          const ampacity = isCu ? w.cuAmp : w.alAmp;
+          if (ampacity >= amps) {
+            selected = w;
+            const resistance = isCu ? w.cuR : w.alR;
+            vDrop = (2 * dist * resistance * amps) / 1000;
+            vDropPct = vDrop / voltage;
+            break;
+          }
+        }
+      }
+
+      if (!selected) return alert('Load exceeds calculator range. Consult an electrician for loads above 240A.');
+
+      const costPerFt = isCu ? selected.cuCost : selected.alCost;
+      // Total wire length: 2× distance (there and back) + 10% for routing
+      const totalWireFt = Math.ceil(dist * 2 * 1.1);
+      const totalCost = totalWireFt * costPerFt;
+
+      const dropClass = vDropPct <= maxDrop ? 'green' : 'red';
+      const dropLabel = vDropPct <= maxDrop ? '✓ Within limit' : '⚠️ Exceeds limit';
+
+      document.getElementById('resultGrid').innerHTML = `
+        <div class="result-item"><div class="value">${selected.awg} AWG</div><div class="label">Recommended Wire</div></div>
+        <div class="result-item ${dropClass}"><div class="value">${(vDropPct * 100).toFixed(1)}%</div><div class="label">Voltage Drop ${dropLabel}</div></div>
+        <div class="result-item"><div class="value">${selected.conduit}</div><div class="label">Conduit Size (EMT)</div></div>
+        <div class="result-item"><div class="value">$${totalCost.toFixed(0)}</div><div class="label">Est. Wire Cost</div></div>
+      `;
+
+      const ampacity = isCu ? selected.cuAmp : selected.alAmp;
+      document.getElementById('costBody').innerHTML = `
+        <tr><td>Wire gauge</td><td style="text-align:right;">${selected.awg} AWG ${isCu ? 'Copper' : 'Aluminum'}</td></tr>
+        <tr><td>Ampacity (75°C rating)</td><td style="text-align:right;">${ampacity}A</td></tr>
+        <tr><td>Circuit load</td><td style="text-align:right;">${amps}A</td></tr>
+        <tr><td>Voltage drop</td><td style="text-align:right;">${vDrop.toFixed(2)}V (${(vDropPct * 100).toFixed(1)}%)</td></tr>
+        <tr><td>Voltage at load</td><td style="text-align:right;">${(voltage - vDrop).toFixed(1)}V</td></tr>
+        <tr><td>One-way distance</td><td style="text-align:right;">${dist} ft</td></tr>
+        <tr><td>Total wire needed (×2 + 10%)</td><td style="text-align:right;">${totalWireFt} ft</td></tr>
+        <tr><td>Wire cost per foot</td><td style="text-align:right;">$${costPerFt.toFixed(2)}/ft</td></tr>
+        <tr style="font-weight:700;border-top:2px solid var(--orange);"><td>Estimated wire cost</td><td style="text-align:right;color:var(--orange);">$${totalCost.toFixed(0)}</td></tr>
+      `;
+
+      document.getElementById('results').classList.add('show');
+      document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
+</body>
+</html>
