@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Contractor Tools & Calculators | BuiltRight Academy</title>
+  <meta name="description" content="Free interactive calculators and tools for contractors. Cost calculators, markup calculators, and estimating tools for electricians, plumbers, HVAC techs, and general contractors.">
+  <link rel="canonical" href="https://builtright-academy.vercel.app/tools/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root { --orange: #F97316; --orange-dark: #EA580C; --darker: #0F0F1A; --gray: #94A3B8; --light: #F8FAFC; }
+    body { font-family: 'Inter', -apple-system, sans-serif; background: var(--darker); color: var(--light); line-height: 1.6; }
+    .container { max-width: 720px; margin: 0 auto; padding: 0 24px; }
+    nav { padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    nav .container { display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.3rem; color: var(--orange); text-decoration: none; }
+    .logo span { color: var(--light); }
+    .nav-links a { color: var(--gray); text-decoration: none; font-size: 0.9rem; margin-left: 24px; }
+    .page-header { padding: 60px 0 40px; }
+    .page-header h1 { font-size: 2.2rem; font-weight: 800; letter-spacing: -1px; margin-bottom: 8px; }
+    .page-header p { color: var(--gray); font-size: 1.1rem; }
+    .tools-grid { display: grid; gap: 16px; padding-bottom: 60px; }
+    .tool-card { display: block; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 32px; text-decoration: none; transition: all 0.2s; }
+    .tool-card:hover { border-color: rgba(249,115,22,0.3); background: rgba(255,255,255,0.05); }
+    .tool-card .icon { font-size: 2rem; margin-bottom: 12px; }
+    .tool-card h2 { font-size: 1.3rem; font-weight: 700; color: var(--light); margin-bottom: 8px; }
+    .tool-card p { color: var(--gray); font-size: 0.95rem; }
+    .tool-card .badge { display: inline-block; background: rgba(34,197,94,0.1); color: #4ADE80; font-size: 0.7rem; font-weight: 600; padding: 2px 8px; border-radius: 100px; margin-bottom: 8px; }
+    footer { padding: 24px 0; border-top: 1px solid rgba(255,255,255,0.06); text-align: center; font-size: 0.8rem; color: #334155; }
+  </style>
+</head>
+<body>
+<nav>
+  <div class="container">
+    <a href="/" class="logo">Built<span>Right</span></a>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/blog/">Blog</a>
+      <a href="/templates/">Templates</a>
+      <a href="/tools/">Tools</a>
+    </div>
+  </div>
+</nav>
+<div class="page-header">
+  <div class="container">
+    <h1>Free Contractor Tools</h1>
+    <p>Interactive calculators and tools to help you price jobs, calculate costs, and run your contracting business smarter.</p>
+  </div>
+</div>
+<section class="tools-grid">
+  <div class="container">
+    <a href="/tools/water-heater-cost-calculator" class="tool-card">
+      <div class="icon">🔧</div>
+      <span class="badge">FREE</span>
+      <h2>Water Heater Installation Cost Calculator</h2>
+      <p>Instant cost estimate for water heater replacement. Tank, tankless, heat pump — all types covered with detailed breakdowns.</p>
+    </a>
+    <a href="/tools/markup-calculator" class="tool-card">
+      <div class="icon">📊</div>
+      <span class="badge">FREE</span>
+      <h2>Contractor Markup & Margin Calculator</h2>
+      <p>Stop confusing markup and margin. Enter your costs and desired profit — get the exact selling price you need.</p>
+    </a>
+    <a href="/tools/electrical-panel-cost-calculator" class="tool-card">
+      <div class="icon">⚡</div>
+      <span class="badge">FREE</span>
+      <h2>Electrical Panel Upgrade Cost Calculator</h2>
+      <p>Estimate the cost of upgrading an electrical panel — 100A to 200A, subpanel installs, and full rewiring.</p>
+    </a>
+    <a href="/tools/bathroom-remodel-calculator" class="tool-card">
+      <div class="icon">🚿</div>
+      <span class="badge">FREE</span>
+      <h2>Bathroom Remodel Cost Calculator</h2>
+      <p>Break down bathroom renovation costs by scope — basic refresh to full gut renovation with material and labor estimates.</p>
+    </a>
+  </div>
+</section>
+<footer>
+  <div class="container">
+    © 2026 BuiltRight Academy. Business skills for tradespeople.<br>
+    <a href="/" style="color:var(--gray);text-decoration:none;">Home</a> · <a href="/blog/" style="color:var(--gray);text-decoration:none;">Blog</a> · <a href="/templates/" style="color:var(--gray);text-decoration:none;">Templates</a> · <a href="/tools/" style="color:var(--gray);text-decoration:none;">Tools</a>
+  </div>
+</footer>
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/_vercel/speed-insights/script.js"></script>
+</body>
+</html>
