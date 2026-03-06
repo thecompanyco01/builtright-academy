@@ -1,12 +1,6 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
-  "rewrites": [
-    { "source": "/blog/how-to-bid-contractor-jobs", "destination": "/blog/how-to-bid-contractor-jobs.html" },
-    { "source": "/blog/how-to-start-an-electrical-business", "destination": "/blog/how-to-start-an-electrical-business.html" },
-    { "source": "/blog/contractor-bookkeeping-guide", "destination": "/blog/contractor-bookkeeping-guide.html" },
-    { "source": "/blog/plumber-marketing-guide", "destination": "/blog/plumber-marketing-guide.html" }
-  ],
   "headers": [
     {
       "source": "/(.*)",
