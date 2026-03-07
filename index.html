@@ -415,6 +415,35 @@
   </div>
 </section>
 
+<section class="pain" style="text-align: center;">
+  <div class="container">
+    <h2>Free Resources — Available Right Now</h2>
+    <p style="color: var(--gray); margin-bottom: 32px; font-size: 1rem;">No signup required. Use these tools to run your business better today.</p>
+    <div class="pain-grid">
+      <a href="/tools/" class="pain-card" style="text-decoration: none; cursor: pointer;">
+        <div class="icon">🧮</div>
+        <h3 style="color: var(--orange);">31 Free Calculators</h3>
+        <p>Concrete, paint, roofing, drywall, flooring, electrical, and more. Save hours on every estimate.</p>
+      </a>
+      <a href="/blog/" class="pain-card" style="text-decoration: none; cursor: pointer;">
+        <div class="icon">📚</div>
+        <h3 style="color: var(--orange);">59 Business Guides</h3>
+        <p>Pricing, estimating, marketing, taxes, insurance, and hiring — everything you need to run a profitable trade business.</p>
+      </a>
+      <a href="/licensing/contractor-license-by-state" class="pain-card" style="text-decoration: none; cursor: pointer;">
+        <div class="icon">📋</div>
+        <h3 style="color: var(--orange);">50-State Licensing Guides</h3>
+        <p>Contractor license requirements for every US state. Costs, exams, bonds, insurance — all in one place.</p>
+      </a>
+      <a href="/templates/" class="pain-card" style="text-decoration: none; cursor: pointer;">
+        <div class="icon">📄</div>
+        <h3 style="color: var(--orange);">Free Templates</h3>
+        <p>Professional invoice, estimate, job costing, and P&L templates. Download and start using today.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
 <section class="bottom-cta">
   <div class="container">
     <h2>Stop guessing. Start building right.</h2>
@@ -457,12 +486,12 @@
       form.style.display = 'none';
       success.style.display = 'block';
       
-      // Also send to our API endpoint if available
-      fetch('/api/waitlist', {
+      // Send to subscribe API
+      fetch('/api/subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, source: 'landing_page', timestamp: new Date().toISOString() })
-      }).catch(() => {}); // Silently fail if API isn't set up yet
+        body: JSON.stringify({ email, source: 'landing_page', lead_magnet: 'waitlist', timestamp: new Date().toISOString() })
+      }).catch(() => {});
     });
   }
   handleSubmit('waitlistForm', 'formSuccess');
