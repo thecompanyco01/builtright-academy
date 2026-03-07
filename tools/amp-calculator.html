@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Amp Calculator — Watts to Amps & Volts/Amps/Watts Converter | BuiltRight Academy</title>
+  <meta name="description" content="Free amp calculator. Convert watts to amps, amps to watts, and calculate volts, amps, or watts instantly. Works for single-phase and three-phase circuits. Essential electrical tool for contractors.">
+  <meta name="keywords" content="amp calculator, watts to amps, amps to watts, voltage calculator, electrical calculator, watt calculator, amperage calculator">
+  <link rel="canonical" href="https://builtright-academy.vercel.app/tools/amp-calculator">
+  <meta property="og:title" content="Amp Calculator — Watts to Amps & Volts/Amps/Watts Converter">
+  <meta property="og:description" content="Free interactive amp calculator. Convert between watts, amps, and volts instantly for single-phase and three-phase circuits.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Amp Calculator",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "description": "Convert between watts, amps, and volts. Supports single-phase and three-phase circuits with power factor adjustment."
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do you convert watts to amps?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Divide watts by volts. The formula is: Amps = Watts ÷ Volts. For example, a 1,500-watt heater on a 120V circuit draws 12.5 amps (1500 ÷ 120 = 12.5). For three-phase circuits, divide by (Volts × √3 × Power Factor)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How many amps is 1000 watts at 120 volts?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "1,000 watts at 120 volts equals 8.33 amps (1000 ÷ 120 = 8.33). This means the device will draw about 8.3 amps from a standard US household outlet. A standard 15-amp circuit can handle this with room to spare."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How many watts can a 20-amp breaker handle?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A 20-amp breaker on a 120V circuit can handle 2,400 watts maximum (20 × 120). However, the NEC 80% rule recommends continuous loads not exceed 80% of the breaker rating, which is 1,920 watts (16 amps × 120V). On a 240V circuit, a 20-amp breaker handles up to 4,800 watts (3,840 watts continuous)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is power factor and why does it matter?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Power factor (PF) is the ratio of real power (watts) to apparent power (volt-amps). It ranges from 0 to 1. Resistive loads like heaters have a PF of 1.0, while motors and fluorescent lights typically have a PF of 0.8–0.95. A lower power factor means more amps are drawn for the same wattage, which matters for wire sizing and breaker selection."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What's the difference between single-phase and three-phase power?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Single-phase power uses two wires (hot and neutral) and is standard in homes (120V or 240V). Three-phase power uses three hot wires delivering power in overlapping waves, providing more consistent power for heavy equipment. Three-phase is common in commercial and industrial settings at 208V, 480V, or 600V. The three-phase formula includes a √3 (1.732) multiplier."
+        }
+      }
+    ]
+  }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root { --orange: #F97316; --orange-dark: #EA580C; --darker: #0F0F1A; --dark-card: #1A1A2E; --gray: #94A3B8; --light: #F8FAFC; --green: #22C55E; --border: rgba(255,255,255,0.08); }
+    body { font-family: 'Inter', -apple-system, sans-serif; background: var(--darker); color: var(--light); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+    nav { padding: 20px 0; border-bottom: 1px solid var(--border); }
+    nav .container { display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.3rem; color: var(--orange); text-decoration: none; letter-spacing: -0.5px; }
+    .logo span { color: var(--light); }
+    .nav-links a { color: var(--gray); text-decoration: none; font-size: 0.9rem; margin-left: 24px; }
+    .nav-links a:hover { color: var(--light); }
+    .hero { padding: 48px 0 32px; text-align: center; }
+    .hero .badge { display: inline-block; background: rgba(249,115,22,0.1); border: 1px solid rgba(249,115,22,0.3); color: var(--orange); font-size: 0.8rem; font-weight: 600; padding: 6px 16px; border-radius: 100px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .hero h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 800; line-height: 1.15; letter-spacing: -1px; margin-bottom: 12px; }
+    .hero h1 .highlight { color: var(--orange); }
+    .hero p { color: var(--gray); font-size: 1.05rem; max-width: 600px; margin: 0 auto; }
+    .calc-section { padding: 24px 0 60px; }
+    .calc-card { background: var(--dark-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; margin-bottom: 24px; }
+    .calc-card h2 { font-size: 1.2rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+    .calc-card h2 .icon { font-size: 1.4rem; }
+    .tabs { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
+    .tab { background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: var(--gray); padding: 10px 20px; border-radius: 8px; cursor: pointer; font-size: 0.9rem; font-weight: 500; transition: all 0.2s; }
+    .tab:hover { border-color: var(--orange); color: var(--light); }
+    .tab.active { background: rgba(249,115,22,0.15); border-color: var(--orange); color: var(--orange); }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 500px) { .form-grid { grid-template-columns: 1fr; } }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group.full { grid-column: 1 / -1; }
+    label { font-size: 0.85rem; font-weight: 600; color: var(--gray); text-transform: uppercase; letter-spacing: 0.5px; }
+    input, select { background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: var(--light); padding: 12px 16px; border-radius: 8px; font-size: 1rem; font-family: inherit; outline: none; transition: border-color 0.2s; }
+    input:focus, select:focus { border-color: var(--orange); }
+    select option { background: var(--darker); }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: var(--orange); color: #fff; font-weight: 700; font-size: 1rem; padding: 14px 28px; border-radius: 10px; border: none; cursor: pointer; width: 100%; margin-top: 16px; transition: background 0.2s; }
+    .btn:hover { background: var(--orange-dark); }
+    .results { display: none; margin-top: 24px; }
+    .results.show { display: block; }
+    .result-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; }
+    .result-item { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 12px; padding: 20px; text-align: center; }
+    .result-item .number { font-size: 2rem; font-weight: 800; color: var(--orange); letter-spacing: -1px; }
+    .result-item .label { font-size: 0.8rem; color: var(--gray); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .result-item .detail { font-size: 0.85rem; color: var(--light); margin-top: 8px; opacity: 0.8; }
+    .waste-note { background: rgba(249,115,22,0.08); border: 1px solid rgba(249,115,22,0.2); border-radius: 10px; padding: 16px 20px; margin-top: 20px; font-size: 0.9rem; color: var(--gray); }
+    .waste-note strong { color: var(--orange); }
+    .info-section { padding: 40px 0 60px; }
+    .info-card { background: var(--dark-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; margin-bottom: 24px; }
+    .info-card h2 { font-size: 1.4rem; font-weight: 700; margin-bottom: 16px; }
+    .info-card h3 { font-size: 1.1rem; font-weight: 600; margin: 20px 0 8px; color: var(--orange); }
+    .info-card p { color: var(--gray); margin-bottom: 12px; line-height: 1.8; }
+    .info-card ul, .info-card ol { color: var(--gray); margin-left: 20px; margin-bottom: 12px; }
+    .info-card li { margin-bottom: 6px; }
+    .info-card table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+    .info-card th, .info-card td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+    .info-card th { color: var(--orange); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; }
+    .info-card td { color: var(--gray); }
+    footer { padding: 40px 0; border-top: 1px solid var(--border); text-align: center; }
+    footer p { color: var(--gray); font-size: 0.85rem; }
+    footer a { color: var(--orange); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <nav><div class="container"><a href="/" class="logo">Built<span>Right</span></a><div class="nav-links"><a href="/blog">Blog</a><a href="/templates">Templates</a><a href="/tools">Tools</a></div></div></nav>
+
+  <section class="hero"><div class="container">
+    <div class="badge">Free Tool</div>
+    <h1>Amp <span class="highlight">Calculator</span></h1>
+    <p>Convert watts to amps, amps to watts, or calculate any electrical value. Works for single-phase and three-phase circuits.</p>
+  </div></section>
+
+  <section class="calc-section"><div class="container">
+    <div class="calc-card">
+      <h2><span class="icon">⚡</span> Choose Your Conversion</h2>
+      <div class="tabs">
+        <div class="tab active" data-type="w2a">Watts → Amps</div>
+        <div class="tab" data-type="a2w">Amps → Watts</div>
+        <div class="tab" data-type="ohm">Ohm's Law</div>
+        <div class="tab" data-type="three">Three-Phase</div>
+      </div>
+
+      <!-- Watts to Amps -->
+      <div id="form-w2a" class="calc-form">
+        <div class="form-grid">
+          <div class="form-group"><label>Watts (W)</label><input type="number" id="w2a-watts" placeholder="e.g. 1500" step="any"></div>
+          <div class="form-group"><label>Volts (V)</label><input type="number" id="w2a-volts" placeholder="e.g. 120" step="any" value="120"></div>
+          <div class="form-group"><label>Power Factor</label><input type="number" id="w2a-pf" placeholder="1.0" step="any" value="1.0" min="0" max="1"></div>
+        </div>
+        <button class="btn" onclick="calcW2A()">Calculate Amps</button>
+      </div>
+
+      <!-- Amps to Watts -->
+      <div id="form-a2w" class="calc-form" style="display:none">
+        <div class="form-grid">
+          <div class="form-group"><label>Amps (A)</label><input type="number" id="a2w-amps" placeholder="e.g. 15" step="any"></div>
+          <div class="form-group"><label>Volts (V)</label><input type="number" id="a2w-volts" placeholder="e.g. 120" step="any" value="120"></div>
+          <div class="form-group"><label>Power Factor</label><input type="number" id="a2w-pf" placeholder="1.0" step="any" value="1.0" min="0" max="1"></div>
+        </div>
+        <button class="btn" onclick="calcA2W()">Calculate Watts</button>
+      </div>
+
+      <!-- Ohm's Law -->
+      <div id="form-ohm" class="calc-form" style="display:none">
+        <div class="form-grid">
+          <div class="form-group"><label>Volts (V) — leave blank to solve</label><input type="number" id="ohm-volts" placeholder="e.g. 120" step="any"></div>
+          <div class="form-group"><label>Amps (A) — leave blank to solve</label><input type="number" id="ohm-amps" placeholder="e.g. 15" step="any"></div>
+          <div class="form-group"><label>Resistance (Ω) — leave blank to solve</label><input type="number" id="ohm-ohms" placeholder="e.g. 8" step="any"></div>
+          <div class="form-group"><label>Watts (W) — leave blank to solve</label><input type="number" id="ohm-watts" placeholder="e.g. 1800" step="any"></div>
+        </div>
+        <button class="btn" onclick="calcOhm()">Calculate</button>
+      </div>
+
+      <!-- Three-Phase -->
+      <div id="form-three" class="calc-form" style="display:none">
+        <div class="form-grid">
+          <div class="form-group"><label>Solve For</label>
+            <select id="three-solve">
+              <option value="amps">Amps (from Watts)</option>
+              <option value="watts">Watts (from Amps)</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Voltage (V)</label>
+            <select id="three-volts">
+              <option value="208">208V</option>
+              <option value="240">240V</option>
+              <option value="480" selected>480V</option>
+              <option value="600">600V</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Watts or Amps</label><input type="number" id="three-value" placeholder="Enter value" step="any"></div>
+          <div class="form-group"><label>Power Factor</label><input type="number" id="three-pf" placeholder="0.85" step="any" value="0.85" min="0" max="1"></div>
+        </div>
+        <button class="btn" onclick="calcThree()">Calculate</button>
+      </div>
+
+      <div class="results" id="results">
+        <div class="result-grid" id="result-grid"></div>
+        <div class="waste-note"><strong>NEC 80% Rule:</strong> For continuous loads (running 3+ hours), don't exceed <strong>80% of the breaker rating</strong>. A 20-amp breaker should carry no more than 16 amps continuously. Always size wire and breakers for the worst case.</div>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="info-section"><div class="container">
+    <div class="info-card">
+      <h2>How to Convert Watts to Amps: Complete Guide</h2>
+      <p>Understanding the relationship between watts, amps, and volts is essential for any electrical work — from sizing breakers to choosing the right wire gauge. Here's everything you need to know.</p>
+
+      <h3>The Basic Formulas</h3>
+      <p>For <strong>single-phase</strong> AC circuits:</p>
+      <p><strong>Amps = Watts ÷ (Volts × Power Factor)</strong></p>
+      <p><strong>Watts = Amps × Volts × Power Factor</strong></p>
+      <p>For <strong>three-phase</strong> AC circuits:</p>
+      <p><strong>Amps = Watts ÷ (Volts × √3 × Power Factor)</strong></p>
+      <p><strong>Watts = Amps × Volts × √3 × Power Factor</strong></p>
+      <p>For <strong>DC</strong> circuits (no power factor):</p>
+      <p><strong>Amps = Watts ÷ Volts</strong></p>
+
+      <h3>Common Watts to Amps Conversions (120V)</h3>
+      <table>
+        <tr><th>Watts</th><th>Amps (120V)</th><th>Typical Appliance</th></tr>
+        <tr><td>100W</td><td>0.83A</td><td>LED light fixtures</td></tr>
+        <tr><td>500W</td><td>4.17A</td><td>Window fan</td></tr>
+        <tr><td>1,000W</td><td>8.33A</td><td>Toaster, iron</td></tr>
+        <tr><td>1,500W</td><td>12.5A</td><td>Space heater, hair dryer</td></tr>
+        <tr><td>1,800W</td><td>15.0A</td><td>Max for 15A circuit (continuous)</td></tr>
+        <tr><td>2,400W</td><td>20.0A</td><td>Max for 20A circuit</td></tr>
+      </table>
+
+      <h3>Common Watts to Amps Conversions (240V)</h3>
+      <table>
+        <tr><th>Watts</th><th>Amps (240V)</th><th>Typical Appliance</th></tr>
+        <tr><td>3,000W</td><td>12.5A</td><td>Water heater (small)</td></tr>
+        <tr><td>4,500W</td><td>18.75A</td><td>Water heater (standard)</td></tr>
+        <tr><td>5,000W</td><td>20.83A</td><td>Clothes dryer</td></tr>
+        <tr><td>7,200W</td><td>30.0A</td><td>EV charger (Level 2)</td></tr>
+        <tr><td>10,000W</td><td>41.67A</td><td>Electric range</td></tr>
+        <tr><td>24,000W</td><td>100A</td><td>Central AC (5-ton)</td></tr>
+      </table>
+
+      <h3>Wire Sizing by Amperage</h3>
+      <table>
+        <tr><th>Amps</th><th>Wire Gauge (AWG)</th><th>Breaker Size</th><th>Common Use</th></tr>
+        <tr><td>15A</td><td>14 AWG</td><td>15A</td><td>Lighting, general outlets</td></tr>
+        <tr><td>20A</td><td>12 AWG</td><td>20A</td><td>Kitchen, bathroom, shop outlets</td></tr>
+        <tr><td>30A</td><td>10 AWG</td><td>30A</td><td>Dryers, water heaters</td></tr>
+        <tr><td>40A</td><td>8 AWG</td><td>40A</td><td>Electric ranges, cooktops</td></tr>
+        <tr><td>50A</td><td>6 AWG</td><td>50A</td><td>EV chargers, sub-panels</td></tr>
+        <tr><td>60A</td><td>6 AWG</td><td>60A</td><td>Large appliances, sub-panels</td></tr>
+        <tr><td>100A</td><td>3 AWG</td><td>100A</td><td>Sub-panels, main service</td></tr>
+        <tr><td>200A</td><td>2/0 AWG</td><td>200A</td><td>Main service panel</td></tr>
+      </table>
+
+      <h3>Understanding Power Factor</h3>
+      <p>Power factor (PF) is the ratio of real power to apparent power. Resistive loads like heaters, incandescent lights, and electric ranges have a PF of 1.0. Inductive loads draw more current:</p>
+      <ul>
+        <li><strong>PF 1.0:</strong> Heaters, incandescent lights, toasters</li>
+        <li><strong>PF 0.95:</strong> LED drivers, modern electronics</li>
+        <li><strong>PF 0.85–0.90:</strong> Motors (HVAC compressors, pumps)</li>
+        <li><strong>PF 0.80:</strong> Fluorescent lights, older motors</li>
+        <li><strong>PF 0.60–0.70:</strong> Unloaded motors, cheap power supplies</li>
+      </ul>
+      <p><strong>Why it matters:</strong> A 1,000W motor with PF 0.85 at 120V actually draws 9.8 amps, not 8.3 amps. That extra current matters for wire sizing and breaker selection.</p>
+
+      <h3>5 Electrical Mistakes That Trip Breakers</h3>
+      <ol>
+        <li><strong>Overloading a circuit.</strong> A 15-amp circuit maxes out at 1,440W continuous (80% rule). Two space heaters on one circuit = guaranteed trip.</li>
+        <li><strong>Ignoring power factor for motors.</strong> Motors draw more amps than their wattage suggests. Always use the nameplate amps, not calculated amps from watts.</li>
+        <li><strong>Using 14-gauge wire on a 20-amp breaker.</strong> This is a code violation and fire hazard. 20-amp circuits require 12-gauge minimum.</li>
+        <li><strong>Not accounting for voltage drop.</strong> Long wire runs (50+ feet) lose voltage. Use the next size up wire gauge for runs over 50 feet.</li>
+        <li><strong>Confusing 120V and 240V calculations.</strong> A 240V appliance draws half the amps of the same wattage at 120V. Always check the nameplate voltage.</li>
+      </ol>
+    </div>
+
+    <div class="info-card">
+      <h2>Breaker Sizing Guide: How Many Amps Do You Need?</h2>
+      <table>
+        <tr><th>Circuit</th><th>Breaker</th><th>Wire</th><th>Max Watts (Continuous)</th></tr>
+        <tr><td>General lighting</td><td>15A / 120V</td><td>14 AWG</td><td>1,440W</td></tr>
+        <tr><td>Kitchen / Bath outlets</td><td>20A / 120V</td><td>12 AWG</td><td>1,920W</td></tr>
+        <tr><td>Garage / Workshop</td><td>20A / 120V</td><td>12 AWG</td><td>1,920W</td></tr>
+        <tr><td>Electric dryer</td><td>30A / 240V</td><td>10 AWG</td><td>5,760W</td></tr>
+        <tr><td>Electric range</td><td>50A / 240V</td><td>6 AWG</td><td>9,600W</td></tr>
+        <tr><td>EV charger (L2)</td><td>50A / 240V</td><td>6 AWG</td><td>9,600W</td></tr>
+        <tr><td>Central AC (3-ton)</td><td>30A / 240V</td><td>10 AWG</td><td>5,760W</td></tr>
+        <tr><td>Central AC (5-ton)</td><td>60A / 240V</td><td>6 AWG</td><td>11,520W</td></tr>
+      </table>
+      <p><strong>Remember the 80% rule:</strong> For continuous loads (running 3+ hours), multiply the breaker rating by 0.8 for the maximum safe load. A 20-amp breaker should carry no more than 16 amps continuously. The values above already reflect this rule.</p>
+    </div>
+  </div></section>
+
+  <!-- Email Capture CTA -->
+  <div id="email-cta" style="max-width:720px;margin:40px auto;padding:40px 32px;background:linear-gradient(135deg,#1e293b 0%,#0f172a 100%);border:1px solid rgba(249,115,22,0.3);border-radius:16px;text-align:center;">
+    <div style="font-size:2rem;margin-bottom:12px;">📋</div>
+    <h3 style="font-family:Inter,-apple-system,sans-serif;font-size:1.4rem;font-weight:700;color:#f8fafc;margin-bottom:8px;">Free Contractor Toolkit</h3>
+    <p style="font-family:Inter,-apple-system,sans-serif;color:#94a3b8;font-size:0.95rem;margin-bottom:24px;max-width:480px;margin-left:auto;margin-right:auto;">Get our <strong style="color:#f97316;">free spreadsheet templates</strong> &mdash; invoice, estimate, job costing &amp; profit tracker. Used by 500+ contractors.</p>
+    <form id="capture-form" onsubmit="return handleCapture(event)" style="display:flex;gap:10px;max-width:420px;margin:0 auto;flex-wrap:wrap;justify-content:center;">
+      <input type="email" id="capture-email" placeholder="you@company.com" required style="flex:1;min-width:220px;padding:12px 16px;border-radius:8px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.05);color:#f8fafc;font-size:0.95rem;font-family:Inter,-apple-system,sans-serif;outline:none;">
+      <button type="submit" style="padding:12px 24px;background:#f97316;color:#fff;border:none;border-radius:8px;font-weight:600;font-size:0.95rem;cursor:pointer;font-family:Inter,-apple-system,sans-serif;white-space:nowrap;">Send Me the Templates</button>
+    </form>
+    <p id="capture-msg" style="font-family:Inter,-apple-system,sans-serif;color:#22c55e;font-size:0.85rem;margin-top:12px;display:none;"></p>
+    <p style="font-family:Inter,-apple-system,sans-serif;color:#64748b;font-size:0.75rem;margin-top:12px;">No spam. Unsubscribe anytime.</p>
+  </div>
+
+  <footer><div class="container"><p>© 2026 <a href="/">BuiltRight Academy</a>. Free tools for tradespeople who mean business.</p></div></footer>
+
+  <script>
+    // Tab switching
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.calc-form').forEach(f => f.style.display = 'none');
+        tab.classList.add('active');
+        document.getElementById('form-' + tab.dataset.type).style.display = 'block';
+        document.getElementById('results').classList.remove('show');
+      });
+    });
+
+    function showResultItems(items) {
+      const grid = document.getElementById('result-grid');
+      grid.innerHTML = items.map(i => `
+        <div class="result-item">
+          <div class="number">${i.value}</div>
+          <div class="label">${i.label}</div>
+          ${i.detail ? `<div class="detail">${i.detail}</div>` : ''}
+        </div>
+      `).join('');
+      document.getElementById('results').classList.add('show');
+      document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function calcW2A() {
+      const w = parseFloat(document.getElementById('w2a-watts').value);
+      const v = parseFloat(document.getElementById('w2a-volts').value);
+      const pf = parseFloat(document.getElementById('w2a-pf').value) || 1;
+      if (!w || !v) return alert('Please enter watts and volts.');
+      const amps = w / (v * pf);
+      const breakerNeeded = Math.ceil(amps / 0.8);
+      const breakers = [15, 20, 25, 30, 40, 50, 60, 70, 80, 100, 125, 150, 200];
+      const breaker = breakers.find(b => b >= breakerNeeded) || breakerNeeded;
+      showResultItems([
+        { value: amps.toFixed(2), label: 'Amps', detail: `At ${v}V, PF ${pf}` },
+        { value: w.toLocaleString(), label: 'Watts', detail: 'Input power' },
+        { value: (w / 1000).toFixed(2), label: 'Kilowatts', detail: `${(w / 1000 * 0.16).toFixed(2)}/hr @ $0.16/kWh` },
+        { value: breaker + 'A', label: 'Min Breaker (80%)', detail: `Continuous load rating` }
+      ]);
+    }
+
+    function calcA2W() {
+      const a = parseFloat(document.getElementById('a2w-amps').value);
+      const v = parseFloat(document.getElementById('a2w-volts').value);
+      const pf = parseFloat(document.getElementById('a2w-pf').value) || 1;
+      if (!a || !v) return alert('Please enter amps and volts.');
+      const watts = a * v * pf;
+      showResultItems([
+        { value: watts.toFixed(0), label: 'Watts', detail: `At ${v}V, PF ${pf}` },
+        { value: (watts / 1000).toFixed(2), label: 'Kilowatts', detail: '' },
+        { value: a.toFixed(2), label: 'Amps', detail: 'Input current' },
+        { value: (watts / 1000 * 0.16).toFixed(2), label: '$/Hour', detail: 'At $0.16/kWh avg' }
+      ]);
+    }
+
+    function calcOhm() {
+      let v = parseFloat(document.getElementById('ohm-volts').value) || null;
+      let a = parseFloat(document.getElementById('ohm-amps').value) || null;
+      let r = parseFloat(document.getElementById('ohm-ohms').value) || null;
+      let w = parseFloat(document.getElementById('ohm-watts').value) || null;
+      const known = [v, a, r, w].filter(x => x !== null).length;
+      if (known < 2) return alert('Enter at least 2 known values.');
+
+      // Solve unknowns
+      if (v && a) { r = r || v / a; w = w || v * a; }
+      else if (v && r) { a = a || v / r; w = w || (v * v) / r; }
+      else if (v && w) { a = a || w / v; r = r || (v * v) / w; }
+      else if (a && r) { v = v || a * r; w = w || a * a * r; }
+      else if (a && w) { v = v || w / a; r = r || w / (a * a); }
+      else if (r && w) { v = v || Math.sqrt(w * r); a = a || Math.sqrt(w / r); }
+
+      showResultItems([
+        { value: v ? v.toFixed(2) : '—', label: 'Volts (V)', detail: '' },
+        { value: a ? a.toFixed(2) : '—', label: 'Amps (A)', detail: '' },
+        { value: r ? r.toFixed(2) : '—', label: 'Ohms (Ω)', detail: '' },
+        { value: w ? w.toFixed(2) : '—', label: 'Watts (W)', detail: '' }
+      ]);
+    }
+
+    function calcThree() {
+      const solve = document.getElementById('three-solve').value;
+      const v = parseFloat(document.getElementById('three-volts').value);
+      const val = parseFloat(document.getElementById('three-value').value);
+      const pf = parseFloat(document.getElementById('three-pf').value) || 0.85;
+      if (!val) return alert('Please enter a value.');
+      const sqrt3 = 1.732;
+
+      if (solve === 'amps') {
+        const amps = val / (v * sqrt3 * pf);
+        showResultItems([
+          { value: amps.toFixed(2), label: 'Amps (per phase)', detail: `3Φ at ${v}V` },
+          { value: val.toLocaleString(), label: 'Watts', detail: 'Input power' },
+          { value: (val / 1000).toFixed(2), label: 'Kilowatts', detail: '' },
+          { value: (val / 745.7).toFixed(1), label: 'Horsepower', detail: 'Approx.' }
+        ]);
+      } else {
+        const watts = val * v * sqrt3 * pf;
+        showResultItems([
+          { value: watts.toFixed(0), label: 'Watts', detail: `3Φ at ${v}V` },
+          { value: (watts / 1000).toFixed(2), label: 'Kilowatts', detail: '' },
+          { value: val.toFixed(2), label: 'Amps (per phase)', detail: 'Input current' },
+          { value: (watts / 745.7).toFixed(1), label: 'Horsepower', detail: 'Approx.' }
+        ]);
+      }
+    }
+  </script>
+
+  <script>
+  function handleCapture(e){
+    e.preventDefault();
+    var em=document.getElementById("capture-email").value;
+    var msg=document.getElementById("capture-msg");
+    var btn=e.target.querySelector("button");
+    btn.textContent="Sending...";btn.disabled=true;
+    fetch("/api/subscribe",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:em,source:window.location.pathname,lead_magnet:"contractor-toolkit"})})
+    .then(function(r){return r.json()})
+    .then(function(d){msg.textContent="\u2705 Check your inbox! Templates are on the way.";msg.style.display="block";document.getElementById("capture-form").style.display="none"})
+    .catch(function(){msg.textContent="Something went wrong. Try again.";msg.style.color="#ef4444";msg.style.display="block";btn.textContent="Send Me the Templates";btn.disabled=false});
+    return false;
+  }
+  </script>
+
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flooring Calculator — How Much Flooring Do I Need? | BuiltRight Academy</title>
+  <meta name="description" content="Free flooring calculator. Enter room dimensions to get square footage, waste factor, boxes needed, and cost estimate. Works for hardwood, tile, laminate, and vinyl. Updated for 2026 pricing.">
+  <meta name="keywords" content="flooring calculator, flooring estimator, how much flooring do I need, hardwood flooring calculator, tile calculator, laminate flooring calculator, vinyl flooring calculator">
+  <link rel="canonical" href="https://builtright-academy.vercel.app/tools/flooring-calculator">
+  <meta property="og:title" content="Flooring Calculator — How Much Flooring Do I Need?">
+  <meta property="og:description" content="Free interactive flooring calculator. Get square footage, material quantity, and cost estimate instantly for hardwood, tile, laminate, or vinyl.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://builtright-academy.vercel.app/tools/flooring-calculator">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Flooring Calculator",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "description": "Calculate how much flooring you need for any room. Get square footage with waste factor, boxes of material, and cost estimates for hardwood, tile, laminate, and vinyl."
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do I calculate how much flooring I need?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Measure the length and width of your room in feet, then multiply them together to get the square footage. Add 10% for waste (15% for diagonal patterns or tile). For example, a 12×15 ft room = 180 sq ft + 10% waste = 198 sq ft of flooring needed."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much does flooring cost per square foot in 2026?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Flooring costs vary by material: Vinyl/LVP runs $2–$5/sq ft, laminate $3–$7/sq ft, hardwood $5–$12/sq ft, and tile $3–$15/sq ft for materials only. Installation adds $3–$10/sq ft depending on the material and your location."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What waste factor should I use for flooring?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Use 10% waste for standard straight-lay installations. Use 15% for diagonal patterns, herringbone, or rooms with many cuts (angles, alcoves). For tile, use 10–15% depending on tile size — larger tiles in small rooms mean more waste from cuts."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How many boxes of flooring do I need?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Divide your total square footage (including waste) by the coverage per box listed on the packaging. Most laminate and hardwood boxes cover 20–25 sq ft. Always round up to the next full box."
+        }
+      }
+    ]
+  }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root { --orange: #F97316; --orange-dark: #EA580C; --darker: #0F0F1A; --dark-card: #1A1A2E; --gray: #94A3B8; --light: #F8FAFC; --green: #22C55E; --border: rgba(255,255,255,0.08); }
+    body { font-family: 'Inter', -apple-system, sans-serif; background: var(--darker); color: var(--light); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+    nav { padding: 20px 0; border-bottom: 1px solid var(--border); }
+    nav .container { display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.3rem; color: var(--orange); text-decoration: none; letter-spacing: -0.5px; }
+    .logo span { color: var(--light); }
+    .nav-links a { color: var(--gray); text-decoration: none; font-size: 0.9rem; margin-left: 24px; }
+    .nav-links a:hover { color: var(--light); }
+    .hero { padding: 48px 0 32px; text-align: center; }
+    .hero .badge { display: inline-block; background: rgba(249,115,22,0.1); border: 1px solid rgba(249,115,22,0.3); color: var(--orange); font-size: 0.8rem; font-weight: 600; padding: 6px 16px; border-radius: 100px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .hero h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 800; line-height: 1.15; letter-spacing: -1px; margin-bottom: 12px; }
+    .hero h1 .highlight { color: var(--orange); }
+    .hero p { color: var(--gray); font-size: 1.05rem; max-width: 600px; margin: 0 auto; }
+    .calc-section { padding: 24px 0 60px; }
+    .calc-card { background: var(--dark-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; margin-bottom: 24px; }
+    .calc-card h2 { font-size: 1.2rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+    .calc-card h2 .icon { font-size: 1.4rem; }
+    .tabs { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
+    .tab { background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: var(--gray); padding: 10px 20px; border-radius: 8px; cursor: pointer; font-size: 0.9rem; font-weight: 500; transition: all 0.2s; }
+    .tab:hover { border-color: var(--orange); color: var(--light); }
+    .tab.active { background: rgba(249,115,22,0.15); border-color: var(--orange); color: var(--orange); }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 500px) { .form-grid { grid-template-columns: 1fr; } }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group.full { grid-column: 1 / -1; }
+    label { font-size: 0.85rem; font-weight: 600; color: var(--gray); text-transform: uppercase; letter-spacing: 0.5px; }
+    input, select { background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: var(--light); padding: 12px 16px; border-radius: 8px; font-size: 1rem; font-family: inherit; outline: none; transition: border-color 0.2s; }
+    input:focus, select:focus { border-color: var(--orange); }
+    select option { background: var(--darker); }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: var(--orange); color: #fff; font-weight: 700; font-size: 1rem; padding: 14px 28px; border-radius: 10px; border: none; cursor: pointer; width: 100%; margin-top: 16px; transition: background 0.2s; }
+    .btn:hover { background: var(--orange-dark); }
+    .results { display: none; margin-top: 24px; }
+    .results.show { display: block; }
+    .result-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; }
+    .result-item { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 12px; padding: 20px; text-align: center; }
+    .result-item .number { font-size: 2rem; font-weight: 800; color: var(--orange); letter-spacing: -1px; }
+    .result-item .label { font-size: 0.8rem; color: var(--gray); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .result-item .detail { font-size: 0.85rem; color: var(--light); margin-top: 8px; opacity: 0.8; }
+    .waste-note { background: rgba(249,115,22,0.08); border: 1px solid rgba(249,115,22,0.2); border-radius: 10px; padding: 16px 20px; margin-top: 20px; font-size: 0.9rem; color: var(--gray); }
+    .waste-note strong { color: var(--orange); }
+    .info-section { padding: 40px 0 60px; }
+    .info-card { background: var(--dark-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; margin-bottom: 24px; }
+    .info-card h2 { font-size: 1.4rem; font-weight: 700; margin-bottom: 16px; }
+    .info-card h3 { font-size: 1.1rem; font-weight: 600; margin: 20px 0 8px; color: var(--orange); }
+    .info-card p { color: var(--gray); margin-bottom: 12px; line-height: 1.8; }
+    .info-card ul, .info-card ol { color: var(--gray); margin-left: 20px; margin-bottom: 12px; }
+    .info-card li { margin-bottom: 6px; }
+    .info-card table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+    .info-card th, .info-card td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+    .info-card th { color: var(--orange); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; }
+    .info-card td { color: var(--gray); }
+    footer { padding: 40px 0; border-top: 1px solid var(--border); text-align: center; }
+    footer p { color: var(--gray); font-size: 0.85rem; }
+    footer a { color: var(--orange); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <nav><div class="container"><a href="/" class="logo">Built<span>Right</span></a><div class="nav-links"><a href="/blog">Blog</a><a href="/templates">Templates</a><a href="/tools">Tools</a></div></div></nav>
+
+  <section class="hero"><div class="container">
+    <div class="badge">Free Tool</div>
+    <h1>Flooring <span class="highlight">Calculator</span></h1>
+    <p>Calculate square footage, material quantity, waste factor, and estimated cost for hardwood, tile, laminate, or vinyl flooring.</p>
+  </div></section>
+
+  <section class="calc-section"><div class="container">
+    <div class="calc-card">
+      <h2><span class="icon">🏠</span> Choose Your Flooring Type</h2>
+      <div class="tabs">
+        <div class="tab active" data-type="hardwood">Hardwood</div>
+        <div class="tab" data-type="tile">Tile</div>
+        <div class="tab" data-type="laminate">Laminate</div>
+        <div class="tab" data-type="vinyl">Vinyl / LVP</div>
+      </div>
+
+      <div class="calc-form">
+        <div class="form-grid">
+          <div class="form-group"><label>Room Length (ft)</label><input type="number" id="room-length" placeholder="e.g. 15" step="any"></div>
+          <div class="form-group"><label>Room Width (ft)</label><input type="number" id="room-width" placeholder="e.g. 12" step="any"></div>
+          <div class="form-group"><label>Waste Factor</label>
+            <select id="waste-factor">
+              <option value="10">10% — Standard straight lay</option>
+              <option value="15">15% — Diagonal / complex room</option>
+              <option value="20">20% — Herringbone / chevron</option>
+              <option value="5">5% — Simple rectangle, no cuts</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Box Coverage (sq ft)</label><input type="number" id="box-coverage" placeholder="e.g. 22" step="any" value="22"></div>
+        </div>
+
+        <div class="form-grid" style="margin-top:16px;">
+          <div class="form-group full">
+            <label>Add More Rooms (optional)</label>
+            <div id="extra-rooms"></div>
+            <button type="button" onclick="addRoom()" style="background:rgba(255,255,255,0.05);border:1px dashed var(--border);color:var(--gray);padding:10px 16px;border-radius:8px;cursor:pointer;font-size:0.85rem;margin-top:8px;width:100%;">+ Add Another Room</button>
+          </div>
+        </div>
+
+        <button class="btn" onclick="calcFlooring()">Calculate Flooring</button>
+      </div>
+
+      <div class="results" id="results">
+        <div class="result-grid">
+          <div class="result-item"><div class="number" id="r-sqft">—</div><div class="label">Total Sq Ft Needed</div><div class="detail" id="r-raw"></div></div>
+          <div class="result-item"><div class="number" id="r-boxes">—</div><div class="label">Boxes</div><div class="detail" id="r-boxdetail"></div></div>
+          <div class="result-item"><div class="number" id="r-costmat">—</div><div class="label">Material Cost</div><div class="detail" id="r-costrange"></div></div>
+          <div class="result-item"><div class="number" id="r-costtotal">—</div><div class="label">Installed Cost</div><div class="detail">Materials + labor</div></div>
+        </div>
+        <div class="waste-note"><strong>Pro Tip:</strong> Always buy an extra box or two beyond the calculator result. You'll want spare planks or tiles for future repairs — manufacturers discontinue colors and patterns frequently.</div>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="info-section"><div class="container">
+    <div class="info-card">
+      <h2>How to Calculate Flooring: Complete Guide</h2>
+      <p>Getting the right amount of flooring prevents costly reorders and delays. Here's everything you need to know about measuring and estimating flooring materials.</p>
+
+      <h3>The Basic Formula</h3>
+      <p><strong>Total Flooring = Room Area × (1 + Waste Factor)</strong></p>
+      <p>Measure length × width in feet to get area. Then add your waste percentage. For a 12×15 ft room with 10% waste: 180 sq ft × 1.10 = 198 sq ft needed.</p>
+
+      <h3>Measuring Odd-Shaped Rooms</h3>
+      <p>Break irregular rooms into rectangles. Measure each rectangle separately, calculate the area of each, and add them together. For L-shaped rooms, split into two rectangles. For rooms with alcoves or closets, measure those separately and add them in.</p>
+
+      <h3>Waste Factors by Layout Pattern</h3>
+      <table>
+        <tr><th>Pattern</th><th>Waste %</th><th>Notes</th></tr>
+        <tr><td>Straight lay (parallel to walls)</td><td>10%</td><td>Most common, most efficient</td></tr>
+        <tr><td>Diagonal (45°)</td><td>15%</td><td>More cuts at walls</td></tr>
+        <tr><td>Herringbone / Chevron</td><td>15–20%</td><td>Many angled cuts</td></tr>
+        <tr><td>Random width planks</td><td>10–15%</td><td>Depends on plank mix</td></tr>
+        <tr><td>Tile — large format (24×24+)</td><td>10–15%</td><td>Fewer cuts but more waste per cut</td></tr>
+        <tr><td>Tile — mosaic / small format</td><td>10%</td><td>Smaller offcuts, less waste</td></tr>
+      </table>
+
+      <h3>Flooring Cost per Square Foot (2026)</h3>
+      <table>
+        <tr><th>Material</th><th>Material Cost/sq ft</th><th>Install Cost/sq ft</th><th>Total/sq ft</th></tr>
+        <tr><td>Vinyl / LVP</td><td>$2–$5</td><td>$3–$5</td><td>$5–$10</td></tr>
+        <tr><td>Laminate</td><td>$3–$7</td><td>$3–$6</td><td>$6–$13</td></tr>
+        <tr><td>Engineered Hardwood</td><td>$5–$10</td><td>$4–$8</td><td>$9–$18</td></tr>
+        <tr><td>Solid Hardwood</td><td>$6–$12</td><td>$5–$10</td><td>$11–$22</td></tr>
+        <tr><td>Ceramic Tile</td><td>$3–$8</td><td>$5–$10</td><td>$8–$18</td></tr>
+        <tr><td>Porcelain Tile</td><td>$5–$15</td><td>$6–$12</td><td>$11–$27</td></tr>
+      </table>
+
+      <h3>5 Common Flooring Mistakes That Cost You Money</h3>
+      <ol>
+        <li><strong>Not acclimating wood flooring.</strong> Hardwood and laminate need 48–72 hours in the room to adjust to humidity. Skipping this causes buckling and gaps.</li>
+        <li><strong>Skipping underlayment.</strong> Underlayment reduces noise, smooths minor subfloor imperfections, and adds moisture protection. Always use it for laminate and engineered wood.</li>
+        <li><strong>Forgetting transitions and trim.</strong> Budget for T-moldings, reducers, baseboards, and quarter-round. These add 10–15% to material costs.</li>
+        <li><strong>Not checking subfloor flatness.</strong> Subfloors should be flat within 3/16" over 10 feet. Uneven subfloors cause squeaking, gaps, and premature wear.</li>
+        <li><strong>Buying from different dye lots.</strong> Order all your flooring at once from the same batch. Different production runs can have noticeable color variations.</li>
+      </ol>
+    </div>
+
+    <div class="info-card">
+      <h2>Flooring Material Comparison: Which Is Best for Your Project?</h2>
+      <table>
+        <tr><th>Factor</th><th>Hardwood</th><th>Laminate</th><th>Vinyl/LVP</th><th>Tile</th></tr>
+        <tr><td>Durability</td><td>25+ years</td><td>15–25 years</td><td>15–20 years</td><td>50+ years</td></tr>
+        <tr><td>Water resistance</td><td>Poor</td><td>Moderate</td><td>Excellent</td><td>Excellent</td></tr>
+        <tr><td>DIY difficulty</td><td>Hard</td><td>Easy</td><td>Easy</td><td>Moderate</td></tr>
+        <tr><td>Home value impact</td><td>High (+ROI)</td><td>Moderate</td><td>Moderate</td><td>High in kitchens/baths</td></tr>
+        <tr><td>Best rooms</td><td>Living, bedrooms</td><td>Bedrooms, offices</td><td>Kitchens, basements</td><td>Bathrooms, kitchens</td></tr>
+        <tr><td>Can refinish?</td><td>Yes (3–5 times)</td><td>No</td><td>No</td><td>N/A</td></tr>
+      </table>
+      <p><strong>Bottom line:</strong> If you want maximum home value, go hardwood in main living areas and tile in wet rooms. For rentals or budget renovations, LVP gives the best bang for your buck — waterproof, durable, and easy to install.</p>
+    </div>
+  </div></section>
+
+  <!-- Email Capture CTA -->
+  <div id="email-cta" style="max-width:720px;margin:40px auto;padding:40px 32px;background:linear-gradient(135deg,#1e293b 0%,#0f172a 100%);border:1px solid rgba(249,115,22,0.3);border-radius:16px;text-align:center;">
+    <div style="font-size:2rem;margin-bottom:12px;">📋</div>
+    <h3 style="font-family:Inter,-apple-system,sans-serif;font-size:1.4rem;font-weight:700;color:#f8fafc;margin-bottom:8px;">Free Contractor Toolkit</h3>
+    <p style="font-family:Inter,-apple-system,sans-serif;color:#94a3b8;font-size:0.95rem;margin-bottom:24px;max-width:480px;margin-left:auto;margin-right:auto;">Get our <strong style="color:#f97316;">free spreadsheet templates</strong> &mdash; invoice, estimate, job costing &amp; profit tracker. Used by 500+ contractors.</p>
+    <form id="capture-form" onsubmit="return handleCapture(event)" style="display:flex;gap:10px;max-width:420px;margin:0 auto;flex-wrap:wrap;justify-content:center;">
+      <input type="email" id="capture-email" placeholder="you@company.com" required style="flex:1;min-width:220px;padding:12px 16px;border-radius:8px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.05);color:#f8fafc;font-size:0.95rem;font-family:Inter,-apple-system,sans-serif;outline:none;">
+      <button type="submit" style="padding:12px 24px;background:#f97316;color:#fff;border:none;border-radius:8px;font-weight:600;font-size:0.95rem;cursor:pointer;font-family:Inter,-apple-system,sans-serif;white-space:nowrap;">Send Me the Templates</button>
+    </form>
+    <p id="capture-msg" style="font-family:Inter,-apple-system,sans-serif;color:#22c55e;font-size:0.85rem;margin-top:12px;display:none;"></p>
+    <p style="font-family:Inter,-apple-system,sans-serif;color:#64748b;font-size:0.75rem;margin-top:12px;">No spam. Unsubscribe anytime.</p>
+  </div>
+
+  <footer><div class="container"><p>© 2026 <a href="/">BuiltRight Academy</a>. Free tools for tradespeople who mean business.</p></div></footer>
+
+  <script>
+    // Flooring type pricing data
+    const flooringTypes = {
+      hardwood: { label: 'Hardwood', matLow: 6, matHigh: 12, instLow: 5, instHigh: 10 },
+      tile: { label: 'Tile', matLow: 3, matHigh: 15, instLow: 5, instHigh: 12 },
+      laminate: { label: 'Laminate', matLow: 3, matHigh: 7, instLow: 3, instHigh: 6 },
+      vinyl: { label: 'Vinyl / LVP', matLow: 2, matHigh: 5, instLow: 3, instHigh: 5 }
+    };
+    let currentType = 'hardwood';
+
+    // Tab switching
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        currentType = tab.dataset.type;
+        document.getElementById('results').classList.remove('show');
+      });
+    });
+
+    let roomCount = 0;
+    function addRoom() {
+      roomCount++;
+      const div = document.createElement('div');
+      div.style.cssText = 'display:grid;grid-template-columns:1fr 1fr auto;gap:8px;margin-top:8px;align-items:end;';
+      div.innerHTML = '<div><label style="font-size:0.75rem;">Length (ft)</label><input type="number" class="extra-length" placeholder="Length" step="any" style="width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);color:#F8FAFC;padding:10px 12px;border-radius:8px;font-size:0.9rem;font-family:inherit;outline:none;"></div><div><label style="font-size:0.75rem;">Width (ft)</label><input type="number" class="extra-width" placeholder="Width" step="any" style="width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);color:#F8FAFC;padding:10px 12px;border-radius:8px;font-size:0.9rem;font-family:inherit;outline:none;"></div><button onclick="this.parentElement.remove()" style="background:none;border:1px solid rgba(255,255,255,0.08);color:#94A3B8;padding:10px 12px;border-radius:8px;cursor:pointer;font-size:0.9rem;">✕</button>';
+      document.getElementById('extra-rooms').appendChild(div);
+    }
+
+    function calcFlooring() {
+      const l = parseFloat(document.getElementById('room-length').value);
+      const w = parseFloat(document.getElementById('room-width').value);
+      if (!l || !w) return alert('Please enter room length and width.');
+
+      let totalArea = l * w;
+
+      // Add extra rooms
+      document.querySelectorAll('.extra-length').forEach((el, i) => {
+        const el2 = document.querySelectorAll('.extra-width')[i];
+        const rl = parseFloat(el.value) || 0;
+        const rw = parseFloat(el2.value) || 0;
+        totalArea += rl * rw;
+      });
+
+      const wastePct = parseFloat(document.getElementById('waste-factor').value) / 100;
+      const boxCoverage = parseFloat(document.getElementById('box-coverage').value) || 22;
+      const totalWithWaste = totalArea * (1 + wastePct);
+      const boxes = Math.ceil(totalWithWaste / boxCoverage);
+      const ft = flooringTypes[currentType];
+
+      const matCostLow = totalWithWaste * ft.matLow;
+      const matCostHigh = totalWithWaste * ft.matHigh;
+      const totalCostLow = totalWithWaste * (ft.matLow + ft.instLow);
+      const totalCostHigh = totalWithWaste * (ft.matHigh + ft.instHigh);
+
+      document.getElementById('r-sqft').textContent = Math.ceil(totalWithWaste);
+      document.getElementById('r-raw').textContent = Math.round(totalArea) + ' sq ft + ' + (wastePct * 100) + '% waste';
+      document.getElementById('r-boxes').textContent = boxes;
+      document.getElementById('r-boxdetail').textContent = boxCoverage + ' sq ft per box';
+      document.getElementById('r-costmat').textContent = '$' + Math.round(matCostLow) + '–$' + Math.round(matCostHigh);
+      document.getElementById('r-costrange').textContent = ft.label + ' materials only';
+      document.getElementById('r-costtotal').textContent = '$' + Math.round(totalCostLow) + '–$' + Math.round(totalCostHigh);
+      document.getElementById('results').classList.add('show');
+      document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function handleCapture(e){
+      e.preventDefault();
+      var em=document.getElementById("capture-email").value;
+      var msg=document.getElementById("capture-msg");
+      var btn=e.target.querySelector("button");
+      btn.textContent="Sending...";btn.disabled=true;
+      fetch("/api/subscribe",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:em,source:window.location.pathname,lead_magnet:"contractor-toolkit"})})
+      .then(function(r){return r.json()})
+      .then(function(d){msg.textContent="\u2705 Check your inbox! Templates are on the way.";msg.style.display="block";document.getElementById("capture-form").style.display="none"})
+      .catch(function(){msg.textContent="Something went wrong. Try again.";msg.style.color="#ef4444";msg.style.display="block";btn.textContent="Send Me the Templates";btn.disabled=false});
+      return false;
+    }
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
+</body>
+</html>

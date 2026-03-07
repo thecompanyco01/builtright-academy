@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Contractor Templates — Invoice & Estimate | BuiltRight Academy</title>
+  <meta name="description" content="Download free contractor invoice and estimate templates. Professional spreadsheets ready to use. No signup required for basic templates.">
+  <meta name="keywords" content="free contractor invoice template, free estimate template, contractor spreadsheet, construction invoice">
+  <link rel="canonical" href="https://builtright-academy.vercel.app/templates/free-download">
+  <meta property="og:title" content="Free Contractor Templates — Invoice & Estimate">
+  <meta property="og:description" content="Professional contractor templates. Free to download, ready to use.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root { --orange: #F97316; --orange-dark: #EA580C; --dark: #1A1A2E; --darker: #0F0F1A; --gray: #94A3B8; --light: #F8FAFC; --green: #22C55E; }
+    body { font-family: 'Inter', -apple-system, sans-serif; background: var(--darker); color: var(--light); line-height: 1.6; }
+    .container { max-width: 720px; margin: 0 auto; padding: 0 24px; }
+    nav { padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    nav .container { display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.3rem; color: var(--orange); text-decoration: none; }
+    .logo span { color: var(--light); }
+    
+    .hero { padding: 60px 0 40px; text-align: center; }
+    h1 { font-size: 2.4rem; font-weight: 800; line-height: 1.1; letter-spacing: -1.5px; margin-bottom: 16px; }
+    h1 .hl { color: var(--orange); }
+    .sub { color: var(--gray); font-size: 1.1rem; max-width: 560px; margin: 0 auto 40px; }
+    
+    .templates-grid { display: grid; gap: 24px; margin-bottom: 48px; }
+    .template-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 32px; }
+    .template-card.free { border-color: rgba(34,197,94,0.3); }
+    .template-card.pro { border-color: rgba(249,115,22,0.3); }
+    .badge { display: inline-block; padding: 4px 12px; border-radius: 100px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 16px; }
+    .badge.free-badge { background: rgba(34,197,94,0.1); color: var(--green); border: 1px solid rgba(34,197,94,0.3); }
+    .badge.pro-badge { background: rgba(249,115,22,0.1); color: var(--orange); border: 1px solid rgba(249,115,22,0.3); }
+    .template-card h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 8px; }
+    .template-card p { color: var(--gray); font-size: 0.9rem; margin-bottom: 20px; }
+    .template-card ul { list-style: none; margin-bottom: 24px; }
+    .template-card li { padding: 6px 0; color: var(--gray); font-size: 0.9rem; }
+    .template-card li::before { content: "✓ "; color: var(--green); font-weight: 700; }
+    .template-card.pro li.locked::before { content: "🔒 "; }
+    
+    .dl-form { display: flex; gap: 10px; flex-wrap: wrap; }
+    .dl-form input { flex: 1; min-width: 200px; padding: 12px 16px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); color: var(--light); font-size: 0.9rem; }
+    .dl-form input:focus { outline: none; border-color: var(--green); }
+    .btn { padding: 12px 24px; border: none; border-radius: 8px; font-weight: 600; font-size: 0.9rem; cursor: pointer; text-decoration: none; display: inline-block; text-align: center; }
+    .btn-green { background: var(--green); color: #fff; }
+    .btn-green:hover { background: #16a34a; }
+    .btn-orange { background: var(--orange); color: #fff; }
+    .btn-orange:hover { background: var(--orange-dark); }
+    .btn-disabled { opacity: 0.5; cursor: not-allowed; }
+    
+    .msg { font-size: 0.85rem; margin-top: 12px; display: none; }
+    .msg.success { color: var(--green); }
+    .msg.error { color: #ef4444; }
+    
+    .compare { margin: 48px 0; }
+    .compare h2 { text-align: center; font-size: 1.6rem; font-weight: 700; margin-bottom: 8px; }
+    .compare .sub2 { text-align: center; color: var(--gray); margin-bottom: 32px; }
+    .compare table { width: 100%; border-collapse: collapse; }
+    .compare th, .compare td { padding: 12px 16px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 0.9rem; }
+    .compare th { color: var(--gray); font-weight: 600; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.5px; }
+    .compare td:nth-child(2), .compare td:nth-child(3) { text-align: center; }
+    .compare th:nth-child(2), .compare th:nth-child(3) { text-align: center; }
+    .check { color: var(--green); }
+    .cross { color: #64748b; }
+    
+    footer { padding: 40px 0; border-top: 1px solid rgba(255,255,255,0.06); text-align: center; color: var(--gray); font-size: 0.8rem; }
+  </style>
+</head>
+<body>
+  <nav><div class="container"><a href="/" class="logo">Built<span>Right</span></a><a href="/tools" style="color:var(--gray);text-decoration:none;font-size:0.9rem;">Free Tools →</a></div></nav>
+
+  <div class="container">
+    <div class="hero">
+      <h1>Free <span class="hl">Contractor Templates</span></h1>
+      <p class="sub">Professional spreadsheet templates built for tradespeople. Download the free pack or upgrade to Pro for the complete toolkit.</p>
+    </div>
+
+    <div class="templates-grid">
+      <!-- FREE TEMPLATES -->
+      <div class="template-card free">
+        <span class="badge free-badge">Free</span>
+        <h3>Starter Pack — 2 Templates</h3>
+        <p>The essentials to get your business organized. Professional formatting, ready to customize.</p>
+        <ul>
+          <li>Contractor Invoice Template</li>
+          <li>Job Estimate Template</li>
+        </ul>
+        <form class="dl-form" id="free-form" onsubmit="return handleFreeDownload(event)">
+          <input type="email" id="free-email" placeholder="Your email" required>
+          <button type="submit" class="btn btn-green">Download Free</button>
+        </form>
+        <p class="msg" id="free-msg"></p>
+      </div>
+
+      <!-- PRO TEMPLATES -->
+      <div class="template-card pro">
+        <span class="badge pro-badge">Pro — $29</span>
+        <h3>Complete Toolkit — 4 Templates</h3>
+        <p>Everything in Free, plus job costing and P&L tracking. The tools serious contractors use to grow.</p>
+        <ul>
+          <li>Contractor Invoice Template</li>
+          <li>Job Estimate Template</li>
+          <li>Job Costing Tracker (track labor, materials, subs per job)</li>
+          <li>Monthly P&L Tracker (income, expenses, margins, KPIs)</li>
+        </ul>
+        <a href="/templates/pro-bundle" class="btn btn-orange btn-disabled" style="width:100%;display:block;" onclick="alert('Pro Bundle coming soon! Enter your email above and we\'ll notify you when it launches.');return false;">Coming Soon — $29</a>
+        <p style="color:var(--gray);font-size:0.8rem;margin-top:12px;text-align:center;">Join 500+ contractors using BuiltRight templates</p>
+      </div>
+    </div>
+
+    <!-- COMPARISON TABLE -->
+    <div class="compare">
+      <h2>Free vs Pro</h2>
+      <p class="sub2">See what's included in each pack</p>
+      <table>
+        <thead>
+          <tr><th>Feature</th><th>Free</th><th>Pro ($29)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Professional Invoice Template</td><td class="check">✓</td><td class="check">✓</td></tr>
+          <tr><td>Job Estimate Template</td><td class="check">✓</td><td class="check">✓</td></tr>
+          <tr><td>Job Costing Tracker</td><td class="cross">—</td><td class="check">✓</td></tr>
+          <tr><td>Monthly P&L Tracker</td><td class="cross">—</td><td class="check">✓</td></tr>
+          <tr><td>Pre-built formulas</td><td class="check">✓</td><td class="check">✓</td></tr>
+          <tr><td>Custom categories</td><td class="cross">—</td><td class="check">✓</td></tr>
+          <tr><td>12-month dashboard</td><td class="cross">—</td><td class="check">✓</td></tr>
+          <tr><td>KPI tracking</td><td class="cross">—</td><td class="check">✓</td></tr>
+          <tr><td>Future updates</td><td class="cross">—</td><td class="check">✓</td></tr>
+          <tr><td>Price</td><td><strong>$0</strong></td><td><strong>$29 one-time</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <footer><div class="container">© 2026 BuiltRight Academy. Built for tradespeople, by tradespeople.</div></footer>
+
+  <script>
+  function handleFreeDownload(e) {
+    e.preventDefault();
+    var email = document.getElementById('free-email').value;
+    var msg = document.getElementById('free-msg');
+    var btn = e.target.querySelector('button');
+    btn.textContent = 'Sending...'; btn.disabled = true;
+    
+    fetch('/api/subscribe', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({email: email, source: '/templates/free-download', lead_magnet: 'free-starter-pack'})
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(d) {
+      // Show download links
+      msg.innerHTML = '✅ <strong>Download ready!</strong><br><br>' +
+        '<a href="/assets/templates/contractor-invoice-template.csv" download style="color:#22c55e;font-weight:600;">📄 Download Invoice Template</a><br>' +
+        '<a href="/assets/templates/job-estimate-template.csv" download style="color:#22c55e;font-weight:600;">📄 Download Estimate Template</a>';
+      msg.className = 'msg success';
+      msg.style.display = 'block';
+      btn.textContent = '✓ Downloaded';
+    })
+    .catch(function() {
+      msg.textContent = 'Something went wrong. Try again.';
+      msg.className = 'msg error';
+      msg.style.display = 'block';
+      btn.textContent = 'Download Free';
+      btn.disabled = false;
+    });
+    return false;
+  }
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
+</body>
+</html>

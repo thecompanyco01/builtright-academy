@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Insulation Calculator — How Much Insulation Do I Need? | BuiltRight Academy</title>
+  <meta name="description" content="Free insulation calculator. Calculate R-value, batts or rolls needed, and cost for walls, attics, and crawlspaces. Includes R-value guide by climate zone. Updated for 2026.">
+  <meta name="keywords" content="insulation calculator, insulation estimator, how much insulation do I need, R-value calculator, attic insulation calculator, wall insulation calculator, batt insulation calculator">
+  <link rel="canonical" href="https://builtright-academy.vercel.app/tools/insulation-calculator">
+  <meta property="og:title" content="Insulation Calculator — How Much Insulation Do I Need?">
+  <meta property="og:description" content="Free interactive insulation calculator. Get R-value recommendations, batts/rolls needed, and cost estimates by climate zone.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://builtright-academy.vercel.app/tools/insulation-calculator">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Insulation Calculator",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "description": "Calculate how much insulation you need for walls, attics, and crawlspaces. Get R-value recommendations, number of batts or rolls, and cost estimates."
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What R-value insulation do I need?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "R-value requirements depend on your climate zone and where you're insulating. Attics in cold climates (zones 5-8) need R-49 to R-60. Walls typically need R-13 to R-21. Floors over crawlspaces need R-25 to R-30. Check the DOE recommendations for your specific zone."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much does insulation cost per square foot?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Fiberglass batts cost $0.50–$1.50 per sq ft installed depending on R-value. Blown-in cellulose runs $1.00–$2.50/sq ft. Spray foam is the most expensive at $1.50–$4.00/sq ft for closed-cell. DIY fiberglass batts from a hardware store cost $0.30–$0.80/sq ft for materials only."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How many batts of insulation do I need?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Divide your total wall or attic area (in sq ft) by the coverage per batt or bag listed on the packaging. Standard R-13 batts for 2×4 walls (15\" wide) cover about 40 sq ft per bundle. R-30 attic batts (15\" wide) cover about 31 sq ft per bundle."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Should I insulate my attic or walls first?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Attic insulation gives the best return on investment. Heat rises, so an under-insulated attic loses more energy than under-insulated walls. Start with the attic, then crawlspace/basement, then exterior walls. Most homes save 10–50% on heating/cooling bills after proper attic insulation."
+        }
+      }
+    ]
+  }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root { --orange: #F97316; --orange-dark: #EA580C; --darker: #0F0F1A; --dark-card: #1A1A2E; --gray: #94A3B8; --light: #F8FAFC; --green: #22C55E; --border: rgba(255,255,255,0.08); }
+    body { font-family: 'Inter', -apple-system, sans-serif; background: var(--darker); color: var(--light); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+    nav { padding: 20px 0; border-bottom: 1px solid var(--border); }
+    nav .container { display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.3rem; color: var(--orange); text-decoration: none; letter-spacing: -0.5px; }
+    .logo span { color: var(--light); }
+    .nav-links a { color: var(--gray); text-decoration: none; font-size: 0.9rem; margin-left: 24px; }
+    .nav-links a:hover { color: var(--light); }
+    .hero { padding: 48px 0 32px; text-align: center; }
+    .hero .badge { display: inline-block; background: rgba(249,115,22,0.1); border: 1px solid rgba(249,115,22,0.3); color: var(--orange); font-size: 0.8rem; font-weight: 600; padding: 6px 16px; border-radius: 100px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .hero h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 800; line-height: 1.15; letter-spacing: -1px; margin-bottom: 12px; }
+    .hero h1 .highlight { color: var(--orange); }
+    .hero p { color: var(--gray); font-size: 1.05rem; max-width: 600px; margin: 0 auto; }
+    .calc-section { padding: 24px 0 60px; }
+    .calc-card { background: var(--dark-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; margin-bottom: 24px; }
+    .calc-card h2 { font-size: 1.2rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+    .calc-card h2 .icon { font-size: 1.4rem; }
+    .tabs { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
+    .tab { background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: var(--gray); padding: 10px 20px; border-radius: 8px; cursor: pointer; font-size: 0.9rem; font-weight: 500; transition: all 0.2s; }
+    .tab:hover { border-color: var(--orange); color: var(--light); }
+    .tab.active { background: rgba(249,115,22,0.15); border-color: var(--orange); color: var(--orange); }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 500px) { .form-grid { grid-template-columns: 1fr; } }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group.full { grid-column: 1 / -1; }
+    label { font-size: 0.85rem; font-weight: 600; color: var(--gray); text-transform: uppercase; letter-spacing: 0.5px; }
+    input, select { background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: var(--light); padding: 12px 16px; border-radius: 8px; font-size: 1rem; font-family: inherit; outline: none; transition: border-color 0.2s; }
+    input:focus, select:focus { border-color: var(--orange); }
+    select option { background: var(--darker); }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: var(--orange); color: #fff; font-weight: 700; font-size: 1rem; padding: 14px 28px; border-radius: 10px; border: none; cursor: pointer; width: 100%; margin-top: 16px; transition: background 0.2s; }
+    .btn:hover { background: var(--orange-dark); }
+    .results { display: none; margin-top: 24px; }
+    .results.show { display: block; }
+    .result-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; }
+    .result-item { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 12px; padding: 20px; text-align: center; }
+    .result-item .number { font-size: 2rem; font-weight: 800; color: var(--orange); letter-spacing: -1px; }
+    .result-item .label { font-size: 0.8rem; color: var(--gray); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .result-item .detail { font-size: 0.85rem; color: var(--light); margin-top: 8px; opacity: 0.8; }
+    .waste-note { background: rgba(249,115,22,0.08); border: 1px solid rgba(249,115,22,0.2); border-radius: 10px; padding: 16px 20px; margin-top: 20px; font-size: 0.9rem; color: var(--gray); }
+    .waste-note strong { color: var(--orange); }
+    .info-section { padding: 40px 0 60px; }
+    .info-card { background: var(--dark-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; margin-bottom: 24px; }
+    .info-card h2 { font-size: 1.4rem; font-weight: 700; margin-bottom: 16px; }
+    .info-card h3 { font-size: 1.1rem; font-weight: 600; margin: 20px 0 8px; color: var(--orange); }
+    .info-card p { color: var(--gray); margin-bottom: 12px; line-height: 1.8; }
+    .info-card ul, .info-card ol { color: var(--gray); margin-left: 20px; margin-bottom: 12px; }
+    .info-card li { margin-bottom: 6px; }
+    .info-card table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+    .info-card th, .info-card td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+    .info-card th { color: var(--orange); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; }
+    .info-card td { color: var(--gray); }
+    footer { padding: 40px 0; border-top: 1px solid var(--border); text-align: center; }
+    footer p { color: var(--gray); font-size: 0.85rem; }
+    footer a { color: var(--orange); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <nav><div class="container"><a href="/" class="logo">Built<span>Right</span></a><div class="nav-links"><a href="/blog">Blog</a><a href="/templates">Templates</a><a href="/tools">Tools</a></div></div></nav>
+
+  <section class="hero"><div class="container">
+    <div class="badge">Free Tool</div>
+    <h1>Insulation <span class="highlight">Calculator</span></h1>
+    <p>Calculate R-value requirements, batts or rolls needed, and estimated cost for walls, attics, and crawlspaces by climate zone.</p>
+  </div></section>
+
+  <section class="calc-section"><div class="container">
+    <div class="calc-card">
+      <h2><span class="icon">🧊</span> Choose Your Insulation Area</h2>
+      <div class="tabs">
+        <div class="tab active" data-type="wall">Exterior Walls</div>
+        <div class="tab" data-type="attic">Attic / Ceiling</div>
+        <div class="tab" data-type="crawlspace">Crawlspace / Floor</div>
+      </div>
+
+      <div class="calc-form">
+        <div class="form-grid">
+          <div class="form-group"><label>Area Length (ft)</label><input type="number" id="ins-length" placeholder="e.g. 40" step="any"></div>
+          <div class="form-group"><label>Area Height/Width (ft)</label><input type="number" id="ins-height" placeholder="e.g. 8" step="any"></div>
+          <div class="form-group"><label>Climate Zone</label>
+            <select id="climate-zone">
+              <option value="1">Zone 1 — Miami, Hawaii (Hot)</option>
+              <option value="2">Zone 2 — Houston, Phoenix (Hot)</option>
+              <option value="3">Zone 3 — Atlanta, Dallas (Warm)</option>
+              <option value="4" selected>Zone 4 — Nashville, Seattle (Mixed)</option>
+              <option value="5">Zone 5 — Chicago, Boston (Cold)</option>
+              <option value="6">Zone 6 — Minneapolis, Burlington (Cold)</option>
+              <option value="7">Zone 7 — Duluth, Anchorage (Very Cold)</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Insulation Type</label>
+            <select id="ins-type">
+              <option value="fiberglass-batt">Fiberglass Batts</option>
+              <option value="blown-cellulose">Blown-In Cellulose</option>
+              <option value="blown-fiberglass">Blown-In Fiberglass</option>
+              <option value="spray-open">Spray Foam (Open Cell)</option>
+              <option value="spray-closed">Spray Foam (Closed Cell)</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Stud Spacing</label>
+            <select id="stud-spacing">
+              <option value="16">16" on center (standard)</option>
+              <option value="24">24" on center</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Wall Framing</label>
+            <select id="wall-framing">
+              <option value="2x4">2×4 walls (3.5" cavity)</option>
+              <option value="2x6">2×6 walls (5.5" cavity)</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn" onclick="calcInsulation()">Calculate Insulation</button>
+      </div>
+
+      <div class="results" id="results">
+        <div class="result-grid">
+          <div class="result-item"><div class="number" id="r-sqft">—</div><div class="label">Total Sq Ft</div><div class="detail" id="r-area"></div></div>
+          <div class="result-item"><div class="number" id="r-rvalue">—</div><div class="label">Recommended R-Value</div><div class="detail" id="r-rdetail"></div></div>
+          <div class="result-item"><div class="number" id="r-bundles">—</div><div class="label">Bundles / Bags</div><div class="detail" id="r-bundledetail"></div></div>
+          <div class="result-item"><div class="number" id="r-cost">—</div><div class="label">Estimated Cost</div><div class="detail" id="r-costdetail"></div></div>
+        </div>
+        <div class="waste-note"><strong>Pro Tip:</strong> Don't compress insulation to fit — it reduces R-value. If you need higher R-value than your cavity allows, consider adding rigid foam sheathing on the exterior for extra thermal resistance.</div>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="info-section"><div class="container">
+    <div class="info-card">
+      <h2>R-Value Guide by Climate Zone</h2>
+      <p>The Department of Energy recommends different R-values depending on your climate zone. Here's what you need for each area of your home:</p>
+
+      <table>
+        <tr><th>Climate Zone</th><th>Attic</th><th>Walls (Cavity)</th><th>Floor</th><th>Example Cities</th></tr>
+        <tr><td>Zone 1</td><td>R-30 to R-49</td><td>R-13</td><td>R-13</td><td>Miami, Key West, Hawaii</td></tr>
+        <tr><td>Zone 2</td><td>R-30 to R-60</td><td>R-13</td><td>R-13</td><td>Houston, Phoenix, New Orleans</td></tr>
+        <tr><td>Zone 3</td><td>R-30 to R-60</td><td>R-13 to R-15</td><td>R-19 to R-25</td><td>Atlanta, Dallas, Las Vegas</td></tr>
+        <tr><td>Zone 4</td><td>R-38 to R-60</td><td>R-13 to R-21</td><td>R-19 to R-25</td><td>Nashville, Seattle, DC</td></tr>
+        <tr><td>Zone 5</td><td>R-49 to R-60</td><td>R-13 to R-21</td><td>R-25 to R-30</td><td>Chicago, Boston, Denver</td></tr>
+        <tr><td>Zone 6</td><td>R-49 to R-60</td><td>R-19 to R-21</td><td>R-25 to R-30</td><td>Minneapolis, Burlington, Helena</td></tr>
+        <tr><td>Zone 7</td><td>R-49 to R-60</td><td>R-21</td><td>R-25 to R-30</td><td>Duluth, Anchorage, Fairbanks</td></tr>
+      </table>
+
+      <h3>Understanding R-Value</h3>
+      <p>R-value measures thermal resistance — how well insulation resists heat flow. Higher R-value = better insulation. The R-value you need depends on where you live (climate zone) and where you're insulating (attic, walls, floors).</p>
+      <p><strong>Key fact:</strong> R-values are additive. Two layers of R-19 gives you R-38. This is useful for attic insulation where you can stack batts or add blown-in over existing insulation.</p>
+
+      <h3>Insulation Types Compared</h3>
+      <table>
+        <tr><th>Type</th><th>R-Value per Inch</th><th>Cost/sq ft (installed)</th><th>Best For</th></tr>
+        <tr><td>Fiberglass Batts</td><td>R-3.1 to R-3.7</td><td>$0.50–$1.50</td><td>Walls, attics (DIY-friendly)</td></tr>
+        <tr><td>Blown-In Cellulose</td><td>R-3.2 to R-3.8</td><td>$1.00–$2.00</td><td>Attics, retrofit walls</td></tr>
+        <tr><td>Blown-In Fiberglass</td><td>R-2.5 to R-3.7</td><td>$1.00–$2.50</td><td>Attics with obstructions</td></tr>
+        <tr><td>Open-Cell Spray Foam</td><td>R-3.5 to R-3.7</td><td>$1.50–$2.50</td><td>Interior walls, sound control</td></tr>
+        <tr><td>Closed-Cell Spray Foam</td><td>R-6.0 to R-7.0</td><td>$2.50–$4.00</td><td>Crawlspaces, basements, max R-value</td></tr>
+        <tr><td>Rigid Foam Board</td><td>R-3.8 to R-6.5</td><td>$1.50–$3.50</td><td>Exterior sheathing, foundations</td></tr>
+      </table>
+
+      <h3>How Much Can You Save on Energy Bills?</h3>
+      <p>Proper insulation is one of the highest-ROI home improvements:</p>
+      <ul>
+        <li><strong>Attic insulation:</strong> Saves 10–50% on heating/cooling. Pays for itself in 1–3 years.</li>
+        <li><strong>Wall insulation:</strong> Saves 10–20%. Payback in 3–5 years.</li>
+        <li><strong>Crawlspace insulation:</strong> Saves 10–20% and reduces moisture issues.</li>
+        <li><strong>Air sealing + insulation:</strong> Combined savings of 15–40% on energy bills.</li>
+      </ul>
+
+      <h3>5 Insulation Mistakes That Waste Energy (and Money)</h3>
+      <ol>
+        <li><strong>Compressing insulation.</strong> Stuffing R-19 batts into a 3.5" wall cavity reduces the R-value to about R-13. Use the right thickness for your cavity.</li>
+        <li><strong>Leaving gaps and voids.</strong> Even small gaps dramatically reduce effectiveness. Insulation must fill the entire cavity with no air pockets.</li>
+        <li><strong>Ignoring air sealing.</strong> Insulation slows heat transfer but doesn't stop air leaks. Seal gaps around wires, pipes, and outlets before insulating.</li>
+        <li><strong>Blocking soffit vents in the attic.</strong> Attics need airflow. Use baffles to keep insulation away from soffit vents.</li>
+        <li><strong>No vapor barrier where needed.</strong> In cold climates, install a vapor barrier on the warm side (interior). In hot/humid climates, it goes on the exterior side.</li>
+      </ol>
+    </div>
+
+    <div class="info-card">
+      <h2>DIY vs. Professional Insulation: When to Hire a Pro</h2>
+      <table>
+        <tr><th>Factor</th><th>DIY</th><th>Professional</th></tr>
+        <tr><td>Best for</td><td>Attic batts, accessible walls</td><td>Spray foam, blown-in, tight spaces</td></tr>
+        <tr><td>Cost savings</td><td>40–60% on labor</td><td>—</td></tr>
+        <tr><td>Equipment needed</td><td>Utility knife, staple gun</td><td>Blowing machine, spray rig</td></tr>
+        <tr><td>Time (1,000 sq ft attic)</td><td>4–8 hours</td><td>2–4 hours</td></tr>
+        <tr><td>Safety concerns</td><td>Fiberglass irritation, attic heat</td><td>Professional gear</td></tr>
+        <tr><td>Warranty</td><td>Material only</td><td>Labor + material</td></tr>
+      </table>
+      <p><strong>Rule of thumb:</strong> If you can safely access the area and it's fiberglass batts, DIY is straightforward and saves 40–60%. For spray foam or blown-in cellulose, hire a pro — the equipment and technique matter significantly.</p>
+    </div>
+  </div></section>
+
+  <!-- Email Capture CTA -->
+  <div id="email-cta" style="max-width:720px;margin:40px auto;padding:40px 32px;background:linear-gradient(135deg,#1e293b 0%,#0f172a 100%);border:1px solid rgba(249,115,22,0.3);border-radius:16px;text-align:center;">
+    <div style="font-size:2rem;margin-bottom:12px;">📋</div>
+    <h3 style="font-family:Inter,-apple-system,sans-serif;font-size:1.4rem;font-weight:700;color:#f8fafc;margin-bottom:8px;">Free Contractor Toolkit</h3>
+    <p style="font-family:Inter,-apple-system,sans-serif;color:#94a3b8;font-size:0.95rem;margin-bottom:24px;max-width:480px;margin-left:auto;margin-right:auto;">Get our <strong style="color:#f97316;">free spreadsheet templates</strong> &mdash; invoice, estimate, job costing &amp; profit tracker. Used by 500+ contractors.</p>
+    <form id="capture-form" onsubmit="return handleCapture(event)" style="display:flex;gap:10px;max-width:420px;margin:0 auto;flex-wrap:wrap;justify-content:center;">
+      <input type="email" id="capture-email" placeholder="you@company.com" required style="flex:1;min-width:220px;padding:12px 16px;border-radius:8px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.05);color:#f8fafc;font-size:0.95rem;font-family:Inter,-apple-system,sans-serif;outline:none;">
+      <button type="submit" style="padding:12px 24px;background:#f97316;color:#fff;border:none;border-radius:8px;font-weight:600;font-size:0.95rem;cursor:pointer;font-family:Inter,-apple-system,sans-serif;white-space:nowrap;">Send Me the Templates</button>
+    </form>
+    <p id="capture-msg" style="font-family:Inter,-apple-system,sans-serif;color:#22c55e;font-size:0.85rem;margin-top:12px;display:none;"></p>
+    <p style="font-family:Inter,-apple-system,sans-serif;color:#64748b;font-size:0.75rem;margin-top:12px;">No spam. Unsubscribe anytime.</p>
+  </div>
+
+  <footer><div class="container"><p>© 2026 <a href="/">BuiltRight Academy</a>. Free tools for tradespeople who mean business.</p></div></footer>
+
+  <script>
+    let currentArea = 'wall';
+
+    // R-value recommendations by zone and area
+    const rValues = {
+      wall:       { 1: 13, 2: 13, 3: 13, 4: 13, 5: 20, 6: 21, 7: 21 },
+      attic:      { 1: 30, 2: 38, 3: 38, 4: 49, 5: 49, 6: 49, 7: 60 },
+      crawlspace: { 1: 13, 2: 13, 3: 25, 4: 25, 5: 25, 6: 30, 7: 30 }
+    };
+
+    // Insulation type data: R-value per inch, cost per sq ft low/high, coverage per bundle/bag (sq ft)
+    const insTypes = {
+      'fiberglass-batt':   { label: 'Fiberglass Batts', rPerInch: 3.4, costLow: 0.40, costHigh: 1.20, coveragePerBundle: 40 },
+      'blown-cellulose':   { label: 'Blown-In Cellulose', rPerInch: 3.5, costLow: 0.80, costHigh: 1.80, coveragePerBundle: 40 },
+      'blown-fiberglass':  { label: 'Blown-In Fiberglass', rPerInch: 3.1, costLow: 0.80, costHigh: 2.00, coveragePerBundle: 35 },
+      'spray-open':        { label: 'Open-Cell Spray Foam', rPerInch: 3.6, costLow: 1.20, costHigh: 2.50, coveragePerBundle: null },
+      'spray-closed':      { label: 'Closed-Cell Spray Foam', rPerInch: 6.5, costLow: 2.00, costHigh: 4.00, coveragePerBundle: null }
+    };
+
+    // Tab switching
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        currentArea = tab.dataset.type;
+        document.getElementById('results').classList.remove('show');
+      });
+    });
+
+    function calcInsulation() {
+      const l = parseFloat(document.getElementById('ins-length').value);
+      const h = parseFloat(document.getElementById('ins-height').value);
+      if (!l || !h) return alert('Please enter area dimensions.');
+
+      const zone = document.getElementById('climate-zone').value;
+      const insType = document.getElementById('ins-type').value;
+      const framing = document.getElementById('wall-framing').value;
+      const totalSqFt = l * h;
+
+      const recR = rValues[currentArea][zone];
+      const ins = insTypes[insType];
+      const cavityDepth = framing === '2x6' ? 5.5 : 3.5;
+      const maxR = Math.round(cavityDepth * ins.rPerInch);
+      const effectiveR = currentArea === 'wall' ? Math.min(recR, maxR) : recR;
+
+      // Calculate thickness needed
+      const thicknessNeeded = effectiveR / ins.rPerInch;
+
+      // Calculate bundles/bags
+      let bundles = '—';
+      let bundleLabel = 'Bundles / Bags';
+      if (ins.coveragePerBundle) {
+        bundles = Math.ceil(totalSqFt / ins.coveragePerBundle);
+        bundleLabel = insType.includes('blown') ? 'Bags' : 'Bundles';
+      } else {
+        // Spray foam — measured in board feet (1 sq ft × 1 inch thick)
+        const boardFeet = totalSqFt * thicknessNeeded;
+        bundles = Math.ceil(boardFeet);
+        bundleLabel = 'Board Feet';
+      }
+
+      const costLow = totalSqFt * ins.costLow;
+      const costHigh = totalSqFt * ins.costHigh;
+
+      document.getElementById('r-sqft').textContent = Math.ceil(totalSqFt);
+      document.getElementById('r-area').textContent = l + '×' + h + ' ft';
+      document.getElementById('r-rvalue').textContent = 'R-' + effectiveR;
+      document.getElementById('r-rdetail').textContent = 'Zone ' + zone + ' — ' + currentArea;
+      document.getElementById('r-bundles').textContent = bundles;
+      document.getElementById('r-bundledetail').textContent = ins.label;
+      document.getElementById('r-cost').textContent = '$' + Math.round(costLow) + '–$' + Math.round(costHigh);
+      document.getElementById('r-costdetail').textContent = 'Materials only';
+      document.getElementById('results').classList.add('show');
+      document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function handleCapture(e){
+      e.preventDefault();
+      var em=document.getElementById("capture-email").value;
+      var msg=document.getElementById("capture-msg");
+      var btn=e.target.querySelector("button");
+      btn.textContent="Sending...";btn.disabled=true;
+      fetch("/api/subscribe",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:em,source:window.location.pathname,lead_magnet:"contractor-toolkit"})})
+      .then(function(r){return r.json()})
+      .then(function(d){msg.textContent="\u2705 Check your inbox! Templates are on the way.";msg.style.display="block";document.getElementById("capture-form").style.display="none"})
+      .catch(function(){msg.textContent="Something went wrong. Try again.";msg.style.color="#ef4444";msg.style.display="block";btn.textContent="Send Me the Templates";btn.disabled=false});
+      return false;
+    }
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
+</body>
+</html>
