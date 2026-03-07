@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Square Footage Calculator — Calculate Area for Any Shape | BuiltRight Academy</title>
+  <meta name="description" content="Free square footage calculator. Calculate square feet for rooms, irregular shapes, and multiple areas. Works for flooring, painting, landscaping, roofing, and real estate. Instant results.">
+  <meta name="keywords" content="square footage calculator, square feet calculator, area calculator, room size calculator, how to calculate square footage, sq ft calculator, floor area calculator">
+  <link rel="canonical" href="https://builtright-academy.vercel.app/tools/square-footage-calculator">
+  <meta property="og:title" content="Square Footage Calculator — Calculate Area for Any Shape">
+  <meta property="og:description" content="Free interactive square footage calculator. Calculate area for rooms, irregular shapes, and multiple areas instantly.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Square Footage Calculator",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "description": "Calculate square footage for rooms, irregular shapes, circles, triangles, and multiple areas. Convert between square feet, square yards, square meters, and acres."
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do you calculate square footage?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For a rectangle or square, multiply length × width (both in feet). For example, a 12×15 foot room = 180 square feet. If your measurements are in inches, multiply length × width in inches, then divide by 144 to get square feet. For irregular shapes, break the area into rectangles, calculate each one, and add them together."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How many square feet is a 10x10 room?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A 10×10 room is 100 square feet. To calculate: 10 feet × 10 feet = 100 sq ft. This is a common small bedroom size. For flooring, you'd need about 110 sq ft of material (adding 10% for waste and cuts)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I calculate square footage for flooring?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Measure each room's length and width in feet, multiply them together, then add all rooms. Add 10% waste for standard installations or 15% for diagonal patterns. For example: Living room (15×20 = 300) + Bedroom (12×14 = 168) = 468 sq ft. With 10% waste: 468 × 1.10 = 515 sq ft of flooring needed."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do you calculate square footage of an irregular shape?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Break the irregular shape into simple rectangles, triangles, or circles. Calculate each section's area separately, then add them all together. For L-shaped rooms, split into two rectangles. For rooms with bay windows or bump-outs, add the bump-out area to the main room. For curved areas, use the circle formula: π × radius²."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How many square feet in an acre?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "One acre equals 43,560 square feet. A half acre is 21,780 sq ft, and a quarter acre is 10,890 sq ft. For reference, a standard American football field (not including end zones) is about 48,000 sq ft, slightly larger than an acre. To convert square feet to acres, divide by 43,560."
+        }
+      }
+    ]
+  }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root { --orange: #F97316; --orange-dark: #EA580C; --darker: #0F0F1A; --dark-card: #1A1A2E; --gray: #94A3B8; --light: #F8FAFC; --green: #22C55E; --border: rgba(255,255,255,0.08); }
+    body { font-family: 'Inter', -apple-system, sans-serif; background: var(--darker); color: var(--light); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+    nav { padding: 20px 0; border-bottom: 1px solid var(--border); }
+    nav .container { display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.3rem; color: var(--orange); text-decoration: none; letter-spacing: -0.5px; }
+    .logo span { color: var(--light); }
+    .nav-links a { color: var(--gray); text-decoration: none; font-size: 0.9rem; margin-left: 24px; }
+    .nav-links a:hover { color: var(--light); }
+    .hero { padding: 48px 0 32px; text-align: center; }
+    .hero .badge { display: inline-block; background: rgba(249,115,22,0.1); border: 1px solid rgba(249,115,22,0.3); color: var(--orange); font-size: 0.8rem; font-weight: 600; padding: 6px 16px; border-radius: 100px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .hero h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 800; line-height: 1.15; letter-spacing: -1px; margin-bottom: 12px; }
+    .hero h1 .highlight { color: var(--orange); }
+    .hero p { color: var(--gray); font-size: 1.05rem; max-width: 600px; margin: 0 auto; }
+    .calc-section { padding: 24px 0 60px; }
+    .calc-card { background: var(--dark-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; margin-bottom: 24px; }
+    .calc-card h2 { font-size: 1.2rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+    .calc-card h2 .icon { font-size: 1.4rem; }
+    .tabs { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
+    .tab { background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: var(--gray); padding: 10px 20px; border-radius: 8px; cursor: pointer; font-size: 0.9rem; font-weight: 500; transition: all 0.2s; }
+    .tab:hover { border-color: var(--orange); color: var(--light); }
+    .tab.active { background: rgba(249,115,22,0.15); border-color: var(--orange); color: var(--orange); }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 500px) { .form-grid { grid-template-columns: 1fr; } }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group.full { grid-column: 1 / -1; }
+    label { font-size: 0.85rem; font-weight: 600; color: var(--gray); text-transform: uppercase; letter-spacing: 0.5px; }
+    input, select { background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: var(--light); padding: 12px 16px; border-radius: 8px; font-size: 1rem; font-family: inherit; outline: none; transition: border-color 0.2s; }
+    input:focus, select:focus { border-color: var(--orange); }
+    select option { background: var(--darker); }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: var(--orange); color: #fff; font-weight: 700; font-size: 1rem; padding: 14px 28px; border-radius: 10px; border: none; cursor: pointer; width: 100%; margin-top: 16px; transition: background 0.2s; }
+    .btn:hover { background: var(--orange-dark); }
+    .btn-secondary { background: rgba(255,255,255,0.08); border: 1px solid var(--border); margin-top: 12px; font-size: 0.9rem; padding: 10px 20px; }
+    .btn-secondary:hover { background: rgba(255,255,255,0.12); border-color: var(--orange); }
+    .results { display: none; margin-top: 24px; }
+    .results.show { display: block; }
+    .result-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; }
+    .result-item { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 12px; padding: 20px; text-align: center; }
+    .result-item .number { font-size: 2rem; font-weight: 800; color: var(--orange); letter-spacing: -1px; }
+    .result-item .label { font-size: 0.8rem; color: var(--gray); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .result-item .detail { font-size: 0.85rem; color: var(--light); margin-top: 8px; opacity: 0.8; }
+    .waste-note { background: rgba(249,115,22,0.08); border: 1px solid rgba(249,115,22,0.2); border-radius: 10px; padding: 16px 20px; margin-top: 20px; font-size: 0.9rem; color: var(--gray); }
+    .waste-note strong { color: var(--orange); }
+    .room-list { margin-top: 16px; }
+    .room-entry { display: flex; align-items: center; gap: 12px; padding: 10px 14px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 8px; margin-bottom: 8px; font-size: 0.9rem; }
+    .room-entry .room-name { flex: 1; color: var(--light); }
+    .room-entry .room-area { color: var(--orange); font-weight: 700; }
+    .room-entry .room-remove { background: none; border: none; color: var(--gray); cursor: pointer; font-size: 1.1rem; padding: 4px 8px; }
+    .room-entry .room-remove:hover { color: #ef4444; }
+    .info-section { padding: 40px 0 60px; }
+    .info-card { background: var(--dark-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; margin-bottom: 24px; }
+    .info-card h2 { font-size: 1.4rem; font-weight: 700; margin-bottom: 16px; }
+    .info-card h3 { font-size: 1.1rem; font-weight: 600; margin: 20px 0 8px; color: var(--orange); }
+    .info-card p { color: var(--gray); margin-bottom: 12px; line-height: 1.8; }
+    .info-card ul, .info-card ol { color: var(--gray); margin-left: 20px; margin-bottom: 12px; }
+    .info-card li { margin-bottom: 6px; }
+    .info-card table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+    .info-card th, .info-card td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+    .info-card th { color: var(--orange); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; }
+    .info-card td { color: var(--gray); }
+    footer { padding: 40px 0; border-top: 1px solid var(--border); text-align: center; }
+    footer p { color: var(--gray); font-size: 0.85rem; }
+    footer a { color: var(--orange); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <nav><div class="container"><a href="/" class="logo">Built<span>Right</span></a><div class="nav-links"><a href="/blog">Blog</a><a href="/templates">Templates</a><a href="/tools">Tools</a></div></div></nav>
+
+  <section class="hero"><div class="container">
+    <div class="badge">Free Tool</div>
+    <h1>Square Footage <span class="highlight">Calculator</span></h1>
+    <p>Calculate square feet for any shape — rectangles, circles, triangles, and irregular rooms. Add multiple areas together for total project size.</p>
+  </div></section>
+
+  <section class="calc-section"><div class="container">
+    <div class="calc-card">
+      <h2><span class="icon">📐</span> Choose Your Shape</h2>
+      <div class="tabs">
+        <div class="tab active" data-type="rect">Rectangle</div>
+        <div class="tab" data-type="circle">Circle</div>
+        <div class="tab" data-type="triangle">Triangle</div>
+        <div class="tab" data-type="trapezoid">Trapezoid</div>
+        <div class="tab" data-type="multi">Multi-Room</div>
+      </div>
+
+      <!-- Rectangle -->
+      <div id="form-rect" class="calc-form">
+        <div class="form-grid">
+          <div class="form-group"><label>Length</label><input type="number" id="rect-length" placeholder="e.g. 20" step="any"></div>
+          <div class="form-group"><label>Width</label><input type="number" id="rect-width" placeholder="e.g. 15" step="any"></div>
+          <div class="form-group"><label>Unit</label>
+            <select id="rect-unit">
+              <option value="ft" selected>Feet</option>
+              <option value="in">Inches</option>
+              <option value="yd">Yards</option>
+              <option value="m">Meters</option>
+              <option value="cm">Centimeters</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn" onclick="calcRect()">Calculate Square Footage</button>
+      </div>
+
+      <!-- Circle -->
+      <div id="form-circle" class="calc-form" style="display:none">
+        <div class="form-grid">
+          <div class="form-group"><label>Measurement Type</label>
+            <select id="circle-type">
+              <option value="radius">Radius</option>
+              <option value="diameter" selected>Diameter</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Value (ft)</label><input type="number" id="circle-value" placeholder="e.g. 10" step="any"></div>
+        </div>
+        <button class="btn" onclick="calcCircle()">Calculate Square Footage</button>
+      </div>
+
+      <!-- Triangle -->
+      <div id="form-triangle" class="calc-form" style="display:none">
+        <div class="form-grid">
+          <div class="form-group"><label>Base (ft)</label><input type="number" id="tri-base" placeholder="e.g. 10" step="any"></div>
+          <div class="form-group"><label>Height (ft)</label><input type="number" id="tri-height" placeholder="e.g. 8" step="any"></div>
+        </div>
+        <button class="btn" onclick="calcTriangle()">Calculate Square Footage</button>
+      </div>
+
+      <!-- Trapezoid -->
+      <div id="form-trapezoid" class="calc-form" style="display:none">
+        <div class="form-grid">
+          <div class="form-group"><label>Side A / Top (ft)</label><input type="number" id="trap-a" placeholder="e.g. 8" step="any"></div>
+          <div class="form-group"><label>Side B / Bottom (ft)</label><input type="number" id="trap-b" placeholder="e.g. 12" step="any"></div>
+          <div class="form-group"><label>Height (ft)</label><input type="number" id="trap-h" placeholder="e.g. 6" step="any"></div>
+        </div>
+        <button class="btn" onclick="calcTrapezoid()">Calculate Square Footage</button>
+      </div>
+
+      <!-- Multi-Room -->
+      <div id="form-multi" class="calc-form" style="display:none">
+        <div class="form-grid">
+          <div class="form-group"><label>Room Name</label><input type="text" id="multi-name" placeholder="e.g. Living Room"></div>
+          <div class="form-group"><label>Shape</label>
+            <select id="multi-shape">
+              <option value="rect">Rectangle</option>
+              <option value="circle">Circle</option>
+              <option value="triangle">Triangle</option>
+            </select>
+          </div>
+          <div class="form-group" id="multi-dim1-group"><label id="multi-dim1-label">Length (ft)</label><input type="number" id="multi-dim1" placeholder="e.g. 15" step="any"></div>
+          <div class="form-group" id="multi-dim2-group"><label id="multi-dim2-label">Width (ft)</label><input type="number" id="multi-dim2" placeholder="e.g. 12" step="any"></div>
+        </div>
+        <button class="btn btn-secondary" onclick="addRoom()">+ Add Room</button>
+        <div class="room-list" id="room-list"></div>
+        <button class="btn" onclick="calcMulti()" id="multi-calc-btn" style="display:none">Calculate Total Square Footage</button>
+      </div>
+
+      <div class="results" id="results">
+        <div class="result-grid" id="result-grid"></div>
+        <div class="waste-note"><strong>Material Tip:</strong> When buying flooring or tile, add <strong>10% for waste</strong> on standard installs, <strong>15% for diagonal</strong> patterns, and <strong>20% for complex shapes</strong>. For paint, 1 gallon covers about 350–400 sq ft with one coat.</div>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="info-section"><div class="container">
+    <div class="info-card">
+      <h2>How to Calculate Square Footage: Complete Guide</h2>
+      <p>Square footage is the most common measurement in construction, real estate, and home improvement. Whether you're ordering flooring, estimating paint, or listing a property, accurate square footage is essential.</p>
+
+      <h3>Basic Square Footage Formulas</h3>
+      <table>
+        <tr><th>Shape</th><th>Formula</th><th>Example</th></tr>
+        <tr><td>Rectangle / Square</td><td>Length × Width</td><td>12 ft × 15 ft = 180 sq ft</td></tr>
+        <tr><td>Circle</td><td>π × radius²</td><td>π × 5² = 78.5 sq ft</td></tr>
+        <tr><td>Triangle</td><td>½ × base × height</td><td>½ × 10 × 8 = 40 sq ft</td></tr>
+        <tr><td>Trapezoid</td><td>½ × (a + b) × height</td><td>½ × (8+12) × 6 = 60 sq ft</td></tr>
+      </table>
+      <p><strong>Tip:</strong> If your measurements are in inches, calculate the area in square inches, then divide by 144 to convert to square feet (12 × 12 = 144).</p>
+
+      <h3>Common Room Sizes (Square Feet)</h3>
+      <table>
+        <tr><th>Room Type</th><th>Typical Size</th><th>Square Feet</th></tr>
+        <tr><td>Small Bedroom</td><td>10 × 10</td><td>100 sq ft</td></tr>
+        <tr><td>Standard Bedroom</td><td>12 × 12</td><td>144 sq ft</td></tr>
+        <tr><td>Master Bedroom</td><td>14 × 16</td><td>224 sq ft</td></tr>
+        <tr><td>Living Room</td><td>15 × 20</td><td>300 sq ft</td></tr>
+        <tr><td>Kitchen</td><td>12 × 16</td><td>192 sq ft</td></tr>
+        <tr><td>Full Bathroom</td><td>8 × 10</td><td>80 sq ft</td></tr>
+        <tr><td>Half Bathroom</td><td>5 × 8</td><td>40 sq ft</td></tr>
+        <tr><td>1-Car Garage</td><td>12 × 22</td><td>264 sq ft</td></tr>
+        <tr><td>2-Car Garage</td><td>22 × 22</td><td>484 sq ft</td></tr>
+        <tr><td>Standard Deck</td><td>12 × 16</td><td>192 sq ft</td></tr>
+      </table>
+
+      <h3>Unit Conversions</h3>
+      <table>
+        <tr><th>From</th><th>To</th><th>Multiply By</th></tr>
+        <tr><td>Square Feet</td><td>Square Yards</td><td>÷ 9</td></tr>
+        <tr><td>Square Feet</td><td>Square Meters</td><td>× 0.0929</td></tr>
+        <tr><td>Square Feet</td><td>Acres</td><td>÷ 43,560</td></tr>
+        <tr><td>Square Meters</td><td>Square Feet</td><td>× 10.764</td></tr>
+        <tr><td>Square Yards</td><td>Square Feet</td><td>× 9</td></tr>
+        <tr><td>Acres</td><td>Square Feet</td><td>× 43,560</td></tr>
+      </table>
+
+      <h3>How to Measure Irregular Rooms</h3>
+      <p>Most rooms aren't perfect rectangles. Here's how to handle common situations:</p>
+      <ul>
+        <li><strong>L-Shaped rooms:</strong> Split into two rectangles. Measure each one separately and add the areas together.</li>
+        <li><strong>Rooms with alcoves or bump-outs:</strong> Measure the main rectangle, then add the alcove area.</li>
+        <li><strong>Rooms with bay windows:</strong> Approximate the bay as a trapezoid and add to the main room area.</li>
+        <li><strong>Rounded walls:</strong> Approximate as a half-circle (½ × π × r²) and add to the rectangular portion.</li>
+        <li><strong>Angled walls:</strong> Create a right triangle from the angle. Calculate the triangle area and add or subtract from the rectangle.</li>
+      </ul>
+
+      <h3>Square Footage for Materials Estimating</h3>
+      <table>
+        <tr><th>Material</th><th>Coverage per Unit</th><th>Waste Factor</th></tr>
+        <tr><td>Interior paint (1 gal)</td><td>350–400 sq ft</td><td>+10%</td></tr>
+        <tr><td>Exterior paint (1 gal)</td><td>250–350 sq ft</td><td>+15%</td></tr>
+        <tr><td>Hardwood flooring</td><td>Per sq ft purchased</td><td>+10% (straight) / +15% (diagonal)</td></tr>
+        <tr><td>Ceramic tile</td><td>Per sq ft purchased</td><td>+10–15%</td></tr>
+        <tr><td>Carpet (sold by sq yd)</td><td>÷ 9 for sq yards</td><td>+10%</td></tr>
+        <tr><td>Drywall (4×8 sheet)</td><td>32 sq ft per sheet</td><td>+10%</td></tr>
+        <tr><td>Insulation (R-13 batt)</td><td>Per sq ft</td><td>+5%</td></tr>
+        <tr><td>Roofing (1 square)</td><td>100 sq ft</td><td>+10–15%</td></tr>
+        <tr><td>Sod (per pallet)</td><td>450–500 sq ft</td><td>+5%</td></tr>
+        <tr><td>Mulch (1 cu yd, 3" deep)</td><td>108 sq ft</td><td>+10%</td></tr>
+      </table>
+
+      <h3>5 Square Footage Mistakes That Cost Money</h3>
+      <ol>
+        <li><strong>Forgetting to subtract openings.</strong> For drywall and paint, subtract doors (~21 sq ft each) and windows (~12 sq ft each). For flooring, don't subtract — you still need to cut boards to fit around them.</li>
+        <li><strong>Mixing up feet and inches.</strong> A "12 × 14" room means 12 feet × 14 feet = 168 sq ft. If you accidentally use inches (12" × 14" = 168 sq in = 1.17 sq ft), you'll be off by a factor of 144.</li>
+        <li><strong>Not accounting for waste.</strong> Every cut generates waste. Tile cuts are especially wasteful at borders and around obstacles. Always add your waste factor before ordering.</li>
+        <li><strong>Using outer walls instead of inner walls.</strong> For flooring, measure from wall to wall on the inside. Measuring from the outside adds the wall thickness (typically 4.5"–6") on each side.</li>
+        <li><strong>Rounding down instead of up.</strong> Always round up to the next full unit when ordering materials. 147 sq ft of tile with 10% waste = 162 sq ft. If tiles come in boxes of 25 sq ft, order 7 boxes (175 sq ft), not 6.</li>
+      </ol>
+    </div>
+
+    <div class="info-card">
+      <h2>Square Footage in Real Estate</h2>
+      <p>How square footage is measured in real estate differs from construction measurements. Understanding the rules prevents disputes and ensures accurate listings.</p>
+
+      <h3>What Counts as "Living Space"?</h3>
+      <ul>
+        <li><strong>Included:</strong> All heated/cooled rooms with finished floors, walls, and ceilings. Bedrooms, living rooms, kitchens, bathrooms, hallways, closets, and laundry rooms.</li>
+        <li><strong>Usually excluded:</strong> Garages, unfinished basements, unfinished attics, covered porches, screened rooms, and detached structures.</li>
+        <li><strong>Varies by market:</strong> Finished basements are sometimes counted at 50–100% depending on local MLS rules. Below-grade space is often listed separately.</li>
+      </ul>
+
+      <h3>Average Home Sizes (USA)</h3>
+      <table>
+        <tr><th>Home Type</th><th>Average Sq Ft</th><th>Price/Sq Ft (2026)</th></tr>
+        <tr><td>Studio apartment</td><td>400–600</td><td>$200–$400</td></tr>
+        <tr><td>1-bedroom apartment</td><td>600–800</td><td>$175–$350</td></tr>
+        <tr><td>Small house (2BR)</td><td>800–1,200</td><td>$150–$300</td></tr>
+        <tr><td>Average house (3BR)</td><td>1,500–2,000</td><td>$150–$275</td></tr>
+        <tr><td>Large house (4BR+)</td><td>2,500–3,500</td><td>$140–$250</td></tr>
+        <tr><td>New construction avg</td><td>2,200–2,500</td><td>$175–$325</td></tr>
+      </table>
+    </div>
+  </div></section>
+
+  <!-- Email Capture CTA -->
+  <div id="email-cta" style="max-width:720px;margin:40px auto;padding:40px 32px;background:linear-gradient(135deg,#1e293b 0%,#0f172a 100%);border:1px solid rgba(249,115,22,0.3);border-radius:16px;text-align:center;">
+    <div style="font-size:2rem;margin-bottom:12px;">📋</div>
+    <h3 style="font-family:Inter,-apple-system,sans-serif;font-size:1.4rem;font-weight:700;color:#f8fafc;margin-bottom:8px;">Free Contractor Toolkit</h3>
+    <p style="font-family:Inter,-apple-system,sans-serif;color:#94a3b8;font-size:0.95rem;margin-bottom:24px;max-width:480px;margin-left:auto;margin-right:auto;">Get our <strong style="color:#f97316;">free spreadsheet templates</strong> &mdash; invoice, estimate, job costing &amp; profit tracker. Used by 500+ contractors.</p>
+    <form id="capture-form" onsubmit="return handleCapture(event)" style="display:flex;gap:10px;max-width:420px;margin:0 auto;flex-wrap:wrap;justify-content:center;">
+      <input type="email" id="capture-email" placeholder="you@company.com" required style="flex:1;min-width:220px;padding:12px 16px;border-radius:8px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.05);color:#f8fafc;font-size:0.95rem;font-family:Inter,-apple-system,sans-serif;outline:none;">
+      <button type="submit" style="padding:12px 24px;background:#f97316;color:#fff;border:none;border-radius:8px;font-weight:600;font-size:0.95rem;cursor:pointer;font-family:Inter,-apple-system,sans-serif;white-space:nowrap;">Send Me the Templates</button>
+    </form>
+    <p id="capture-msg" style="font-family:Inter,-apple-system,sans-serif;color:#22c55e;font-size:0.85rem;margin-top:12px;display:none;"></p>
+    <p style="font-family:Inter,-apple-system,sans-serif;color:#64748b;font-size:0.75rem;margin-top:12px;">No spam. Unsubscribe anytime.</p>
+  </div>
+
+  <footer><div class="container"><p>© 2026 <a href="/">BuiltRight Academy</a>. Free tools for tradespeople who mean business.</p></div></footer>
+
+  <script>
+    // Tab switching
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.calc-form').forEach(f => f.style.display = 'none');
+        tab.classList.add('active');
+        document.getElementById('form-' + tab.dataset.type).style.display = 'block';
+        document.getElementById('results').classList.remove('show');
+      });
+    });
+
+    // Multi-room shape change
+    document.getElementById('multi-shape').addEventListener('change', function() {
+      const v = this.value;
+      const l1 = document.getElementById('multi-dim1-label');
+      const l2 = document.getElementById('multi-dim2-label');
+      const g2 = document.getElementById('multi-dim2-group');
+      if (v === 'rect') { l1.textContent = 'Length (ft)'; l2.textContent = 'Width (ft)'; g2.style.display = 'flex'; }
+      else if (v === 'circle') { l1.textContent = 'Diameter (ft)'; g2.style.display = 'none'; }
+      else if (v === 'triangle') { l1.textContent = 'Base (ft)'; l2.textContent = 'Height (ft)'; g2.style.display = 'flex'; }
+    });
+
+    function toSqFt(value, unit) {
+      switch(unit) {
+        case 'ft': return value;
+        case 'in': return value / 144;
+        case 'yd': return value * 9;
+        case 'm': return value * 10.764;
+        case 'cm': return value / 929.03;
+        default: return value;
+      }
+    }
+
+    function showResultItems(items) {
+      const grid = document.getElementById('result-grid');
+      grid.innerHTML = items.map(i => `
+        <div class="result-item">
+          <div class="number">${i.value}</div>
+          <div class="label">${i.label}</div>
+          ${i.detail ? `<div class="detail">${i.detail}</div>` : ''}
+        </div>
+      `).join('');
+      document.getElementById('results').classList.add('show');
+      document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function showConversions(sqft) {
+      showResultItems([
+        { value: sqft.toLocaleString(undefined, {maximumFractionDigits: 2}), label: 'Square Feet', detail: '' },
+        { value: (sqft / 9).toFixed(2), label: 'Square Yards', detail: '' },
+        { value: (sqft * 0.0929).toFixed(2), label: 'Square Meters', detail: '' },
+        { value: sqft >= 43560 ? (sqft / 43560).toFixed(4) : (sqft / 43560).toFixed(6), label: 'Acres', detail: sqft >= 43560 ? '' : `${(sqft / 43560 * 100).toFixed(2)}% of an acre` }
+      ]);
+    }
+
+    function calcRect() {
+      const l = parseFloat(document.getElementById('rect-length').value);
+      const w = parseFloat(document.getElementById('rect-width').value);
+      const unit = document.getElementById('rect-unit').value;
+      if (!l || !w) return alert('Please enter length and width.');
+      let area = l * w;
+      if (unit === 'in') area = area / 144;
+      else if (unit === 'yd') area = area * 9;
+      else if (unit === 'm') area = area * 10.764;
+      else if (unit === 'cm') area = area / 929.03;
+      showConversions(area);
+    }
+
+    function calcCircle() {
+      const type = document.getElementById('circle-type').value;
+      let val = parseFloat(document.getElementById('circle-value').value);
+      if (!val) return alert('Please enter a value.');
+      const radius = type === 'diameter' ? val / 2 : val;
+      const area = Math.PI * radius * radius;
+      showConversions(area);
+    }
+
+    function calcTriangle() {
+      const base = parseFloat(document.getElementById('tri-base').value);
+      const height = parseFloat(document.getElementById('tri-height').value);
+      if (!base || !height) return alert('Please enter base and height.');
+      showConversions(0.5 * base * height);
+    }
+
+    function calcTrapezoid() {
+      const a = parseFloat(document.getElementById('trap-a').value);
+      const b = parseFloat(document.getElementById('trap-b').value);
+      const h = parseFloat(document.getElementById('trap-h').value);
+      if (!a || !b || !h) return alert('Please fill in all dimensions.');
+      showConversions(0.5 * (a + b) * h);
+    }
+
+    // Multi-room calculator
+    let rooms = [];
+
+    function addRoom() {
+      const name = document.getElementById('multi-name').value || ('Room ' + (rooms.length + 1));
+      const shape = document.getElementById('multi-shape').value;
+      const d1 = parseFloat(document.getElementById('multi-dim1').value);
+      const d2 = parseFloat(document.getElementById('multi-dim2').value);
+      let area;
+
+      if (shape === 'rect') {
+        if (!d1 || !d2) return alert('Enter length and width.');
+        area = d1 * d2;
+      } else if (shape === 'circle') {
+        if (!d1) return alert('Enter diameter.');
+        area = Math.PI * Math.pow(d1 / 2, 2);
+      } else if (shape === 'triangle') {
+        if (!d1 || !d2) return alert('Enter base and height.');
+        area = 0.5 * d1 * d2;
+      }
+
+      rooms.push({ name, area, shape, d1, d2 });
+      renderRooms();
+      document.getElementById('multi-name').value = '';
+      document.getElementById('multi-dim1').value = '';
+      document.getElementById('multi-dim2').value = '';
+      document.getElementById('multi-calc-btn').style.display = 'block';
+    }
+
+    function removeRoom(idx) {
+      rooms.splice(idx, 1);
+      renderRooms();
+      if (rooms.length === 0) {
+        document.getElementById('multi-calc-btn').style.display = 'none';
+        document.getElementById('results').classList.remove('show');
+      }
+    }
+
+    function renderRooms() {
+      const list = document.getElementById('room-list');
+      list.innerHTML = rooms.map((r, i) => `
+        <div class="room-entry">
+          <span class="room-name">${r.name}</span>
+          <span class="room-area">${r.area.toFixed(1)} sq ft</span>
+          <button class="room-remove" onclick="removeRoom(${i})">✕</button>
+        </div>
+      `).join('');
+    }
+
+    function calcMulti() {
+      if (rooms.length === 0) return alert('Add at least one room.');
+      const total = rooms.reduce((sum, r) => sum + r.area, 0);
+      showResultItems([
+        { value: total.toLocaleString(undefined, {maximumFractionDigits: 1}), label: 'Total Square Feet', detail: `${rooms.length} area${rooms.length > 1 ? 's' : ''}` },
+        { value: (total / 9).toFixed(1), label: 'Square Yards', detail: '' },
+        { value: (total * 0.0929).toFixed(1), label: 'Square Meters', detail: '' },
+        { value: Math.ceil(total / 350), label: 'Gallons of Paint', detail: '~350 sq ft/gal, 1 coat' }
+      ]);
+    }
+  </script>
+
+  <script>
+  function handleCapture(e){
+    e.preventDefault();
+    var em=document.getElementById("capture-email").value;
+    var msg=document.getElementById("capture-msg");
+    var btn=e.target.querySelector("button");
+    btn.textContent="Sending...";btn.disabled=true;
+    fetch("/api/subscribe",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:em,source:window.location.pathname,lead_magnet:"contractor-toolkit"})})
+    .then(function(r){return r.json()})
+    .then(function(d){msg.textContent="\u2705 Check your inbox! Templates are on the way.";msg.style.display="block";document.getElementById("capture-form").style.display="none"})
+    .catch(function(){msg.textContent="Something went wrong. Try again.";msg.style.color="#ef4444";msg.style.display="block";btn.textContent="Send Me the Templates";btn.disabled=false});
+    return false;
+  }
+  </script>
+
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
+</body>
+</html>

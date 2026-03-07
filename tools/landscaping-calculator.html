@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Landscaping Calculator — Mulch, Gravel, Topsoil &amp; Sod | BuiltRight Academy</title>
+  <meta name="description" content="Free landscaping calculator. Calculate how much mulch, gravel, topsoil, or sod you need by area. Get cubic yards, bags, pallets, and cost estimates. Updated for 2026 pricing.">
+  <meta name="keywords" content="landscaping calculator, mulch calculator, gravel calculator, topsoil calculator, sod calculator, landscape material calculator, cubic yards calculator, how much mulch do I need">
+  <link rel="canonical" href="https://builtright-academy.vercel.app/tools/landscaping-calculator">
+  <meta property="og:title" content="Landscaping Calculator — Mulch, Gravel, Topsoil & Sod">
+  <meta property="og:description" content="Free interactive landscaping calculator. Get cubic yards, bags/pallets, and cost estimate for mulch, gravel, topsoil, or sod.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://builtright-academy.vercel.app/tools/landscaping-calculator">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Landscaping Calculator",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "description": "Calculate how much mulch, gravel, topsoil, or sod you need for landscaping projects. Get cubic yards, bag counts, pallet estimates, and cost calculations."
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How much mulch do I need?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Calculate the area in square feet (length × width), then multiply by the depth in feet. Divide by 27 to get cubic yards. For a 2-inch mulch layer: Area (sq ft) × 0.167 ft ÷ 27 = cubic yards. A 10×20 ft bed with 3\" of mulch needs about 1.85 cubic yards."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How many bags of mulch do I need?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A standard 2 cubic foot bag of mulch covers about 8 sq ft at 3 inches deep. Divide your total square footage by 8 to get the number of bags. For a 200 sq ft bed at 3\" depth, you'd need about 25 bags. Bulk delivery is usually cheaper for areas over 500 sq ft."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much does landscaping material cost per cubic yard?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Bulk mulch costs $25–$60 per cubic yard delivered. Decorative gravel runs $35–$75/yd³. Topsoil is $20–$50/yd³. River rock is $50–$150/yd³. Delivery fees typically add $50–$150 depending on distance. Bagged materials cost 2–3× more per yard but are easier for small projects."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much sod do I need for my yard?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Measure your yard area in square feet. Add 5% for waste and trimming. A standard sod pallet covers 450–500 sq ft. For a 2,000 sq ft lawn: 2,000 × 1.05 = 2,100 sq ft, which is about 4.5 pallets. Sod costs $0.30–$0.85 per sq ft depending on grass type."
+        }
+      }
+    ]
+  }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root { --orange: #F97316; --orange-dark: #EA580C; --darker: #0F0F1A; --dark-card: #1A1A2E; --gray: #94A3B8; --light: #F8FAFC; --green: #22C55E; --border: rgba(255,255,255,0.08); }
+    body { font-family: 'Inter', -apple-system, sans-serif; background: var(--darker); color: var(--light); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+    nav { padding: 20px 0; border-bottom: 1px solid var(--border); }
+    nav .container { display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.3rem; color: var(--orange); text-decoration: none; letter-spacing: -0.5px; }
+    .logo span { color: var(--light); }
+    .nav-links a { color: var(--gray); text-decoration: none; font-size: 0.9rem; margin-left: 24px; }
+    .nav-links a:hover { color: var(--light); }
+    .hero { padding: 48px 0 32px; text-align: center; }
+    .hero .badge { display: inline-block; background: rgba(249,115,22,0.1); border: 1px solid rgba(249,115,22,0.3); color: var(--orange); font-size: 0.8rem; font-weight: 600; padding: 6px 16px; border-radius: 100px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .hero h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 800; line-height: 1.15; letter-spacing: -1px; margin-bottom: 12px; }
+    .hero h1 .highlight { color: var(--orange); }
+    .hero p { color: var(--gray); font-size: 1.05rem; max-width: 600px; margin: 0 auto; }
+    .calc-section { padding: 24px 0 60px; }
+    .calc-card { background: var(--dark-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; margin-bottom: 24px; }
+    .calc-card h2 { font-size: 1.2rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+    .calc-card h2 .icon { font-size: 1.4rem; }
+    .tabs { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
+    .tab { background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: var(--gray); padding: 10px 20px; border-radius: 8px; cursor: pointer; font-size: 0.9rem; font-weight: 500; transition: all 0.2s; }
+    .tab:hover { border-color: var(--orange); color: var(--light); }
+    .tab.active { background: rgba(249,115,22,0.15); border-color: var(--orange); color: var(--orange); }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 500px) { .form-grid { grid-template-columns: 1fr; } }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group.full { grid-column: 1 / -1; }
+    label { font-size: 0.85rem; font-weight: 600; color: var(--gray); text-transform: uppercase; letter-spacing: 0.5px; }
+    input, select { background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: var(--light); padding: 12px 16px; border-radius: 8px; font-size: 1rem; font-family: inherit; outline: none; transition: border-color 0.2s; }
+    input:focus, select:focus { border-color: var(--orange); }
+    select option { background: var(--darker); }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: var(--orange); color: #fff; font-weight: 700; font-size: 1rem; padding: 14px 28px; border-radius: 10px; border: none; cursor: pointer; width: 100%; margin-top: 16px; transition: background 0.2s; }
+    .btn:hover { background: var(--orange-dark); }
+    .results { display: none; margin-top: 24px; }
+    .results.show { display: block; }
+    .result-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; }
+    .result-item { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 12px; padding: 20px; text-align: center; }
+    .result-item .number { font-size: 2rem; font-weight: 800; color: var(--orange); letter-spacing: -1px; }
+    .result-item .label { font-size: 0.8rem; color: var(--gray); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .result-item .detail { font-size: 0.85rem; color: var(--light); margin-top: 8px; opacity: 0.8; }
+    .waste-note { background: rgba(249,115,22,0.08); border: 1px solid rgba(249,115,22,0.2); border-radius: 10px; padding: 16px 20px; margin-top: 20px; font-size: 0.9rem; color: var(--gray); }
+    .waste-note strong { color: var(--orange); }
+    .info-section { padding: 40px 0 60px; }
+    .info-card { background: var(--dark-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; margin-bottom: 24px; }
+    .info-card h2 { font-size: 1.4rem; font-weight: 700; margin-bottom: 16px; }
+    .info-card h3 { font-size: 1.1rem; font-weight: 600; margin: 20px 0 8px; color: var(--orange); }
+    .info-card p { color: var(--gray); margin-bottom: 12px; line-height: 1.8; }
+    .info-card ul, .info-card ol { color: var(--gray); margin-left: 20px; margin-bottom: 12px; }
+    .info-card li { margin-bottom: 6px; }
+    .info-card table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+    .info-card th, .info-card td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+    .info-card th { color: var(--orange); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; }
+    .info-card td { color: var(--gray); }
+    footer { padding: 40px 0; border-top: 1px solid var(--border); text-align: center; }
+    footer p { color: var(--gray); font-size: 0.85rem; }
+    footer a { color: var(--orange); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <nav><div class="container"><a href="/" class="logo">Built<span>Right</span></a><div class="nav-links"><a href="/blog">Blog</a><a href="/templates">Templates</a><a href="/tools">Tools</a></div></div></nav>
+
+  <section class="hero"><div class="container">
+    <div class="badge">Free Tool</div>
+    <h1>Landscaping <span class="highlight">Calculator</span></h1>
+    <p>Calculate how much mulch, gravel, topsoil, or sod you need. Get cubic yards, bags, pallets, and cost estimates for any project.</p>
+  </div></section>
+
+  <section class="calc-section"><div class="container">
+    <div class="calc-card">
+      <h2><span class="icon">🌿</span> Choose Your Material</h2>
+      <div class="tabs">
+        <div class="tab active" data-type="mulch">Mulch</div>
+        <div class="tab" data-type="gravel">Gravel / Rock</div>
+        <div class="tab" data-type="topsoil">Topsoil</div>
+        <div class="tab" data-type="sod">Sod / Turf</div>
+      </div>
+
+      <!-- Mulch -->
+      <div id="form-mulch" class="calc-form">
+        <div class="form-grid">
+          <div class="form-group"><label>Area Length (ft)</label><input type="number" id="mulch-length" placeholder="e.g. 30" step="any"></div>
+          <div class="form-group"><label>Area Width (ft)</label><input type="number" id="mulch-width" placeholder="e.g. 10" step="any"></div>
+          <div class="form-group"><label>Depth</label>
+            <select id="mulch-depth">
+              <option value="2">2 inches — refresh existing mulch</option>
+              <option value="3" selected>3 inches — standard new bed</option>
+              <option value="4">4 inches — heavy weed suppression</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Mulch Type</label>
+            <select id="mulch-type">
+              <option value="hardwood">Hardwood Mulch — $25–$45/yd³</option>
+              <option value="cedar">Cedar Mulch — $35–$55/yd³</option>
+              <option value="pine">Pine Bark — $30–$50/yd³</option>
+              <option value="rubber">Rubber Mulch — $80–$150/yd³</option>
+              <option value="dyed">Dyed (Red/Black) — $30–$50/yd³</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn" onclick="calcMulch()">Calculate Mulch</button>
+      </div>
+
+      <!-- Gravel -->
+      <div id="form-gravel" class="calc-form" style="display:none">
+        <div class="form-grid">
+          <div class="form-group"><label>Area Length (ft)</label><input type="number" id="gravel-length" placeholder="e.g. 20" step="any"></div>
+          <div class="form-group"><label>Area Width (ft)</label><input type="number" id="gravel-width" placeholder="e.g. 10" step="any"></div>
+          <div class="form-group"><label>Depth</label>
+            <select id="gravel-depth">
+              <option value="2">2 inches — decorative top layer</option>
+              <option value="3">3 inches — walkway / path</option>
+              <option value="4" selected>4 inches — driveway / parking</option>
+              <option value="6">6 inches — drainage base</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Gravel Type</label>
+            <select id="gravel-type">
+              <option value="pea">Pea Gravel — $35–$55/yd³</option>
+              <option value="crushed">Crushed Stone — $30–$50/yd³</option>
+              <option value="river">River Rock — $50–$150/yd³</option>
+              <option value="decomposed">Decomposed Granite — $40–$60/yd³</option>
+              <option value="lava">Lava Rock — $60–$100/yd³</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn" onclick="calcGravel()">Calculate Gravel</button>
+      </div>
+
+      <!-- Topsoil -->
+      <div id="form-topsoil" class="calc-form" style="display:none">
+        <div class="form-grid">
+          <div class="form-group"><label>Area Length (ft)</label><input type="number" id="soil-length" placeholder="e.g. 40" step="any"></div>
+          <div class="form-group"><label>Area Width (ft)</label><input type="number" id="soil-width" placeholder="e.g. 20" step="any"></div>
+          <div class="form-group"><label>Depth</label>
+            <select id="soil-depth">
+              <option value="2">2 inches — top dressing lawn</option>
+              <option value="4">4 inches — new garden bed</option>
+              <option value="6" selected>6 inches — new lawn prep</option>
+              <option value="8">8 inches — raised garden bed</option>
+              <option value="12">12 inches — raised bed fill</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Soil Type</label>
+            <select id="soil-type">
+              <option value="topsoil">Screened Topsoil — $20–$40/yd³</option>
+              <option value="garden">Garden Mix — $35–$55/yd³</option>
+              <option value="compost">Compost — $30–$50/yd³</option>
+              <option value="fill">Fill Dirt — $10–$25/yd³</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn" onclick="calcTopsoil()">Calculate Topsoil</button>
+      </div>
+
+      <!-- Sod -->
+      <div id="form-sod" class="calc-form" style="display:none">
+        <div class="form-grid">
+          <div class="form-group"><label>Area Length (ft)</label><input type="number" id="sod-length" placeholder="e.g. 50" step="any"></div>
+          <div class="form-group"><label>Area Width (ft)</label><input type="number" id="sod-width" placeholder="e.g. 40" step="any"></div>
+          <div class="form-group"><label>Grass Type</label>
+            <select id="sod-type">
+              <option value="bermuda">Bermuda — $0.30–$0.55/sq ft</option>
+              <option value="fescue">Fescue — $0.35–$0.65/sq ft</option>
+              <option value="bluegrass">Kentucky Bluegrass — $0.40–$0.70/sq ft</option>
+              <option value="zoysia">Zoysia — $0.45–$0.85/sq ft</option>
+              <option value="staugustine">St. Augustine — $0.40–$0.75/sq ft</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Waste Factor</label>
+            <select id="sod-waste">
+              <option value="5" selected>5% — rectangular area</option>
+              <option value="10">10% — curves / irregular shape</option>
+              <option value="15">15% — many cuts needed</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn" onclick="calcSod()">Calculate Sod</button>
+      </div>
+
+      <div class="results" id="results">
+        <div class="result-grid">
+          <div class="result-item"><div class="number" id="r-area">—</div><div class="label">Total Area</div><div class="detail" id="r-areadetail"></div></div>
+          <div class="result-item"><div class="number" id="r-volume">—</div><div class="label" id="r-volume-label">Cubic Yards</div><div class="detail" id="r-voldetail"></div></div>
+          <div class="result-item"><div class="number" id="r-bags">—</div><div class="label" id="r-bags-label">Bags (2 cu ft)</div><div class="detail" id="r-bagsdetail"></div></div>
+          <div class="result-item"><div class="number" id="r-cost">—</div><div class="label">Estimated Cost</div><div class="detail" id="r-costdetail"></div></div>
+        </div>
+        <div class="waste-note" id="result-tip"><strong>Pro Tip:</strong> Bulk delivery is almost always cheaper than bags for anything over 3 cubic yards. Most suppliers deliver for $50–$150. Call ahead — some will spread it for an extra fee.</div>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="info-section"><div class="container">
+    <div class="info-card">
+      <h2>Landscaping Materials Guide: Complete Cost &amp; Coverage Reference</h2>
+      <p>Getting the right amount of material saves money and trips to the store. Here's everything you need to know about calculating and choosing landscaping materials.</p>
+
+      <h3>The Universal Formula</h3>
+      <p>For mulch, gravel, topsoil, and any bulk material:</p>
+      <p><strong>Cubic Yards = Length (ft) × Width (ft) × Depth (ft) ÷ 27</strong></p>
+      <p>Remember to convert inches to feet (divide by 12). Example: 3 inches = 0.25 feet.</p>
+
+      <h3>Mulch Coverage &amp; Cost (2026)</h3>
+      <table>
+        <tr><th>Mulch Type</th><th>Bulk Price/yd³</th><th>Bag Price (2 cu ft)</th><th>Lifespan</th></tr>
+        <tr><td>Hardwood Mulch</td><td>$25–$45</td><td>$3.50–$5.00</td><td>1–2 years</td></tr>
+        <tr><td>Cedar Mulch</td><td>$35–$55</td><td>$4.50–$7.00</td><td>2–3 years</td></tr>
+        <tr><td>Pine Bark Mulch</td><td>$30–$50</td><td>$4.00–$6.00</td><td>1–2 years</td></tr>
+        <tr><td>Dyed Mulch (red/black)</td><td>$30–$50</td><td>$4.00–$6.00</td><td>1–2 years</td></tr>
+        <tr><td>Rubber Mulch</td><td>$80–$150</td><td>$7.00–$12.00</td><td>10+ years</td></tr>
+        <tr><td>Pine Straw (bale)</td><td>$4–$8/bale</td><td>—</td><td>6–12 months</td></tr>
+      </table>
+      <p><strong>Coverage tip:</strong> 1 cubic yard of mulch covers about 162 sq ft at 2" deep, 108 sq ft at 3" deep, or 81 sq ft at 4" deep.</p>
+
+      <h3>Gravel Coverage &amp; Cost</h3>
+      <table>
+        <tr><th>Gravel Type</th><th>Bulk Price/yd³</th><th>Weight/yd³</th><th>Best Use</th></tr>
+        <tr><td>Pea Gravel</td><td>$35–$55</td><td>~2,800 lbs</td><td>Paths, drainage, dog runs</td></tr>
+        <tr><td>Crushed Stone (#57)</td><td>$30–$50</td><td>~2,700 lbs</td><td>Driveways, base material</td></tr>
+        <tr><td>River Rock</td><td>$50–$150</td><td>~2,600 lbs</td><td>Decorative, dry creek beds</td></tr>
+        <tr><td>Decomposed Granite</td><td>$40–$60</td><td>~3,000 lbs</td><td>Patios, paths, xeriscaping</td></tr>
+        <tr><td>Lava Rock</td><td>$60–$100</td><td>~1,500 lbs</td><td>Decorative beds, fire pits</td></tr>
+        <tr><td>Drainage Gravel</td><td>$25–$40</td><td>~2,800 lbs</td><td>French drains, retaining walls</td></tr>
+      </table>
+
+      <h3>Sod Coverage &amp; Cost</h3>
+      <table>
+        <tr><th>Grass Type</th><th>Cost/sq ft</th><th>Pallet Coverage</th><th>Best Climate</th></tr>
+        <tr><td>Bermuda</td><td>$0.30–$0.55</td><td>450–500 sq ft</td><td>Hot, full sun (South)</td></tr>
+        <tr><td>Tall Fescue</td><td>$0.35–$0.65</td><td>450–500 sq ft</td><td>Transition zone, shade OK</td></tr>
+        <tr><td>Kentucky Bluegrass</td><td>$0.40–$0.70</td><td>450–500 sq ft</td><td>Cool, northern climates</td></tr>
+        <tr><td>Zoysia</td><td>$0.45–$0.85</td><td>450–500 sq ft</td><td>Warm/transition, low maint.</td></tr>
+        <tr><td>St. Augustine</td><td>$0.40–$0.75</td><td>400–450 sq ft</td><td>Hot, coastal, shade tolerant</td></tr>
+      </table>
+
+      <h3>Bulk vs. Bagged: When to Use Each</h3>
+      <table>
+        <tr><th>Factor</th><th>Bagged</th><th>Bulk Delivery</th></tr>
+        <tr><td>Best for</td><td>Under 2 cubic yards</td><td>Over 3 cubic yards</td></tr>
+        <tr><td>Cost per yard</td><td>$150–$350 (mulch)</td><td>$25–$60 (mulch)</td></tr>
+        <tr><td>Convenience</td><td>Buy anytime, easy to transport</td><td>Delivered, dumped in driveway</td></tr>
+        <tr><td>Precision</td><td>Exact amounts</td><td>Rounded to nearest ½ yard</td></tr>
+        <tr><td>Labor</td><td>Load/unload bags from car</td><td>Wheelbarrow from pile</td></tr>
+      </table>
+
+      <h3>5 Landscaping Material Mistakes to Avoid</h3>
+      <ol>
+        <li><strong>Too much mulch.</strong> Over 4 inches of mulch suffocates plant roots and creates fungal problems. For existing beds, just top off to 3 inches — don't keep piling on.</li>
+        <li><strong>Mulch volcanoes around trees.</strong> Don't pile mulch against tree trunks. Keep a 3–6 inch gap. Volcano mulching causes rot, disease, and pest problems.</li>
+        <li><strong>Wrong gravel for the job.</strong> Pea gravel shifts under foot traffic and is terrible for driveways. Use crushed stone with fines for driveways and decomposed granite for paths.</li>
+        <li><strong>Not prepping soil before sod.</strong> Sod needs 4–6 inches of good topsoil, a smooth surface, and starter fertilizer. Laying sod on compacted clay = dead grass.</li>
+        <li><strong>Skipping landscape fabric under gravel.</strong> Without fabric, gravel sinks into soil within a year. Use woven landscape fabric (not plastic sheeting) under all gravel installations.</li>
+      </ol>
+    </div>
+  </div></section>
+
+  <!-- Email Capture CTA -->
+  <div id="email-cta" style="max-width:720px;margin:40px auto;padding:40px 32px;background:linear-gradient(135deg,#1e293b 0%,#0f172a 100%);border:1px solid rgba(249,115,22,0.3);border-radius:16px;text-align:center;">
+    <div style="font-size:2rem;margin-bottom:12px;">📋</div>
+    <h3 style="font-family:Inter,-apple-system,sans-serif;font-size:1.4rem;font-weight:700;color:#f8fafc;margin-bottom:8px;">Free Contractor Toolkit</h3>
+    <p style="font-family:Inter,-apple-system,sans-serif;color:#94a3b8;font-size:0.95rem;margin-bottom:24px;max-width:480px;margin-left:auto;margin-right:auto;">Get our <strong style="color:#f97316;">free spreadsheet templates</strong> &mdash; invoice, estimate, job costing &amp; profit tracker. Used by 500+ contractors.</p>
+    <form id="capture-form" onsubmit="return handleCapture(event)" style="display:flex;gap:10px;max-width:420px;margin:0 auto;flex-wrap:wrap;justify-content:center;">
+      <input type="email" id="capture-email" placeholder="you@company.com" required style="flex:1;min-width:220px;padding:12px 16px;border-radius:8px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.05);color:#f8fafc;font-size:0.95rem;font-family:Inter,-apple-system,sans-serif;outline:none;">
+      <button type="submit" style="padding:12px 24px;background:#f97316;color:#fff;border:none;border-radius:8px;font-weight:600;font-size:0.95rem;cursor:pointer;font-family:Inter,-apple-system,sans-serif;white-space:nowrap;">Send Me the Templates</button>
+    </form>
+    <p id="capture-msg" style="font-family:Inter,-apple-system,sans-serif;color:#22c55e;font-size:0.85rem;margin-top:12px;display:none;"></p>
+    <p style="font-family:Inter,-apple-system,sans-serif;color:#64748b;font-size:0.75rem;margin-top:12px;">No spam. Unsubscribe anytime.</p>
+  </div>
+
+  <footer><div class="container"><p>© 2026 <a href="/">BuiltRight Academy</a>. Free tools for tradespeople who mean business.</p></div></footer>
+
+  <script>
+    const materialData = {
+      mulch: {
+        hardwood:  { label: 'Hardwood Mulch', costLow: 25, costHigh: 45, bagCost: 4.25 },
+        cedar:     { label: 'Cedar Mulch', costLow: 35, costHigh: 55, bagCost: 5.75 },
+        pine:      { label: 'Pine Bark', costLow: 30, costHigh: 50, bagCost: 5.00 },
+        rubber:    { label: 'Rubber Mulch', costLow: 80, costHigh: 150, bagCost: 9.50 },
+        dyed:      { label: 'Dyed Mulch', costLow: 30, costHigh: 50, bagCost: 5.00 }
+      },
+      gravel: {
+        pea:          { label: 'Pea Gravel', costLow: 35, costHigh: 55, bagCost: 5.50 },
+        crushed:      { label: 'Crushed Stone', costLow: 30, costHigh: 50, bagCost: 5.00 },
+        river:        { label: 'River Rock', costLow: 50, costHigh: 150, bagCost: 8.00 },
+        decomposed:   { label: 'Decomposed Granite', costLow: 40, costHigh: 60, bagCost: 6.00 },
+        lava:         { label: 'Lava Rock', costLow: 60, costHigh: 100, bagCost: 7.50 }
+      },
+      topsoil: {
+        topsoil:  { label: 'Screened Topsoil', costLow: 20, costHigh: 40, bagCost: 3.50 },
+        garden:   { label: 'Garden Mix', costLow: 35, costHigh: 55, bagCost: 5.50 },
+        compost:  { label: 'Compost', costLow: 30, costHigh: 50, bagCost: 5.00 },
+        fill:     { label: 'Fill Dirt', costLow: 10, costHigh: 25, bagCost: 3.00 }
+      },
+      sod: {
+        bermuda:     { label: 'Bermuda', costLow: 0.30, costHigh: 0.55 },
+        fescue:      { label: 'Fescue', costLow: 0.35, costHigh: 0.65 },
+        bluegrass:   { label: 'Kentucky Bluegrass', costLow: 0.40, costHigh: 0.70 },
+        zoysia:      { label: 'Zoysia', costLow: 0.45, costHigh: 0.85 },
+        staugustine: { label: 'St. Augustine', costLow: 0.40, costHigh: 0.75 }
+      }
+    };
+
+    // Tab switching
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.calc-form').forEach(f => f.style.display = 'none');
+        tab.classList.add('active');
+        document.getElementById('form-' + tab.dataset.type).style.display = 'block';
+        document.getElementById('results').classList.remove('show');
+      });
+    });
+
+    function showBulkResults(sqFt, cuYd, mat, isBulk) {
+      const bags = Math.ceil((cuYd * 27) / 2); // 2 cu ft bags
+      document.getElementById('r-area').textContent = Math.ceil(sqFt).toLocaleString();
+      document.getElementById('r-areadetail').textContent = 'Square feet';
+      document.getElementById('r-volume').textContent = cuYd.toFixed(1);
+      document.getElementById('r-volume-label').textContent = 'Cubic Yards';
+      document.getElementById('r-voldetail').textContent = (cuYd * 27).toFixed(0) + ' cubic feet';
+      document.getElementById('r-bags').textContent = bags;
+      document.getElementById('r-bags-label').textContent = 'Bags (2 cu ft)';
+      document.getElementById('r-bagsdetail').textContent = 'Or ~' + Math.ceil(cuYd * 27 / 3) + ' bags (3 cu ft)';
+
+      const costLow = cuYd * mat.costLow;
+      const costHigh = cuYd * mat.costHigh;
+      document.getElementById('r-cost').textContent = '$' + Math.round(costLow) + '–$' + Math.round(costHigh);
+      document.getElementById('r-costdetail').textContent = 'Bulk price + delivery';
+      document.getElementById('result-tip').innerHTML = '<strong>Pro Tip:</strong> Bulk delivery is almost always cheaper than bags for anything over 3 cubic yards. Most suppliers deliver for $50–$150. Call ahead — some will spread it for an extra fee.';
+      document.getElementById('results').classList.add('show');
+      document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function calcMulch() {
+      const l = parseFloat(document.getElementById('mulch-length').value);
+      const w = parseFloat(document.getElementById('mulch-width').value);
+      if (!l || !w) return alert('Please enter area dimensions.');
+      const depth = parseFloat(document.getElementById('mulch-depth').value) / 12;
+      const type = document.getElementById('mulch-type').value;
+      const sqFt = l * w;
+      const cuYd = (sqFt * depth) / 27;
+      showBulkResults(sqFt, cuYd, materialData.mulch[type]);
+    }
+
+    function calcGravel() {
+      const l = parseFloat(document.getElementById('gravel-length').value);
+      const w = parseFloat(document.getElementById('gravel-width').value);
+      if (!l || !w) return alert('Please enter area dimensions.');
+      const depth = parseFloat(document.getElementById('gravel-depth').value) / 12;
+      const type = document.getElementById('gravel-type').value;
+      const sqFt = l * w;
+      const cuYd = (sqFt * depth) / 27;
+      showBulkResults(sqFt, cuYd, materialData.gravel[type]);
+    }
+
+    function calcTopsoil() {
+      const l = parseFloat(document.getElementById('soil-length').value);
+      const w = parseFloat(document.getElementById('soil-width').value);
+      if (!l || !w) return alert('Please enter area dimensions.');
+      const depth = parseFloat(document.getElementById('soil-depth').value) / 12;
+      const type = document.getElementById('soil-type').value;
+      const sqFt = l * w;
+      const cuYd = (sqFt * depth) / 27;
+      showBulkResults(sqFt, cuYd, materialData.topsoil[type]);
+    }
+
+    function calcSod() {
+      const l = parseFloat(document.getElementById('sod-length').value);
+      const w = parseFloat(document.getElementById('sod-width').value);
+      if (!l || !w) return alert('Please enter area dimensions.');
+      const waste = parseFloat(document.getElementById('sod-waste').value) / 100;
+      const type = document.getElementById('sod-type').value;
+      const sqFt = l * w;
+      const totalSqFt = sqFt * (1 + waste);
+      const pallets = Math.ceil(totalSqFt / 475);
+      const mat = materialData.sod[type];
+
+      document.getElementById('r-area').textContent = Math.ceil(totalSqFt).toLocaleString();
+      document.getElementById('r-areadetail').textContent = Math.round(sqFt) + ' sq ft + ' + (waste*100) + '% waste';
+      document.getElementById('r-volume').textContent = pallets;
+      document.getElementById('r-volume-label').textContent = 'Pallets';
+      document.getElementById('r-voldetail').textContent = '~475 sq ft per pallet';
+      document.getElementById('r-bags').textContent = Math.ceil(totalSqFt / 16);
+      document.getElementById('r-bags-label').textContent = 'Sod Rolls (16 sq ft)';
+      document.getElementById('r-bagsdetail').textContent = 'Standard 2×8 ft rolls';
+
+      const costLow = totalSqFt * mat.costLow;
+      const costHigh = totalSqFt * mat.costHigh;
+      document.getElementById('r-cost').textContent = '$' + Math.round(costLow) + '–$' + Math.round(costHigh);
+      document.getElementById('r-costdetail').textContent = mat.label + ' — sod only';
+      document.getElementById('result-tip').innerHTML = '<strong>Pro Tip:</strong> Install sod within 24 hours of delivery — it starts dying fast on the pallet. Water heavily for the first 2 weeks (daily), then taper to deep watering 2–3 times per week.';
+      document.getElementById('results').classList.add('show');
+      document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function handleCapture(e){
+      e.preventDefault();
+      var em=document.getElementById("capture-email").value;
+      var msg=document.getElementById("capture-msg");
+      var btn=e.target.querySelector("button");
+      btn.textContent="Sending...";btn.disabled=true;
+      fetch("/api/subscribe",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:em,source:window.location.pathname,lead_magnet:"contractor-toolkit"})})
+      .then(function(r){return r.json()})
+      .then(function(d){msg.textContent="\u2705 Check your inbox! Templates are on the way.";msg.style.display="block";document.getElementById("capture-form").style.display="none"})
+      .catch(function(){msg.textContent="Something went wrong. Try again.";msg.style.color="#ef4444";msg.style.display="block";btn.textContent="Send Me the Templates";btn.disabled=false});
+      return false;
+    }
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
+</body>
+</html>

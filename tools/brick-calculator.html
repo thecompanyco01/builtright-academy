@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brick Calculator — How Many Bricks Do I Need? | BuiltRight Academy</title>
+  <meta name="description" content="Free brick calculator. Enter dimensions to get the number of bricks, mortar bags, and cost estimate for walls, patios, and walkways. Updated for 2026 pricing.">
+  <meta name="keywords" content="brick calculator, brick estimator, how many bricks do I need, brick wall calculator, patio brick calculator, mortar calculator, brick cost calculator">
+  <link rel="canonical" href="https://builtright-academy.vercel.app/tools/brick-calculator">
+  <meta property="og:title" content="Brick Calculator — How Many Bricks Do I Need?">
+  <meta property="og:description" content="Free interactive brick calculator. Get brick count, mortar bags, and cost estimate for walls, patios, and walkways.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://builtright-academy.vercel.app/tools/brick-calculator">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Brick Calculator",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "description": "Calculate how many bricks you need for walls, patios, and walkways. Get brick count, mortar estimates, and cost calculations."
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How many bricks do I need per square foot?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For a standard modular brick (3⅝\" × 2¼\" × 7⅝\") with 3/8\" mortar joints, you need about 6.75 bricks per square foot for a single-wythe wall. For a patio or walkway (flat, no mortar), you need about 4.5 bricks per square foot with standard pavers."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much mortar do I need for bricks?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For standard modular bricks, one 80-lb bag of mortar mix lays approximately 35–40 bricks in a wall. For 1,000 bricks, you'll need about 25–30 bags of mortar. This assumes standard 3/8\" joints. Thicker joints require more mortar."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much does a brick cost in 2026?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Standard clay bricks cost $0.50–$1.50 each in 2026, depending on type and quantity. Concrete bricks are $0.40–$0.80. Face bricks (for visible surfaces) run $0.75–$2.50. Buying in bulk (1,000+) gets you the best pricing. A pallet of 500 bricks typically costs $250–$750."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How many bricks are on a pallet?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A standard pallet holds about 500 bricks for modular size, or 300–400 for larger brick sizes. Pallets typically weigh 2,000–2,500 lbs. Plan for delivery — most suppliers charge $50–$150 for delivery depending on distance."
+        }
+      }
+    ]
+  }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root { --orange: #F97316; --orange-dark: #EA580C; --darker: #0F0F1A; --dark-card: #1A1A2E; --gray: #94A3B8; --light: #F8FAFC; --green: #22C55E; --border: rgba(255,255,255,0.08); }
+    body { font-family: 'Inter', -apple-system, sans-serif; background: var(--darker); color: var(--light); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+    nav { padding: 20px 0; border-bottom: 1px solid var(--border); }
+    nav .container { display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.3rem; color: var(--orange); text-decoration: none; letter-spacing: -0.5px; }
+    .logo span { color: var(--light); }
+    .nav-links a { color: var(--gray); text-decoration: none; font-size: 0.9rem; margin-left: 24px; }
+    .nav-links a:hover { color: var(--light); }
+    .hero { padding: 48px 0 32px; text-align: center; }
+    .hero .badge { display: inline-block; background: rgba(249,115,22,0.1); border: 1px solid rgba(249,115,22,0.3); color: var(--orange); font-size: 0.8rem; font-weight: 600; padding: 6px 16px; border-radius: 100px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .hero h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 800; line-height: 1.15; letter-spacing: -1px; margin-bottom: 12px; }
+    .hero h1 .highlight { color: var(--orange); }
+    .hero p { color: var(--gray); font-size: 1.05rem; max-width: 600px; margin: 0 auto; }
+    .calc-section { padding: 24px 0 60px; }
+    .calc-card { background: var(--dark-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; margin-bottom: 24px; }
+    .calc-card h2 { font-size: 1.2rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+    .calc-card h2 .icon { font-size: 1.4rem; }
+    .tabs { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
+    .tab { background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: var(--gray); padding: 10px 20px; border-radius: 8px; cursor: pointer; font-size: 0.9rem; font-weight: 500; transition: all 0.2s; }
+    .tab:hover { border-color: var(--orange); color: var(--light); }
+    .tab.active { background: rgba(249,115,22,0.15); border-color: var(--orange); color: var(--orange); }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 500px) { .form-grid { grid-template-columns: 1fr; } }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group.full { grid-column: 1 / -1; }
+    label { font-size: 0.85rem; font-weight: 600; color: var(--gray); text-transform: uppercase; letter-spacing: 0.5px; }
+    input, select { background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: var(--light); padding: 12px 16px; border-radius: 8px; font-size: 1rem; font-family: inherit; outline: none; transition: border-color 0.2s; }
+    input:focus, select:focus { border-color: var(--orange); }
+    select option { background: var(--darker); }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: var(--orange); color: #fff; font-weight: 700; font-size: 1rem; padding: 14px 28px; border-radius: 10px; border: none; cursor: pointer; width: 100%; margin-top: 16px; transition: background 0.2s; }
+    .btn:hover { background: var(--orange-dark); }
+    .results { display: none; margin-top: 24px; }
+    .results.show { display: block; }
+    .result-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; }
+    .result-item { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 12px; padding: 20px; text-align: center; }
+    .result-item .number { font-size: 2rem; font-weight: 800; color: var(--orange); letter-spacing: -1px; }
+    .result-item .label { font-size: 0.8rem; color: var(--gray); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .result-item .detail { font-size: 0.85rem; color: var(--light); margin-top: 8px; opacity: 0.8; }
+    .waste-note { background: rgba(249,115,22,0.08); border: 1px solid rgba(249,115,22,0.2); border-radius: 10px; padding: 16px 20px; margin-top: 20px; font-size: 0.9rem; color: var(--gray); }
+    .waste-note strong { color: var(--orange); }
+    .info-section { padding: 40px 0 60px; }
+    .info-card { background: var(--dark-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; margin-bottom: 24px; }
+    .info-card h2 { font-size: 1.4rem; font-weight: 700; margin-bottom: 16px; }
+    .info-card h3 { font-size: 1.1rem; font-weight: 600; margin: 20px 0 8px; color: var(--orange); }
+    .info-card p { color: var(--gray); margin-bottom: 12px; line-height: 1.8; }
+    .info-card ul, .info-card ol { color: var(--gray); margin-left: 20px; margin-bottom: 12px; }
+    .info-card li { margin-bottom: 6px; }
+    .info-card table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+    .info-card th, .info-card td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+    .info-card th { color: var(--orange); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; }
+    .info-card td { color: var(--gray); }
+    footer { padding: 40px 0; border-top: 1px solid var(--border); text-align: center; }
+    footer p { color: var(--gray); font-size: 0.85rem; }
+    footer a { color: var(--orange); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <nav><div class="container"><a href="/" class="logo">Built<span>Right</span></a><div class="nav-links"><a href="/blog">Blog</a><a href="/templates">Templates</a><a href="/tools">Tools</a></div></div></nav>
+
+  <section class="hero"><div class="container">
+    <div class="badge">Free Tool</div>
+    <h1>Brick <span class="highlight">Calculator</span></h1>
+    <p>Calculate the number of bricks, mortar bags, and estimated cost for walls, patios, and walkways.</p>
+  </div></section>
+
+  <section class="calc-section"><div class="container">
+    <div class="calc-card">
+      <h2><span class="icon">🧱</span> Choose Your Project Type</h2>
+      <div class="tabs">
+        <div class="tab active" data-type="wall">Brick Wall</div>
+        <div class="tab" data-type="patio">Patio / Walkway</div>
+        <div class="tab" data-type="column">Brick Column</div>
+      </div>
+
+      <!-- Wall -->
+      <div id="form-wall" class="calc-form">
+        <div class="form-grid">
+          <div class="form-group"><label>Wall Length (ft)</label><input type="number" id="wall-length" placeholder="e.g. 20" step="any"></div>
+          <div class="form-group"><label>Wall Height (ft)</label><input type="number" id="wall-height" placeholder="e.g. 8" step="any"></div>
+          <div class="form-group"><label>Brick Size</label>
+            <select id="wall-brick-size">
+              <option value="modular">Modular (3⅝×2¼×7⅝") — 6.75/sq ft</option>
+              <option value="queen">Queen (2¾×2¾×7⅝") — 5.76/sq ft</option>
+              <option value="king">King (2¾×2⅝×9⅝") — 4.50/sq ft</option>
+              <option value="utility">Utility (3⅝×3⅝×11⅝") — 3.00/sq ft</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Wall Type</label>
+            <select id="wall-type">
+              <option value="single">Single Wythe (1 brick thick)</option>
+              <option value="double">Double Wythe (2 bricks thick)</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Window/Door Area (sq ft)</label><input type="number" id="wall-openings" placeholder="0" value="0" step="any"></div>
+          <div class="form-group"><label>Waste Factor</label>
+            <select id="wall-waste">
+              <option value="5">5% — Simple straight wall</option>
+              <option value="10" selected>10% — Standard (recommended)</option>
+              <option value="15">15% — Complex with many cuts</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn" onclick="calcWall()">Calculate Bricks</button>
+      </div>
+
+      <!-- Patio -->
+      <div id="form-patio" class="calc-form" style="display:none">
+        <div class="form-grid">
+          <div class="form-group"><label>Length (ft)</label><input type="number" id="patio-length" placeholder="e.g. 12" step="any"></div>
+          <div class="form-group"><label>Width (ft)</label><input type="number" id="patio-width" placeholder="e.g. 10" step="any"></div>
+          <div class="form-group"><label>Paver Size</label>
+            <select id="patio-paver-size">
+              <option value="standard">Standard Brick (4×8") — 4.5/sq ft</option>
+              <option value="large">Large (4×12") — 3.0/sq ft</option>
+              <option value="square">Square (8×8") — 2.25/sq ft</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Pattern</label>
+            <select id="patio-pattern">
+              <option value="running">Running Bond — 5% waste</option>
+              <option value="herringbone">Herringbone — 10% waste</option>
+              <option value="basket">Basketweave — 5% waste</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn" onclick="calcPatio()">Calculate Bricks</button>
+      </div>
+
+      <!-- Column -->
+      <div id="form-column" class="calc-form" style="display:none">
+        <div class="form-grid">
+          <div class="form-group"><label>Column Height (ft)</label><input type="number" id="col-height" placeholder="e.g. 4" step="any"></div>
+          <div class="form-group"><label>Column Size</label>
+            <select id="col-size">
+              <option value="12">12×12" (1 brick per side)</option>
+              <option value="16">16×16" (1.5 bricks per side)</option>
+              <option value="24">24×24" (2 bricks per side)</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Number of Columns</label><input type="number" id="col-qty" placeholder="1" value="1"></div>
+        </div>
+        <button class="btn" onclick="calcColumn()">Calculate Bricks</button>
+      </div>
+
+      <div class="results" id="results">
+        <div class="result-grid">
+          <div class="result-item"><div class="number" id="r-bricks">—</div><div class="label">Bricks Needed</div><div class="detail" id="r-brickdetail"></div></div>
+          <div class="result-item"><div class="number" id="r-pallets">—</div><div class="label">Pallets</div><div class="detail">~500 bricks per pallet</div></div>
+          <div class="result-item"><div class="number" id="r-mortar">—</div><div class="label">Mortar Bags (80 lb)</div><div class="detail" id="r-mortardetail"></div></div>
+          <div class="result-item"><div class="number" id="r-cost">—</div><div class="label">Material Cost</div><div class="detail" id="r-costdetail"></div></div>
+        </div>
+        <div class="waste-note"><strong>Pro Tip:</strong> Order 5–10% extra bricks. They're difficult to match later if you run short — different kiln batches produce slightly different colors. Keep leftover bricks for future repairs.</div>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="info-section"><div class="container">
+    <div class="info-card">
+      <h2>How to Calculate Bricks: Complete Guide</h2>
+      <p>Whether you're building a garden wall, patio, or full brick veneer, getting the right brick count saves money and prevents delays. Here's everything you need to know.</p>
+
+      <h3>Bricks per Square Foot by Size</h3>
+      <table>
+        <tr><th>Brick Size</th><th>Dimensions (W×H×L)</th><th>Bricks per Sq Ft (Wall)</th><th>Bricks per Sq Ft (Flat)</th></tr>
+        <tr><td>Modular</td><td>3⅝ × 2¼ × 7⅝"</td><td>6.75</td><td>4.50</td></tr>
+        <tr><td>Queen</td><td>2¾ × 2¾ × 7⅝"</td><td>5.76</td><td>4.50</td></tr>
+        <tr><td>King</td><td>2¾ × 2⅝ × 9⅝"</td><td>4.50</td><td>3.50</td></tr>
+        <tr><td>Utility</td><td>3⅝ × 3⅝ × 11⅝"</td><td>3.00</td><td>2.25</td></tr>
+        <tr><td>Standard Paver</td><td>4 × 2¼ × 8"</td><td>—</td><td>4.50</td></tr>
+      </table>
+      <p><strong>Note:</strong> These counts include standard 3/8" mortar joints for walls. Dry-laid pavers with sand joints use slightly different counts.</p>
+
+      <h3>Mortar Estimation</h3>
+      <p>For standard modular bricks with 3/8" mortar joints:</p>
+      <ul>
+        <li><strong>1 bag (80 lb) mortar mix</strong> lays approximately 35–40 bricks</li>
+        <li><strong>Per 1,000 bricks:</strong> ~25–30 bags of mortar mix</li>
+        <li><strong>Sand needed:</strong> About 18–20 cubic feet per 1,000 bricks (with pre-mixed mortar, sand is included)</li>
+      </ul>
+
+      <h3>Brick Cost in 2026</h3>
+      <table>
+        <tr><th>Brick Type</th><th>Cost per Brick</th><th>Cost per 1,000</th><th>Best For</th></tr>
+        <tr><td>Common clay</td><td>$0.50–$0.90</td><td>$500–$900</td><td>Structural, hidden surfaces</td></tr>
+        <tr><td>Face brick</td><td>$0.75–$2.50</td><td>$750–$2,500</td><td>Visible walls, facades</td></tr>
+        <tr><td>Concrete brick</td><td>$0.40–$0.80</td><td>$400–$800</td><td>Budget projects, painting</td></tr>
+        <tr><td>Fire brick</td><td>$2.00–$5.00</td><td>$2,000–$5,000</td><td>Fireplaces, pizza ovens</td></tr>
+        <tr><td>Paver brick</td><td>$0.50–$1.50</td><td>$500–$1,500</td><td>Patios, walkways, driveways</td></tr>
+        <tr><td>Reclaimed/vintage</td><td>$1.00–$4.00</td><td>$1,000–$4,000</td><td>Character, historic restoration</td></tr>
+      </table>
+
+      <h3>5 Brick Project Mistakes to Avoid</h3>
+      <ol>
+        <li><strong>Not soaking bricks before laying.</strong> Dry bricks absorb moisture from mortar, weakening the bond. Dampen them (don't saturate) before use.</li>
+        <li><strong>Inconsistent mortar joints.</strong> Use a jointing tool and story pole to keep joints uniform. Uneven joints look amateur and can cause structural issues.</li>
+        <li><strong>Mixing mortar too wet or too dry.</strong> Mortar should hold its shape when squeezed but not crumble. Too wet = sliding bricks and weak joints.</li>
+        <li><strong>Skipping the foundation.</strong> Brick walls need a proper concrete footing below the frost line. A wall without a footing will crack and lean.</li>
+        <li><strong>Not planning for drainage.</strong> Brick patios need a proper gravel base (4–6") and slight slope (1/4" per foot) for water drainage.</li>
+      </ol>
+    </div>
+
+    <div class="info-card">
+      <h2>Brick Patterns and Bonds Explained</h2>
+      <h3>Wall Bond Patterns</h3>
+      <table>
+        <tr><th>Pattern</th><th>Description</th><th>Difficulty</th><th>Waste</th></tr>
+        <tr><td>Running Bond</td><td>Each row offset by half a brick</td><td>Easy</td><td>5%</td></tr>
+        <tr><td>Stack Bond</td><td>Bricks aligned vertically</td><td>Easy</td><td>3%</td></tr>
+        <tr><td>Flemish Bond</td><td>Alternating headers and stretchers</td><td>Medium</td><td>8%</td></tr>
+        <tr><td>English Bond</td><td>Alternating rows of headers and stretchers</td><td>Medium</td><td>8%</td></tr>
+        <tr><td>Herringbone</td><td>45° zigzag pattern</td><td>Hard</td><td>10–15%</td></tr>
+      </table>
+      <h3>Patio Patterns</h3>
+      <table>
+        <tr><th>Pattern</th><th>Description</th><th>Waste</th><th>Best For</th></tr>
+        <tr><td>Running Bond</td><td>Offset rows, easy to lay</td><td>5%</td><td>Walkways, simple patios</td></tr>
+        <tr><td>Herringbone</td><td>90° interlocking V-pattern</td><td>10%</td><td>Driveways, heavy traffic</td></tr>
+        <tr><td>Basketweave</td><td>Pairs of bricks at 90°</td><td>5%</td><td>Patios, courtyards</td></tr>
+        <tr><td>Pinwheel</td><td>Square with center brick</td><td>8%</td><td>Decorative accents</td></tr>
+      </table>
+      <p><strong>For driveways:</strong> Use herringbone pattern — it distributes load better and resists shifting under vehicle weight. Running bond tends to track (shift in the direction of traffic).</p>
+    </div>
+  </div></section>
+
+  <!-- Email Capture CTA -->
+  <div id="email-cta" style="max-width:720px;margin:40px auto;padding:40px 32px;background:linear-gradient(135deg,#1e293b 0%,#0f172a 100%);border:1px solid rgba(249,115,22,0.3);border-radius:16px;text-align:center;">
+    <div style="font-size:2rem;margin-bottom:12px;">📋</div>
+    <h3 style="font-family:Inter,-apple-system,sans-serif;font-size:1.4rem;font-weight:700;color:#f8fafc;margin-bottom:8px;">Free Contractor Toolkit</h3>
+    <p style="font-family:Inter,-apple-system,sans-serif;color:#94a3b8;font-size:0.95rem;margin-bottom:24px;max-width:480px;margin-left:auto;margin-right:auto;">Get our <strong style="color:#f97316;">free spreadsheet templates</strong> &mdash; invoice, estimate, job costing &amp; profit tracker. Used by 500+ contractors.</p>
+    <form id="capture-form" onsubmit="return handleCapture(event)" style="display:flex;gap:10px;max-width:420px;margin:0 auto;flex-wrap:wrap;justify-content:center;">
+      <input type="email" id="capture-email" placeholder="you@company.com" required style="flex:1;min-width:220px;padding:12px 16px;border-radius:8px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.05);color:#f8fafc;font-size:0.95rem;font-family:Inter,-apple-system,sans-serif;outline:none;">
+      <button type="submit" style="padding:12px 24px;background:#f97316;color:#fff;border:none;border-radius:8px;font-weight:600;font-size:0.95rem;cursor:pointer;font-family:Inter,-apple-system,sans-serif;white-space:nowrap;">Send Me the Templates</button>
+    </form>
+    <p id="capture-msg" style="font-family:Inter,-apple-system,sans-serif;color:#22c55e;font-size:0.85rem;margin-top:12px;display:none;"></p>
+    <p style="font-family:Inter,-apple-system,sans-serif;color:#64748b;font-size:0.75rem;margin-top:12px;">No spam. Unsubscribe anytime.</p>
+  </div>
+
+  <footer><div class="container"><p>© 2026 <a href="/">BuiltRight Academy</a>. Free tools for tradespeople who mean business.</p></div></footer>
+
+  <script>
+    const brickSizes = {
+      modular: { perSqFt: 6.75, label: 'Modular' },
+      queen:   { perSqFt: 5.76, label: 'Queen' },
+      king:    { perSqFt: 4.50, label: 'King' },
+      utility: { perSqFt: 3.00, label: 'Utility' }
+    };
+    const paverSizes = {
+      standard: { perSqFt: 4.5, label: 'Standard (4×8")' },
+      large:    { perSqFt: 3.0, label: 'Large (4×12")' },
+      square:   { perSqFt: 2.25, label: 'Square (8×8")' }
+    };
+    const patternWaste = { running: 0.05, herringbone: 0.10, basket: 0.05 };
+
+    // Tab switching
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.calc-form').forEach(f => f.style.display = 'none');
+        tab.classList.add('active');
+        document.getElementById('form-' + tab.dataset.type).style.display = 'block';
+        document.getElementById('results').classList.remove('show');
+      });
+    });
+
+    function showResults(bricks, hasMortar, brickCostLow, brickCostHigh) {
+      const pallets = Math.ceil(bricks / 500);
+      const mortarBags = hasMortar ? Math.ceil(bricks / 37) : 0;
+      const mortarCost = mortarBags * 7;
+      const totalLow = (bricks * brickCostLow) + mortarCost;
+      const totalHigh = (bricks * brickCostHigh) + mortarCost;
+
+      document.getElementById('r-bricks').textContent = bricks.toLocaleString();
+      document.getElementById('r-brickdetail').textContent = 'Including waste factor';
+      document.getElementById('r-pallets').textContent = pallets;
+      document.getElementById('r-mortar').textContent = hasMortar ? mortarBags : 'N/A';
+      document.getElementById('r-mortardetail').textContent = hasMortar ? '~37 bricks per bag' : 'Dry-laid, no mortar';
+      document.getElementById('r-cost').textContent = '$' + Math.round(totalLow).toLocaleString() + '–$' + Math.round(totalHigh).toLocaleString();
+      document.getElementById('r-costdetail').textContent = 'Bricks' + (hasMortar ? ' + mortar' : '') + ' only';
+      document.getElementById('results').classList.add('show');
+      document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function calcWall() {
+      const l = parseFloat(document.getElementById('wall-length').value);
+      const h = parseFloat(document.getElementById('wall-height').value);
+      if (!l || !h) return alert('Please enter wall length and height.');
+      const openings = parseFloat(document.getElementById('wall-openings').value) || 0;
+      const size = document.getElementById('wall-brick-size').value;
+      const wallType = document.getElementById('wall-type').value;
+      const wastePct = parseFloat(document.getElementById('wall-waste').value) / 100;
+
+      const netArea = (l * h) - openings;
+      if (netArea <= 0) return alert('Wall area must be greater than openings.');
+
+      let bricks = Math.ceil(netArea * brickSizes[size].perSqFt * (1 + wastePct));
+      if (wallType === 'double') bricks *= 2;
+
+      showResults(bricks, true, 0.60, 1.50);
+    }
+
+    function calcPatio() {
+      const l = parseFloat(document.getElementById('patio-length').value);
+      const w = parseFloat(document.getElementById('patio-width').value);
+      if (!l || !w) return alert('Please enter patio dimensions.');
+
+      const paverSize = document.getElementById('patio-paver-size').value;
+      const pattern = document.getElementById('patio-pattern').value;
+      const waste = patternWaste[pattern];
+      const area = l * w;
+      const bricks = Math.ceil(area * paverSizes[paverSize].perSqFt * (1 + waste));
+
+      showResults(bricks, false, 0.50, 1.50);
+    }
+
+    function calcColumn() {
+      const h = parseFloat(document.getElementById('col-height').value);
+      if (!h) return alert('Please enter column height.');
+
+      const colSize = parseInt(document.getElementById('col-size').value);
+      const qty = parseInt(document.getElementById('col-qty').value) || 1;
+
+      // Bricks per course by column size
+      const bricksPerCourse = { 12: 4, 16: 6, 24: 8 };
+      const coursesPerFt = 3; // ~3 courses per vertical foot with mortar
+      const totalCourses = Math.ceil(h * coursesPerFt);
+      const bricksPerCol = totalCourses * bricksPerCourse[colSize];
+      const totalBricks = Math.ceil(bricksPerCol * qty * 1.10); // 10% waste
+
+      showResults(totalBricks, true, 0.60, 1.50);
+    }
+
+    function handleCapture(e){
+      e.preventDefault();
+      var em=document.getElementById("capture-email").value;
+      var msg=document.getElementById("capture-msg");
+      var btn=e.target.querySelector("button");
+      btn.textContent="Sending...";btn.disabled=true;
+      fetch("/api/subscribe",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:em,source:window.location.pathname,lead_magnet:"contractor-toolkit"})})
+      .then(function(r){return r.json()})
+      .then(function(d){msg.textContent="\u2705 Check your inbox! Templates are on the way.";msg.style.display="block";document.getElementById("capture-form").style.display="none"})
+      .catch(function(){msg.textContent="Something went wrong. Try again.";msg.style.color="#ef4444";msg.style.display="block";btn.textContent="Send Me the Templates";btn.disabled=false});
+      return false;
+    }
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
+</body>
+</html>

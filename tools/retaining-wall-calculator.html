@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Retaining Wall Calculator — Blocks, Gravel &amp; Cost | BuiltRight Academy</title>
+  <meta name="description" content="Free retaining wall calculator. Calculate blocks, backfill gravel, cap stones, and cost for your retaining wall project. Supports segmental blocks, timber, and natural stone. Updated 2026.">
+  <meta name="keywords" content="retaining wall calculator, retaining wall cost calculator, how many blocks for retaining wall, retaining wall estimator, retaining wall materials calculator, landscape block calculator">
+  <link rel="canonical" href="https://builtright-academy.vercel.app/tools/retaining-wall-calculator">
+  <meta property="og:title" content="Retaining Wall Calculator — Blocks, Gravel & Cost Estimate">
+  <meta property="og:description" content="Free interactive retaining wall calculator. Get block count, backfill gravel, cap stones, and total cost estimate instantly.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://builtright-academy.vercel.app/tools/retaining-wall-calculator">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Retaining Wall Calculator",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "description": "Calculate blocks, backfill gravel, cap stones, and cost for retaining wall projects. Supports segmental blocks, timber, and natural stone walls."
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How many blocks do I need for a retaining wall?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Divide the wall face area (length × height) by the face area of one block. Standard retaining wall blocks are 12\" wide × 4\" tall (face area = 0.33 sq ft). For a 20 ft long × 3 ft high wall: 60 sq ft ÷ 0.33 = ~182 blocks. Add 10% for waste."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much does a retaining wall cost per linear foot?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "DIY retaining walls with segmental blocks cost $10–$25 per face square foot for materials. Professionally installed walls run $25–$60 per face sq ft. A 20-foot long, 3-foot high wall typically costs $600–$1,500 DIY or $1,500–$3,600 professionally installed."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much gravel do I need behind a retaining wall?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Use a minimum 12-inch wide gravel backfill zone behind the wall for the full height, plus a 6-inch gravel base beneath the first course. For a 20 ft × 3 ft wall: about 1.5–2 cubic yards of drainage gravel, plus 0.5 cubic yards for the base."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need a permit for a retaining wall?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Most jurisdictions require a permit for retaining walls over 4 feet tall (measured from the bottom of the footing to the top of the wall). Walls over 4 feet also typically require engineering. Check your local building codes — some areas have stricter height limits."
+        }
+      }
+    ]
+  }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root { --orange: #F97316; --orange-dark: #EA580C; --darker: #0F0F1A; --dark-card: #1A1A2E; --gray: #94A3B8; --light: #F8FAFC; --green: #22C55E; --border: rgba(255,255,255,0.08); }
+    body { font-family: 'Inter', -apple-system, sans-serif; background: var(--darker); color: var(--light); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+    nav { padding: 20px 0; border-bottom: 1px solid var(--border); }
+    nav .container { display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.3rem; color: var(--orange); text-decoration: none; letter-spacing: -0.5px; }
+    .logo span { color: var(--light); }
+    .nav-links a { color: var(--gray); text-decoration: none; font-size: 0.9rem; margin-left: 24px; }
+    .nav-links a:hover { color: var(--light); }
+    .hero { padding: 48px 0 32px; text-align: center; }
+    .hero .badge { display: inline-block; background: rgba(249,115,22,0.1); border: 1px solid rgba(249,115,22,0.3); color: var(--orange); font-size: 0.8rem; font-weight: 600; padding: 6px 16px; border-radius: 100px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .hero h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 800; line-height: 1.15; letter-spacing: -1px; margin-bottom: 12px; }
+    .hero h1 .highlight { color: var(--orange); }
+    .hero p { color: var(--gray); font-size: 1.05rem; max-width: 600px; margin: 0 auto; }
+    .calc-section { padding: 24px 0 60px; }
+    .calc-card { background: var(--dark-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; margin-bottom: 24px; }
+    .calc-card h2 { font-size: 1.2rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+    .calc-card h2 .icon { font-size: 1.4rem; }
+    .tabs { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
+    .tab { background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: var(--gray); padding: 10px 20px; border-radius: 8px; cursor: pointer; font-size: 0.9rem; font-weight: 500; transition: all 0.2s; }
+    .tab:hover { border-color: var(--orange); color: var(--light); }
+    .tab.active { background: rgba(249,115,22,0.15); border-color: var(--orange); color: var(--orange); }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 500px) { .form-grid { grid-template-columns: 1fr; } }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group.full { grid-column: 1 / -1; }
+    label { font-size: 0.85rem; font-weight: 600; color: var(--gray); text-transform: uppercase; letter-spacing: 0.5px; }
+    input, select { background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: var(--light); padding: 12px 16px; border-radius: 8px; font-size: 1rem; font-family: inherit; outline: none; transition: border-color 0.2s; }
+    input:focus, select:focus { border-color: var(--orange); }
+    select option { background: var(--darker); }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: var(--orange); color: #fff; font-weight: 700; font-size: 1rem; padding: 14px 28px; border-radius: 10px; border: none; cursor: pointer; width: 100%; margin-top: 16px; transition: background 0.2s; }
+    .btn:hover { background: var(--orange-dark); }
+    .results { display: none; margin-top: 24px; }
+    .results.show { display: block; }
+    .result-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; }
+    .result-item { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 12px; padding: 20px; text-align: center; }
+    .result-item .number { font-size: 1.8rem; font-weight: 800; color: var(--orange); letter-spacing: -1px; }
+    .result-item .label { font-size: 0.8rem; color: var(--gray); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .result-item .detail { font-size: 0.85rem; color: var(--light); margin-top: 8px; opacity: 0.8; }
+    .waste-note { background: rgba(249,115,22,0.08); border: 1px solid rgba(249,115,22,0.2); border-radius: 10px; padding: 16px 20px; margin-top: 20px; font-size: 0.9rem; color: var(--gray); }
+    .waste-note strong { color: var(--orange); }
+    .info-section { padding: 40px 0 60px; }
+    .info-card { background: var(--dark-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; margin-bottom: 24px; }
+    .info-card h2 { font-size: 1.4rem; font-weight: 700; margin-bottom: 16px; }
+    .info-card h3 { font-size: 1.1rem; font-weight: 600; margin: 20px 0 8px; color: var(--orange); }
+    .info-card p { color: var(--gray); margin-bottom: 12px; line-height: 1.8; }
+    .info-card ul, .info-card ol { color: var(--gray); margin-left: 20px; margin-bottom: 12px; }
+    .info-card li { margin-bottom: 6px; }
+    .info-card table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+    .info-card th, .info-card td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+    .info-card th { color: var(--orange); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; }
+    .info-card td { color: var(--gray); }
+    footer { padding: 40px 0; border-top: 1px solid var(--border); text-align: center; }
+    footer p { color: var(--gray); font-size: 0.85rem; }
+    footer a { color: var(--orange); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <nav><div class="container"><a href="/" class="logo">Built<span>Right</span></a><div class="nav-links"><a href="/blog">Blog</a><a href="/templates">Templates</a><a href="/tools">Tools</a></div></div></nav>
+
+  <section class="hero"><div class="container">
+    <div class="badge">Free Tool</div>
+    <h1>Retaining Wall <span class="highlight">Calculator</span></h1>
+    <p>Calculate blocks, backfill gravel, cap stones, and total cost for your retaining wall project.</p>
+  </div></section>
+
+  <section class="calc-section"><div class="container">
+    <div class="calc-card">
+      <h2><span class="icon">🏗️</span> Choose Your Wall Type</h2>
+      <div class="tabs">
+        <div class="tab active" data-type="block">Segmental Block</div>
+        <div class="tab" data-type="timber">Timber / Railroad Tie</div>
+        <div class="tab" data-type="stone">Natural Stone</div>
+      </div>
+
+      <!-- Block Wall -->
+      <div id="form-block" class="calc-form">
+        <div class="form-grid">
+          <div class="form-group"><label>Wall Length (ft)</label><input type="number" id="block-length" placeholder="e.g. 30" step="any"></div>
+          <div class="form-group"><label>Wall Height (ft)</label><input type="number" id="block-height" placeholder="e.g. 3" step="any"></div>
+          <div class="form-group"><label>Block Size</label>
+            <select id="block-size">
+              <option value="standard">Standard (12×4×8") — $3–$6 ea</option>
+              <option value="large">Large (12×6×18") — $6–$12 ea</option>
+              <option value="small">Small (12×4×6") — $2–$4 ea</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Include Cap Stones?</label>
+            <select id="block-caps">
+              <option value="yes">Yes — finished look</option>
+              <option value="no">No — unfinished top</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn" onclick="calcBlock()">Calculate Retaining Wall</button>
+      </div>
+
+      <!-- Timber Wall -->
+      <div id="form-timber" class="calc-form" style="display:none">
+        <div class="form-grid">
+          <div class="form-group"><label>Wall Length (ft)</label><input type="number" id="timber-length" placeholder="e.g. 20" step="any"></div>
+          <div class="form-group"><label>Wall Height (ft)</label><input type="number" id="timber-height" placeholder="e.g. 3" step="any"></div>
+          <div class="form-group"><label>Timber Size</label>
+            <select id="timber-size">
+              <option value="6x6">6×6 Landscape Timbers — $12–$20 ea</option>
+              <option value="6x8">6×8 Railroad Ties — $20–$40 ea</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Timber Length</label>
+            <select id="timber-len">
+              <option value="8">8 ft timbers</option>
+              <option value="6">6 ft timbers</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn" onclick="calcTimber()">Calculate Retaining Wall</button>
+      </div>
+
+      <!-- Stone Wall -->
+      <div id="form-stone" class="calc-form" style="display:none">
+        <div class="form-grid">
+          <div class="form-group"><label>Wall Length (ft)</label><input type="number" id="stone-length" placeholder="e.g. 20" step="any"></div>
+          <div class="form-group"><label>Wall Height (ft)</label><input type="number" id="stone-height" placeholder="e.g. 3" step="any"></div>
+          <div class="form-group"><label>Wall Thickness (in)</label><input type="number" id="stone-depth" placeholder="e.g. 18" value="18" step="any"></div>
+          <div class="form-group"><label>Stone Type</label>
+            <select id="stone-type">
+              <option value="fieldstone">Fieldstone — $200–$400/ton</option>
+              <option value="limestone">Limestone — $250–$500/ton</option>
+              <option value="granite">Granite — $300–$600/ton</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn" onclick="calcStone()">Calculate Retaining Wall</button>
+      </div>
+
+      <div class="results" id="results">
+        <div class="result-grid">
+          <div class="result-item"><div class="number" id="r-blocks">—</div><div class="label" id="r-blocks-label">Blocks</div><div class="detail" id="r-blocksdetail"></div></div>
+          <div class="result-item"><div class="number" id="r-caps">—</div><div class="label">Cap Stones</div><div class="detail" id="r-capsdetail"></div></div>
+          <div class="result-item"><div class="number" id="r-gravel">—</div><div class="label">Backfill Gravel</div><div class="detail">Cubic yards</div></div>
+          <div class="result-item"><div class="number" id="r-base">—</div><div class="label">Base Gravel</div><div class="detail">Cubic yards</div></div>
+          <div class="result-item"><div class="number" id="r-fabric">—</div><div class="label">Filter Fabric</div><div class="detail">Linear feet</div></div>
+          <div class="result-item"><div class="number" id="r-cost">—</div><div class="label">Total Material Cost</div><div class="detail" id="r-costdetail"></div></div>
+        </div>
+        <div class="waste-note"><strong>Pro Tip:</strong> Retaining walls over 4 feet typically require a building permit and may need engineer-stamped plans. Also install a perforated drain pipe at the base of the wall — water pressure is the #1 cause of retaining wall failure.</div>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="info-section"><div class="container">
+    <div class="info-card">
+      <h2>How to Build a Retaining Wall: Complete Guide</h2>
+      <p>Retaining walls hold back soil on slopes, create usable flat areas, and add structure to landscapes. Here's everything you need to know about planning and estimating your project.</p>
+
+      <h3>Retaining Wall Cost Comparison (2026)</h3>
+      <table>
+        <tr><th>Wall Type</th><th>Material Cost/sq ft face</th><th>Installed Cost/sq ft face</th><th>Max DIY Height</th></tr>
+        <tr><td>Segmental Block (standard)</td><td>$10–$18</td><td>$25–$45</td><td>3–4 ft</td></tr>
+        <tr><td>Segmental Block (premium)</td><td>$15–$30</td><td>$35–$60</td><td>3–4 ft</td></tr>
+        <tr><td>Landscape Timber</td><td>$8–$15</td><td>$15–$30</td><td>3 ft</td></tr>
+        <tr><td>Natural Stone</td><td>$15–$35</td><td>$30–$65</td><td>3 ft</td></tr>
+        <tr><td>Poured Concrete</td><td>$20–$35</td><td>$40–$75</td><td>Not DIY</td></tr>
+        <tr><td>Boulder</td><td>$15–$40</td><td>$25–$50</td><td>Not DIY</td></tr>
+      </table>
+
+      <h3>Materials Checklist</h3>
+      <ul>
+        <li><strong>Wall blocks or material</strong> — the visible structure</li>
+        <li><strong>Cap stones</strong> — finished top course (flat, glued down)</li>
+        <li><strong>Base gravel</strong> — 6" deep compacted gravel beneath first course</li>
+        <li><strong>Backfill gravel</strong> — 12" wide behind wall, full height, for drainage</li>
+        <li><strong>Filter fabric</strong> — landscape fabric between gravel and soil to prevent clogging</li>
+        <li><strong>Drain pipe</strong> — 4" perforated pipe at base for water management</li>
+        <li><strong>Construction adhesive</strong> — for securing cap stones and top courses</li>
+      </ul>
+
+      <h3>Step-by-Step Overview</h3>
+      <ol>
+        <li><strong>Excavate and level.</strong> Dig a trench 6" deep and 24" wide. Compact the soil.</li>
+        <li><strong>Add base gravel.</strong> Lay 6" of compacted gravel. Level with a 2×4 and check with a level.</li>
+        <li><strong>Lay first course.</strong> This is the most critical row — if it's not level, the whole wall won't be. Use a string line.</li>
+        <li><strong>Stack remaining courses.</strong> Stagger joints (like brickwork). Add backfill gravel and fabric as you go.</li>
+        <li><strong>Install drain pipe.</strong> Place perforated pipe at the base behind the wall on top of gravel.</li>
+        <li><strong>Backfill.</strong> 12" of gravel behind wall, then soil on top.</li>
+        <li><strong>Cap it off.</strong> Glue cap stones with construction adhesive for a finished look.</li>
+      </ol>
+
+      <h3>5 Retaining Wall Mistakes That Cause Failure</h3>
+      <ol>
+        <li><strong>No drainage.</strong> Water pressure behind the wall is the #1 failure cause. Always use backfill gravel and a drain pipe.</li>
+        <li><strong>Poor base preparation.</strong> A level, compacted base is critical. Skipping this causes settling and leaning.</li>
+        <li><strong>Building too high without engineering.</strong> Walls over 4 feet need professional engineering. The forces increase dramatically with height.</li>
+        <li><strong>Not stepping back.</strong> Walls should lean slightly into the hill (battered). Most block systems have a built-in setback per course.</li>
+        <li><strong>Ignoring the surcharge.</strong> Heavy loads near the top of the wall (vehicles, structures, slopes) add lateral pressure. Factor this into your design.</li>
+      </ol>
+    </div>
+
+    <div class="info-card">
+      <h2>When Do You Need a Permit or Engineer?</h2>
+      <p>Rules vary by jurisdiction, but general guidelines:</p>
+      <table>
+        <tr><th>Wall Height</th><th>Permit</th><th>Engineering</th><th>Notes</th></tr>
+        <tr><td>Under 2 ft</td><td>Usually no</td><td>No</td><td>Simple garden walls</td></tr>
+        <tr><td>2–4 ft</td><td>Check local codes</td><td>Usually no</td><td>Most DIY projects</td></tr>
+        <tr><td>4+ ft</td><td>Yes (most areas)</td><td>Yes</td><td>Engineer-stamped plans required</td></tr>
+        <tr><td>Any height near structures</td><td>Yes</td><td>Recommended</td><td>Within 2× wall height of buildings</td></tr>
+        <tr><td>Near property lines</td><td>Yes</td><td>Check codes</td><td>Setback requirements apply</td></tr>
+      </table>
+      <p><strong>Bottom line:</strong> If your wall is under 4 feet and not near a building or property line, you're usually fine for DIY. For anything taller, get professional help — the liability risk isn't worth saving a few hundred dollars.</p>
+    </div>
+  </div></section>
+
+  <!-- Email Capture CTA -->
+  <div id="email-cta" style="max-width:720px;margin:40px auto;padding:40px 32px;background:linear-gradient(135deg,#1e293b 0%,#0f172a 100%);border:1px solid rgba(249,115,22,0.3);border-radius:16px;text-align:center;">
+    <div style="font-size:2rem;margin-bottom:12px;">📋</div>
+    <h3 style="font-family:Inter,-apple-system,sans-serif;font-size:1.4rem;font-weight:700;color:#f8fafc;margin-bottom:8px;">Free Contractor Toolkit</h3>
+    <p style="font-family:Inter,-apple-system,sans-serif;color:#94a3b8;font-size:0.95rem;margin-bottom:24px;max-width:480px;margin-left:auto;margin-right:auto;">Get our <strong style="color:#f97316;">free spreadsheet templates</strong> &mdash; invoice, estimate, job costing &amp; profit tracker. Used by 500+ contractors.</p>
+    <form id="capture-form" onsubmit="return handleCapture(event)" style="display:flex;gap:10px;max-width:420px;margin:0 auto;flex-wrap:wrap;justify-content:center;">
+      <input type="email" id="capture-email" placeholder="you@company.com" required style="flex:1;min-width:220px;padding:12px 16px;border-radius:8px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.05);color:#f8fafc;font-size:0.95rem;font-family:Inter,-apple-system,sans-serif;outline:none;">
+      <button type="submit" style="padding:12px 24px;background:#f97316;color:#fff;border:none;border-radius:8px;font-weight:600;font-size:0.95rem;cursor:pointer;font-family:Inter,-apple-system,sans-serif;white-space:nowrap;">Send Me the Templates</button>
+    </form>
+    <p id="capture-msg" style="font-family:Inter,-apple-system,sans-serif;color:#22c55e;font-size:0.85rem;margin-top:12px;display:none;"></p>
+    <p style="font-family:Inter,-apple-system,sans-serif;color:#64748b;font-size:0.75rem;margin-top:12px;">No spam. Unsubscribe anytime.</p>
+  </div>
+
+  <footer><div class="container"><p>© 2026 <a href="/">BuiltRight Academy</a>. Free tools for tradespeople who mean business.</p></div></footer>
+
+  <script>
+    // Block data
+    const blockData = {
+      standard: { faceW: 12/12, faceH: 4/12, costLow: 3, costHigh: 6, label: 'Standard 12×4"' },
+      large:    { faceW: 18/12, faceH: 6/12, costLow: 6, costHigh: 12, label: 'Large 12×6×18"' },
+      small:    { faceW: 6/12,  faceH: 4/12, costLow: 2, costHigh: 4, label: 'Small 12×4×6"' }
+    };
+
+    // Tab switching
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.calc-form').forEach(f => f.style.display = 'none');
+        tab.classList.add('active');
+        document.getElementById('form-' + tab.dataset.type).style.display = 'block';
+        document.getElementById('results').classList.remove('show');
+      });
+    });
+
+    function calcBlock() {
+      const length = parseFloat(document.getElementById('block-length').value);
+      const height = parseFloat(document.getElementById('block-height').value);
+      if (!length || !height) return alert('Please enter wall length and height.');
+
+      const size = document.getElementById('block-size').value;
+      const includeCaps = document.getElementById('block-caps').value === 'yes';
+      const block = blockData[size];
+
+      const faceArea = length * height;
+      const blocksPerSqFt = 1 / (block.faceW * block.faceH);
+      const blocks = Math.ceil(faceArea * blocksPerSqFt * 1.10); // 10% waste
+
+      // Cap stones — same width as blocks, one per linear foot
+      const caps = includeCaps ? Math.ceil(length / block.faceW * 1.05) : 0;
+      const capCostPerUnit = 4; // avg cap stone cost
+
+      // Gravel: 12" wide backfill behind wall, full height
+      const backfillCuYd = (length * 1 * height) / 27; // 1 ft wide
+      // Base gravel: 24" wide × 6" deep × wall length
+      const baseCuYd = (length * 2 * 0.5) / 27;
+      // Filter fabric
+      const fabricFt = Math.ceil(length * 1.1);
+
+      // Cost
+      const blockCostLow = blocks * block.costLow;
+      const blockCostHigh = blocks * block.costHigh;
+      const capCost = caps * capCostPerUnit;
+      const gravelCost = (backfillCuYd + baseCuYd) * 55; // ~$55/cu yd
+      const fabricCost = fabricFt * 0.50;
+      const totalLow = blockCostLow + capCost + gravelCost + fabricCost;
+      const totalHigh = blockCostHigh + capCost + gravelCost + fabricCost;
+
+      document.getElementById('r-blocks').textContent = blocks.toLocaleString();
+      document.getElementById('r-blocks-label').textContent = 'Blocks';
+      document.getElementById('r-blocksdetail').textContent = block.label + ' + 10% waste';
+      document.getElementById('r-caps').textContent = includeCaps ? caps : 'N/A';
+      document.getElementById('r-capsdetail').textContent = includeCaps ? 'Glue with adhesive' : 'Not included';
+      document.getElementById('r-gravel').textContent = backfillCuYd.toFixed(1);
+      document.getElementById('r-base').textContent = baseCuYd.toFixed(1);
+      document.getElementById('r-fabric').textContent = fabricFt;
+      document.getElementById('r-cost').textContent = '$' + Math.round(totalLow).toLocaleString() + '–$' + Math.round(totalHigh).toLocaleString();
+      document.getElementById('r-costdetail').textContent = 'All materials';
+      document.getElementById('results').classList.add('show');
+      document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function calcTimber() {
+      const length = parseFloat(document.getElementById('timber-length').value);
+      const height = parseFloat(document.getElementById('timber-height').value);
+      if (!length || !height) return alert('Please enter wall length and height.');
+
+      const timberType = document.getElementById('timber-size').value;
+      const timberLen = parseFloat(document.getElementById('timber-len').value);
+      const timberH = timberType === '6x6' ? 6/12 : 8/12; // height in feet
+      const costLow = timberType === '6x6' ? 12 : 20;
+      const costHigh = timberType === '6x6' ? 20 : 40;
+
+      const courses = Math.ceil(height / timberH);
+      const timbersPerCourse = Math.ceil(length / timberLen);
+      // Add deadmen (perpendicular braces) every 4 ft for walls over 2 ft
+      const deadmen = height > 2 ? Math.ceil(length / 4) : 0;
+      const totalTimbers = Math.ceil((courses * timbersPerCourse + deadmen) * 1.10);
+
+      const backfillCuYd = (length * 1 * height) / 27;
+      const baseCuYd = (length * 1.5 * 0.5) / 27;
+      const fabricFt = Math.ceil(length * 1.1);
+
+      const matLow = totalTimbers * costLow;
+      const matHigh = totalTimbers * costHigh;
+      const gravelCost = (backfillCuYd + baseCuYd) * 55;
+      const rebarCost = totalTimbers * 3;
+      const totalLow = matLow + gravelCost + rebarCost + (fabricFt * 0.5);
+      const totalHigh = matHigh + gravelCost + rebarCost + (fabricFt * 0.5);
+
+      document.getElementById('r-blocks').textContent = totalTimbers;
+      document.getElementById('r-blocks-label').textContent = 'Timbers';
+      document.getElementById('r-blocksdetail').textContent = timberLen + ' ft lengths + 10% waste';
+      document.getElementById('r-caps').textContent = 'N/A';
+      document.getElementById('r-capsdetail').textContent = 'Not needed for timber';
+      document.getElementById('r-gravel').textContent = backfillCuYd.toFixed(1);
+      document.getElementById('r-base').textContent = baseCuYd.toFixed(1);
+      document.getElementById('r-fabric').textContent = fabricFt;
+      document.getElementById('r-cost').textContent = '$' + Math.round(totalLow).toLocaleString() + '–$' + Math.round(totalHigh).toLocaleString();
+      document.getElementById('r-costdetail').textContent = 'Timbers + gravel + rebar';
+      document.getElementById('results').classList.add('show');
+      document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function calcStone() {
+      const length = parseFloat(document.getElementById('stone-length').value);
+      const height = parseFloat(document.getElementById('stone-height').value);
+      const depth = parseFloat(document.getElementById('stone-depth').value) / 12;
+      if (!length || !height || !depth) return alert('Please enter all dimensions.');
+
+      const stoneType = document.getElementById('stone-type').value;
+      const costPerTon = { fieldstone: [200, 400], limestone: [250, 500], granite: [300, 600] };
+
+      // Stone weighs ~150 lbs per cubic foot
+      const cuFt = length * height * depth;
+      const tons = (cuFt * 150) / 2000;
+      const tonsWithWaste = tons * 1.15; // 15% waste for irregular shapes
+
+      const backfillCuYd = (length * 1 * height) / 27;
+      const baseCuYd = (length * 2 * 0.5) / 27;
+      const fabricFt = Math.ceil(length * 1.1);
+
+      const costs = costPerTon[stoneType];
+      const stoneLow = tonsWithWaste * costs[0];
+      const stoneHigh = tonsWithWaste * costs[1];
+      const gravelCost = (backfillCuYd + baseCuYd) * 55;
+      const totalLow = stoneLow + gravelCost + (fabricFt * 0.5);
+      const totalHigh = stoneHigh + gravelCost + (fabricFt * 0.5);
+
+      document.getElementById('r-blocks').textContent = tonsWithWaste.toFixed(1);
+      document.getElementById('r-blocks-label').textContent = 'Tons of Stone';
+      document.getElementById('r-blocksdetail').textContent = stoneType.charAt(0).toUpperCase() + stoneType.slice(1) + ' + 15% waste';
+      document.getElementById('r-caps').textContent = 'N/A';
+      document.getElementById('r-capsdetail').textContent = 'Flat cap stones separate';
+      document.getElementById('r-gravel').textContent = backfillCuYd.toFixed(1);
+      document.getElementById('r-base').textContent = baseCuYd.toFixed(1);
+      document.getElementById('r-fabric').textContent = fabricFt;
+      document.getElementById('r-cost').textContent = '$' + Math.round(totalLow).toLocaleString() + '–$' + Math.round(totalHigh).toLocaleString();
+      document.getElementById('r-costdetail').textContent = 'Stone + gravel + fabric';
+      document.getElementById('results').classList.add('show');
+      document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function handleCapture(e){
+      e.preventDefault();
+      var em=document.getElementById("capture-email").value;
+      var msg=document.getElementById("capture-msg");
+      var btn=e.target.querySelector("button");
+      btn.textContent="Sending...";btn.disabled=true;
+      fetch("/api/subscribe",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:em,source:window.location.pathname,lead_magnet:"contractor-toolkit"})})
+      .then(function(r){return r.json()})
+      .then(function(d){msg.textContent="\u2705 Check your inbox! Templates are on the way.";msg.style.display="block";document.getElementById("capture-form").style.display="none"})
+      .catch(function(){msg.textContent="Something went wrong. Try again.";msg.style.color="#ef4444";msg.style.display="block";btn.textContent="Send Me the Templates";btn.disabled=false});
+      return false;
+    }
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
+</body>
+</html>

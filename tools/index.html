@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Free Contractor Tools & Calculators | BuiltRight Academy</title>
-  <meta name="description" content="22 free interactive calculators for contractors and tradespeople. Concrete, paint, roofing, drywall, deck, fence, asphalt, BTU, wire size and more. All free, no signup.">
+  <title>31 Free Contractor Calculators & Tools | BuiltRight Academy</title>
+  <meta name="description" content="31 free interactive calculators for contractors. Concrete, paint, roofing, drywall, deck, fence, asphalt, BTU, wire size, square footage and more. All free, no signup required.">
   <link rel="canonical" href="https://builtright-academy.vercel.app/tools/">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -12,233 +12,116 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
     :root { --orange: #F97316; --orange-dark: #EA580C; --darker: #0F0F1A; --gray: #94A3B8; --light: #F8FAFC; }
     body { font-family: 'Inter', -apple-system, sans-serif; background: var(--darker); color: var(--light); line-height: 1.6; }
-    .container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+    .container { max-width: 960px; margin: 0 auto; padding: 0 24px; }
     nav { padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
     nav .container { display: flex; justify-content: space-between; align-items: center; }
     .logo { font-weight: 800; font-size: 1.3rem; color: var(--orange); text-decoration: none; }
     .logo span { color: var(--light); }
     .nav-links a { color: var(--gray); text-decoration: none; font-size: 0.9rem; margin-left: 24px; }
-    .page-header { padding: 60px 0 40px; text-align: center; }
+    .page-header { padding: 60px 0 32px; text-align: center; }
     .page-header h1 { font-size: 2.2rem; font-weight: 800; letter-spacing: -1px; margin-bottom: 8px; }
     .page-header p { color: var(--gray); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
-    .category { margin-bottom: 40px; }
-    .category h2 { font-size: 1.3rem; font-weight: 700; color: var(--orange); margin-bottom: 16px; padding-bottom: 8px; border-bottom: 1px solid rgba(249,115,22,0.2); }
-    .tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; padding-bottom: 20px; }
-    .tool-card { display: block; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 24px; text-decoration: none; transition: all 0.2s; }
-    .tool-card:hover { border-color: rgba(249,115,22,0.3); background: rgba(255,255,255,0.05); transform: translateY(-2px); }
-    .tool-card .icon { font-size: 1.8rem; margin-bottom: 10px; }
-    .tool-card h3 { font-size: 1.05rem; font-weight: 700; color: var(--light); margin-bottom: 6px; }
-    .tool-card p { color: var(--gray); font-size: 0.85rem; line-height: 1.5; }
-    .tool-card .badge { display: inline-block; background: rgba(34,197,94,0.1); color: #4ADE80; font-size: 0.65rem; font-weight: 600; padding: 2px 8px; border-radius: 100px; margin-bottom: 8px; }
     .count { font-size: 0.9rem; color: var(--gray); text-align: center; margin-bottom: 40px; }
+    .category { margin-bottom: 40px; }
+    .category h2 { font-size: 1.2rem; font-weight: 700; color: var(--orange); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid rgba(249,115,22,0.2); }
+    .tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+    .tool-card { display: block; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 20px; text-decoration: none; transition: all 0.2s; }
+    .tool-card:hover { border-color: rgba(249,115,22,0.3); background: rgba(255,255,255,0.05); transform: translateY(-2px); }
+    .tool-card .icon { font-size: 1.6rem; margin-bottom: 8px; }
+    .tool-card h3 { font-size: 0.95rem; font-weight: 700; color: var(--light); margin-bottom: 4px; }
+    .tool-card p { color: var(--gray); font-size: 0.8rem; line-height: 1.4; }
+    .tool-card .vol { display: inline-block; background: rgba(34,197,94,0.1); color: #4ADE80; font-size: 0.6rem; font-weight: 600; padding: 2px 6px; border-radius: 100px; margin-bottom: 6px; }
     footer { padding: 24px 0; border-top: 1px solid rgba(255,255,255,0.06); text-align: center; font-size: 0.8rem; color: #334155; }
     footer a { color: var(--gray); text-decoration: none; }
   </style>
 </head>
 <body>
-<nav>
-  <div class="container">
-    <a href="/" class="logo">Built<span>Right</span></a>
-    <div class="nav-links">
-      <a href="/">Home</a>
-      <a href="/blog/">Blog</a>
-      <a href="/templates/">Templates</a>
-      <a href="/tools/">Tools</a>
+<nav><div class="container"><a href="/" class="logo">Built<span>Right</span></a><div class="nav-links"><a href="/">Home</a><a href="/blog/">Blog</a><a href="/templates/">Templates</a><a href="/tools/">Tools</a></div></div></nav>
+
+<div class="page-header"><div class="container">
+  <h1>Free Contractor Calculators</h1>
+  <p>31 interactive tools to estimate materials, price jobs, and run your contracting business smarter. All free — no signup.</p>
+</div></div>
+<div class="count">📐 31 free calculators — updated March 2026</div>
+
+<section><div class="container">
+
+  <div class="category">
+    <h2>📏 Measurement & Conversion</h2>
+    <div class="tools-grid">
+      <a href="/tools/square-footage-calculator" class="tool-card"><div class="icon">📐</div><span class="vol">246K/mo</span><h3>Square Footage Calculator</h3><p>Rectangle, circle, triangle, trapezoid + multi-room. Unit conversions included.</p></a>
+      <a href="/tools/cubic-yard-calculator" class="tool-card"><div class="icon">📦</div><span class="vol">40K/mo</span><h3>Cubic Yard Calculator</h3><p>Convert dimensions to cubic yards with material weight estimates.</p></a>
+      <a href="/tools/board-foot-calculator" class="tool-card"><div class="icon">🪵</div><span class="vol">33K/mo</span><h3>Board Foot Calculator</h3><p>Multi-board support with hardwood pricing by species.</p></a>
     </div>
   </div>
-</nav>
-<div class="page-header">
-  <div class="container">
-    <h1>Free Contractor Calculators</h1>
-    <p>22 interactive tools to help you estimate materials, price jobs, and run your business smarter. All free — no signup required.</p>
+
+  <div class="category">
+    <h2>🧱 Concrete & Masonry</h2>
+    <div class="tools-grid">
+      <a href="/tools/concrete-calculator" class="tool-card"><div class="icon">🧱</div><span class="vol">550K/mo</span><h3>Concrete Calculator</h3><p>Cubic yards, bags, and cost for slabs, footings, columns, stairs.</p></a>
+      <a href="/tools/rebar-calculator" class="tool-card"><div class="icon">🔩</div><span class="vol">6.6K/mo</span><h3>Rebar Calculator</h3><p>Pieces, linear feet, weight, tie wire, and chairs.</p></a>
+      <a href="/tools/brick-calculator" class="tool-card"><div class="icon">🧱</div><span class="vol">6.6K/mo</span><h3>Brick Calculator</h3><p>Bricks, mortar, pallets for walls, patios, and columns.</p></a>
+      <a href="/tools/retaining-wall-calculator" class="tool-card"><div class="icon">🏗️</div><span class="vol">2.4K/mo</span><h3>Retaining Wall Calculator</h3><p>Block, timber, or stone with backfill and drainage.</p></a>
+    </div>
   </div>
-</div>
-<div class="count">📐 22 free calculators — updated March 2026</div>
-<section>
-  <div class="container">
 
-    <div class="category">
-      <h2>🧱 Concrete & Masonry</h2>
-      <div class="tools-grid">
-        <a href="/tools/concrete-calculator" class="tool-card">
-          <div class="icon">🧱</div>
-          <span class="badge">550K searches/mo</span>
-          <h3>Concrete Calculator</h3>
-          <p>Cubic yards, bags, and cost for slabs, footings, columns, and stairs.</p>
-        </a>
-        <a href="/tools/rebar-calculator" class="tool-card">
-          <div class="icon">🔩</div>
-          <span class="badge">FREE</span>
-          <h3>Rebar Calculator</h3>
-          <p>Rebar pieces, linear feet, weight, tie wire, and chairs for any slab.</p>
-        </a>
-        <a href="/tools/brick-calculator" class="tool-card">
-          <div class="icon">🧱</div>
-          <span class="badge">FREE</span>
-          <h3>Brick Calculator</h3>
-          <p>Bricks, mortar bags, and cost for walls, patios, and walkways.</p>
-        </a>
-      </div>
+  <div class="category">
+    <h2>🏠 Framing & Lumber</h2>
+    <div class="tools-grid">
+      <a href="/tools/stair-calculator" class="tool-card"><div class="icon">🪜</div><span class="vol">33K/mo</span><h3>Stair Calculator</h3><p>Riser, tread, stringer with IRC code compliance check.</p></a>
+      <a href="/tools/deck-calculator" class="tool-card"><div class="icon">🏗️</div><span class="vol">10K/mo</span><h3>Deck Calculator</h3><p>Full materials: decking, joists, beams, posts, footings, railing.</p></a>
+      <a href="/tools/fence-calculator" class="tool-card"><div class="icon">🪵</div><span class="vol">12K/mo</span><h3>Fence Calculator</h3><p>Posts, pickets, rails, concrete for all fence types.</p></a>
+      <a href="/tools/roof-pitch-calculator" class="tool-card"><div class="icon">📐</div><span class="vol">27K/mo</span><h3>Roof Pitch Calculator</h3><p>Pitch, angle, rafter length with visual diagram.</p></a>
+      <a href="/tools/lumber-calculator" class="tool-card"><div class="icon">🪵</div><span class="vol">2.4K/mo</span><h3>Lumber Calculator</h3><p>Board feet, pieces needed, wall framing, deck boards.</p></a>
+      <a href="/tools/plywood-calculator" class="tool-card"><div class="icon">📏</div><span class="vol">6.6K/mo</span><h3>Plywood Calculator</h3><p>Sheets needed with waste factor, all grades and thicknesses.</p></a>
     </div>
-
-    <div class="category">
-      <h2>🏠 Framing & Structure</h2>
-      <div class="tools-grid">
-        <a href="/tools/deck-calculator" class="tool-card">
-          <div class="icon">🏗️</div>
-          <span class="badge">FREE</span>
-          <h3>Deck Calculator</h3>
-          <p>Complete materials list: decking, joists, beams, posts, footings, railing, and cost.</p>
-        </a>
-        <a href="/tools/stair-calculator" class="tool-card">
-          <div class="icon">🪜</div>
-          <span class="badge">33K searches/mo</span>
-          <h3>Stair Calculator</h3>
-          <p>Riser height, tread depth, stringer length with code compliance check.</p>
-        </a>
-        <a href="/tools/fence-calculator" class="tool-card">
-          <div class="icon">🪵</div>
-          <span class="badge">FREE</span>
-          <h3>Fence Calculator</h3>
-          <p>Posts, pickets, rails, concrete, and cost for wood and board-on-board.</p>
-        </a>
-        <a href="/tools/roof-pitch-calculator" class="tool-card">
-          <div class="icon">📐</div>
-          <span class="badge">27K searches/mo</span>
-          <h3>Roof Pitch Calculator</h3>
-          <p>Pitch ratio, slope angle, rafter length, and area multiplier with visual diagram.</p>
-        </a>
-        <a href="/tools/board-foot-calculator" class="tool-card">
-          <div class="icon">🪵</div>
-          <span class="badge">33K searches/mo</span>
-          <h3>Board Foot Calculator</h3>
-          <p>Board feet for lumber orders with hardwood pricing by species.</p>
-        </a>
-        <a href="/tools/plywood-calculator" class="tool-card">
-          <div class="icon">📏</div>
-          <span class="badge">FREE</span>
-          <h3>Plywood Calculator</h3>
-          <p>Sheets needed by area with waste factor. All grades and thicknesses.</p>
-        </a>
-      </div>
-    </div>
-
-    <div class="category">
-      <h2>🎨 Interior Finishes</h2>
-      <div class="tools-grid">
-        <a href="/tools/paint-calculator" class="tool-card">
-          <div class="icon">🎨</div>
-          <span class="badge">60K searches/mo</span>
-          <h3>Paint Calculator</h3>
-          <p>Gallons for walls, ceiling, and trim. Accounts for doors, windows, and coats.</p>
-        </a>
-        <a href="/tools/drywall-calculator" class="tool-card">
-          <div class="icon">📏</div>
-          <span class="badge">18K searches/mo</span>
-          <h3>Drywall Calculator</h3>
-          <p>Sheets, joint compound, tape, screws, and total cost.</p>
-        </a>
-        <a href="/tools/tile-calculator" class="tool-card">
-          <div class="icon">🔲</div>
-          <span class="badge">15K searches/mo</span>
-          <h3>Tile Calculator</h3>
-          <p>Tiles, boxes, and cost for floors, walls, and backsplashes.</p>
-        </a>
-        <a href="/tools/carpet-calculator" class="tool-card">
-          <div class="icon">🧶</div>
-          <span class="badge">FREE</span>
-          <h3>Carpet Calculator</h3>
-          <p>Square yards, padding, tack strip, and seam tape for multiple rooms + stairs.</p>
-        </a>
-      </div>
-    </div>
-
-    <div class="category">
-      <h2>🏡 Exterior & Hardscape</h2>
-      <div class="tools-grid">
-        <a href="/tools/siding-calculator" class="tool-card">
-          <div class="icon">🏠</div>
-          <span class="badge">FREE</span>
-          <h3>Siding Calculator</h3>
-          <p>Squares of siding, trim, J-channel, and cost for vinyl, fiber cement, and wood.</p>
-        </a>
-        <a href="/tools/asphalt-calculator" class="tool-card">
-          <div class="icon">🛣️</div>
-          <span class="badge">27K searches/mo</span>
-          <h3>Asphalt Calculator</h3>
-          <p>Tons, truckloads, and cost for driveways, parking lots, and overlays.</p>
-        </a>
-        <a href="/tools/paver-calculator" class="tool-card">
-          <div class="icon">🧩</div>
-          <span class="badge">FREE</span>
-          <h3>Paver Calculator</h3>
-          <p>Pavers, sand, gravel base, and edging for patios and walkways.</p>
-        </a>
-        <a href="/tools/gravel-calculator" class="tool-card">
-          <div class="icon">🪨</div>
-          <span class="badge">60K searches/mo</span>
-          <h3>Gravel Calculator</h3>
-          <p>Tons, cubic yards, and cost for driveways, paths, and landscaping.</p>
-        </a>
-        <a href="/tools/mulch-calculator" class="tool-card">
-          <div class="icon">🌿</div>
-          <span class="badge">60K searches/mo</span>
-          <h3>Mulch Calculator</h3>
-          <p>Cubic yards and bags for multiple beds with bulk vs. bagged pricing.</p>
-        </a>
-      </div>
-    </div>
-
-    <div class="category">
-      <h2>⚡ Electrical & HVAC</h2>
-      <div class="tools-grid">
-        <a href="/tools/wire-size-calculator" class="tool-card">
-          <div class="icon">⚡</div>
-          <span class="badge">FREE</span>
-          <h3>Wire Size Calculator</h3>
-          <p>AWG gauge, conduit size, and voltage drop for copper and aluminum runs.</p>
-        </a>
-        <a href="/tools/btu-calculator" class="tool-card">
-          <div class="icon">🌡️</div>
-          <span class="badge">FREE</span>
-          <h3>BTU Calculator</h3>
-          <p>Heating and cooling BTU requirements with AC tonnage and furnace sizing.</p>
-        </a>
-      </div>
-    </div>
-
-    <div class="category">
-      <h2>💰 Business & Estimating</h2>
-      <div class="tools-grid">
-        <a href="/tools/markup-calculator" class="tool-card">
-          <div class="icon">📊</div>
-          <span class="badge">FREE</span>
-          <h3>Markup & Margin Calculator</h3>
-          <p>Convert between markup and margin. Get the exact selling price you need.</p>
-        </a>
-        <a href="/tools/cubic-yard-calculator" class="tool-card">
-          <div class="icon">📦</div>
-          <span class="badge">40K searches/mo</span>
-          <h3>Cubic Yard Calculator</h3>
-          <p>Convert dimensions to cubic yards with material weight estimates.</p>
-        </a>
-        <a href="/tools/water-heater-cost-calculator" class="tool-card">
-          <div class="icon">🔧</div>
-          <span class="badge">FREE</span>
-          <h3>Water Heater Cost Calculator</h3>
-          <p>Installation cost for tank, tankless, and heat pump water heaters.</p>
-        </a>
-      </div>
-    </div>
-
   </div>
-</section>
-<footer>
-  <div class="container">
-    © 2026 BuiltRight Academy. Business skills for tradespeople.<br>
-    <a href="/">Home</a> · <a href="/blog/">Blog</a> · <a href="/templates/">Templates</a> · <a href="/tools/">Tools</a>
+
+  <div class="category">
+    <h2>🎨 Interior Finishes</h2>
+    <div class="tools-grid">
+      <a href="/tools/paint-calculator" class="tool-card"><div class="icon">🎨</div><span class="vol">60K/mo</span><h3>Paint Calculator</h3><p>Gallons for walls, ceiling, trim. Doors, windows, coats.</p></a>
+      <a href="/tools/drywall-calculator" class="tool-card"><div class="icon">📏</div><span class="vol">18K/mo</span><h3>Drywall Calculator</h3><p>Sheets, mud, tape, screws, and total cost.</p></a>
+      <a href="/tools/tile-calculator" class="tool-card"><div class="icon">🔲</div><span class="vol">15K/mo</span><h3>Tile Calculator</h3><p>Tiles, boxes, cost for floors, walls, backsplashes.</p></a>
+      <a href="/tools/flooring-calculator" class="tool-card"><div class="icon">🏠</div><span class="vol">6.6K/mo</span><h3>Flooring Calculator</h3><p>Multi-room support. Hardwood, tile, laminate, vinyl.</p></a>
+      <a href="/tools/carpet-calculator" class="tool-card"><div class="icon">🧶</div><span class="vol">5.4K/mo</span><h3>Carpet Calculator</h3><p>Sq yards, padding, tack strip for multiple rooms + stairs.</p></a>
+      <a href="/tools/insulation-calculator" class="tool-card"><div class="icon">🧊</div><span class="vol">6.6K/mo</span><h3>Insulation Calculator</h3><p>R-value by zone. Batts, blown, spray foam sizing.</p></a>
+    </div>
   </div>
-</footer>
+
+  <div class="category">
+    <h2>🏡 Exterior & Hardscape</h2>
+    <div class="tools-grid">
+      <a href="/tools/siding-calculator" class="tool-card"><div class="icon">🏠</div><span class="vol">8.1K/mo</span><h3>Siding Calculator</h3><p>Squares, trim, J-channel. Vinyl, fiber cement, wood.</p></a>
+      <a href="/tools/asphalt-calculator" class="tool-card"><div class="icon">🛣️</div><span class="vol">27K/mo</span><h3>Asphalt Calculator</h3><p>Tons, truckloads, cost for driveways and parking lots.</p></a>
+      <a href="/tools/paver-calculator" class="tool-card"><div class="icon">🧩</div><span class="vol">10K/mo</span><h3>Paver Calculator</h3><p>Pavers, sand, gravel, edging for patios and walkways.</p></a>
+      <a href="/tools/gravel-calculator" class="tool-card"><div class="icon">🪨</div><span class="vol">60K/mo</span><h3>Gravel Calculator</h3><p>Tons, cubic yards, cost for driveways and paths.</p></a>
+      <a href="/tools/mulch-calculator" class="tool-card"><div class="icon">🌿</div><span class="vol">60K/mo</span><h3>Mulch Calculator</h3><p>Cubic yards and bags for multiple beds, bulk vs bagged.</p></a>
+      <a href="/tools/landscaping-calculator" class="tool-card"><div class="icon">🌳</div><span class="vol">1.6K/mo</span><h3>Landscaping Calculator</h3><p>Mulch, gravel, topsoil, and sod with cost estimates.</p></a>
+    </div>
+  </div>
+
+  <div class="category">
+    <h2>⚡ Electrical & HVAC</h2>
+    <div class="tools-grid">
+      <a href="/tools/wire-size-calculator" class="tool-card"><div class="icon">⚡</div><span class="vol">10K/mo</span><h3>Wire Size Calculator</h3><p>AWG gauge, conduit size, voltage drop for copper/aluminum.</p></a>
+      <a href="/tools/amp-calculator" class="tool-card"><div class="icon">🔌</div><span class="vol">5.4K/mo</span><h3>Amp Calculator</h3><p>Watts↔Amps, Ohm's Law, three-phase with NEC sizing.</p></a>
+      <a href="/tools/btu-calculator" class="tool-card"><div class="icon">🌡️</div><span class="vol">10K/mo</span><h3>BTU Calculator</h3><p>Heating/cooling BTU, AC tonnage, furnace sizing.</p></a>
+      <a href="/tools/cfm-calculator" class="tool-card"><div class="icon">💨</div><span class="vol">4.4K/mo</span><h3>CFM Calculator</h3><p>Room ventilation, duct sizing, exhaust fan, HVAC CFM.</p></a>
+    </div>
+  </div>
+
+  <div class="category">
+    <h2>💰 Business & Estimating</h2>
+    <div class="tools-grid">
+      <a href="/tools/markup-calculator" class="tool-card"><div class="icon">📊</div><span class="vol">FREE</span><h3>Markup & Margin Calculator</h3><p>Convert markup to margin. Get the selling price you need.</p></a>
+      <a href="/tools/water-heater-cost-calculator" class="tool-card"><div class="icon">🔧</div><span class="vol">FREE</span><h3>Water Heater Cost Calculator</h3><p>Tank, tankless, heat pump installation cost estimates.</p></a>
+    </div>
+  </div>
+
+</div></section>
+
+<footer><div class="container">© 2026 BuiltRight Academy. Business skills for tradespeople.<br><a href="/">Home</a> · <a href="/blog/">Blog</a> · <a href="/templates/">Templates</a> · <a href="/tools/">Tools</a></div></footer>
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/_vercel/speed-insights/script.js"></script>
 </body>

@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lumber Calculator — Board Feet, Linear Feet & Cost Estimator | BuiltRight Academy</title>
+  <meta name="description" content="Free lumber calculator. Calculate board feet, linear feet, and pieces needed for any project. Includes common lumber sizes, pricing, and waste factors. Updated for 2026 pricing.">
+  <meta name="keywords" content="lumber calculator, board feet calculator, lumber estimator, how many boards do I need, wood calculator, board foot calculator, lumber cost calculator">
+  <link rel="canonical" href="https://builtright-academy.vercel.app/tools/lumber-calculator">
+  <meta property="og:title" content="Lumber Calculator — Board Feet, Linear Feet & Cost Estimator">
+  <meta property="og:description" content="Free interactive lumber calculator. Calculate board feet, pieces needed, and cost estimates for any project.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Lumber Calculator",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "description": "Calculate board feet, linear feet, pieces needed, and cost estimates for lumber projects. Includes common sizes and 2026 pricing."
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do you calculate board feet?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Board Feet = (Thickness in inches × Width in inches × Length in feet) ÷ 12. One board foot equals a piece of wood 1 inch thick, 12 inches wide, and 1 foot long (144 cubic inches). For example, a 2×6 that's 8 feet long = (2 × 6 × 8) ÷ 12 = 8 board feet."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the actual size of a 2×4?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A 2×4's actual dimensions are 1.5 inches × 3.5 inches. The '2×4' is the nominal (name) size before drying and planing. This applies to all dimensional lumber: a 2×6 is actually 1.5×5.5 inches, a 2×8 is 1.5×7.25 inches, and a 2×12 is 1.5×11.25 inches."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much does lumber cost in 2026?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "In 2026, SPF (spruce-pine-fir) framing lumber costs approximately: 2×4×8 = $3.50–$5.50, 2×6×8 = $5.50–$8.00, 2×4×16 = $7.00–$11.00. Pressure-treated lumber costs 50–100% more. Hardwood prices vary widely: oak runs $5–$10 per board foot, walnut $12–$20/BF, maple $6–$12/BF."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How many 2x4s do I need for a wall?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For standard 16-inch on-center framing: divide the wall length in inches by 16, then add 1 for the starter stud. Add 2 for the end studs (king studs), plus extras for corners, headers, and cripples. A rough estimate is (wall length in feet × 0.75) + 5. For a 20-foot wall, that's about 20 studs for the field, plus top plate, bottom plate, and double top plate (3 more pieces the length of the wall)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What does 'pressure-treated' lumber mean?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Pressure-treated (PT) lumber has been infused with chemical preservatives under high pressure to resist rot, decay, and insects. It's required by code for any wood in contact with the ground, within 6 inches of the ground, or exposed to weather. Common treatments include ACQ (Alkaline Copper Quaternary) and CA-C (Copper Azole). PT lumber costs 50–100% more than untreated lumber but lasts 20–40 years in ground contact."
+        }
+      }
+    ]
+  }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root { --orange: #F97316; --orange-dark: #EA580C; --darker: #0F0F1A; --dark-card: #1A1A2E; --gray: #94A3B8; --light: #F8FAFC; --green: #22C55E; --border: rgba(255,255,255,0.08); }
+    body { font-family: 'Inter', -apple-system, sans-serif; background: var(--darker); color: var(--light); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+    nav { padding: 20px 0; border-bottom: 1px solid var(--border); }
+    nav .container { display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.3rem; color: var(--orange); text-decoration: none; letter-spacing: -0.5px; }
+    .logo span { color: var(--light); }
+    .nav-links a { color: var(--gray); text-decoration: none; font-size: 0.9rem; margin-left: 24px; }
+    .nav-links a:hover { color: var(--light); }
+    .hero { padding: 48px 0 32px; text-align: center; }
+    .hero .badge { display: inline-block; background: rgba(249,115,22,0.1); border: 1px solid rgba(249,115,22,0.3); color: var(--orange); font-size: 0.8rem; font-weight: 600; padding: 6px 16px; border-radius: 100px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .hero h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 800; line-height: 1.15; letter-spacing: -1px; margin-bottom: 12px; }
+    .hero h1 .highlight { color: var(--orange); }
+    .hero p { color: var(--gray); font-size: 1.05rem; max-width: 600px; margin: 0 auto; }
+    .calc-section { padding: 24px 0 60px; }
+    .calc-card { background: var(--dark-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; margin-bottom: 24px; }
+    .calc-card h2 { font-size: 1.2rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+    .calc-card h2 .icon { font-size: 1.4rem; }
+    .tabs { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
+    .tab { background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: var(--gray); padding: 10px 20px; border-radius: 8px; cursor: pointer; font-size: 0.9rem; font-weight: 500; transition: all 0.2s; }
+    .tab:hover { border-color: var(--orange); color: var(--light); }
+    .tab.active { background: rgba(249,115,22,0.15); border-color: var(--orange); color: var(--orange); }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 500px) { .form-grid { grid-template-columns: 1fr; } }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group.full { grid-column: 1 / -1; }
+    label { font-size: 0.85rem; font-weight: 600; color: var(--gray); text-transform: uppercase; letter-spacing: 0.5px; }
+    input, select { background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: var(--light); padding: 12px 16px; border-radius: 8px; font-size: 1rem; font-family: inherit; outline: none; transition: border-color 0.2s; }
+    input:focus, select:focus { border-color: var(--orange); }
+    select option { background: var(--darker); }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: var(--orange); color: #fff; font-weight: 700; font-size: 1rem; padding: 14px 28px; border-radius: 10px; border: none; cursor: pointer; width: 100%; margin-top: 16px; transition: background 0.2s; }
+    .btn:hover { background: var(--orange-dark); }
+    .results { display: none; margin-top: 24px; }
+    .results.show { display: block; }
+    .result-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; }
+    .result-item { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 12px; padding: 20px; text-align: center; }
+    .result-item .number { font-size: 2rem; font-weight: 800; color: var(--orange); letter-spacing: -1px; }
+    .result-item .label { font-size: 0.8rem; color: var(--gray); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .result-item .detail { font-size: 0.85rem; color: var(--light); margin-top: 8px; opacity: 0.8; }
+    .waste-note { background: rgba(249,115,22,0.08); border: 1px solid rgba(249,115,22,0.2); border-radius: 10px; padding: 16px 20px; margin-top: 20px; font-size: 0.9rem; color: var(--gray); }
+    .waste-note strong { color: var(--orange); }
+    .info-section { padding: 40px 0 60px; }
+    .info-card { background: var(--dark-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; margin-bottom: 24px; }
+    .info-card h2 { font-size: 1.4rem; font-weight: 700; margin-bottom: 16px; }
+    .info-card h3 { font-size: 1.1rem; font-weight: 600; margin: 20px 0 8px; color: var(--orange); }
+    .info-card p { color: var(--gray); margin-bottom: 12px; line-height: 1.8; }
+    .info-card ul, .info-card ol { color: var(--gray); margin-left: 20px; margin-bottom: 12px; }
+    .info-card li { margin-bottom: 6px; }
+    .info-card table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+    .info-card th, .info-card td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+    .info-card th { color: var(--orange); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; }
+    .info-card td { color: var(--gray); }
+    footer { padding: 40px 0; border-top: 1px solid var(--border); text-align: center; }
+    footer p { color: var(--gray); font-size: 0.85rem; }
+    footer a { color: var(--orange); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <nav><div class="container"><a href="/" class="logo">Built<span>Right</span></a><div class="nav-links"><a href="/blog">Blog</a><a href="/templates">Templates</a><a href="/tools">Tools</a></div></div></nav>
+
+  <section class="hero"><div class="container">
+    <div class="badge">Free Tool</div>
+    <h1>Lumber <span class="highlight">Calculator</span></h1>
+    <p>Calculate board feet, linear feet, pieces needed, and cost estimates for any lumber project. Includes common sizes and 2026 pricing.</p>
+  </div></section>
+
+  <section class="calc-section"><div class="container">
+    <div class="calc-card">
+      <h2><span class="icon">🪵</span> Choose Your Calculation</h2>
+      <div class="tabs">
+        <div class="tab active" data-type="boardft">Board Feet</div>
+        <div class="tab" data-type="pieces">Pieces Needed</div>
+        <div class="tab" data-type="framing">Wall Framing</div>
+        <div class="tab" data-type="deck">Deck Boards</div>
+      </div>
+
+      <!-- Board Feet Calculator -->
+      <div id="form-boardft" class="calc-form">
+        <div class="form-grid">
+          <div class="form-group"><label>Thickness (inches)</label><input type="number" id="bf-thick" placeholder="e.g. 2" step="any" value="2"></div>
+          <div class="form-group"><label>Width (inches)</label><input type="number" id="bf-width" placeholder="e.g. 6" step="any" value="6"></div>
+          <div class="form-group"><label>Length (feet)</label><input type="number" id="bf-length" placeholder="e.g. 8" step="any" value="8"></div>
+          <div class="form-group"><label>Number of Pieces</label><input type="number" id="bf-qty" placeholder="e.g. 10" value="1"></div>
+          <div class="form-group"><label>Price per Board Foot ($)</label><input type="number" id="bf-price" placeholder="e.g. 5.00" step="0.01"></div>
+        </div>
+        <button class="btn" onclick="calcBoardFt()">Calculate Board Feet</button>
+      </div>
+
+      <!-- Pieces Needed -->
+      <div id="form-pieces" class="calc-form" style="display:none">
+        <div class="form-grid">
+          <div class="form-group"><label>Total Length Needed (ft)</label><input type="number" id="pc-total" placeholder="e.g. 100" step="any"></div>
+          <div class="form-group"><label>Board Length (ft)</label>
+            <select id="pc-board-len">
+              <option value="8">8 ft</option>
+              <option value="10">10 ft</option>
+              <option value="12" selected>12 ft</option>
+              <option value="14">14 ft</option>
+              <option value="16">16 ft</option>
+              <option value="20">20 ft</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Lumber Size</label>
+            <select id="pc-size">
+              <option value="2x4" data-t="2" data-w="4">2×4</option>
+              <option value="2x6" data-t="2" data-w="6" selected>2×6</option>
+              <option value="2x8" data-t="2" data-w="8">2×8</option>
+              <option value="2x10" data-t="2" data-w="10">2×10</option>
+              <option value="2x12" data-t="2" data-w="12">2×12</option>
+              <option value="4x4" data-t="4" data-w="4">4×4</option>
+              <option value="1x6" data-t="1" data-w="6">1×6</option>
+              <option value="1x8" data-t="1" data-w="8">1×8</option>
+              <option value="1x12" data-t="1" data-w="12">1×12</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Waste Factor (%)</label><input type="number" id="pc-waste" placeholder="10" value="10" step="1"></div>
+          <div class="form-group"><label>Price per Board ($)</label><input type="number" id="pc-price" placeholder="e.g. 8.50" step="0.01"></div>
+        </div>
+        <button class="btn" onclick="calcPieces()">Calculate Pieces</button>
+      </div>
+
+      <!-- Wall Framing -->
+      <div id="form-framing" class="calc-form" style="display:none">
+        <div class="form-grid">
+          <div class="form-group"><label>Wall Length (ft)</label><input type="number" id="fr-length" placeholder="e.g. 20" step="any"></div>
+          <div class="form-group"><label>Wall Height (ft)</label>
+            <select id="fr-height">
+              <option value="8" selected>8 ft</option>
+              <option value="9">9 ft</option>
+              <option value="10">10 ft</option>
+              <option value="12">12 ft</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Stud Spacing</label>
+            <select id="fr-spacing">
+              <option value="16" selected>16" on center</option>
+              <option value="24">24" on center</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Number of Doors</label><input type="number" id="fr-doors" placeholder="0" value="0"></div>
+          <div class="form-group"><label>Number of Windows</label><input type="number" id="fr-windows" placeholder="0" value="0"></div>
+          <div class="form-group"><label>Stud Price (each)</label><input type="number" id="fr-price" placeholder="e.g. 4.50" step="0.01"></div>
+        </div>
+        <button class="btn" onclick="calcFraming()">Calculate Studs</button>
+      </div>
+
+      <!-- Deck Boards -->
+      <div id="form-deck" class="calc-form" style="display:none">
+        <div class="form-grid">
+          <div class="form-group"><label>Deck Length (ft)</label><input type="number" id="dk-length" placeholder="e.g. 16" step="any"></div>
+          <div class="form-group"><label>Deck Width (ft)</label><input type="number" id="dk-width" placeholder="e.g. 12" step="any"></div>
+          <div class="form-group"><label>Decking Board Width</label>
+            <select id="dk-board">
+              <option value="5.5" data-name="5/4×6 (actual 5.5&quot;)" selected>5/4×6 Deck Board</option>
+              <option value="3.5" data-name="2×4 (actual 3.5&quot;)">2×4</option>
+              <option value="5.5" data-name="2×6 (actual 5.5&quot;)">2×6</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Board Length (ft)</label>
+            <select id="dk-board-len">
+              <option value="8">8 ft</option>
+              <option value="10">10 ft</option>
+              <option value="12" selected>12 ft</option>
+              <option value="16">16 ft</option>
+              <option value="20">20 ft</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Gap Between Boards (in)</label><input type="number" id="dk-gap" placeholder="0.125" value="0.125" step="0.0625"></div>
+          <div class="form-group"><label>Price per Board ($)</label><input type="number" id="dk-price" placeholder="e.g. 12.00" step="0.01"></div>
+        </div>
+        <button class="btn" onclick="calcDeck()">Calculate Deck Boards</button>
+      </div>
+
+      <div class="results" id="results">
+        <div class="result-grid" id="result-grid"></div>
+        <div class="waste-note"><strong>Pro Tip:</strong> Always add <strong>10–15% waste</strong> for cuts, defects, and mistakes. For angled cuts (like deck board patterns), add 20%. Buy a few extra boards — returning unused lumber is easier than making a second trip.</div>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="info-section"><div class="container">
+    <div class="info-card">
+      <h2>How to Calculate Board Feet: Complete Guide</h2>
+      <p>Board feet is the standard unit for measuring and pricing hardwood lumber. Understanding it saves you money and prevents ordering mistakes.</p>
+
+      <h3>The Board Foot Formula</h3>
+      <p><strong>Board Feet = (Thickness × Width × Length) ÷ 12</strong></p>
+      <p>Where thickness and width are in inches, and length is in feet. One board foot = 144 cubic inches of wood (1" × 12" × 12").</p>
+
+      <h3>Quick Board Foot Reference</h3>
+      <table>
+        <tr><th>Size</th><th>Per 8 ft</th><th>Per 10 ft</th><th>Per 12 ft</th><th>Per 16 ft</th></tr>
+        <tr><td>1×4</td><td>2.67 BF</td><td>3.33 BF</td><td>4.00 BF</td><td>5.33 BF</td></tr>
+        <tr><td>1×6</td><td>4.00 BF</td><td>5.00 BF</td><td>6.00 BF</td><td>8.00 BF</td></tr>
+        <tr><td>1×8</td><td>5.33 BF</td><td>6.67 BF</td><td>8.00 BF</td><td>10.67 BF</td></tr>
+        <tr><td>1×12</td><td>8.00 BF</td><td>10.00 BF</td><td>12.00 BF</td><td>16.00 BF</td></tr>
+        <tr><td>2×4</td><td>5.33 BF</td><td>6.67 BF</td><td>8.00 BF</td><td>10.67 BF</td></tr>
+        <tr><td>2×6</td><td>8.00 BF</td><td>10.00 BF</td><td>12.00 BF</td><td>16.00 BF</td></tr>
+        <tr><td>2×8</td><td>10.67 BF</td><td>13.33 BF</td><td>16.00 BF</td><td>21.33 BF</td></tr>
+        <tr><td>2×10</td><td>13.33 BF</td><td>16.67 BF</td><td>20.00 BF</td><td>26.67 BF</td></tr>
+        <tr><td>2×12</td><td>16.00 BF</td><td>20.00 BF</td><td>24.00 BF</td><td>32.00 BF</td></tr>
+        <tr><td>4×4</td><td>10.67 BF</td><td>13.33 BF</td><td>16.00 BF</td><td>21.33 BF</td></tr>
+      </table>
+
+      <h3>Nominal vs. Actual Lumber Sizes</h3>
+      <table>
+        <tr><th>Nominal Size</th><th>Actual Size</th><th>Difference</th></tr>
+        <tr><td>1×4</td><td>¾" × 3½"</td><td>Planed ¼" + ½"</td></tr>
+        <tr><td>1×6</td><td>¾" × 5½"</td><td></td></tr>
+        <tr><td>1×8</td><td>¾" × 7¼"</td><td></td></tr>
+        <tr><td>1×12</td><td>¾" × 11¼"</td><td></td></tr>
+        <tr><td>2×4</td><td>1½" × 3½"</td><td>Planed ½" each side</td></tr>
+        <tr><td>2×6</td><td>1½" × 5½"</td><td></td></tr>
+        <tr><td>2×8</td><td>1½" × 7¼"</td><td></td></tr>
+        <tr><td>2×10</td><td>1½" × 9¼"</td><td></td></tr>
+        <tr><td>2×12</td><td>1½" × 11¼"</td><td></td></tr>
+        <tr><td>4×4</td><td>3½" × 3½"</td><td></td></tr>
+        <tr><td>6×6</td><td>5½" × 5½"</td><td></td></tr>
+      </table>
+      <p><strong>Important:</strong> Board feet for pricing uses <em>nominal</em> dimensions. When calculating actual coverage (e.g., deck boards), use actual dimensions.</p>
+
+      <h3>2026 Lumber Pricing Guide</h3>
+      <table>
+        <tr><th>Lumber Type</th><th>Size</th><th>Price Range (8 ft)</th></tr>
+        <tr><td>SPF Stud</td><td>2×4×8</td><td>$3.50–$5.50</td></tr>
+        <tr><td>SPF Framing</td><td>2×6×8</td><td>$5.50–$8.00</td></tr>
+        <tr><td>SPF Framing</td><td>2×4×16</td><td>$7.00–$11.00</td></tr>
+        <tr><td>Pressure Treated</td><td>2×6×8</td><td>$9.00–$14.00</td></tr>
+        <tr><td>Pressure Treated</td><td>4×4×8</td><td>$12.00–$18.00</td></tr>
+        <tr><td>Cedar</td><td>2×6×8</td><td>$14.00–$22.00</td></tr>
+        <tr><td>5/4 Deck Board (PT)</td><td>5/4×6×12</td><td>$12.00–$18.00</td></tr>
+        <tr><td>Oak (hardwood)</td><td>Per BF</td><td>$5.00–$10.00</td></tr>
+        <tr><td>Walnut (hardwood)</td><td>Per BF</td><td>$12.00–$20.00</td></tr>
+        <tr><td>Maple (hardwood)</td><td>Per BF</td><td>$6.00–$12.00</td></tr>
+        <tr><td>Cherry (hardwood)</td><td>Per BF</td><td>$7.00–$14.00</td></tr>
+      </table>
+
+      <h3>5 Lumber Buying Mistakes to Avoid</h3>
+      <ol>
+        <li><strong>Not checking boards for straightness.</strong> Sight down each board before buying. Twist, bow, and cup are common — especially in big-box stores. A crooked stud is worthless.</li>
+        <li><strong>Buying green (wet) lumber for finish work.</strong> Kiln-dried (KD) lumber has ~12% moisture; green lumber has 30%+. Green wood shrinks, warps, and cracks as it dries. Always use KD for interior work.</li>
+        <li><strong>Skipping the waste factor.</strong> Every cut generates waste. Miter cuts waste more than square cuts. Add 10% for straight cuts, 15–20% for angles.</li>
+        <li><strong>Not comparing board foot pricing.</strong> A $12 board isn't always cheaper than a $15 board. Calculate the price per board foot to compare across sizes and species.</li>
+        <li><strong>Ignoring lumber grades.</strong> #1 grade has fewer knots and defects than #2. For visible work (trim, furniture), pay up for #1 or Select. For framing behind walls, #2 is fine.</li>
+      </ol>
+    </div>
+
+    <div class="info-card">
+      <h2>Lumber Grades Explained</h2>
+      <table>
+        <tr><th>Grade</th><th>Quality</th><th>Best For</th></tr>
+        <tr><td>Select / Clear</td><td>Few or no knots</td><td>Trim, cabinetry, furniture</td></tr>
+        <tr><td>#1 (Construction)</td><td>Small, tight knots</td><td>Exposed framing, shelving</td></tr>
+        <tr><td>#2 (Standard)</td><td>Larger knots, minor defects</td><td>General framing, hidden structure</td></tr>
+        <tr><td>#3 (Utility)</td><td>Large knots, some defects</td><td>Blocking, bracing, temporary</td></tr>
+        <tr><td>Stud Grade</td><td>Special #2 for vertical loads</td><td>Wall studs specifically</td></tr>
+      </table>
+      <p><strong>Hardwood grades</strong> use a different system: FAS (First and Seconds) is the best, followed by #1 Common and #2 Common. FAS boards must be at least 6" wide and 8' long with 83%+ clear area.</p>
+    </div>
+  </div></section>
+
+  <!-- Email Capture CTA -->
+  <div id="email-cta" style="max-width:720px;margin:40px auto;padding:40px 32px;background:linear-gradient(135deg,#1e293b 0%,#0f172a 100%);border:1px solid rgba(249,115,22,0.3);border-radius:16px;text-align:center;">
+    <div style="font-size:2rem;margin-bottom:12px;">📋</div>
+    <h3 style="font-family:Inter,-apple-system,sans-serif;font-size:1.4rem;font-weight:700;color:#f8fafc;margin-bottom:8px;">Free Contractor Toolkit</h3>
+    <p style="font-family:Inter,-apple-system,sans-serif;color:#94a3b8;font-size:0.95rem;margin-bottom:24px;max-width:480px;margin-left:auto;margin-right:auto;">Get our <strong style="color:#f97316;">free spreadsheet templates</strong> &mdash; invoice, estimate, job costing &amp; profit tracker. Used by 500+ contractors.</p>
+    <form id="capture-form" onsubmit="return handleCapture(event)" style="display:flex;gap:10px;max-width:420px;margin:0 auto;flex-wrap:wrap;justify-content:center;">
+      <input type="email" id="capture-email" placeholder="you@company.com" required style="flex:1;min-width:220px;padding:12px 16px;border-radius:8px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.05);color:#f8fafc;font-size:0.95rem;font-family:Inter,-apple-system,sans-serif;outline:none;">
+      <button type="submit" style="padding:12px 24px;background:#f97316;color:#fff;border:none;border-radius:8px;font-weight:600;font-size:0.95rem;cursor:pointer;font-family:Inter,-apple-system,sans-serif;white-space:nowrap;">Send Me the Templates</button>
+    </form>
+    <p id="capture-msg" style="font-family:Inter,-apple-system,sans-serif;color:#22c55e;font-size:0.85rem;margin-top:12px;display:none;"></p>
+    <p style="font-family:Inter,-apple-system,sans-serif;color:#64748b;font-size:0.75rem;margin-top:12px;">No spam. Unsubscribe anytime.</p>
+  </div>
+
+  <footer><div class="container"><p>© 2026 <a href="/">BuiltRight Academy</a>. Free tools for tradespeople who mean business.</p></div></footer>
+
+  <script>
+    // Tab switching
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.calc-form').forEach(f => f.style.display = 'none');
+        tab.classList.add('active');
+        document.getElementById('form-' + tab.dataset.type).style.display = 'block';
+        document.getElementById('results').classList.remove('show');
+      });
+    });
+
+    function showResultItems(items) {
+      const grid = document.getElementById('result-grid');
+      grid.innerHTML = items.map(i => `
+        <div class="result-item">
+          <div class="number">${i.value}</div>
+          <div class="label">${i.label}</div>
+          ${i.detail ? `<div class="detail">${i.detail}</div>` : ''}
+        </div>
+      `).join('');
+      document.getElementById('results').classList.add('show');
+      document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function calcBoardFt() {
+      const t = parseFloat(document.getElementById('bf-thick').value);
+      const w = parseFloat(document.getElementById('bf-width').value);
+      const l = parseFloat(document.getElementById('bf-length').value);
+      const qty = parseInt(document.getElementById('bf-qty').value) || 1;
+      const price = parseFloat(document.getElementById('bf-price').value) || 0;
+      if (!t || !w || !l) return alert('Please fill in thickness, width, and length.');
+      const bfEach = (t * w * l) / 12;
+      const bfTotal = bfEach * qty;
+      const linFt = l * qty;
+      const items = [
+        { value: bfEach.toFixed(2), label: 'Board Feet (each)', detail: `${t}"×${w}" × ${l}ft` },
+        { value: bfTotal.toFixed(2), label: 'Total Board Feet', detail: `${qty} piece${qty > 1 ? 's' : ''}` },
+        { value: linFt.toFixed(1), label: 'Total Linear Feet', detail: '' }
+      ];
+      if (price > 0) {
+        items.push({ value: '$' + (bfTotal * price).toFixed(2), label: 'Total Cost', detail: `$${price}/BF` });
+      }
+      showResultItems(items);
+    }
+
+    function calcPieces() {
+      const totalFt = parseFloat(document.getElementById('pc-total').value);
+      const boardLen = parseFloat(document.getElementById('pc-board-len').value);
+      const waste = parseFloat(document.getElementById('pc-waste').value) || 0;
+      const price = parseFloat(document.getElementById('pc-price').value) || 0;
+      const sizeEl = document.getElementById('pc-size');
+      const t = parseFloat(sizeEl.options[sizeEl.selectedIndex].dataset.t);
+      const w = parseFloat(sizeEl.options[sizeEl.selectedIndex].dataset.w);
+      if (!totalFt) return alert('Please enter total length needed.');
+      const piecesExact = totalFt / boardLen;
+      const piecesWithWaste = Math.ceil(piecesExact * (1 + waste / 100));
+      const totalBF = (t * w * boardLen * piecesWithWaste) / 12;
+      const items = [
+        { value: piecesWithWaste, label: 'Boards Needed', detail: `Includes ${waste}% waste` },
+        { value: Math.ceil(piecesExact), label: 'Without Waste', detail: `${piecesExact.toFixed(1)} exact` },
+        { value: totalBF.toFixed(1), label: 'Total Board Feet', detail: `${sizeEl.value} × ${boardLen}ft` }
+      ];
+      if (price > 0) {
+        items.push({ value: '$' + (piecesWithWaste * price).toFixed(2), label: 'Total Cost', detail: `$${price}/board` });
+      }
+      showResultItems(items);
+    }
+
+    function calcFraming() {
+      const wallLen = parseFloat(document.getElementById('fr-length').value);
+      const wallHt = parseFloat(document.getElementById('fr-height').value);
+      const spacing = parseFloat(document.getElementById('fr-spacing').value);
+      const doors = parseInt(document.getElementById('fr-doors').value) || 0;
+      const windows = parseInt(document.getElementById('fr-windows').value) || 0;
+      const price = parseFloat(document.getElementById('fr-price').value) || 0;
+      if (!wallLen) return alert('Please enter wall length.');
+
+      // Field studs
+      const wallLenIn = wallLen * 12;
+      let studs = Math.ceil(wallLenIn / spacing) + 1;
+      // Corners: add 2 per end
+      studs += 2;
+      // Doors: subtract 1 stud per door opening, add 2 king + 2 jack + 1 header + 2 cripples = ~6 extra pieces
+      studs += (doors * 5); // net: remove 1, add 6
+      // Windows: similar — add king, jack, sill, cripples = ~5 extra
+      studs += (windows * 5);
+
+      // Plates: single bottom + double top
+      const platePieces = Math.ceil(wallLen / 8) * 3; // top, top, bottom in 8ft pieces (or longer)
+      const plateFt = wallLen * 3;
+
+      const totalStudFt = studs * wallHt;
+      const totalBF = ((2 * 4 * totalStudFt) + (2 * 4 * plateFt)) / 12;
+
+      const items = [
+        { value: studs, label: 'Studs Needed', detail: `${spacing}" OC, ${wallHt}ft tall` },
+        { value: plateFt.toFixed(0) + ' ft', label: 'Plate Material', detail: '1 bottom + 2 top plates' },
+        { value: totalBF.toFixed(0), label: 'Total Board Feet', detail: 'Studs + plates (2×4)' }
+      ];
+      if (price > 0) {
+        items.push({ value: '$' + (studs * price + platePieces * price).toFixed(2), label: 'Est. Cost', detail: `$${price}/piece` });
+      }
+      showResultItems(items);
+    }
+
+    function calcDeck() {
+      const deckL = parseFloat(document.getElementById('dk-length').value);
+      const deckW = parseFloat(document.getElementById('dk-width').value);
+      const boardWidthIn = parseFloat(document.getElementById('dk-board').value);
+      const boardLen = parseFloat(document.getElementById('dk-board-len').value);
+      const gap = parseFloat(document.getElementById('dk-gap').value) || 0;
+      const price = parseFloat(document.getElementById('dk-price').value) || 0;
+      if (!deckL || !deckW) return alert('Please enter deck dimensions.');
+
+      // Boards run across the width (perpendicular to joists along length)
+      const deckLenIn = deckL * 12;
+      const boardSpacing = boardWidthIn + gap;
+      const rowsNeeded = Math.ceil(deckLenIn / boardSpacing);
+
+      // How many boards per row (if deck width > board length)
+      const boardsPerRow = Math.ceil(deckW / boardLen);
+      const totalBoards = Math.ceil(rowsNeeded * boardsPerRow * 1.1); // 10% waste
+      const sqft = deckL * deckW;
+
+      const items = [
+        { value: totalBoards, label: 'Boards Needed', detail: 'Includes 10% waste' },
+        { value: rowsNeeded, label: 'Rows of Boards', detail: `${boardWidthIn}" boards + ${gap}" gap` },
+        { value: sqft, label: 'Deck Area', detail: 'Square feet' }
+      ];
+      if (price > 0) {
+        items.push({ value: '$' + (totalBoards * price).toFixed(2), label: 'Material Cost', detail: `$${price}/board × ${boardLen}ft` });
+      }
+      showResultItems(items);
+    }
+  </script>
+
+  <script>
+  function handleCapture(e){
+    e.preventDefault();
+    var em=document.getElementById("capture-email").value;
+    var msg=document.getElementById("capture-msg");
+    var btn=e.target.querySelector("button");
+    btn.textContent="Sending...";btn.disabled=true;
+    fetch("/api/subscribe",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:em,source:window.location.pathname,lead_magnet:"contractor-toolkit"})})
+    .then(function(r){return r.json()})
+    .then(function(d){msg.textContent="\u2705 Check your inbox! Templates are on the way.";msg.style.display="block";document.getElementById("capture-form").style.display="none"})
+    .catch(function(){msg.textContent="Something went wrong. Try again.";msg.style.color="#ef4444";msg.style.display="block";btn.textContent="Send Me the Templates";btn.disabled=false});
+    return false;
+  }
+  </script>
+
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
+</body>
+</html>
