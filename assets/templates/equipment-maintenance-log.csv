@@ -1,0 +1,47 @@
+EQUIPMENT MAINTENANCE LOG,,,,,,
+"BuiltRight Academy — builtright-academy.vercel.app",,,,,,
+,,,,,,
+EQUIPMENT INVENTORY,,,,,,
+Equipment ID,Equipment Name/Type,Make/Model,Serial #,Purchase Date,Purchase Price,Current Condition
+EQ-001,,,,,,Good
+EQ-002,,,,,,Good
+EQ-003,,,,,,Good
+EQ-004,,,,,,Good
+EQ-005,,,,,,Good
+EQ-006,,,,,,Good
+EQ-007,,,,,,Good
+EQ-008,,,,,,Good
+EQ-009,,,,,,Good
+EQ-010,,,,,,Good
+,,,,,,
+MAINTENANCE LOG,,,,,,
+Date,Equipment ID,Maintenance Type,Description,Cost,Performed By,Next Service Due
+,,"Routine / Repair / Inspection",,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+MAINTENANCE SCHEDULE,,,,,,
+Equipment ID,Service Type,Frequency,Last Performed,Next Due,Assigned To,Notes
+,Oil Change,Every 3 months,,,, 
+,Filter Replacement,Every 6 months,,,,
+,Full Inspection,Annually,,,,
+,Calibration,Annually,,,,
+,,,,,,
+COST SUMMARY BY EQUIPMENT,,,,,,
+Equipment ID,Equipment Name,YTD Maintenance Cost,Lifetime Maintenance Cost,Original Value,% of Value Spent,Replace?
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+NOTES,,,,,,
+"Track all maintenance to protect warranties and plan replacements.",,,,,,
+"Equipment costing more than 40% of replacement value in annual maintenance should be considered for replacement.",,,,,,
