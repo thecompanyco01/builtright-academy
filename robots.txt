@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://builtright-academy.vercel.app/sitemap.xml
+Sitemap: https://builtrighthq.com/sitemap.xml
