@@ -388,8 +388,8 @@
     .then(function(r) { return r.json(); })
     .then(function(d) {
       msg.innerHTML = '✅ <strong>Download ready!</strong><br><br>' +
-        '<a href="/assets/templates/contractor-invoice-template.csv" download style="color:#22c55e;font-weight:600;">📄 Download Invoice Template</a><br>' +
-        '<a href="/assets/templates/job-estimate-template.csv" download style="color:#22c55e;font-weight:600;">📄 Download Estimate Template</a>';
+        '<a href="/assets/templates/contractor-invoice-template.xlsx" download style="color:#22c55e;font-weight:600;">📄 Download Invoice Template</a><br>' +
+        '<a href="/assets/templates/job-estimate-template.xlsx" download style="color:#22c55e;font-weight:600;">📄 Download Estimate Template</a>';
       msg.className = 'msg success';
       msg.style.display = 'block';
       btn.textContent = '✓ Downloaded';
