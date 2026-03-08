@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Concrete Block Calculator — CMU Blocks & Mortar Estimate | BuiltRight Academy</title>
+  <meta name="description" content="Free concrete block calculator. Enter wall length and height to get blocks needed, mortar bags, and estimated cost. Includes 10% waste factor. Works for 8x8x16, 8x4x16, and 12x8x16 blocks.">
+  <meta name="keywords" content="concrete block calculator, CMU calculator, cinder block calculator, how many blocks do I need, mortar calculator, block wall calculator">
+  <link rel="canonical" href="https://builtright-academy.vercel.app/tools/concrete-block-calculator">
+  <meta property="og:title" content="Concrete Block Calculator — CMU Blocks & Mortar Estimate">
+  <meta property="og:description" content="Calculate concrete blocks, mortar bags, and cost for any block wall. Includes waste factor and multiple block sizes.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Concrete Block Calculator",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "description": "Calculate how many concrete blocks and mortar bags you need for any wall. Supports standard 8x8x16, half-height 8x4x16, and 12-inch 12x8x16 blocks."
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How many concrete blocks do I need per square foot?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For standard 8x8x16 blocks (including 3/8-inch mortar joints), you need 1.125 blocks per square foot of wall. A 100 sq ft wall needs about 113 blocks. Always add 10% for waste, cuts, and breakage."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How many bags of mortar do I need for a block wall?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "One 80-lb bag of mortar mix typically lays 12-14 standard 8x8x16 blocks. For a 100-block wall, plan on 7-9 bags of mortar. Factors like joint thickness, block type, and mason skill affect actual usage."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much does a concrete block wall cost?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Standard 8x8x16 CMU blocks cost $1.50-$3.00 each depending on location and quantity. Mortar runs about $8-$12 per 80-lb bag. A typical 100 sq ft wall costs $200-$450 in materials alone. Add $10-$17 per sq ft for labor if hiring a mason."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What size concrete block should I use?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Standard 8x8x16 blocks are the most common for walls, foundations, and retaining walls. Use 12x8x16 blocks for taller walls, foundation walls below grade, or when extra strength is needed. 8x4x16 half-blocks are used for decorative walls, garden borders, and non-structural partitions."
+        }
+      }
+    ]
+  }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root { --orange: #F97316; --orange-dark: #EA580C; --darker: #0F0F1A; --dark-card: #1A1A2E; --gray: #94A3B8; --light: #F8FAFC; --green: #22C55E; --border: rgba(255,255,255,0.08); }
+    body { font-family: 'Inter', -apple-system, sans-serif; background: var(--darker); color: var(--light); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+    nav { padding: 20px 0; border-bottom: 1px solid var(--border); }
+    nav .container { display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.3rem; color: var(--orange); text-decoration: none; letter-spacing: -0.5px; }
+    .logo span { color: var(--light); }
+    .nav-links a { color: var(--gray); text-decoration: none; font-size: 0.9rem; margin-left: 24px; }
+    .nav-links a:hover { color: var(--light); }
+    .hero { padding: 48px 0 32px; text-align: center; }
+    .hero .badge { display: inline-block; background: rgba(249,115,22,0.1); border: 1px solid rgba(249,115,22,0.3); color: var(--orange); font-size: 0.8rem; font-weight: 600; padding: 6px 16px; border-radius: 100px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .hero h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 800; line-height: 1.15; letter-spacing: -1px; margin-bottom: 12px; }
+    .hero h1 .highlight { color: var(--orange); }
+    .hero p { color: var(--gray); font-size: 1.05rem; max-width: 600px; margin: 0 auto; }
+    .calc-section { padding: 24px 0 60px; }
+    .calc-card { background: var(--dark-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; margin-bottom: 24px; }
+    .calc-card h2 { font-size: 1.2rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+    .calc-card h2 .icon { font-size: 1.4rem; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 500px) { .form-grid { grid-template-columns: 1fr; } }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group.full { grid-column: 1 / -1; }
+    label { font-size: 0.85rem; font-weight: 600; color: var(--gray); text-transform: uppercase; letter-spacing: 0.5px; }
+    input, select { background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: var(--light); padding: 12px 16px; border-radius: 8px; font-size: 1rem; font-family: inherit; outline: none; transition: border-color 0.2s; }
+    input:focus, select:focus { border-color: var(--orange); }
+    select option { background: var(--darker); }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: var(--orange); color: #fff; font-weight: 700; font-size: 1rem; padding: 14px 28px; border-radius: 10px; border: none; cursor: pointer; width: 100%; margin-top: 16px; transition: background 0.2s; }
+    .btn:hover { background: var(--orange-dark); }
+    .results { display: none; margin-top: 24px; }
+    .results.show { display: block; }
+    .result-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; }
+    .result-item { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 12px; padding: 20px; text-align: center; }
+    .result-item .number { font-size: 2rem; font-weight: 800; color: var(--orange); letter-spacing: -1px; }
+    .result-item .label { font-size: 0.8rem; color: var(--gray); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .result-item .detail { font-size: 0.85rem; color: var(--light); margin-top: 8px; opacity: 0.8; }
+    .waste-note { background: rgba(249,115,22,0.08); border: 1px solid rgba(249,115,22,0.2); border-radius: 10px; padding: 16px 20px; margin-top: 20px; font-size: 0.9rem; color: var(--gray); }
+    .waste-note strong { color: var(--orange); }
+    .info-section { padding: 40px 0 60px; }
+    .info-card { background: var(--dark-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; margin-bottom: 24px; }
+    .info-card h2 { font-size: 1.4rem; font-weight: 700; margin-bottom: 16px; }
+    .info-card h3 { font-size: 1.1rem; font-weight: 600; margin: 20px 0 8px; color: var(--orange); }
+    .info-card p { color: var(--gray); margin-bottom: 12px; line-height: 1.8; }
+    .info-card ul, .info-card ol { color: var(--gray); margin-left: 20px; margin-bottom: 12px; }
+    .info-card li { margin-bottom: 6px; }
+    .info-card table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+    .info-card th, .info-card td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+    .info-card th { color: var(--orange); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; }
+    .info-card td { color: var(--gray); }
+    .related-tools { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-top: 20px; }
+    .related-tool { display: block; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 10px; padding: 16px; text-decoration: none; color: var(--light); transition: border-color 0.2s; }
+    .related-tool:hover { border-color: var(--orange); }
+    .related-tool .tool-icon { font-size: 1.3rem; margin-bottom: 6px; }
+    .related-tool .tool-name { font-weight: 600; font-size: 0.9rem; }
+    .related-tool .tool-desc { font-size: 0.8rem; color: var(--gray); margin-top: 4px; }
+    footer { padding: 40px 0; border-top: 1px solid var(--border); text-align: center; }
+    footer p { color: var(--gray); font-size: 0.85rem; }
+    footer a { color: var(--orange); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <nav><div class="container"><a href="/" class="logo"><span>Built</span>Right</a><div class="nav-links"><a href="/blog">Blog</a><a href="/templates">Templates</a><a href="/tools">Tools</a></div></div></nav>
+
+  <section class="hero"><div class="container">
+    <div class="badge">Free Tool</div>
+    <h1>Concrete Block <span class="highlight">Calculator</span></h1>
+    <p>Calculate blocks needed, mortar bags, and estimated cost for any CMU block wall. Includes 10% waste factor.</p>
+  </div></section>
+
+  <section class="calc-section"><div class="container">
+    <div class="calc-card">
+      <h2><span class="icon">🧱</span> Enter Your Wall Details</h2>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Wall Length (ft)</label>
+          <input type="number" id="wall-length" placeholder="e.g. 20" step="any">
+        </div>
+        <div class="form-group">
+          <label>Wall Height (ft)</label>
+          <input type="number" id="wall-height" placeholder="e.g. 8" step="any">
+        </div>
+        <div class="form-group">
+          <label>Block Size</label>
+          <select id="block-size">
+            <option value="8x8x16">8×8×16 (Standard)</option>
+            <option value="8x4x16">8×4×16 (Half-Height)</option>
+            <option value="12x8x16">12×8×16 (12-inch)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Number of Walls</label>
+          <input type="number" id="wall-count" placeholder="1" value="1" min="1">
+        </div>
+      </div>
+      <button class="btn" onclick="calculate()">Calculate Blocks</button>
+
+      <div class="results" id="results">
+        <div class="result-grid">
+          <div class="result-item"><div class="number" id="r-blocks">—</div><div class="label">Blocks Needed</div><div class="detail" id="r-blocks-note">includes 10% waste</div></div>
+          <div class="result-item"><div class="number" id="r-mortar">—</div><div class="label">Mortar Bags (80 lb)</div><div class="detail">Type S or N mortar</div></div>
+          <div class="result-item"><div class="number" id="r-area">—</div><div class="label">Wall Area (sq ft)</div><div class="detail" id="r-area-note"></div></div>
+          <div class="result-item"><div class="number" id="r-cost">—</div><div class="label">Est. Material Cost</div><div class="detail" id="r-cost-note">blocks + mortar</div></div>
+        </div>
+        <div class="waste-note"><strong>Pro Tip:</strong> The 10% waste factor covers cuts, breakage, and corner pieces. For walls with lots of openings (windows/doors), subtract the opening area before calculating, but keep the waste factor — you'll need cut blocks around each opening.</div>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="info-section"><div class="container">
+    <div class="info-card">
+      <h2>How to Calculate Concrete Blocks: Complete Guide</h2>
+      <p>Accurate block estimation saves trips to the supply yard and prevents costly delays mid-project. Here's how to get it right.</p>
+
+      <h3>The Basic Formula</h3>
+      <p><strong>Blocks = (Wall Area in sq ft) × Blocks per sq ft × 1.10 (waste)</strong></p>
+      <p>Standard 8×8×16 blocks (with 3/8" mortar joints) cover about 0.89 sq ft each, meaning you need 1.125 blocks per square foot.</p>
+
+      <h3>Block Size Reference</h3>
+      <table>
+        <tr><th>Block Size</th><th>Actual Dimensions</th><th>Blocks per Sq Ft</th><th>Cost Each</th><th>Weight</th></tr>
+        <tr><td>8×8×16 (Standard)</td><td>7⅝ × 7⅝ × 15⅝"</td><td>1.125</td><td>$1.50–$3.00</td><td>35–40 lb</td></tr>
+        <tr><td>8×4×16 (Half)</td><td>7⅝ × 3⅝ × 15⅝"</td><td>2.25</td><td>$1.25–$2.50</td><td>22–26 lb</td></tr>
+        <tr><td>12×8×16</td><td>11⅝ × 7⅝ × 15⅝"</td><td>1.125</td><td>$2.50–$4.50</td><td>50–55 lb</td></tr>
+      </table>
+
+      <h3>Mortar Estimation</h3>
+      <p>One 80-lb bag of pre-mixed mortar lays approximately:</p>
+      <ul>
+        <li><strong>12–14 standard blocks</strong> (8×8×16) with 3/8" joints</li>
+        <li><strong>20–24 half-height blocks</strong> (8×4×16)</li>
+        <li><strong>10–12 large blocks</strong> (12×8×16)</li>
+      </ul>
+
+      <h3>Mortar Types</h3>
+      <table>
+        <tr><th>Type</th><th>Strength (PSI)</th><th>Best For</th></tr>
+        <tr><td>Type M</td><td>2,500</td><td>Below grade, foundations, retaining walls</td></tr>
+        <tr><td>Type S</td><td>1,800</td><td>Structural walls, chimneys, exterior at grade</td></tr>
+        <tr><td>Type N</td><td>750</td><td>General purpose, above-grade exterior walls</td></tr>
+        <tr><td>Type O</td><td>350</td><td>Interior non-load-bearing walls</td></tr>
+      </table>
+    </div>
+
+    <div class="info-card">
+      <h2>Related Tools</h2>
+      <div class="related-tools">
+        <a href="/tools/concrete-calculator" class="related-tool"><div class="tool-icon">🧱</div><div class="tool-name">Concrete Calculator</div><div class="tool-desc">Cubic yards, bags & cost</div></a>
+        <a href="/tools/roofing-calculator" class="related-tool"><div class="tool-icon">🏠</div><div class="tool-name">Roofing Calculator</div><div class="tool-desc">Squares, bundles & cost</div></a>
+        <a href="/tools/soil-calculator" class="related-tool"><div class="tool-icon">🌱</div><div class="tool-name">Soil Calculator</div><div class="tool-desc">Cubic yards & weight</div></a>
+      </div>
+    </div>
+  </div></section>
+
+<!-- Email Capture CTA -->
+<div id="email-cta" style="max-width:720px;margin:40px auto;padding:40px 32px;background:linear-gradient(135deg,#1e293b 0%,#0f172a 100%);border:1px solid rgba(249,115,22,0.3);border-radius:16px;text-align:center;">
+  <div style="font-size:2rem;margin-bottom:12px;">📋</div>
+  <h3 style="font-family:Inter,-apple-system,sans-serif;font-size:1.4rem;font-weight:700;color:#f8fafc;margin-bottom:8px;">Get the Free Contractor Toolkit</h3>
+  <p style="font-family:Inter,-apple-system,sans-serif;color:#94a3b8;font-size:0.95rem;margin-bottom:24px;max-width:480px;margin-left:auto;margin-right:auto;">Get our <strong style="color:#f97316;">free spreadsheet templates</strong> &mdash; invoice, estimate, job costing &amp; profit tracker. Used by 500+ contractors.</p>
+  <form id="capture-form" onsubmit="return handleCapture(event)" style="display:flex;gap:10px;max-width:420px;margin:0 auto;flex-wrap:wrap;justify-content:center;">
+    <input type="email" id="capture-email" placeholder="you@company.com" required style="flex:1;min-width:220px;padding:12px 16px;border-radius:8px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.05);color:#f8fafc;font-size:0.95rem;font-family:Inter,-apple-system,sans-serif;outline:none;">
+    <button type="submit" style="padding:12px 24px;background:#f97316;color:#fff;border:none;border-radius:8px;font-weight:600;font-size:0.95rem;cursor:pointer;font-family:Inter,-apple-system,sans-serif;white-space:nowrap;">Send Me the Templates</button>
+  </form>
+  <p id="capture-msg" style="font-family:Inter,-apple-system,sans-serif;color:#22c55e;font-size:0.85rem;margin-top:12px;display:none;"></p>
+  <p style="font-family:Inter,-apple-system,sans-serif;color:#64748b;font-size:0.75rem;margin-top:12px;">No spam. Unsubscribe anytime.</p>
+</div>
+
+  <footer><div class="container"><p>© 2026 <a href="/">BuiltRight Academy</a>. Free tools for tradespeople who mean business.</p></div></footer>
+
+  <script>
+    // Block data: blocksPerSqFt, mortarPerBlock (bags per block), costLow, costHigh per block
+    const blockData = {
+      '8x8x16':  { blocksPerSqFt: 1.125, mortarRatio: 13, costLow: 1.50, costHigh: 3.00, name: '8×8×16 Standard' },
+      '8x4x16':  { blocksPerSqFt: 2.25,  mortarRatio: 22, costLow: 1.25, costHigh: 2.50, name: '8×4×16 Half-Height' },
+      '12x8x16': { blocksPerSqFt: 1.125, mortarRatio: 11, costLow: 2.50, costHigh: 4.50, name: '12×8×16' }
+    };
+
+    function calculate() {
+      const l = parseFloat(document.getElementById('wall-length').value);
+      const h = parseFloat(document.getElementById('wall-height').value);
+      const sizeKey = document.getElementById('block-size').value;
+      const count = parseInt(document.getElementById('wall-count').value) || 1;
+
+      if (!l || !h) return alert('Please fill in wall length and height.');
+
+      const bd = blockData[sizeKey];
+      const wallArea = l * h * count;
+      const blocksExact = wallArea * bd.blocksPerSqFt;
+      const blocksWithWaste = Math.ceil(blocksExact * 1.10); // 10% waste
+      const mortarBags = Math.ceil(blocksWithWaste / bd.mortarRatio);
+      const mortarCost = mortarBags * 10; // ~$10/bag average
+      const costLow = (blocksWithWaste * bd.costLow) + mortarCost;
+      const costHigh = (blocksWithWaste * bd.costHigh) + mortarCost;
+
+      document.getElementById('r-blocks').textContent = blocksWithWaste.toLocaleString();
+      document.getElementById('r-blocks-note').textContent = Math.ceil(blocksExact) + ' + 10% waste';
+      document.getElementById('r-mortar').textContent = mortarBags;
+      document.getElementById('r-area').textContent = wallArea.toFixed(0);
+      document.getElementById('r-area-note').textContent = count > 1 ? count + ' walls combined' : 'single wall';
+      document.getElementById('r-cost').textContent = '$' + Math.round(costLow).toLocaleString() + '–$' + Math.round(costHigh).toLocaleString();
+      document.getElementById('r-cost-note').textContent = bd.name + ' + mortar';
+
+      document.getElementById('results').classList.add('show');
+      document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  </script>
+<script>
+function handleCapture(e){
+  e.preventDefault();
+  var em=document.getElementById("capture-email").value;
+  var msg=document.getElementById("capture-msg");
+  var btn=e.target.querySelector("button");
+  btn.textContent="Sending...";btn.disabled=true;
+  fetch("/api/subscribe",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:em,source:window.location.pathname,lead_magnet:"contractor-toolkit"})})
+  .then(function(r){return r.json()})
+  .then(function(d){msg.textContent="✅ Check your inbox! Templates are on the way.";msg.style.display="block";document.getElementById("capture-form").style.display="none"})
+  .catch(function(){msg.textContent="Something went wrong. Try again.";msg.style.color="#ef4444";msg.style.display="block";btn.textContent="Send Me the Templates";btn.disabled=false});
+  return false;
+}
+</script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
+</body>
+</html>

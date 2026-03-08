@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mortar Calculator — Bags &amp; Sand Needed for Brick, Block &amp; Stone | BuiltRight Academy</title>
+  <meta name="description" content="Free mortar calculator. Enter area, joint size, and material type to calculate bags of mortar (Type N, S, M) and sand needed. Covers brick, block, and stone applications.">
+  <meta name="keywords" content="mortar calculator, how much mortar do I need, mortar mix calculator, brick mortar calculator, block mortar calculator">
+  <link rel="canonical" href="https://builtright-academy.vercel.app/tools/mortar-calculator">
+  <meta property="og:title" content="Mortar Calculator — Bags &amp; Sand Needed for Brick, Block &amp; Stone">
+  <meta property="og:description" content="Calculate mortar bags and sand for any masonry project. Supports brick, block, and stone with different joint sizes.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Mortar Calculator",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "description": "Calculate how many bags of mortar and sand you need for brick, block, and stone masonry projects."
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How many bags of mortar do I need per square foot?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For standard brick with 3/8-inch joints, you need about 1 bag of mortar (80-lb) per 30-35 sq ft of wall area. For concrete block (8×16), one 80-lb bag covers about 12-15 blocks. Actual coverage depends on joint width, depth, and material type."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between Type N, S, and M mortar?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Type N (general purpose) has 750 PSI strength and is best for above-grade walls, chimneys, and interior work. Type S (structural) has 1,800 PSI and is used for foundations, retaining walls, and below-grade applications. Type M (high-strength) has 2,500 PSI for heavy loads, foundations in contact with earth, and commercial structural work."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much sand do I need to mix with mortar?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For pre-mixed mortar (like Quikrete or Sakrete), no additional sand is needed — just add water. For site-mixed mortar using Portland cement, the standard ratio is 1 part cement to 3 parts sand by volume. One 80-lb bag of pre-mixed mortar yields about 0.5 cubic feet of mortar."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long does mortar take to set and cure?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Mortar sets initially in 30-60 minutes (you can't adjust joints after this). It reaches working strength in 24-48 hours. Full cure takes 28 days. Keep mortar joints damp for 2-3 days after application in hot or dry weather to prevent premature drying and cracking."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I use mortar mix for concrete projects?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Mortar mix lacks the coarse aggregate (gravel) found in concrete and is not designed for structural loads like slabs or footings. Mortar is specifically formulated for bonding masonry units (bricks, blocks, stone) in joints. Use concrete mix for structural applications and mortar mix for masonry joints only."
+        }
+      }
+    ]
+  }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root { --orange: #F97316; --orange-dark: #EA580C; --darker: #0F0F1A; --dark-card: #1A1A2E; --gray: #94A3B8; --light: #F8FAFC; --green: #22C55E; --border: rgba(255,255,255,0.08); }
+    body { font-family: 'Inter', -apple-system, sans-serif; background: var(--darker); color: var(--light); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+    nav { padding: 20px 0; border-bottom: 1px solid var(--border); }
+    nav .container { display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.3rem; color: var(--orange); text-decoration: none; letter-spacing: -0.5px; }
+    .logo span { color: var(--light); }
+    .nav-links a { color: var(--gray); text-decoration: none; font-size: 0.9rem; margin-left: 24px; }
+    .nav-links a:hover { color: var(--light); }
+    .hero { padding: 48px 0 32px; text-align: center; }
+    .hero .badge { display: inline-block; background: rgba(249,115,22,0.1); border: 1px solid rgba(249,115,22,0.3); color: var(--orange); font-size: 0.8rem; font-weight: 600; padding: 6px 16px; border-radius: 100px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .hero h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 800; line-height: 1.15; letter-spacing: -1px; margin-bottom: 12px; }
+    .hero h1 .highlight { color: var(--orange); }
+    .hero p { color: var(--gray); font-size: 1.05rem; max-width: 600px; margin: 0 auto; }
+    .calc-section { padding: 24px 0 60px; }
+    .calc-card { background: var(--dark-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; margin-bottom: 24px; }
+    .calc-card h2 { font-size: 1.2rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+    .calc-card h2 .icon { font-size: 1.4rem; }
+    .tabs { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
+    .tab { background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: var(--gray); padding: 10px 20px; border-radius: 8px; cursor: pointer; font-size: 0.9rem; font-weight: 500; transition: all 0.2s; }
+    .tab:hover { border-color: var(--orange); color: var(--light); }
+    .tab.active { background: rgba(249,115,22,0.15); border-color: var(--orange); color: var(--orange); }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 500px) { .form-grid { grid-template-columns: 1fr; } }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group.full { grid-column: 1 / -1; }
+    label { font-size: 0.85rem; font-weight: 600; color: var(--gray); text-transform: uppercase; letter-spacing: 0.5px; }
+    input, select { background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: var(--light); padding: 12px 16px; border-radius: 8px; font-size: 1rem; font-family: inherit; outline: none; transition: border-color 0.2s; }
+    input:focus, select:focus { border-color: var(--orange); }
+    select option { background: var(--darker); }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: var(--orange); color: #fff; font-weight: 700; font-size: 1rem; padding: 14px 28px; border-radius: 10px; border: none; cursor: pointer; width: 100%; margin-top: 16px; transition: background 0.2s; }
+    .btn:hover { background: var(--orange-dark); }
+    .results { display: none; margin-top: 24px; }
+    .results.show { display: block; }
+    .result-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; }
+    .result-item { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 12px; padding: 20px; text-align: center; }
+    .result-item .number { font-size: 1.8rem; font-weight: 800; color: var(--orange); letter-spacing: -1px; }
+    .result-item .label { font-size: 0.8rem; color: var(--gray); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .result-item .detail { font-size: 0.85rem; color: var(--light); margin-top: 8px; opacity: 0.8; }
+    .mortar-types { margin-top: 20px; }
+    .mortar-types h3 { color: var(--green); font-size: 1rem; margin-bottom: 12px; }
+    .mortar-types table { width: 100%; border-collapse: collapse; }
+    .mortar-types th, .mortar-types td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+    .mortar-types th { color: var(--orange); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; }
+    .mortar-types td { color: var(--gray); }
+    .mortar-types .rec { color: var(--green); font-weight: 600; }
+    .waste-note { background: rgba(249,115,22,0.08); border: 1px solid rgba(249,115,22,0.2); border-radius: 10px; padding: 16px 20px; margin-top: 20px; font-size: 0.9rem; color: var(--gray); }
+    .waste-note strong { color: var(--orange); }
+    .info-section { padding: 40px 0 60px; }
+    .info-card { background: var(--dark-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; margin-bottom: 24px; }
+    .info-card h2 { font-size: 1.4rem; font-weight: 700; margin-bottom: 16px; }
+    .info-card h3 { font-size: 1.1rem; font-weight: 600; margin: 20px 0 8px; color: var(--orange); }
+    .info-card p { color: var(--gray); margin-bottom: 12px; line-height: 1.8; }
+    .info-card ul, .info-card ol { color: var(--gray); margin-left: 20px; margin-bottom: 12px; }
+    .info-card li { margin-bottom: 6px; }
+    .info-card table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+    .info-card th, .info-card td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+    .info-card th { color: var(--orange); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; }
+    .info-card td { color: var(--gray); }
+    .related-tools { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-top: 16px; }
+    .related-tool { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 10px; padding: 16px; text-decoration: none; transition: border-color 0.2s; }
+    .related-tool:hover { border-color: var(--orange); }
+    .related-tool .tool-name { color: var(--light); font-weight: 600; font-size: 0.95rem; }
+    .related-tool .tool-desc { color: var(--gray); font-size: 0.8rem; margin-top: 4px; }
+    footer { padding: 40px 0; border-top: 1px solid var(--border); text-align: center; }
+    footer p { color: var(--gray); font-size: 0.85rem; }
+    footer a { color: var(--orange); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <nav><div class="container"><a href="/" class="logo">Built<span>Right</span></a><div class="nav-links"><a href="/blog">Blog</a><a href="/templates">Templates</a><a href="/tools">Tools</a></div></div></nav>
+
+  <section class="hero"><div class="container">
+    <div class="badge">Free Tool</div>
+    <h1>Mortar <span class="highlight">Calculator</span></h1>
+    <p>Calculate bags of mortar and sand needed for brick, block, and stone masonry. Includes coverage rates and mortar type recommendations.</p>
+  </div></section>
+
+  <section class="calc-section"><div class="container">
+    <div class="calc-card">
+      <h2><span class="icon">🧱</span> Masonry Details</h2>
+
+      <div class="tabs" id="mat-tabs">
+        <div class="tab active" data-mat="brick" onclick="setMat('brick')">Brick</div>
+        <div class="tab" data-mat="block" onclick="setMat('block')">Concrete Block</div>
+        <div class="tab" data-mat="stone" onclick="setMat('stone')">Stone / Veneer</div>
+      </div>
+
+      <div class="form-grid">
+        <div class="form-group" id="area-group">
+          <label>Wall Area (sq ft)</label>
+          <input type="number" id="wall-area" placeholder="e.g. 200" step="any">
+        </div>
+        <div class="form-group" id="count-group" style="display:none">
+          <label>Number of Units</label>
+          <input type="number" id="unit-count" placeholder="e.g. 500" step="1">
+        </div>
+        <div class="form-group">
+          <label>Input Method</label>
+          <select id="input-method" onchange="toggleInput()">
+            <option value="area">By Wall Area (sq ft)</option>
+            <option value="count">By Unit Count</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Joint Width (inches)</label>
+          <select id="joint-width">
+            <option value="0.25">1/4"</option>
+            <option value="0.375" selected>3/8"</option>
+            <option value="0.5">1/2"</option>
+            <option value="0.625">5/8"</option>
+            <option value="0.75">3/4"</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Joint Depth (inches)</label>
+          <select id="joint-depth">
+            <option value="0.375">3/8"</option>
+            <option value="0.5" selected>1/2"</option>
+            <option value="0.625">5/8"</option>
+            <option value="0.75">3/4"</option>
+            <option value="1.0">1" (tuckpointing)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Mortar Type</label>
+          <select id="mortar-type">
+            <option value="N" selected>Type N (general purpose)</option>
+            <option value="S">Type S (structural)</option>
+            <option value="M">Type M (high-strength)</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn" onclick="calcMortar()">Calculate Mortar</button>
+
+      <div class="results" id="results">
+        <div class="result-grid">
+          <div class="result-item"><div class="number" id="r-bags80">—</div><div class="label">80-lb Bags</div><div class="detail">pre-mixed mortar</div></div>
+          <div class="result-item"><div class="number" id="r-bags60">—</div><div class="label">60-lb Bags</div><div class="detail">pre-mixed mortar</div></div>
+          <div class="result-item"><div class="number" id="r-cuft">—</div><div class="label">Cu Ft Mortar</div><div class="detail">total volume</div></div>
+          <div class="result-item"><div class="number" id="r-sand">—</div><div class="label">Sand (cu ft)</div><div class="detail">if site-mixing</div></div>
+          <div class="result-item"><div class="number" id="r-units">—</div><div class="label" id="r-units-label">Units</div><div class="detail" id="r-units-detail"></div></div>
+          <div class="result-item"><div class="number" id="r-cost">—</div><div class="label">Est. Mortar Cost</div><div class="detail">pre-mixed bags</div></div>
+        </div>
+
+        <div class="mortar-types">
+          <h3>📋 Mortar Type Recommendation</h3>
+          <table>
+            <tr><th>Type</th><th>Strength</th><th>Best For</th><th>Status</th></tr>
+            <tr id="type-n-row"><td>Type N</td><td>750 PSI</td><td>Above-grade walls, chimneys, veneer</td><td class="rec" id="rec-n">—</td></tr>
+            <tr id="type-s-row"><td>Type S</td><td>1,800 PSI</td><td>Foundations, retaining walls, below-grade</td><td class="rec" id="rec-s">—</td></tr>
+            <tr id="type-m-row"><td>Type M</td><td>2,500 PSI</td><td>Heavy structural, earth contact, commercial</td><td class="rec" id="rec-m">—</td></tr>
+          </table>
+        </div>
+
+        <div class="waste-note"><strong>Pro Tip:</strong> Add <strong>10–15% extra mortar</strong> for waste, dropped mortar, and rework. In hot weather, mortar sets faster and more gets wasted. Mix only what you can use in 90 minutes.</div>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="info-section"><div class="container">
+    <div class="info-card">
+      <h2>Mortar Coverage Rates</h2>
+      <p>How far an 80-lb bag of pre-mixed mortar goes depends on the material, joint size, and application.</p>
+      <table>
+        <tr><th>Application</th><th>Joint Size</th><th>Coverage per 80-lb Bag</th></tr>
+        <tr><td>Standard brick (modular)</td><td>3/8" joints</td><td>30–35 sq ft of wall</td></tr>
+        <tr><td>Standard brick (modular)</td><td>1/2" joints</td><td>22–28 sq ft of wall</td></tr>
+        <tr><td>CMU block (8×8×16)</td><td>3/8" joints</td><td>12–15 blocks</td></tr>
+        <tr><td>CMU block (8×8×16)</td><td>1/2" joints</td><td>10–12 blocks</td></tr>
+        <tr><td>Natural stone veneer</td><td>1/2" joints</td><td>15–20 sq ft</td></tr>
+        <tr><td>Flagstone / thick stone</td><td>3/4" joints</td><td>8–12 sq ft</td></tr>
+        <tr><td>Tuckpointing (repointing)</td><td>3/8" × 3/4" deep</td><td>40–50 sq ft</td></tr>
+      </table>
+    </div>
+
+    <div class="info-card">
+      <h2>Mortar Mix Ratios (Site-Mixed)</h2>
+      <p>If you're mixing mortar from scratch instead of using pre-mixed bags:</p>
+      <table>
+        <tr><th>Type</th><th>Portland Cement</th><th>Lime</th><th>Sand</th><th>Strength</th></tr>
+        <tr><td>Type N</td><td>1 part</td><td>1 part</td><td>6 parts</td><td>750 PSI</td></tr>
+        <tr><td>Type S</td><td>1 part</td><td>1/2 part</td><td>4.5 parts</td><td>1,800 PSI</td></tr>
+        <tr><td>Type M</td><td>1 part</td><td>1/4 part</td><td>3 parts</td><td>2,500 PSI</td></tr>
+        <tr><td>Type O</td><td>1 part</td><td>2 parts</td><td>9 parts</td><td>350 PSI</td></tr>
+      </table>
+      <p><strong>Pre-mixed vs. site-mixed:</strong> Pre-mixed bags are easier and more consistent for small jobs (under 20 bags). For large jobs, site-mixing from Portland cement, lime, and sand is significantly cheaper — about 40-50% less per cubic foot.</p>
+    </div>
+
+    <div class="info-card">
+      <h2>Related Tools</h2>
+      <div class="related-tools">
+        <a href="/tools/concrete-calculator" class="related-tool">
+          <div class="tool-name">🧱 Concrete Calculator</div>
+          <div class="tool-desc">Cubic yards, bags &amp; cost</div>
+        </a>
+        <a href="/tools/concrete-slab-calculator" class="related-tool">
+          <div class="tool-name">🏗️ Concrete Slab Calculator</div>
+          <div class="tool-desc">Slabs with rebar estimation</div>
+        </a>
+        <a href="/tools/shingle-calculator" class="related-tool">
+          <div class="tool-name">🏠 Shingle Calculator</div>
+          <div class="tool-desc">Roofing materials estimator</div>
+        </a>
+        <a href="/tools/ohms-law-calculator" class="related-tool">
+          <div class="tool-name">⚡ Ohm's Law Calculator</div>
+          <div class="tool-desc">Voltage, current, resistance, power</div>
+        </a>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <h2>Related Articles</h2>
+      <ul>
+        <li><a href="/blog/mortar-types-explained" style="color:var(--orange);">Type N vs S vs M Mortar — Which One Do You Need?</a></li>
+        <li><a href="/blog/how-to-mix-mortar" style="color:var(--orange);">How to Mix Mortar by Hand and with a Mixer</a></li>
+        <li><a href="/blog/tuckpointing-guide" style="color:var(--orange);">Tuckpointing Guide: How to Repoint Brick Mortar Joints</a></li>
+        <li><a href="/blog/brick-laying-basics" style="color:var(--orange);">Brick Laying Basics for Beginners (Step-by-Step)</a></li>
+      </ul>
+    </div>
+  </div></section>
+
+  <!-- Email Capture CTA -->
+  <div id="email-cta" style="max-width:720px;margin:40px auto;padding:40px 32px;background:linear-gradient(135deg,#1e293b 0%,#0f172a 100%);border:1px solid rgba(249,115,22,0.3);border-radius:16px;text-align:center;">
+    <div style="font-size:2rem;margin-bottom:12px;">📋</div>
+    <h3 style="font-family:Inter,-apple-system,sans-serif;font-size:1.4rem;font-weight:700;color:#f8fafc;margin-bottom:8px;">Get the Free Contractor Toolkit</h3>
+    <p style="font-family:Inter,-apple-system,sans-serif;color:#94a3b8;font-size:0.95rem;margin-bottom:24px;max-width:480px;margin-left:auto;margin-right:auto;">Get our <strong style="color:#f97316;">free spreadsheet templates</strong> — invoice, estimate, job costing &amp; profit tracker. Used by 500+ contractors.</p>
+    <form id="capture-form" onsubmit="return handleCapture(event)" style="display:flex;gap:10px;max-width:420px;margin:0 auto;flex-wrap:wrap;justify-content:center;">
+      <input type="email" id="capture-email" placeholder="you@company.com" required style="flex:1;min-width:220px;padding:12px 16px;border-radius:8px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.05);color:#f8fafc;font-size:0.95rem;font-family:Inter,-apple-system,sans-serif;outline:none;">
+      <button type="submit" style="padding:12px 24px;background:#f97316;color:#fff;border:none;border-radius:8px;font-weight:600;font-size:0.95rem;cursor:pointer;font-family:Inter,-apple-system,sans-serif;white-space:nowrap;">Send Me the Templates</button>
+    </form>
+    <p id="capture-msg" style="font-family:Inter,-apple-system,sans-serif;color:#22c55e;font-size:0.85rem;margin-top:12px;display:none;"></p>
+    <p style="font-family:Inter,-apple-system,sans-serif;color:#64748b;font-size:0.75rem;margin-top:12px;">No spam. Unsubscribe anytime.</p>
+  </div>
+
+  <footer><div class="container"><p>© 2026 <a href="/">BuiltRight Academy</a>. Free tools for tradespeople who mean business.</p></div></footer>
+
+  <script>
+    let currentMat = 'brick';
+
+    // Material data: units per sq ft, mortar cu ft per unit
+    const matData = {
+      brick: {
+        name: 'Bricks',
+        unitsPerSqFt: 6.75, // modular brick with 3/8" joints
+        // Base mortar volume per unit at 3/8" joint, 1/2" depth (cu ft)
+        baseMortarPerUnit: 0.0075,
+        unitLabel: 'Bricks',
+        unitDetail: 'modular (3-5/8 × 2-1/4 × 7-5/8)'
+      },
+      block: {
+        name: 'Blocks',
+        unitsPerSqFt: 1.125, // 8x8x16 block
+        baseMortarPerUnit: 0.035,
+        unitLabel: 'Blocks',
+        unitDetail: 'CMU 8×8×16'
+      },
+      stone: {
+        name: 'Stone',
+        unitsPerSqFt: 1, // 1 sq ft = 1 unit for stone
+        baseMortarPerUnit: 0.025,
+        unitLabel: 'Sq Ft',
+        unitDetail: 'natural or veneer stone'
+      }
+    };
+
+    function setMat(m) {
+      currentMat = m;
+      document.querySelectorAll('#mat-tabs .tab').forEach(t => {
+        t.classList.toggle('active', t.dataset.mat === m);
+      });
+      document.getElementById('results').classList.remove('show');
+    }
+
+    function toggleInput() {
+      const method = document.getElementById('input-method').value;
+      document.getElementById('area-group').style.display = method === 'area' ? '' : 'none';
+      document.getElementById('count-group').style.display = method === 'count' ? '' : 'none';
+    }
+
+    function calcMortar() {
+      const method = document.getElementById('input-method').value;
+      const jointWidth = parseFloat(document.getElementById('joint-width').value);
+      const jointDepth = parseFloat(document.getElementById('joint-depth').value);
+      const mortarType = document.getElementById('mortar-type').value;
+      const mat = matData[currentMat];
+
+      let units, area;
+
+      if (method === 'area') {
+        area = parseFloat(document.getElementById('wall-area').value);
+        if (!area) return alert('Please enter the wall area.');
+        units = area * mat.unitsPerSqFt;
+      } else {
+        units = parseFloat(document.getElementById('unit-count').value);
+        if (!units) return alert('Please enter the number of units.');
+        area = units / mat.unitsPerSqFt;
+      }
+
+      // Adjust mortar volume based on joint size relative to baseline (3/8" wide, 1/2" deep)
+      const jointFactor = (jointWidth / 0.375) * (jointDepth / 0.5);
+      const mortarPerUnit = mat.baseMortarPerUnit * jointFactor;
+      const totalMortarCuFt = units * mortarPerUnit;
+
+      // Add 10% waste
+      const totalWithWaste = totalMortarCuFt * 1.1;
+
+      // 80-lb bag = ~0.5 cu ft, 60-lb bag = ~0.375 cu ft
+      const bags80 = Math.ceil(totalWithWaste / 0.5);
+      const bags60 = Math.ceil(totalWithWaste / 0.375);
+
+      // Sand needed for site-mixing (3:1 sand:cement ratio)
+      const sandCuFt = totalWithWaste * 0.75; // ~75% of mortar volume is sand
+
+      // Cost: ~$6-8 per 80-lb bag
+      const costLow = bags80 * 6;
+      const costHigh = bags80 * 8;
+
+      document.getElementById('r-bags80').textContent = bags80;
+      document.getElementById('r-bags60').textContent = bags60;
+      document.getElementById('r-cuft').textContent = totalWithWaste.toFixed(1);
+      document.getElementById('r-sand').textContent = sandCuFt.toFixed(1);
+      document.getElementById('r-units').textContent = Math.round(units).toLocaleString();
+      document.getElementById('r-units-label').textContent = mat.unitLabel;
+      document.getElementById('r-units-detail').textContent = mat.unitDetail;
+      document.getElementById('r-cost').textContent = '$' + costLow + '–$' + costHigh;
+
+      // Mortar type recommendation
+      const selected = mortarType;
+      document.getElementById('rec-n').textContent = selected === 'N' ? '✓ Selected' : '';
+      document.getElementById('rec-s').textContent = selected === 'S' ? '✓ Selected' : '';
+      document.getElementById('rec-m').textContent = selected === 'M' ? '✓ Selected' : '';
+
+      document.getElementById('results').classList.add('show');
+      document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function handleCapture(e) {
+      e.preventDefault();
+      var em = document.getElementById("capture-email").value;
+      var msg = document.getElementById("capture-msg");
+      var btn = e.target.querySelector("button");
+      btn.textContent = "Sending..."; btn.disabled = true;
+      fetch("/api/subscribe", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email: em, source: window.location.pathname, lead_magnet: "contractor-toolkit" }) })
+        .then(function(r) { return r.json() })
+        .then(function(d) { msg.textContent = "\u2705 Check your inbox! Templates are on the way."; msg.style.display = "block"; document.getElementById("capture-form").style.display = "none" })
+        .catch(function() { msg.textContent = "Something went wrong. Try again."; msg.style.color = "#ef4444"; msg.style.display = "block"; btn.textContent = "Send Me the Templates"; btn.disabled = false });
+      return false;
+    }
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
+</body>
+</html>

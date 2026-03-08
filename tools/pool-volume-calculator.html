@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pool Volume Calculator — Gallons, Liters & Chemical Amounts | BuiltRight Academy</title>
+  <meta name="description" content="Free pool volume calculator. Calculate gallons, liters, fill time, and chemical amounts for rectangular, circular, oval, and kidney-shaped pools.">
+  <meta name="keywords" content="pool volume calculator, pool gallon calculator, how many gallons in my pool, swimming pool calculator, pool chemical calculator, pool fill time">
+  <link rel="canonical" href="https://builtright-academy.vercel.app/tools/pool-volume-calculator">
+  <meta property="og:title" content="Pool Volume Calculator — Gallons, Liters & Chemical Amounts">
+  <meta property="og:description" content="Calculate pool volume in gallons and liters for any pool shape. Get fill time estimates and chemical dosing amounts.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Pool Volume Calculator",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "description": "Calculate swimming pool volume in gallons and liters. Supports rectangular, circular, oval, and kidney shapes. Includes fill time and chemical dosing estimates."
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do I calculate the gallons in my pool?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For rectangular pools: Length × Width × Average Depth × 7.48 = gallons. For circular pools: Diameter × Diameter × Average Depth × 5.9 = gallons. Average depth = (shallow end + deep end) ÷ 2. A typical 16×32 ft rectangular pool with 5 ft average depth holds about 19,174 gallons."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long does it take to fill a pool?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A standard garden hose delivers about 9 gallons per minute (540 gallons per hour). A 20,000-gallon pool takes approximately 37 hours to fill with one hose. Two hoses cut this in half. Some water utilities offer bulk water delivery by truck for faster fills."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much chlorine do I need for my pool?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For initial chlorination to reach 1-3 ppm free chlorine, use about 2 oz of granular chlorine (calcium hypochlorite 65%) per 10,000 gallons. For shock treatment (10 ppm), use about 10 oz per 10,000 gallons. Always test your water before and after adding chemicals."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the average depth of a swimming pool?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The average depth of a residential pool ranges from 4 to 6 feet. To calculate average depth, add the shallow end depth and deep end depth, then divide by 2. For pools with a hopper bottom, measure at multiple points for better accuracy."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How many gallons is a typical residential pool?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Typical residential pools hold between 10,000 and 30,000 gallons. A small pool (12×24 ft) holds about 8,600 gallons, a medium pool (16×32 ft) holds about 19,000 gallons, and a large pool (20×40 ft) holds about 30,000 gallons, all assuming 5 ft average depth."
+        }
+      }
+    ]
+  }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root { --orange: #F97316; --orange-dark: #EA580C; --darker: #0F0F1A; --dark-card: #1A1A2E; --gray: #94A3B8; --light: #F8FAFC; --green: #22C55E; --blue: #3B82F6; --border: rgba(255,255,255,0.08); }
+    body { font-family: 'Inter', -apple-system, sans-serif; background: var(--darker); color: var(--light); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+    nav { padding: 20px 0; border-bottom: 1px solid var(--border); }
+    nav .container { display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.3rem; color: var(--orange); text-decoration: none; letter-spacing: -0.5px; }
+    .logo span { color: var(--light); }
+    .nav-links a { color: var(--gray); text-decoration: none; font-size: 0.9rem; margin-left: 24px; }
+    .nav-links a:hover { color: var(--light); }
+    .hero { padding: 48px 0 32px; text-align: center; }
+    .hero .badge { display: inline-block; background: rgba(249,115,22,0.1); border: 1px solid rgba(249,115,22,0.3); color: var(--orange); font-size: 0.8rem; font-weight: 600; padding: 6px 16px; border-radius: 100px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .hero h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 800; line-height: 1.15; letter-spacing: -1px; margin-bottom: 12px; }
+    .hero h1 .highlight { color: var(--orange); }
+    .hero p { color: var(--gray); font-size: 1.05rem; max-width: 600px; margin: 0 auto; }
+    .calc-section { padding: 24px 0 60px; }
+    .calc-card { background: var(--dark-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; margin-bottom: 24px; }
+    .calc-card h2 { font-size: 1.2rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+    .calc-card h2 .icon { font-size: 1.4rem; }
+    .tabs { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
+    .tab { background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: var(--gray); padding: 10px 20px; border-radius: 8px; cursor: pointer; font-size: 0.9rem; font-weight: 500; transition: all 0.2s; }
+    .tab:hover { border-color: var(--orange); color: var(--light); }
+    .tab.active { background: rgba(249,115,22,0.15); border-color: var(--orange); color: var(--orange); }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 500px) { .form-grid { grid-template-columns: 1fr; } }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group.full { grid-column: 1 / -1; }
+    label { font-size: 0.85rem; font-weight: 600; color: var(--gray); text-transform: uppercase; letter-spacing: 0.5px; }
+    input, select { background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: var(--light); padding: 12px 16px; border-radius: 8px; font-size: 1rem; font-family: inherit; outline: none; transition: border-color 0.2s; }
+    input:focus, select:focus { border-color: var(--orange); }
+    select option { background: var(--darker); }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: var(--orange); color: #fff; font-weight: 700; font-size: 1rem; padding: 14px 28px; border-radius: 10px; border: none; cursor: pointer; width: 100%; margin-top: 16px; transition: background 0.2s; }
+    .btn:hover { background: var(--orange-dark); }
+    .results { display: none; margin-top: 24px; }
+    .results.show { display: block; }
+    .result-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; }
+    .result-item { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 12px; padding: 20px; text-align: center; }
+    .result-item .number { font-size: 2rem; font-weight: 800; color: var(--orange); letter-spacing: -1px; }
+    .result-item .number.blue { color: var(--blue); }
+    .result-item .label { font-size: 0.8rem; color: var(--gray); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .result-item .detail { font-size: 0.85rem; color: var(--light); margin-top: 8px; opacity: 0.8; }
+    .chem-section { margin-top: 20px; padding: 20px; background: rgba(59,130,246,0.05); border: 1px solid rgba(59,130,246,0.15); border-radius: 12px; }
+    .chem-section h3 { font-size: 1rem; font-weight: 700; margin-bottom: 12px; color: var(--blue); }
+    .chem-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; }
+    .chem-item { text-align: center; }
+    .chem-item .chem-val { font-size: 1.2rem; font-weight: 700; color: var(--light); }
+    .chem-item .chem-label { font-size: 0.75rem; color: var(--gray); margin-top: 2px; }
+    .waste-note { background: rgba(249,115,22,0.08); border: 1px solid rgba(249,115,22,0.2); border-radius: 10px; padding: 16px 20px; margin-top: 20px; font-size: 0.9rem; color: var(--gray); }
+    .waste-note strong { color: var(--orange); }
+    .info-section { padding: 40px 0 60px; }
+    .info-card { background: var(--dark-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; margin-bottom: 24px; }
+    .info-card h2 { font-size: 1.4rem; font-weight: 700; margin-bottom: 16px; }
+    .info-card h3 { font-size: 1.1rem; font-weight: 600; margin: 20px 0 8px; color: var(--orange); }
+    .info-card p { color: var(--gray); margin-bottom: 12px; line-height: 1.8; }
+    .info-card ul { color: var(--gray); margin-left: 20px; margin-bottom: 12px; }
+    .info-card li { margin-bottom: 6px; }
+    .info-card table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+    .info-card th, .info-card td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+    .info-card th { color: var(--orange); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; }
+    .info-card td { color: var(--gray); }
+    .related-tools { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-top: 20px; }
+    .related-tool { display: block; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 10px; padding: 16px; text-decoration: none; color: var(--light); transition: border-color 0.2s; }
+    .related-tool:hover { border-color: var(--orange); }
+    .related-tool .tool-icon { font-size: 1.3rem; margin-bottom: 6px; }
+    .related-tool .tool-name { font-weight: 600; font-size: 0.9rem; }
+    .related-tool .tool-desc { font-size: 0.8rem; color: var(--gray); margin-top: 4px; }
+    footer { padding: 40px 0; border-top: 1px solid var(--border); text-align: center; }
+    footer p { color: var(--gray); font-size: 0.85rem; }
+    footer a { color: var(--orange); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <nav><div class="container"><a href="/" class="logo"><span>Built</span>Right</a><div class="nav-links"><a href="/blog">Blog</a><a href="/templates">Templates</a><a href="/tools">Tools</a></div></div></nav>
+
+  <section class="hero"><div class="container">
+    <div class="badge">Free Tool</div>
+    <h1>Pool Volume <span class="highlight">Calculator</span></h1>
+    <p>Calculate pool volume in gallons and liters. Get fill time estimates and chemical dosing amounts for any pool shape.</p>
+  </div></section>
+
+  <section class="calc-section"><div class="container">
+    <div class="calc-card">
+      <h2><span class="icon">🏊</span> Choose Your Pool Shape</h2>
+      <div class="tabs">
+        <div class="tab active" data-type="rect">Rectangular</div>
+        <div class="tab" data-type="circle">Circular</div>
+        <div class="tab" data-type="oval">Oval</div>
+        <div class="tab" data-type="kidney">Kidney</div>
+      </div>
+
+      <!-- Rectangular -->
+      <div id="form-rect" class="calc-form">
+        <div class="form-grid">
+          <div class="form-group"><label>Length (ft)</label><input type="number" id="rect-length" placeholder="e.g. 32" step="any"></div>
+          <div class="form-group"><label>Width (ft)</label><input type="number" id="rect-width" placeholder="e.g. 16" step="any"></div>
+          <div class="form-group"><label>Shallow End Depth (ft)</label><input type="number" id="rect-shallow" placeholder="e.g. 3" step="any"></div>
+          <div class="form-group"><label>Deep End Depth (ft)</label><input type="number" id="rect-deep" placeholder="e.g. 8" step="any"></div>
+        </div>
+        <button class="btn" onclick="calcRect()">Calculate Volume</button>
+      </div>
+
+      <!-- Circular -->
+      <div id="form-circle" class="calc-form" style="display:none">
+        <div class="form-grid">
+          <div class="form-group"><label>Diameter (ft)</label><input type="number" id="circ-dia" placeholder="e.g. 24" step="any"></div>
+          <div class="form-group"><label>Average Depth (ft)</label><input type="number" id="circ-depth" placeholder="e.g. 5" step="any"></div>
+        </div>
+        <button class="btn" onclick="calcCircle()">Calculate Volume</button>
+      </div>
+
+      <!-- Oval -->
+      <div id="form-oval" class="calc-form" style="display:none">
+        <div class="form-grid">
+          <div class="form-group"><label>Long Diameter (ft)</label><input type="number" id="oval-long" placeholder="e.g. 30" step="any"></div>
+          <div class="form-group"><label>Short Diameter (ft)</label><input type="number" id="oval-short" placeholder="e.g. 15" step="any"></div>
+          <div class="form-group"><label>Shallow End Depth (ft)</label><input type="number" id="oval-shallow" placeholder="e.g. 3" step="any"></div>
+          <div class="form-group"><label>Deep End Depth (ft)</label><input type="number" id="oval-deep" placeholder="e.g. 7" step="any"></div>
+        </div>
+        <button class="btn" onclick="calcOval()">Calculate Volume</button>
+      </div>
+
+      <!-- Kidney -->
+      <div id="form-kidney" class="calc-form" style="display:none">
+        <div class="form-grid">
+          <div class="form-group"><label>Length (ft)</label><input type="number" id="kid-length" placeholder="e.g. 28" step="any"></div>
+          <div class="form-group"><label>Width A — wider end (ft)</label><input type="number" id="kid-widthA" placeholder="e.g. 16" step="any"></div>
+          <div class="form-group"><label>Width B — narrower end (ft)</label><input type="number" id="kid-widthB" placeholder="e.g. 10" step="any"></div>
+          <div class="form-group"><label>Average Depth (ft)</label><input type="number" id="kid-depth" placeholder="e.g. 5" step="any"></div>
+        </div>
+        <button class="btn" onclick="calcKidney()">Calculate Volume</button>
+      </div>
+
+      <div class="results" id="results">
+        <div class="result-grid">
+          <div class="result-item"><div class="number blue" id="r-gallons">—</div><div class="label">Gallons</div><div class="detail" id="r-cuft"></div></div>
+          <div class="result-item"><div class="number blue" id="r-liters">—</div><div class="label">Liters</div><div class="detail">metric volume</div></div>
+          <div class="result-item"><div class="number" id="r-fill">—</div><div class="label">Fill Time (hrs)</div><div class="detail">1 garden hose @ 9 gpm</div></div>
+        </div>
+
+        <div class="chem-section">
+          <h3>🧪 Chemical Dosing Guide (initial treatment)</h3>
+          <div class="chem-grid">
+            <div class="chem-item"><div class="chem-val" id="c-chlorine">—</div><div class="chem-label">Granular Chlorine (oz)<br>to reach 3 ppm</div></div>
+            <div class="chem-item"><div class="chem-val" id="c-shock">—</div><div class="chem-label">Shock Treatment (oz)<br>to reach 10 ppm</div></div>
+            <div class="chem-item"><div class="chem-val" id="c-algaecide">—</div><div class="chem-label">Algaecide (oz)<br>initial dose</div></div>
+            <div class="chem-item"><div class="chem-val" id="c-stabilizer">—</div><div class="chem-label">Stabilizer/CYA (oz)<br>to reach 40 ppm</div></div>
+          </div>
+        </div>
+
+        <div class="waste-note"><strong>Pro Tip:</strong> Always test your water before adding chemicals. These estimates assume you're starting from zero — existing chemical levels will reduce what you need. Test strips or a liquid test kit are essential.</div>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="info-section"><div class="container">
+    <div class="info-card">
+      <h2>How to Calculate Pool Volume</h2>
+      <p>Knowing your pool's exact volume is critical for proper chemical dosing, equipment sizing, and water cost estimates. Here's how to calculate it for every pool shape.</p>
+
+      <h3>Rectangular Pool Formula</h3>
+      <p><strong>Gallons = Length × Width × Average Depth × 7.48</strong></p>
+      <p>The 7.48 converts cubic feet to gallons (1 cubic foot = 7.48 gallons). Average depth = (shallow end + deep end) ÷ 2.</p>
+
+      <h3>Circular Pool Formula</h3>
+      <p><strong>Gallons = Diameter × Diameter × Average Depth × 5.9</strong></p>
+
+      <h3>Oval Pool Formula</h3>
+      <p><strong>Gallons = Long Diameter × Short Diameter × Average Depth × 5.9</strong></p>
+
+      <h3>Kidney Pool Formula</h3>
+      <p><strong>Gallons = (Width A + Width B) × Length × Average Depth × 3.74</strong></p>
+
+      <h3>Typical Pool Volumes</h3>
+      <table>
+        <tr><th>Pool Size</th><th>Avg Depth</th><th>Gallons</th><th>Category</th></tr>
+        <tr><td>12 × 24 ft</td><td>5 ft</td><td>10,800</td><td>Small residential</td></tr>
+        <tr><td>15 × 30 ft</td><td>5 ft</td><td>16,800</td><td>Medium residential</td></tr>
+        <tr><td>16 × 32 ft</td><td>5.5 ft</td><td>21,000</td><td>Standard residential</td></tr>
+        <tr><td>20 × 40 ft</td><td>5.5 ft</td><td>33,000</td><td>Large residential</td></tr>
+        <tr><td>24 ft round</td><td>4 ft</td><td>13,500</td><td>Above-ground</td></tr>
+      </table>
+
+      <h3>Chemical Dosing Reference</h3>
+      <table>
+        <tr><th>Chemical</th><th>Per 10,000 Gallons</th><th>Target Level</th></tr>
+        <tr><td>Granular Chlorine (65%)</td><td>2 oz = 1 ppm</td><td>1–3 ppm</td></tr>
+        <tr><td>Shock (Cal-Hypo)</td><td>10 oz = 10 ppm</td><td>10 ppm (shock)</td></tr>
+        <tr><td>Algaecide</td><td>6–12 oz initial</td><td>Per label</td></tr>
+        <tr><td>Stabilizer (CYA)</td><td>13 oz = 10 ppm</td><td>30–50 ppm</td></tr>
+        <tr><td>pH Increaser (soda ash)</td><td>6 oz = +0.2 pH</td><td>7.2–7.6</td></tr>
+        <tr><td>pH Decreaser (muriatic acid)</td><td>25 oz = -0.2 pH</td><td>7.2–7.6</td></tr>
+      </table>
+    </div>
+
+    <div class="info-card">
+      <h2>Related Tools</h2>
+      <div class="related-tools">
+        <a href="/tools/concrete-calculator" class="related-tool"><div class="tool-icon">🧱</div><div class="tool-name">Concrete Calculator</div><div class="tool-desc">Cubic yards, bags & cost</div></a>
+        <a href="/tools/soil-calculator" class="related-tool"><div class="tool-icon">🌱</div><div class="tool-name">Soil Calculator</div><div class="tool-desc">Cubic yards & weight</div></a>
+        <a href="/tools/roofing-calculator" class="related-tool"><div class="tool-icon">🏠</div><div class="tool-name">Roofing Calculator</div><div class="tool-desc">Squares, bundles & cost</div></a>
+      </div>
+    </div>
+  </div></section>
+
+<!-- Email Capture CTA -->
+<div id="email-cta" style="max-width:720px;margin:40px auto;padding:40px 32px;background:linear-gradient(135deg,#1e293b 0%,#0f172a 100%);border:1px solid rgba(249,115,22,0.3);border-radius:16px;text-align:center;">
+  <div style="font-size:2rem;margin-bottom:12px;">📋</div>
+  <h3 style="font-family:Inter,-apple-system,sans-serif;font-size:1.4rem;font-weight:700;color:#f8fafc;margin-bottom:8px;">Get the Free Contractor Toolkit</h3>
+  <p style="font-family:Inter,-apple-system,sans-serif;color:#94a3b8;font-size:0.95rem;margin-bottom:24px;max-width:480px;margin-left:auto;margin-right:auto;">Get our <strong style="color:#f97316;">free spreadsheet templates</strong> &mdash; invoice, estimate, job costing &amp; profit tracker. Used by 500+ contractors.</p>
+  <form id="capture-form" onsubmit="return handleCapture(event)" style="display:flex;gap:10px;max-width:420px;margin:0 auto;flex-wrap:wrap;justify-content:center;">
+    <input type="email" id="capture-email" placeholder="you@company.com" required style="flex:1;min-width:220px;padding:12px 16px;border-radius:8px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.05);color:#f8fafc;font-size:0.95rem;font-family:Inter,-apple-system,sans-serif;outline:none;">
+    <button type="submit" style="padding:12px 24px;background:#f97316;color:#fff;border:none;border-radius:8px;font-weight:600;font-size:0.95rem;cursor:pointer;font-family:Inter,-apple-system,sans-serif;white-space:nowrap;">Send Me the Templates</button>
+  </form>
+  <p id="capture-msg" style="font-family:Inter,-apple-system,sans-serif;color:#22c55e;font-size:0.85rem;margin-top:12px;display:none;"></p>
+  <p style="font-family:Inter,-apple-system,sans-serif;color:#64748b;font-size:0.75rem;margin-top:12px;">No spam. Unsubscribe anytime.</p>
+</div>
+
+  <footer><div class="container"><p>© 2026 <a href="/">BuiltRight Academy</a>. Free tools for tradespeople who mean business.</p></div></footer>
+
+  <script>
+    // Tab switching
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.calc-form').forEach(f => f.style.display = 'none');
+        tab.classList.add('active');
+        document.getElementById('form-' + tab.dataset.type).style.display = 'block';
+        document.getElementById('results').classList.remove('show');
+      });
+    });
+
+    function showResults(gallons) {
+      const liters = gallons * 3.78541;
+      const fillHrs = gallons / 540; // 9 gpm = 540 gph
+      const per10k = gallons / 10000;
+
+      document.getElementById('r-gallons').textContent = Math.round(gallons).toLocaleString();
+      document.getElementById('r-cuft').textContent = Math.round(gallons / 7.48).toLocaleString() + ' cu ft';
+      document.getElementById('r-liters').textContent = Math.round(liters).toLocaleString();
+      document.getElementById('r-fill').textContent = fillHrs.toFixed(1);
+
+      // Chemical amounts
+      // Chlorine: 2 oz per 10,000 gal = 1 ppm, target 3 ppm → 6 oz per 10k
+      document.getElementById('c-chlorine').textContent = (per10k * 6).toFixed(1);
+      // Shock: 10 oz per 10,000 gal for 10 ppm
+      document.getElementById('c-shock').textContent = (per10k * 10).toFixed(1);
+      // Algaecide: ~8 oz per 10,000 gal initial
+      document.getElementById('c-algaecide').textContent = (per10k * 8).toFixed(1);
+      // Stabilizer (CYA): 13 oz per 10,000 gal = 10 ppm, target 40 ppm → 52 oz per 10k
+      document.getElementById('c-stabilizer').textContent = (per10k * 52).toFixed(1);
+
+      document.getElementById('results').classList.add('show');
+      document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function calcRect() {
+      const l = parseFloat(document.getElementById('rect-length').value);
+      const w = parseFloat(document.getElementById('rect-width').value);
+      const s = parseFloat(document.getElementById('rect-shallow').value);
+      const d = parseFloat(document.getElementById('rect-deep').value);
+      if (!l || !w || !s || !d) return alert('Please fill in all dimensions.');
+      const avgDepth = (s + d) / 2;
+      showResults(l * w * avgDepth * 7.48);
+    }
+
+    function calcCircle() {
+      const dia = parseFloat(document.getElementById('circ-dia').value);
+      const d = parseFloat(document.getElementById('circ-depth').value);
+      if (!dia || !d) return alert('Please fill in diameter and depth.');
+      showResults(dia * dia * d * 5.9);
+    }
+
+    function calcOval() {
+      const longD = parseFloat(document.getElementById('oval-long').value);
+      const shortD = parseFloat(document.getElementById('oval-short').value);
+      const s = parseFloat(document.getElementById('oval-shallow').value);
+      const d = parseFloat(document.getElementById('oval-deep').value);
+      if (!longD || !shortD || !s || !d) return alert('Please fill in all dimensions.');
+      const avgDepth = (s + d) / 2;
+      showResults(longD * shortD * avgDepth * 5.9);
+    }
+
+    function calcKidney() {
+      const l = parseFloat(document.getElementById('kid-length').value);
+      const wA = parseFloat(document.getElementById('kid-widthA').value);
+      const wB = parseFloat(document.getElementById('kid-widthB').value);
+      const d = parseFloat(document.getElementById('kid-depth').value);
+      if (!l || !wA || !wB || !d) return alert('Please fill in all dimensions.');
+      showResults((wA + wB) * l * d * 3.74);
+    }
+  </script>
+<script>
+function handleCapture(e){
+  e.preventDefault();
+  var em=document.getElementById("capture-email").value;
+  var msg=document.getElementById("capture-msg");
+  var btn=e.target.querySelector("button");
+  btn.textContent="Sending...";btn.disabled=true;
+  fetch("/api/subscribe",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:em,source:window.location.pathname,lead_magnet:"contractor-toolkit"})})
+  .then(function(r){return r.json()})
+  .then(function(d){msg.textContent="✅ Check your inbox! Templates are on the way.";msg.style.display="block";document.getElementById("capture-form").style.display="none"})
+  .catch(function(){msg.textContent="Something went wrong. Try again.";msg.style.color="#ef4444";msg.style.display="block";btn.textContent="Send Me the Templates";btn.disabled=false});
+  return false;
+}
+</script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
+</body>
+</html>
