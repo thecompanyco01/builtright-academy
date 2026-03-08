@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ohm's Law Calculator — Voltage, Current, Resistance, Power | BuiltRight Academy</title>
+  <meta name="description" content="Free Ohm's law calculator. Enter any 2 values (voltage, current, resistance, power) and instantly calculate the rest. Includes formula reference and common electrical values.">
+  <meta name="keywords" content="ohms law calculator, voltage calculator, resistance calculator, electrical calculator, watts calculator, amperage calculator">
+  <link rel="canonical" href="https://builtright-academy.vercel.app/tools/ohms-law-calculator">
+  <meta property="og:title" content="Ohm's Law Calculator — Voltage, Current, Resistance, Power">
+  <meta property="og:description" content="Free interactive Ohm's law calculator. Enter any 2 values and get the rest instantly.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Ohm's Law Calculator",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "description": "Calculate voltage, current, resistance, and power using Ohm's law. Enter any two values to find the remaining two."
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is Ohm's Law?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Ohm's Law states that voltage (V) equals current (I) multiplied by resistance (R): V = I × R. It's the fundamental relationship in electrical circuits. Combined with the power equation (P = V × I), you can calculate any electrical value if you know two others."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I calculate watts from volts and amps?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Multiply volts by amps: P (watts) = V (volts) × I (amps). For example, a 120V circuit drawing 15A uses 1,800 watts. This is the most common formula electricians use to size circuits and breakers."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I find resistance if I know voltage and current?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Divide voltage by current: R (ohms) = V (volts) ÷ I (amps). For example, if you measure 12V across a component and 0.5A flowing through it, the resistance is 12 ÷ 0.5 = 24 ohms."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What's the difference between AC and DC in Ohm's Law?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Ohm's Law applies to both AC and DC circuits for purely resistive loads. In AC circuits with inductors or capacitors, you use impedance (Z) instead of resistance (R), and calculations become more complex due to phase angles and reactive power."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How many watts can a 20-amp circuit handle?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A 20-amp circuit at 120V can handle 2,400 watts maximum (20A × 120V). However, the NEC 80% rule limits continuous loads to 80% of the breaker rating, so you should only use 1,920 watts continuously on a 20A circuit."
+        }
+      }
+    ]
+  }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root { --orange: #F97316; --orange-dark: #EA580C; --darker: #0F0F1A; --dark-card: #1A1A2E; --gray: #94A3B8; --light: #F8FAFC; --green: #22C55E; --border: rgba(255,255,255,0.08); }
+    body { font-family: 'Inter', -apple-system, sans-serif; background: var(--darker); color: var(--light); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+    nav { padding: 20px 0; border-bottom: 1px solid var(--border); }
+    nav .container { display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.3rem; color: var(--orange); text-decoration: none; letter-spacing: -0.5px; }
+    .logo span { color: var(--light); }
+    .nav-links a { color: var(--gray); text-decoration: none; font-size: 0.9rem; margin-left: 24px; }
+    .nav-links a:hover { color: var(--light); }
+    .hero { padding: 48px 0 32px; text-align: center; }
+    .hero .badge { display: inline-block; background: rgba(249,115,22,0.1); border: 1px solid rgba(249,115,22,0.3); color: var(--orange); font-size: 0.8rem; font-weight: 600; padding: 6px 16px; border-radius: 100px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .hero h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 800; line-height: 1.15; letter-spacing: -1px; margin-bottom: 12px; }
+    .hero h1 .highlight { color: var(--orange); }
+    .hero p { color: var(--gray); font-size: 1.05rem; max-width: 600px; margin: 0 auto; }
+    .calc-section { padding: 24px 0 60px; }
+    .calc-card { background: var(--dark-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; margin-bottom: 24px; }
+    .calc-card h2 { font-size: 1.2rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+    .calc-card h2 .icon { font-size: 1.4rem; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 500px) { .form-grid { grid-template-columns: 1fr; } }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group.full { grid-column: 1 / -1; }
+    label { font-size: 0.85rem; font-weight: 600; color: var(--gray); text-transform: uppercase; letter-spacing: 0.5px; }
+    input, select { background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: var(--light); padding: 12px 16px; border-radius: 8px; font-size: 1rem; font-family: inherit; outline: none; transition: border-color 0.2s; }
+    input:focus, select:focus { border-color: var(--orange); }
+    select option { background: var(--darker); }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: var(--orange); color: #fff; font-weight: 700; font-size: 1rem; padding: 14px 28px; border-radius: 10px; border: none; cursor: pointer; width: 100%; margin-top: 16px; transition: background 0.2s; }
+    .btn:hover { background: var(--orange-dark); }
+    .btn-secondary { background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: var(--gray); margin-top: 8px; }
+    .btn-secondary:hover { background: rgba(255,255,255,0.1); color: var(--light); }
+    .results { display: none; margin-top: 24px; }
+    .results.show { display: block; }
+    .result-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; }
+    .result-item { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 12px; padding: 20px; text-align: center; }
+    .result-item .number { font-size: 1.8rem; font-weight: 800; color: var(--orange); letter-spacing: -1px; }
+    .result-item .label { font-size: 0.8rem; color: var(--gray); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .result-item .detail { font-size: 0.85rem; color: var(--light); margin-top: 8px; opacity: 0.8; }
+    .result-item.computed { border-color: rgba(34,197,94,0.3); }
+    .result-item.computed .number { color: var(--green); }
+    .waste-note { background: rgba(249,115,22,0.08); border: 1px solid rgba(249,115,22,0.2); border-radius: 10px; padding: 16px 20px; margin-top: 20px; font-size: 0.9rem; color: var(--gray); }
+    .waste-note strong { color: var(--orange); }
+    .diagram { text-align: center; margin: 24px 0; }
+    .diagram svg { max-width: 320px; width: 100%; }
+    .help-text { font-size: 0.85rem; color: var(--gray); margin-top: 8px; font-style: italic; }
+    .info-section { padding: 40px 0 60px; }
+    .info-card { background: var(--dark-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; margin-bottom: 24px; }
+    .info-card h2 { font-size: 1.4rem; font-weight: 700; margin-bottom: 16px; }
+    .info-card h3 { font-size: 1.1rem; font-weight: 600; margin: 20px 0 8px; color: var(--orange); }
+    .info-card p { color: var(--gray); margin-bottom: 12px; line-height: 1.8; }
+    .info-card ul, .info-card ol { color: var(--gray); margin-left: 20px; margin-bottom: 12px; }
+    .info-card li { margin-bottom: 6px; }
+    .info-card table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+    .info-card th, .info-card td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+    .info-card th { color: var(--orange); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; }
+    .info-card td { color: var(--gray); }
+    .related-tools { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-top: 16px; }
+    .related-tool { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 10px; padding: 16px; text-decoration: none; transition: border-color 0.2s; }
+    .related-tool:hover { border-color: var(--orange); }
+    .related-tool .tool-name { color: var(--light); font-weight: 600; font-size: 0.95rem; }
+    .related-tool .tool-desc { color: var(--gray); font-size: 0.8rem; margin-top: 4px; }
+    footer { padding: 40px 0; border-top: 1px solid var(--border); text-align: center; }
+    footer p { color: var(--gray); font-size: 0.85rem; }
+    footer a { color: var(--orange); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <nav><div class="container"><a href="/" class="logo">Built<span>Right</span></a><div class="nav-links"><a href="/blog">Blog</a><a href="/templates">Templates</a><a href="/tools">Tools</a></div></div></nav>
+
+  <section class="hero"><div class="container">
+    <div class="badge">Free Tool</div>
+    <h1>Ohm's Law <span class="highlight">Calculator</span></h1>
+    <p>Enter any two electrical values — voltage, current, resistance, or power — and instantly calculate the remaining values.</p>
+  </div></section>
+
+  <section class="calc-section"><div class="container">
+    <div class="calc-card">
+      <h2><span class="icon">⚡</span> Enter Any Two Values</h2>
+      <p class="help-text">Fill in exactly 2 fields. Leave the others blank to calculate them.</p>
+
+      <div class="diagram">
+        <svg viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="160" cy="160" r="140" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="2"/>
+          <line x1="20" y1="160" x2="300" y2="160" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+          <line x1="160" y1="20" x2="160" y2="300" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+          <!-- V top -->
+          <text x="160" y="65" fill="#F97316" font-family="Inter,sans-serif" font-size="28" font-weight="800" text-anchor="middle">V</text>
+          <text x="160" y="85" fill="#94A3B8" font-family="Inter,sans-serif" font-size="11" text-anchor="middle">Voltage</text>
+          <!-- I left -->
+          <text x="60" y="170" fill="#22C55E" font-family="Inter,sans-serif" font-size="28" font-weight="800" text-anchor="middle">I</text>
+          <text x="60" y="190" fill="#94A3B8" font-family="Inter,sans-serif" font-size="11" text-anchor="middle">Current</text>
+          <!-- R right -->
+          <text x="260" y="170" fill="#3B82F6" font-family="Inter,sans-serif" font-size="28" font-weight="800" text-anchor="middle">R</text>
+          <text x="260" y="190" fill="#94A3B8" font-family="Inter,sans-serif" font-size="11" text-anchor="middle">Resistance</text>
+          <!-- P bottom -->
+          <text x="160" y="260" fill="#A855F7" font-family="Inter,sans-serif" font-size="28" font-weight="800" text-anchor="middle">P</text>
+          <text x="160" y="280" fill="#94A3B8" font-family="Inter,sans-serif" font-size="11" text-anchor="middle">Power</text>
+          <!-- Formulas -->
+          <text x="110" y="120" fill="#94A3B8" font-family="Inter,sans-serif" font-size="10" text-anchor="middle">V = I×R</text>
+          <text x="210" y="120" fill="#94A3B8" font-family="Inter,sans-serif" font-size="10" text-anchor="middle">P = V²/R</text>
+          <text x="110" y="230" fill="#94A3B8" font-family="Inter,sans-serif" font-size="10" text-anchor="middle">P = I²×R</text>
+          <text x="210" y="230" fill="#94A3B8" font-family="Inter,sans-serif" font-size="10" text-anchor="middle">P = V×I</text>
+        </svg>
+      </div>
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Voltage (V) — Volts</label>
+          <input type="number" id="inp-v" placeholder="e.g. 120" step="any">
+        </div>
+        <div class="form-group">
+          <label>Current (I) — Amps</label>
+          <input type="number" id="inp-i" placeholder="e.g. 15" step="any">
+        </div>
+        <div class="form-group">
+          <label>Resistance (R) — Ohms</label>
+          <input type="number" id="inp-r" placeholder="e.g. 8" step="any">
+        </div>
+        <div class="form-group">
+          <label>Power (P) — Watts</label>
+          <input type="number" id="inp-p" placeholder="e.g. 1800" step="any">
+        </div>
+      </div>
+      <button class="btn" onclick="calculate()">Calculate</button>
+      <button class="btn btn-secondary" onclick="clearAll()">Clear All</button>
+
+      <div class="results" id="results">
+        <div class="result-grid">
+          <div class="result-item" id="res-v"><div class="number" id="r-v">—</div><div class="label">Volts (V)</div><div class="detail">Voltage</div></div>
+          <div class="result-item" id="res-i"><div class="number" id="r-i">—</div><div class="label">Amps (I)</div><div class="detail">Current</div></div>
+          <div class="result-item" id="res-r"><div class="number" id="r-r">—</div><div class="label">Ohms (Ω)</div><div class="detail">Resistance</div></div>
+          <div class="result-item" id="res-p"><div class="number" id="r-p">—</div><div class="label">Watts (P)</div><div class="detail">Power</div></div>
+        </div>
+        <div class="waste-note" id="formula-used"><strong>Formula used:</strong> <span id="formula-text"></span></div>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="info-section"><div class="container">
+    <div class="info-card">
+      <h2>Ohm's Law Formulas — Complete Reference</h2>
+      <p>Ohm's Law defines the relationship between voltage (V), current (I), resistance (R), and power (P) in electrical circuits. If you know any two values, you can calculate the other two.</p>
+
+      <h3>Core Formulas</h3>
+      <table>
+        <tr><th>Find</th><th>Formula 1</th><th>Formula 2</th><th>Formula 3</th></tr>
+        <tr><td>Voltage (V)</td><td>V = I × R</td><td>V = P ÷ I</td><td>V = √(P × R)</td></tr>
+        <tr><td>Current (I)</td><td>I = V ÷ R</td><td>I = P ÷ V</td><td>I = √(P ÷ R)</td></tr>
+        <tr><td>Resistance (R)</td><td>R = V ÷ I</td><td>R = V² ÷ P</td><td>R = P ÷ I²</td></tr>
+        <tr><td>Power (P)</td><td>P = V × I</td><td>P = I² × R</td><td>P = V² ÷ R</td></tr>
+      </table>
+
+      <h3>Common Electrical Values Reference</h3>
+      <table>
+        <tr><th>Application</th><th>Voltage</th><th>Typical Amps</th><th>Watts</th></tr>
+        <tr><td>LED bulb</td><td>120V</td><td>0.08A</td><td>10W</td></tr>
+        <tr><td>Phone charger</td><td>5V</td><td>2A</td><td>10W</td></tr>
+        <tr><td>USB-C fast charge</td><td>20V</td><td>3A</td><td>60W</td></tr>
+        <tr><td>Standard outlet (US)</td><td>120V</td><td>15A max</td><td>1,800W</td></tr>
+        <tr><td>Kitchen/bath circuit</td><td>120V</td><td>20A max</td><td>2,400W</td></tr>
+        <tr><td>Dryer / range outlet</td><td>240V</td><td>30A</td><td>7,200W</td></tr>
+        <tr><td>EV charger (Level 2)</td><td>240V</td><td>40A</td><td>9,600W</td></tr>
+        <tr><td>Microwave</td><td>120V</td><td>8-12A</td><td>1,000-1,500W</td></tr>
+        <tr><td>Space heater</td><td>120V</td><td>12.5A</td><td>1,500W</td></tr>
+        <tr><td>Car battery</td><td>12V</td><td>varies</td><td>varies</td></tr>
+      </table>
+
+      <h3>NEC 80% Rule for Continuous Loads</h3>
+      <p>The National Electrical Code requires that continuous loads (running 3+ hours) must not exceed 80% of the breaker's rated capacity. This means:</p>
+      <ul>
+        <li><strong>15A breaker</strong> → 12A continuous → 1,440W max at 120V</li>
+        <li><strong>20A breaker</strong> → 16A continuous → 1,920W max at 120V</li>
+        <li><strong>30A breaker</strong> → 24A continuous → 5,760W max at 240V</li>
+        <li><strong>50A breaker</strong> → 40A continuous → 9,600W max at 240V</li>
+      </ul>
+    </div>
+
+    <div class="info-card">
+      <h2>Related Tools</h2>
+      <div class="related-tools">
+        <a href="/tools/concrete-calculator" class="related-tool">
+          <div class="tool-name">🧱 Concrete Calculator</div>
+          <div class="tool-desc">Calculate cubic yards and bags needed</div>
+        </a>
+        <a href="/tools/concrete-slab-calculator" class="related-tool">
+          <div class="tool-name">🏗️ Concrete Slab Calculator</div>
+          <div class="tool-desc">Slabs with rebar estimation</div>
+        </a>
+        <a href="/tools/shingle-calculator" class="related-tool">
+          <div class="tool-name">🏠 Shingle Calculator</div>
+          <div class="tool-desc">Roofing materials estimator</div>
+        </a>
+        <a href="/tools/mortar-calculator" class="related-tool">
+          <div class="tool-name">🧱 Mortar Calculator</div>
+          <div class="tool-desc">Mortar and sand estimation</div>
+        </a>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <h2>Related Articles</h2>
+      <ul>
+        <li><a href="/blog/electrical-basics-for-contractors" style="color:var(--orange);">Electrical Basics Every Contractor Should Know</a></li>
+        <li><a href="/blog/wire-gauge-ampacity-chart" style="color:var(--orange);">Wire Gauge & Ampacity Chart — Complete Guide</a></li>
+        <li><a href="/blog/how-to-size-a-circuit-breaker" style="color:var(--orange);">How to Size a Circuit Breaker (NEC 2026)</a></li>
+      </ul>
+    </div>
+  </div></section>
+
+  <!-- Email Capture CTA -->
+  <div id="email-cta" style="max-width:720px;margin:40px auto;padding:40px 32px;background:linear-gradient(135deg,#1e293b 0%,#0f172a 100%);border:1px solid rgba(249,115,22,0.3);border-radius:16px;text-align:center;">
+    <div style="font-size:2rem;margin-bottom:12px;">📋</div>
+    <h3 style="font-family:Inter,-apple-system,sans-serif;font-size:1.4rem;font-weight:700;color:#f8fafc;margin-bottom:8px;">Get the Free Contractor Toolkit</h3>
+    <p style="font-family:Inter,-apple-system,sans-serif;color:#94a3b8;font-size:0.95rem;margin-bottom:24px;max-width:480px;margin-left:auto;margin-right:auto;">Get our <strong style="color:#f97316;">free spreadsheet templates</strong> — invoice, estimate, job costing &amp; profit tracker. Used by 500+ contractors.</p>
+    <form id="capture-form" onsubmit="return handleCapture(event)" style="display:flex;gap:10px;max-width:420px;margin:0 auto;flex-wrap:wrap;justify-content:center;">
+      <input type="email" id="capture-email" placeholder="you@company.com" required style="flex:1;min-width:220px;padding:12px 16px;border-radius:8px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.05);color:#f8fafc;font-size:0.95rem;font-family:Inter,-apple-system,sans-serif;outline:none;">
+      <button type="submit" style="padding:12px 24px;background:#f97316;color:#fff;border:none;border-radius:8px;font-weight:600;font-size:0.95rem;cursor:pointer;font-family:Inter,-apple-system,sans-serif;white-space:nowrap;">Send Me the Templates</button>
+    </form>
+    <p id="capture-msg" style="font-family:Inter,-apple-system,sans-serif;color:#22c55e;font-size:0.85rem;margin-top:12px;display:none;"></p>
+    <p style="font-family:Inter,-apple-system,sans-serif;color:#64748b;font-size:0.75rem;margin-top:12px;">No spam. Unsubscribe anytime.</p>
+  </div>
+
+  <footer><div class="container"><p>© 2026 <a href="/">BuiltRight Academy</a>. Free tools for tradespeople who mean business.</p></div></footer>
+
+  <script>
+    function fmt(n) {
+      if (n === null || n === undefined || isNaN(n) || !isFinite(n)) return '—';
+      if (Math.abs(n) >= 1e6) return n.toExponential(2);
+      if (Math.abs(n) >= 100) return parseFloat(n.toFixed(1)).toLocaleString();
+      if (Math.abs(n) >= 1) return parseFloat(n.toFixed(3)).toString();
+      if (Math.abs(n) >= 0.001) return parseFloat(n.toFixed(4)).toString();
+      return n.toExponential(2);
+    }
+
+    function calculate() {
+      const vIn = document.getElementById('inp-v').value;
+      const iIn = document.getElementById('inp-i').value;
+      const rIn = document.getElementById('inp-r').value;
+      const pIn = document.getElementById('inp-p').value;
+
+      let v = vIn !== '' ? parseFloat(vIn) : null;
+      let i = iIn !== '' ? parseFloat(iIn) : null;
+      let r = rIn !== '' ? parseFloat(rIn) : null;
+      let p = pIn !== '' ? parseFloat(pIn) : null;
+
+      const filled = [v,i,r,p].filter(x => x !== null).length;
+      if (filled < 2) return alert('Please enter at least 2 values.');
+      if (filled > 2) return alert('Please enter exactly 2 values. Leave the others blank.');
+
+      let formulaText = '';
+      const computed = { v: v === null, i: i === null, r: r === null, p: p === null };
+
+      // V and I known
+      if (v !== null && i !== null) {
+        r = v / i; p = v * i;
+        formulaText = 'R = V ÷ I = ' + fmt(r) + 'Ω, P = V × I = ' + fmt(p) + 'W';
+      }
+      // V and R known
+      else if (v !== null && r !== null) {
+        i = v / r; p = v * v / r;
+        formulaText = 'I = V ÷ R = ' + fmt(i) + 'A, P = V² ÷ R = ' + fmt(p) + 'W';
+      }
+      // V and P known
+      else if (v !== null && p !== null) {
+        i = p / v; r = v * v / p;
+        formulaText = 'I = P ÷ V = ' + fmt(i) + 'A, R = V² ÷ P = ' + fmt(r) + 'Ω';
+      }
+      // I and R known
+      else if (i !== null && r !== null) {
+        v = i * r; p = i * i * r;
+        formulaText = 'V = I × R = ' + fmt(v) + 'V, P = I² × R = ' + fmt(p) + 'W';
+      }
+      // I and P known
+      else if (i !== null && p !== null) {
+        v = p / i; r = p / (i * i);
+        formulaText = 'V = P ÷ I = ' + fmt(v) + 'V, R = P ÷ I² = ' + fmt(r) + 'Ω';
+      }
+      // R and P known
+      else if (r !== null && p !== null) {
+        v = Math.sqrt(p * r); i = Math.sqrt(p / r);
+        formulaText = 'V = √(P×R) = ' + fmt(v) + 'V, I = √(P÷R) = ' + fmt(i) + 'A';
+      }
+
+      document.getElementById('r-v').textContent = fmt(v);
+      document.getElementById('r-i').textContent = fmt(i);
+      document.getElementById('r-r').textContent = fmt(r);
+      document.getElementById('r-p').textContent = fmt(p);
+      document.getElementById('formula-text').textContent = formulaText;
+
+      ['v','i','r','p'].forEach(k => {
+        document.getElementById('res-' + k).className = 'result-item' + (computed[k] ? ' computed' : '');
+      });
+
+      document.getElementById('results').classList.add('show');
+      document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function clearAll() {
+      ['inp-v','inp-i','inp-r','inp-p'].forEach(id => document.getElementById(id).value = '');
+      document.getElementById('results').classList.remove('show');
+    }
+
+    function handleCapture(e) {
+      e.preventDefault();
+      var em = document.getElementById("capture-email").value;
+      var msg = document.getElementById("capture-msg");
+      var btn = e.target.querySelector("button");
+      btn.textContent = "Sending..."; btn.disabled = true;
+      fetch("/api/subscribe", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email: em, source: window.location.pathname, lead_magnet: "contractor-toolkit" }) })
+        .then(function(r) { return r.json() })
+        .then(function(d) { msg.textContent = "\u2705 Check your inbox! Templates are on the way."; msg.style.display = "block"; document.getElementById("capture-form").style.display = "none" })
+        .catch(function() { msg.textContent = "Something went wrong. Try again."; msg.style.color = "#ef4444"; msg.style.display = "block"; btn.textContent = "Send Me the Templates"; btn.disabled = false });
+      return false;
+    }
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
+</body>
+</html>
