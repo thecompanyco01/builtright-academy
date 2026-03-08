@@ -518,6 +518,14 @@
   <p id="capture-msg" style="font-family:Inter,-apple-system,sans-serif;color:#22c55e;font-size:0.85rem;margin-top:12px;display:none;"></p>
   <p style="font-family:Inter,-apple-system,sans-serif;color:#64748b;font-size:0.75rem;margin-top:12px;">No spam. Unsubscribe anytime.</p>
 </div>
+<!-- pro-bundle-cta -->
+<div style="max-width:720px;margin:24px auto 40px;padding:32px;background:linear-gradient(135deg,rgba(249,115,22,0.08) 0%,rgba(249,115,22,0.02) 100%);border:2px solid rgba(249,115,22,0.3);border-radius:16px;text-align:center;">
+  <p style="font-family:Inter,-apple-system,sans-serif;font-size:1.1rem;font-weight:700;color:#f8fafc;margin-bottom:8px;">⚡ Want the complete toolkit?</p>
+  <p style="font-family:Inter,-apple-system,sans-serif;color:#94a3b8;font-size:0.9rem;margin-bottom:20px;">Invoice + Estimate + Job Costing + P&L Tracker — everything you need to run your business like a pro.</p>
+  <a href="https://buy.stripe.com/cNi6oI87ta3X7Q7bTZaMU04" target="_blank" style="display:inline-block;padding:14px 32px;background:#F97316;color:#fff;font-family:Inter,-apple-system,sans-serif;font-weight:700;font-size:1rem;border-radius:8px;text-decoration:none;">Get Pro Bundle — $29</a>
+  <p style="font-family:Inter,-apple-system,sans-serif;color:#64748b;font-size:0.75rem;margin-top:12px;">One-time payment. Instant download. No subscription.</p>
+</div>
+
 <script>
 function handleCapture(e){e.preventDefault();var em=document.getElementById("capture-email").value;var msg=document.getElementById("capture-msg");var btn=e.target.querySelector("button");btn.textContent="Sending...";btn.disabled=true;fetch("/api/subscribe",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:em,source:window.location.pathname,lead_magnet:"contractor-toolkit"})}).then(function(r){return r.json()}).then(function(d){msg.textContent="\u2705 Check your inbox! Templates are on the way.";msg.style.display="block";document.getElementById("capture-form").style.display="none"}).catch(function(){msg.textContent="Something went wrong. Try again.";msg.style.color="#ef4444";msg.style.display="block";btn.textContent="Get Free Templates";btn.disabled=false});return false;}
 </script>
