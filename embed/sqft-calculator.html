@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Square Footage Calculator Widget — BuiltRight Academy</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:transparent;color:#1a1a2e}
+.calc-widget{max-width:400px;background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:24px;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+.calc-widget h2{font-size:18px;margin-bottom:16px;color:#1a1a2e;display:flex;align-items:center;gap:8px}
+.form-group{margin-bottom:14px}
+.form-group label{display:block;font-size:13px;font-weight:600;color:#475569;margin-bottom:4px}
+.form-group input,.form-group select{width:100%;padding:10px 12px;border:1px solid #cbd5e1;border-radius:8px;font-size:15px;transition:border .2s}
+.form-group input:focus,.form-group select:focus{outline:none;border-color:#f97316}
+.row{display:flex;gap:10px}
+.row .form-group{flex:1}
+.btn{width:100%;padding:12px;background:#f97316;color:#fff;border:none;border-radius:8px;font-size:15px;font-weight:600;cursor:pointer;transition:background .2s}
+.btn:hover{background:#ea580c}
+.result{margin-top:16px;padding:16px;background:#fff7ed;border-radius:8px;border:1px solid #fed7aa;display:none}
+.result h3{font-size:14px;color:#9a3412;margin-bottom:8px}
+.result .amount{font-size:28px;font-weight:700;color:#ea580c}
+.result .unit{font-size:14px;color:#78716c}
+.result .details{margin-top:8px;font-size:13px;color:#57534e;line-height:1.5}
+.tabs{display:flex;gap:4px;margin-bottom:16px}
+.tab{flex:1;padding:8px;border:1px solid #cbd5e1;border-radius:8px;background:#f8fafc;text-align:center;cursor:pointer;font-size:13px;font-weight:600;color:#475569}
+.tab.active{background:#f97316;color:#fff;border-color:#f97316}
+.shape-form{display:none}
+.shape-form.active{display:block}
+.powered{margin-top:12px;text-align:center;font-size:11px;color:#94a3b8}
+.powered a{color:#f97316;text-decoration:none;font-weight:600}
+</style>
+</head>
+<body>
+<div class="calc-widget">
+  <h2>📐 Square Footage Calculator</h2>
+  <div class="tabs">
+    <div class="tab active" onclick="setShape('rect')">Rectangle</div>
+    <div class="tab" onclick="setShape('circle')">Circle</div>
+    <div class="tab" onclick="setShape('triangle')">Triangle</div>
+  </div>
+  <div class="shape-form active" id="rect-form">
+    <div class="row">
+      <div class="form-group"><label>Length (ft)</label><input type="number" id="r-length" placeholder="20" step="0.1"></div>
+      <div class="form-group"><label>Width (ft)</label><input type="number" id="r-width" placeholder="15" step="0.1"></div>
+    </div>
+  </div>
+  <div class="shape-form" id="circle-form">
+    <div class="form-group"><label>Radius (ft)</label><input type="number" id="c-radius" placeholder="10" step="0.1"></div>
+  </div>
+  <div class="shape-form" id="triangle-form">
+    <div class="row">
+      <div class="form-group"><label>Base (ft)</label><input type="number" id="t-base" placeholder="20" step="0.1"></div>
+      <div class="form-group"><label>Height (ft)</label><input type="number" id="t-height" placeholder="10" step="0.1"></div>
+    </div>
+  </div>
+  <button class="btn" onclick="calculate()">Calculate</button>
+  <div class="result" id="result">
+    <h3>Area:</h3>
+    <div><span class="amount" id="sqft">—</span> <span class="unit">sq ft</span></div>
+    <div class="details" id="details"></div>
+  </div>
+  <div class="powered">Powered by <a href="https://builtright-academy.vercel.app/tools/square-footage-calculator.html" target="_blank" rel="noopener">BuiltRight Academy</a></div>
+</div>
+<script>
+let shape='rect';
+function setShape(s){
+  shape=s;
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.shape-form').forEach(f=>f.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById(s+'-form').classList.add('active');
+}
+function calculate(){
+  let sqft=0,desc='';
+  if(shape==='rect'){
+    const l=parseFloat(document.getElementById('r-length').value);
+    const w=parseFloat(document.getElementById('r-width').value);
+    if(!l||!w){alert('Enter length and width');return}
+    sqft=l*w;desc=`${l} ft × ${w} ft`;
+  }else if(shape==='circle'){
+    const r=parseFloat(document.getElementById('c-radius').value);
+    if(!r){alert('Enter radius');return}
+    sqft=Math.PI*r*r;desc=`π × ${r}² ft`;
+  }else{
+    const b=parseFloat(document.getElementById('t-base').value);
+    const h=parseFloat(document.getElementById('t-height').value);
+    if(!b||!h){alert('Enter base and height');return}
+    sqft=0.5*b*h;desc=`½ × ${b} ft × ${h} ft`;
+  }
+  const sqm=sqft*0.0929;
+  const acres=sqft/43560;
+  document.getElementById('sqft').textContent=sqft.toFixed(1);
+  document.getElementById('details').innerHTML=
+    `${desc}<br>`+
+    `= <strong>${sqm.toFixed(2)} m²</strong> | <strong>${acres.toFixed(4)} acres</strong>`;
+  document.getElementById('result').style.display='block';
+}
+</script>
+</body>
+</html>
