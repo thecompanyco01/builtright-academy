@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Concrete Slab Calculator — Yards, Bags, Rebar &amp; Cost | BuiltRight Academy</title>
+  <meta name="description" content="Free concrete slab calculator. Enter length, width, and thickness to get cubic yards, bags needed (60lb &amp; 80lb), rebar requirements, and cost estimate. Supports feet and meters.">
+  <meta name="keywords" content="concrete slab calculator, how much concrete for a slab, concrete yardage calculator, rebar calculator, slab cost estimator">
+  <link rel="canonical" href="https://builtright-academy.vercel.app/tools/concrete-slab-calculator">
+  <meta property="og:title" content="Concrete Slab Calculator — Yards, Bags, Rebar &amp; Cost">
+  <meta property="og:description" content="Calculate concrete for any slab: cubic yards, bags, rebar, and cost. Free instant results.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Concrete Slab Calculator",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "description": "Calculate cubic yards, bags of concrete, rebar, and cost for concrete slabs. Supports imperial and metric units."
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How thick should a concrete slab be?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Standard residential slabs are 4 inches thick for patios and sidewalks, 5-6 inches for driveways and garage floors, and 8+ inches for heavy equipment or commercial use. Thicker slabs cost more but handle heavier loads and last longer."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much does a 10x10 concrete slab cost?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A 10×10 ft slab at 4 inches thick requires about 1.24 cubic yards of concrete. Ready-mix costs $155–$205 for the concrete alone. With labor, forms, and finishing, total installed cost runs $800–$1,500 depending on your area and site prep needed."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need rebar in a concrete slab?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Rebar is recommended for driveways, garage floors, and any slab that will bear significant weight. Standard spacing is #4 rebar on 18-inch centers in both directions. For simple patios and sidewalks, wire mesh or fiber reinforcement may be sufficient."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How many bags of concrete for a slab?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It depends on slab size and bag size. An 80-lb bag yields about 0.6 cubic feet, and a 60-lb bag yields about 0.45 cubic feet. For a 10×10×4in slab (33.3 cu ft), you'd need about 56 bags of 80-lb or 74 bags of 60-lb concrete. For slabs over 1 cubic yard, ready-mix delivery is more cost-effective."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long does it take for a concrete slab to cure?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Concrete reaches about 70% strength in 7 days and full design strength (typically 4,000 PSI) in 28 days. You can walk on it after 24-48 hours and drive on it after 7 days. Keep it moist for the first 7 days for best results — this is called wet curing."
+        }
+      }
+    ]
+  }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root { --orange: #F97316; --orange-dark: #EA580C; --darker: #0F0F1A; --dark-card: #1A1A2E; --gray: #94A3B8; --light: #F8FAFC; --green: #22C55E; --border: rgba(255,255,255,0.08); }
+    body { font-family: 'Inter', -apple-system, sans-serif; background: var(--darker); color: var(--light); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+    nav { padding: 20px 0; border-bottom: 1px solid var(--border); }
+    nav .container { display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.3rem; color: var(--orange); text-decoration: none; letter-spacing: -0.5px; }
+    .logo span { color: var(--light); }
+    .nav-links a { color: var(--gray); text-decoration: none; font-size: 0.9rem; margin-left: 24px; }
+    .nav-links a:hover { color: var(--light); }
+    .hero { padding: 48px 0 32px; text-align: center; }
+    .hero .badge { display: inline-block; background: rgba(249,115,22,0.1); border: 1px solid rgba(249,115,22,0.3); color: var(--orange); font-size: 0.8rem; font-weight: 600; padding: 6px 16px; border-radius: 100px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .hero h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 800; line-height: 1.15; letter-spacing: -1px; margin-bottom: 12px; }
+    .hero h1 .highlight { color: var(--orange); }
+    .hero p { color: var(--gray); font-size: 1.05rem; max-width: 600px; margin: 0 auto; }
+    .calc-section { padding: 24px 0 60px; }
+    .calc-card { background: var(--dark-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; margin-bottom: 24px; }
+    .calc-card h2 { font-size: 1.2rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+    .calc-card h2 .icon { font-size: 1.4rem; }
+    .tabs { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
+    .tab { background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: var(--gray); padding: 10px 20px; border-radius: 8px; cursor: pointer; font-size: 0.9rem; font-weight: 500; transition: all 0.2s; }
+    .tab:hover { border-color: var(--orange); color: var(--light); }
+    .tab.active { background: rgba(249,115,22,0.15); border-color: var(--orange); color: var(--orange); }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 500px) { .form-grid { grid-template-columns: 1fr; } }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group.full { grid-column: 1 / -1; }
+    label { font-size: 0.85rem; font-weight: 600; color: var(--gray); text-transform: uppercase; letter-spacing: 0.5px; }
+    input, select { background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: var(--light); padding: 12px 16px; border-radius: 8px; font-size: 1rem; font-family: inherit; outline: none; transition: border-color 0.2s; }
+    input:focus, select:focus { border-color: var(--orange); }
+    select option { background: var(--darker); }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: var(--orange); color: #fff; font-weight: 700; font-size: 1rem; padding: 14px 28px; border-radius: 10px; border: none; cursor: pointer; width: 100%; margin-top: 16px; transition: background 0.2s; }
+    .btn:hover { background: var(--orange-dark); }
+    .results { display: none; margin-top: 24px; }
+    .results.show { display: block; }
+    .result-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; }
+    .result-item { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 12px; padding: 20px; text-align: center; }
+    .result-item .number { font-size: 1.8rem; font-weight: 800; color: var(--orange); letter-spacing: -1px; }
+    .result-item .label { font-size: 0.8rem; color: var(--gray); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .result-item .detail { font-size: 0.85rem; color: var(--light); margin-top: 8px; opacity: 0.8; }
+    .rebar-results { margin-top: 16px; padding: 20px; background: rgba(34,197,94,0.05); border: 1px solid rgba(34,197,94,0.2); border-radius: 12px; }
+    .rebar-results h3 { color: var(--green); font-size: 1rem; margin-bottom: 12px; }
+    .rebar-results .rebar-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; }
+    .rebar-results .rebar-item { text-align: center; }
+    .rebar-results .rebar-item .number { font-size: 1.4rem; font-weight: 800; color: var(--green); }
+    .rebar-results .rebar-item .label { font-size: 0.75rem; color: var(--gray); margin-top: 4px; text-transform: uppercase; }
+    .waste-note { background: rgba(249,115,22,0.08); border: 1px solid rgba(249,115,22,0.2); border-radius: 10px; padding: 16px 20px; margin-top: 20px; font-size: 0.9rem; color: var(--gray); }
+    .waste-note strong { color: var(--orange); }
+    .checkbox-group { display: flex; align-items: center; gap: 10px; margin-top: 8px; }
+    .checkbox-group input[type="checkbox"] { width: 20px; height: 20px; accent-color: var(--orange); }
+    .checkbox-group label { text-transform: none; font-size: 0.95rem; color: var(--light); }
+    .info-section { padding: 40px 0 60px; }
+    .info-card { background: var(--dark-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; margin-bottom: 24px; }
+    .info-card h2 { font-size: 1.4rem; font-weight: 700; margin-bottom: 16px; }
+    .info-card h3 { font-size: 1.1rem; font-weight: 600; margin: 20px 0 8px; color: var(--orange); }
+    .info-card p { color: var(--gray); margin-bottom: 12px; line-height: 1.8; }
+    .info-card ul, .info-card ol { color: var(--gray); margin-left: 20px; margin-bottom: 12px; }
+    .info-card li { margin-bottom: 6px; }
+    .info-card table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+    .info-card th, .info-card td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+    .info-card th { color: var(--orange); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; }
+    .info-card td { color: var(--gray); }
+    .related-tools { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-top: 16px; }
+    .related-tool { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 10px; padding: 16px; text-decoration: none; transition: border-color 0.2s; }
+    .related-tool:hover { border-color: var(--orange); }
+    .related-tool .tool-name { color: var(--light); font-weight: 600; font-size: 0.95rem; }
+    .related-tool .tool-desc { color: var(--gray); font-size: 0.8rem; margin-top: 4px; }
+    footer { padding: 40px 0; border-top: 1px solid var(--border); text-align: center; }
+    footer p { color: var(--gray); font-size: 0.85rem; }
+    footer a { color: var(--orange); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <nav><div class="container"><a href="/" class="logo">Built<span>Right</span></a><div class="nav-links"><a href="/blog">Blog</a><a href="/templates">Templates</a><a href="/tools">Tools</a></div></div></nav>
+
+  <section class="hero"><div class="container">
+    <div class="badge">Free Tool</div>
+    <h1>Concrete Slab <span class="highlight">Calculator</span></h1>
+    <p>Calculate cubic yards, bags, rebar, and cost for any concrete slab. Switch between feet and meters instantly.</p>
+  </div></section>
+
+  <section class="calc-section"><div class="container">
+    <div class="calc-card">
+      <h2><span class="icon">🏗️</span> Slab Dimensions</h2>
+
+      <div class="tabs" id="unit-tabs">
+        <div class="tab active" data-unit="ft" onclick="setUnit('ft')">Feet (ft)</div>
+        <div class="tab" data-unit="m" onclick="setUnit('m')">Meters (m)</div>
+      </div>
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label id="lbl-length">Length (ft)</label>
+          <input type="number" id="slab-length" placeholder="e.g. 20" step="any">
+        </div>
+        <div class="form-group">
+          <label id="lbl-width">Width (ft)</label>
+          <input type="number" id="slab-width" placeholder="e.g. 10" step="any">
+        </div>
+        <div class="form-group">
+          <label id="lbl-thick">Thickness (inches)</label>
+          <input type="number" id="slab-thick" placeholder="e.g. 4" step="any">
+        </div>
+        <div class="form-group">
+          <label>Cost per Yard ($)</label>
+          <input type="number" id="slab-cost" placeholder="145" value="145" step="any">
+        </div>
+        <div class="form-group full">
+          <div class="checkbox-group">
+            <input type="checkbox" id="rebar-check">
+            <label for="rebar-check">Include rebar calculation</label>
+          </div>
+        </div>
+        <div class="form-group" id="rebar-spacing-group" style="display:none">
+          <label>Rebar Spacing (inches OC)</label>
+          <select id="rebar-spacing">
+            <option value="12">12" on center</option>
+            <option value="16">16" on center</option>
+            <option value="18" selected>18" on center</option>
+            <option value="24">24" on center</option>
+          </select>
+        </div>
+        <div class="form-group" id="rebar-size-group" style="display:none">
+          <label>Rebar Size</label>
+          <select id="rebar-size">
+            <option value="3">#3 (3/8")</option>
+            <option value="4" selected>#4 (1/2")</option>
+            <option value="5">#5 (5/8")</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn" onclick="calcSlab()">Calculate Concrete</button>
+
+      <div class="results" id="results">
+        <div class="result-grid">
+          <div class="result-item"><div class="number" id="r-yards">—</div><div class="label">Cubic Yards</div><div class="detail" id="r-cuft"></div></div>
+          <div class="result-item"><div class="number" id="r-cum">—</div><div class="label">Cubic Meters</div><div class="detail" id="r-sqft"></div></div>
+          <div class="result-item"><div class="number" id="r-bags80">—</div><div class="label">80-lb Bags</div><div class="detail">≈ 0.6 cu ft each</div></div>
+          <div class="result-item"><div class="number" id="r-bags60">—</div><div class="label">60-lb Bags</div><div class="detail">≈ 0.45 cu ft each</div></div>
+          <div class="result-item"><div class="number" id="r-cost">—</div><div class="label">Ready-Mix Cost</div><div class="detail" id="r-cost-detail">at $145/yd³</div></div>
+          <div class="result-item"><div class="number" id="r-weight">—</div><div class="label">Total Weight</div><div class="detail">approx. lbs</div></div>
+        </div>
+
+        <div class="rebar-results" id="rebar-results" style="display:none">
+          <h3>🔩 Rebar Estimate</h3>
+          <div class="rebar-grid">
+            <div class="rebar-item"><div class="number" id="rb-pieces">—</div><div class="label">Total Pieces (20ft)</div></div>
+            <div class="rebar-item"><div class="number" id="rb-linear">—</div><div class="label">Linear Feet</div></div>
+            <div class="rebar-item"><div class="number" id="rb-ties">—</div><div class="label">Tie Wires</div></div>
+            <div class="rebar-item"><div class="number" id="rb-chairs">—</div><div class="label">Rebar Chairs</div></div>
+          </div>
+        </div>
+
+        <div class="waste-note"><strong>Pro Tip:</strong> Add <strong>5–10% extra</strong> for waste and over-excavation. For ready-mix, round up to the nearest half-yard — it's cheaper than a short-load callback.</div>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="info-section"><div class="container">
+    <div class="info-card">
+      <h2>Common Slab Thicknesses Reference</h2>
+      <table>
+        <tr><th>Application</th><th>Thickness</th><th>PSI Strength</th><th>Rebar?</th></tr>
+        <tr><td>Sidewalk / Pathway</td><td>4"</td><td>3,000 PSI</td><td>Wire mesh optional</td></tr>
+        <tr><td>Patio</td><td>4"</td><td>3,000 PSI</td><td>Wire mesh recommended</td></tr>
+        <tr><td>Shed Floor</td><td>4"</td><td>3,000 PSI</td><td>Wire mesh</td></tr>
+        <tr><td>Residential Driveway</td><td>5–6"</td><td>3,500 PSI</td><td>#4 rebar @ 18" OC</td></tr>
+        <tr><td>Garage Floor</td><td>6"</td><td>3,500 PSI</td><td>#4 rebar @ 18" OC</td></tr>
+        <tr><td>RV Pad / Heavy Vehicle</td><td>6–8"</td><td>4,000 PSI</td><td>#4 rebar @ 12" OC</td></tr>
+        <tr><td>Commercial Floor</td><td>6–8"</td><td>4,000+ PSI</td><td>#5 rebar @ 12" OC</td></tr>
+        <tr><td>Equipment Pad</td><td>8–12"</td><td>4,000+ PSI</td><td>Engineered design</td></tr>
+      </table>
+    </div>
+
+    <div class="info-card">
+      <h2>Concrete Slab Cost Breakdown (2026)</h2>
+      <table>
+        <tr><th>Component</th><th>Cost Range</th><th>Notes</th></tr>
+        <tr><td>Concrete (ready-mix)</td><td>$125–$165/yd³</td><td>Delivered price, standard mix</td></tr>
+        <tr><td>Short-load surcharge</td><td>$50–$100</td><td>Orders under 5 yards</td></tr>
+        <tr><td>Pump truck</td><td>$150–$300</td><td>If pour site is 18+ ft from truck</td></tr>
+        <tr><td>Rebar (#4)</td><td>$0.60–$0.90/ft</td><td>20-ft sticks</td></tr>
+        <tr><td>Wire mesh</td><td>$0.15–$0.25/sq ft</td><td>6×6 W1.4/W1.4</td></tr>
+        <tr><td>Form lumber</td><td>$3–$6/linear ft</td><td>2×4 or 2×6 stakes + boards</td></tr>
+        <tr><td>Gravel base</td><td>$15–$25/ton</td><td>4" compacted base recommended</td></tr>
+        <tr><td>Labor (finish)</td><td>$3–$8/sq ft</td><td>Forming, pouring, finishing</td></tr>
+      </table>
+    </div>
+
+    <div class="info-card">
+      <h2>Related Tools</h2>
+      <div class="related-tools">
+        <a href="/tools/concrete-calculator" class="related-tool">
+          <div class="tool-name">🧱 Concrete Calculator</div>
+          <div class="tool-desc">Slabs, footings, columns &amp; stairs</div>
+        </a>
+        <a href="/tools/mortar-calculator" class="related-tool">
+          <div class="tool-name">🧱 Mortar Calculator</div>
+          <div class="tool-desc">Mortar bags &amp; sand estimation</div>
+        </a>
+        <a href="/tools/shingle-calculator" class="related-tool">
+          <div class="tool-name">🏠 Shingle Calculator</div>
+          <div class="tool-desc">Roofing materials estimator</div>
+        </a>
+        <a href="/tools/ohms-law-calculator" class="related-tool">
+          <div class="tool-name">⚡ Ohm's Law Calculator</div>
+          <div class="tool-desc">Voltage, current, resistance, power</div>
+        </a>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <h2>Related Articles</h2>
+      <ul>
+        <li><a href="/blog/how-to-pour-a-concrete-slab" style="color:var(--orange);">How to Pour a Concrete Slab — Step-by-Step Guide</a></li>
+        <li><a href="/blog/concrete-curing-guide" style="color:var(--orange);">Concrete Curing: When Can You Walk On &amp; Drive On New Concrete?</a></li>
+        <li><a href="/blog/rebar-vs-wire-mesh" style="color:var(--orange);">Rebar vs. Wire Mesh: Which Reinforcement Is Right for Your Slab?</a></li>
+        <li><a href="/blog/concrete-mix-ratios-explained" style="color:var(--orange);">Concrete Mix Ratios Explained (3000 vs 4000 vs 5000 PSI)</a></li>
+      </ul>
+    </div>
+  </div></section>
+
+  <!-- Email Capture CTA -->
+  <div id="email-cta" style="max-width:720px;margin:40px auto;padding:40px 32px;background:linear-gradient(135deg,#1e293b 0%,#0f172a 100%);border:1px solid rgba(249,115,22,0.3);border-radius:16px;text-align:center;">
+    <div style="font-size:2rem;margin-bottom:12px;">📋</div>
+    <h3 style="font-family:Inter,-apple-system,sans-serif;font-size:1.4rem;font-weight:700;color:#f8fafc;margin-bottom:8px;">Get the Free Contractor Toolkit</h3>
+    <p style="font-family:Inter,-apple-system,sans-serif;color:#94a3b8;font-size:0.95rem;margin-bottom:24px;max-width:480px;margin-left:auto;margin-right:auto;">Get our <strong style="color:#f97316;">free spreadsheet templates</strong> — invoice, estimate, job costing &amp; profit tracker. Used by 500+ contractors.</p>
+    <form id="capture-form" onsubmit="return handleCapture(event)" style="display:flex;gap:10px;max-width:420px;margin:0 auto;flex-wrap:wrap;justify-content:center;">
+      <input type="email" id="capture-email" placeholder="you@company.com" required style="flex:1;min-width:220px;padding:12px 16px;border-radius:8px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.05);color:#f8fafc;font-size:0.95rem;font-family:Inter,-apple-system,sans-serif;outline:none;">
+      <button type="submit" style="padding:12px 24px;background:#f97316;color:#fff;border:none;border-radius:8px;font-weight:600;font-size:0.95rem;cursor:pointer;font-family:Inter,-apple-system,sans-serif;white-space:nowrap;">Send Me the Templates</button>
+    </form>
+    <p id="capture-msg" style="font-family:Inter,-apple-system,sans-serif;color:#22c55e;font-size:0.85rem;margin-top:12px;display:none;"></p>
+    <p style="font-family:Inter,-apple-system,sans-serif;color:#64748b;font-size:0.75rem;margin-top:12px;">No spam. Unsubscribe anytime.</p>
+  </div>
+
+  <footer><div class="container"><p>© 2026 <a href="/">BuiltRight Academy</a>. Free tools for tradespeople who mean business.</p></div></footer>
+
+  <script>
+    let currentUnit = 'ft';
+
+    function setUnit(u) {
+      currentUnit = u;
+      document.querySelectorAll('#unit-tabs .tab').forEach(t => {
+        t.classList.toggle('active', t.dataset.unit === u);
+      });
+      if (u === 'ft') {
+        document.getElementById('lbl-length').textContent = 'Length (ft)';
+        document.getElementById('lbl-width').textContent = 'Width (ft)';
+        document.getElementById('lbl-thick').textContent = 'Thickness (inches)';
+      } else {
+        document.getElementById('lbl-length').textContent = 'Length (m)';
+        document.getElementById('lbl-width').textContent = 'Width (m)';
+        document.getElementById('lbl-thick').textContent = 'Thickness (cm)';
+      }
+    }
+
+    document.getElementById('rebar-check').addEventListener('change', function() {
+      document.getElementById('rebar-spacing-group').style.display = this.checked ? '' : 'none';
+      document.getElementById('rebar-size-group').style.display = this.checked ? '' : 'none';
+    });
+
+    function calcSlab() {
+      let l = parseFloat(document.getElementById('slab-length').value);
+      let w = parseFloat(document.getElementById('slab-width').value);
+      let t = parseFloat(document.getElementById('slab-thick').value);
+      const costPerYard = parseFloat(document.getElementById('slab-cost').value) || 145;
+      if (!l || !w || !t) return alert('Please fill in length, width, and thickness.');
+
+      let lengthFt, widthFt, thickFt;
+      if (currentUnit === 'ft') {
+        lengthFt = l; widthFt = w; thickFt = t / 12;
+      } else {
+        lengthFt = l * 3.28084; widthFt = w * 3.28084; thickFt = (t / 100) * 3.28084;
+      }
+
+      const cuFt = lengthFt * widthFt * thickFt;
+      const cuYards = cuFt / 27;
+      const cuMeters = cuFt * 0.0283168;
+      const sqFt = lengthFt * widthFt;
+      const bags80 = Math.ceil(cuFt / 0.6);
+      const bags60 = Math.ceil(cuFt / 0.45);
+      const cost = cuYards * costPerYard;
+      const weight = cuFt * 150; // ~150 lbs per cu ft
+
+      document.getElementById('r-yards').textContent = cuYards.toFixed(2);
+      document.getElementById('r-cuft').textContent = cuFt.toFixed(1) + ' cu ft';
+      document.getElementById('r-cum').textContent = cuMeters.toFixed(2);
+      document.getElementById('r-sqft').textContent = sqFt.toFixed(0) + ' sq ft area';
+      document.getElementById('r-bags80').textContent = bags80;
+      document.getElementById('r-bags60').textContent = bags60;
+      document.getElementById('r-cost').textContent = '$' + Math.round(cost).toLocaleString();
+      document.getElementById('r-cost-detail').textContent = 'at $' + costPerYard + '/yd³';
+      document.getElementById('r-weight').textContent = (weight >= 1000 ? (weight/1000).toFixed(1) + 'k' : Math.round(weight));
+      document.querySelector('#r-weight + .detail').textContent = Math.round(weight).toLocaleString() + ' lbs';
+
+      // Rebar
+      if (document.getElementById('rebar-check').checked) {
+        const spacing = parseFloat(document.getElementById('rebar-spacing').value);
+        const spacingFt = spacing / 12;
+        // Bars along length (spaced across width) + bars along width (spaced across length)
+        const barsAcrossWidth = Math.ceil(widthFt / spacingFt) + 1;
+        const barsAcrossLength = Math.ceil(lengthFt / spacingFt) + 1;
+        const linearFt = (barsAcrossWidth * lengthFt) + (barsAcrossLength * widthFt);
+        const pieces20ft = Math.ceil(linearFt / 20);
+        const intersections = barsAcrossWidth * barsAcrossLength;
+        const chairs = Math.ceil(sqFt / 8); // ~1 chair per 8 sq ft
+
+        document.getElementById('rb-pieces').textContent = pieces20ft;
+        document.getElementById('rb-linear').textContent = Math.round(linearFt).toLocaleString();
+        document.getElementById('rb-ties').textContent = intersections;
+        document.getElementById('rb-chairs').textContent = chairs;
+        document.getElementById('rebar-results').style.display = '';
+      } else {
+        document.getElementById('rebar-results').style.display = 'none';
+      }
+
+      document.getElementById('results').classList.add('show');
+      document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function handleCapture(e) {
+      e.preventDefault();
+      var em = document.getElementById("capture-email").value;
+      var msg = document.getElementById("capture-msg");
+      var btn = e.target.querySelector("button");
+      btn.textContent = "Sending..."; btn.disabled = true;
+      fetch("/api/subscribe", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email: em, source: window.location.pathname, lead_magnet: "contractor-toolkit" }) })
+        .then(function(r) { return r.json() })
+        .then(function(d) { msg.textContent = "\u2705 Check your inbox! Templates are on the way."; msg.style.display = "block"; document.getElementById("capture-form").style.display = "none" })
+        .catch(function() { msg.textContent = "Something went wrong. Try again."; msg.style.color = "#ef4444"; msg.style.display = "block"; btn.textContent = "Send Me the Templates"; btn.disabled = false });
+      return false;
+    }
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
+</body>
+</html>

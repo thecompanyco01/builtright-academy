@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Roofing Calculator — Squares, Bundles & Cost Estimate | BuiltRight Academy</title>
+  <meta name="description" content="Free roofing calculator. Enter roof dimensions and pitch to get total area, squares needed, bundles, and estimated material cost for shingles, metal, or tile.">
+  <meta name="keywords" content="roofing calculator, roof area calculator, how many shingles do I need, roofing squares calculator, roof pitch calculator, roofing cost estimator">
+  <link rel="canonical" href="https://builtright-academy.vercel.app/tools/roofing-calculator">
+  <meta property="og:title" content="Roofing Calculator — Squares, Bundles & Cost Estimate">
+  <meta property="og:description" content="Calculate roof area, squares, bundles, and cost for any roofing material. Accounts for roof pitch automatically.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Roofing Calculator",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "description": "Calculate roof area, roofing squares, bundles needed, and material cost estimates for asphalt shingles, metal roofing, and tile."
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is a roofing square?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A roofing square is a unit of measurement equal to 100 square feet of roof area. Roofing materials are priced and sold by the square. For example, a roof with 2,000 square feet of area needs 20 squares of material."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How many bundles of shingles are in a square?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Most asphalt shingles come 3 bundles per square (100 sq ft). Some heavier architectural shingles require 4-5 bundles per square. Always check the manufacturer's specifications on the packaging."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does roof pitch affect the amount of materials needed?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Steeper roofs have more surface area than flat roofs with the same footprint. A 4/12 pitch adds about 5.4% more area, while a 12/12 pitch (45 degrees) adds 41.4% more area. The calculator applies a pitch multiplier to convert your footprint dimensions to actual roof surface area."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much does a new roof cost in 2026?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Material costs vary significantly: asphalt shingles run $350-$500 per square, metal roofing $700-$1,200 per square, and tile $800-$1,600 per square. Labor typically adds $150-$300 per square. A typical 20-square residential roof costs $10,000-$16,000 for asphalt or $17,000-$30,000 for metal."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I measure my roof from the ground?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Measure the footprint of your house (length and width at ground level), then apply the pitch factor. You can determine pitch by measuring 12 inches horizontally on your attic rafters and noting how many inches the rafter rises in that distance. A 6-inch rise = 6/12 pitch."
+        }
+      }
+    ]
+  }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root { --orange: #F97316; --orange-dark: #EA580C; --darker: #0F0F1A; --dark-card: #1A1A2E; --gray: #94A3B8; --light: #F8FAFC; --green: #22C55E; --border: rgba(255,255,255,0.08); }
+    body { font-family: 'Inter', -apple-system, sans-serif; background: var(--darker); color: var(--light); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+    nav { padding: 20px 0; border-bottom: 1px solid var(--border); }
+    nav .container { display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.3rem; color: var(--orange); text-decoration: none; letter-spacing: -0.5px; }
+    .logo span { color: var(--light); }
+    .nav-links a { color: var(--gray); text-decoration: none; font-size: 0.9rem; margin-left: 24px; }
+    .nav-links a:hover { color: var(--light); }
+    .hero { padding: 48px 0 32px; text-align: center; }
+    .hero .badge { display: inline-block; background: rgba(249,115,22,0.1); border: 1px solid rgba(249,115,22,0.3); color: var(--orange); font-size: 0.8rem; font-weight: 600; padding: 6px 16px; border-radius: 100px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .hero h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 800; line-height: 1.15; letter-spacing: -1px; margin-bottom: 12px; }
+    .hero h1 .highlight { color: var(--orange); }
+    .hero p { color: var(--gray); font-size: 1.05rem; max-width: 600px; margin: 0 auto; }
+    .calc-section { padding: 24px 0 60px; }
+    .calc-card { background: var(--dark-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; margin-bottom: 24px; }
+    .calc-card h2 { font-size: 1.2rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+    .calc-card h2 .icon { font-size: 1.4rem; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 500px) { .form-grid { grid-template-columns: 1fr; } }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group.full { grid-column: 1 / -1; }
+    label { font-size: 0.85rem; font-weight: 600; color: var(--gray); text-transform: uppercase; letter-spacing: 0.5px; }
+    input, select { background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: var(--light); padding: 12px 16px; border-radius: 8px; font-size: 1rem; font-family: inherit; outline: none; transition: border-color 0.2s; }
+    input:focus, select:focus { border-color: var(--orange); }
+    select option { background: var(--darker); }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: var(--orange); color: #fff; font-weight: 700; font-size: 1rem; padding: 14px 28px; border-radius: 10px; border: none; cursor: pointer; width: 100%; margin-top: 16px; transition: background 0.2s; }
+    .btn:hover { background: var(--orange-dark); }
+    .results { display: none; margin-top: 24px; }
+    .results.show { display: block; }
+    .result-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; }
+    .result-item { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 12px; padding: 20px; text-align: center; }
+    .result-item .number { font-size: 2rem; font-weight: 800; color: var(--orange); letter-spacing: -1px; }
+    .result-item .label { font-size: 0.8rem; color: var(--gray); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .result-item .detail { font-size: 0.85rem; color: var(--light); margin-top: 8px; opacity: 0.8; }
+    .waste-note { background: rgba(249,115,22,0.08); border: 1px solid rgba(249,115,22,0.2); border-radius: 10px; padding: 16px 20px; margin-top: 20px; font-size: 0.9rem; color: var(--gray); }
+    .waste-note strong { color: var(--orange); }
+    .info-section { padding: 40px 0 60px; }
+    .info-card { background: var(--dark-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; margin-bottom: 24px; }
+    .info-card h2 { font-size: 1.4rem; font-weight: 700; margin-bottom: 16px; }
+    .info-card h3 { font-size: 1.1rem; font-weight: 600; margin: 20px 0 8px; color: var(--orange); }
+    .info-card p { color: var(--gray); margin-bottom: 12px; line-height: 1.8; }
+    .info-card ul, .info-card ol { color: var(--gray); margin-left: 20px; margin-bottom: 12px; }
+    .info-card li { margin-bottom: 6px; }
+    .info-card table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+    .info-card th, .info-card td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+    .info-card th { color: var(--orange); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; }
+    .info-card td { color: var(--gray); }
+    .related-tools { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-top: 20px; }
+    .related-tool { display: block; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 10px; padding: 16px; text-decoration: none; color: var(--light); transition: border-color 0.2s; }
+    .related-tool:hover { border-color: var(--orange); }
+    .related-tool .tool-icon { font-size: 1.3rem; margin-bottom: 6px; }
+    .related-tool .tool-name { font-weight: 600; font-size: 0.9rem; }
+    .related-tool .tool-desc { font-size: 0.8rem; color: var(--gray); margin-top: 4px; }
+    footer { padding: 40px 0; border-top: 1px solid var(--border); text-align: center; }
+    footer p { color: var(--gray); font-size: 0.85rem; }
+    footer a { color: var(--orange); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <nav><div class="container"><a href="/" class="logo"><span>Built</span>Right</a><div class="nav-links"><a href="/blog">Blog</a><a href="/templates">Templates</a><a href="/tools">Tools</a></div></div></nav>
+
+  <section class="hero"><div class="container">
+    <div class="badge">Free Tool</div>
+    <h1>Roofing <span class="highlight">Calculator</span></h1>
+    <p>Calculate roof area, squares, bundles, and estimated material cost. Accounts for roof pitch automatically.</p>
+  </div></section>
+
+  <section class="calc-section"><div class="container">
+    <div class="calc-card">
+      <h2><span class="icon">🏠</span> Enter Your Roof Details</h2>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Roof Length (ft)</label>
+          <input type="number" id="roof-length" placeholder="e.g. 40" step="any">
+        </div>
+        <div class="form-group">
+          <label>Roof Width (ft)</label>
+          <input type="number" id="roof-width" placeholder="e.g. 30" step="any">
+        </div>
+        <div class="form-group">
+          <label>Roof Pitch</label>
+          <select id="roof-pitch">
+            <option value="1.000">Flat (0/12)</option>
+            <option value="1.003">1/12 (Low Slope)</option>
+            <option value="1.014">2/12</option>
+            <option value="1.031">3/12</option>
+            <option value="1.054" selected>4/12 (Common)</option>
+            <option value="1.083">5/12</option>
+            <option value="1.118">6/12 (Standard)</option>
+            <option value="1.158">7/12</option>
+            <option value="1.202">8/12 (Steep)</option>
+            <option value="1.250">9/12</option>
+            <option value="1.302">10/12</option>
+            <option value="1.357">11/12</option>
+            <option value="1.414">12/12 (45°)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Roofing Material</label>
+          <select id="roof-material">
+            <option value="shingles">Asphalt Shingles ($350–$500/sq)</option>
+            <option value="metal">Metal Roofing ($700–$1,200/sq)</option>
+            <option value="tile">Tile ($800–$1,600/sq)</option>
+          </select>
+        </div>
+        <div class="form-group full">
+          <label>Number of Roof Sections</label>
+          <input type="number" id="roof-sections" placeholder="1" value="1" min="1">
+        </div>
+      </div>
+      <button class="btn" onclick="calculate()">Calculate Roofing</button>
+
+      <div class="results" id="results">
+        <div class="result-grid">
+          <div class="result-item"><div class="number" id="r-area">—</div><div class="label">Roof Area (sq ft)</div><div class="detail" id="r-pitch-note"></div></div>
+          <div class="result-item"><div class="number" id="r-squares">—</div><div class="label">Squares Needed</div><div class="detail">1 square = 100 sq ft</div></div>
+          <div class="result-item"><div class="number" id="r-bundles">—</div><div class="label">Bundles</div><div class="detail" id="r-bundle-note">3 per square (shingles)</div></div>
+          <div class="result-item"><div class="number" id="r-cost">—</div><div class="label">Material Cost</div><div class="detail" id="r-cost-note"></div></div>
+        </div>
+        <div class="waste-note"><strong>Pro Tip:</strong> Add <strong>10–15% extra</strong> for waste, cuts, and ridge/hip areas. Complex roof shapes with valleys and dormers can waste 15–20%. The estimates above include a 10% waste factor.</div>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="info-section"><div class="container">
+    <div class="info-card">
+      <h2>How to Calculate Roofing Materials</h2>
+      <p>Getting an accurate material estimate starts with understanding your roof's actual surface area, which is always larger than the building footprint because of the pitch (slope).</p>
+
+      <h3>Step 1: Calculate Roof Area</h3>
+      <p><strong>Roof Area = Length × Width × Pitch Factor × Number of Sections</strong></p>
+      <p>The pitch factor converts flat area to sloped area. A 4/12 pitch multiplies area by 1.054 (5.4% more). A 12/12 pitch multiplies by 1.414 (41.4% more).</p>
+
+      <h3>Step 2: Convert to Squares</h3>
+      <p><strong>Squares = Roof Area ÷ 100</strong></p>
+      <p>Roofing materials are sold by the "square" — 100 square feet of coverage.</p>
+
+      <h3>Pitch Factor Reference</h3>
+      <table>
+        <tr><th>Pitch</th><th>Factor</th><th>Angle</th><th>Classification</th></tr>
+        <tr><td>2/12</td><td>1.014</td><td>9.5°</td><td>Low slope</td></tr>
+        <tr><td>4/12</td><td>1.054</td><td>18.4°</td><td>Common residential</td></tr>
+        <tr><td>6/12</td><td>1.118</td><td>26.6°</td><td>Standard</td></tr>
+        <tr><td>8/12</td><td>1.202</td><td>33.7°</td><td>Steep</td></tr>
+        <tr><td>10/12</td><td>1.302</td><td>39.8°</td><td>Very steep</td></tr>
+        <tr><td>12/12</td><td>1.414</td><td>45°</td><td>Maximum standard</td></tr>
+      </table>
+
+      <h3>Material Cost Comparison (2026)</h3>
+      <table>
+        <tr><th>Material</th><th>Cost/Square</th><th>Lifespan</th><th>Weight</th></tr>
+        <tr><td>3-Tab Shingles</td><td>$350–$400</td><td>15–20 years</td><td>200–250 lb/sq</td></tr>
+        <tr><td>Architectural Shingles</td><td>$400–$500</td><td>25–30 years</td><td>300–400 lb/sq</td></tr>
+        <tr><td>Standing Seam Metal</td><td>$700–$1,200</td><td>40–70 years</td><td>100–150 lb/sq</td></tr>
+        <tr><td>Clay/Concrete Tile</td><td>$800–$1,600</td><td>50–100 years</td><td>900–1,200 lb/sq</td></tr>
+      </table>
+    </div>
+
+    <div class="info-card">
+      <h2>Related Tools</h2>
+      <div class="related-tools">
+        <a href="/tools/concrete-calculator" class="related-tool"><div class="tool-icon">🧱</div><div class="tool-name">Concrete Calculator</div><div class="tool-desc">Cubic yards, bags & cost</div></a>
+        <a href="/tools/concrete-block-calculator" class="related-tool"><div class="tool-icon">🧱</div><div class="tool-name">Block Calculator</div><div class="tool-desc">CMU blocks & mortar</div></a>
+        <a href="/tools/voltage-drop-calculator" class="related-tool"><div class="tool-icon">⚡</div><div class="tool-name">Voltage Drop Calculator</div><div class="tool-desc">Wire sizing & NEC compliance</div></a>
+      </div>
+    </div>
+  </div></section>
+
+<!-- Email Capture CTA -->
+<div id="email-cta" style="max-width:720px;margin:40px auto;padding:40px 32px;background:linear-gradient(135deg,#1e293b 0%,#0f172a 100%);border:1px solid rgba(249,115,22,0.3);border-radius:16px;text-align:center;">
+  <div style="font-size:2rem;margin-bottom:12px;">📋</div>
+  <h3 style="font-family:Inter,-apple-system,sans-serif;font-size:1.4rem;font-weight:700;color:#f8fafc;margin-bottom:8px;">Get the Free Contractor Toolkit</h3>
+  <p style="font-family:Inter,-apple-system,sans-serif;color:#94a3b8;font-size:0.95rem;margin-bottom:24px;max-width:480px;margin-left:auto;margin-right:auto;">Get our <strong style="color:#f97316;">free spreadsheet templates</strong> &mdash; invoice, estimate, job costing &amp; profit tracker. Used by 500+ contractors.</p>
+  <form id="capture-form" onsubmit="return handleCapture(event)" style="display:flex;gap:10px;max-width:420px;margin:0 auto;flex-wrap:wrap;justify-content:center;">
+    <input type="email" id="capture-email" placeholder="you@company.com" required style="flex:1;min-width:220px;padding:12px 16px;border-radius:8px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.05);color:#f8fafc;font-size:0.95rem;font-family:Inter,-apple-system,sans-serif;outline:none;">
+    <button type="submit" style="padding:12px 24px;background:#f97316;color:#fff;border:none;border-radius:8px;font-weight:600;font-size:0.95rem;cursor:pointer;font-family:Inter,-apple-system,sans-serif;white-space:nowrap;">Send Me the Templates</button>
+  </form>
+  <p id="capture-msg" style="font-family:Inter,-apple-system,sans-serif;color:#22c55e;font-size:0.85rem;margin-top:12px;display:none;"></p>
+  <p style="font-family:Inter,-apple-system,sans-serif;color:#64748b;font-size:0.75rem;margin-top:12px;">No spam. Unsubscribe anytime.</p>
+</div>
+
+  <footer><div class="container"><p>© 2026 <a href="/">BuiltRight Academy</a>. Free tools for tradespeople who mean business.</p></div></footer>
+
+  <script>
+    const materialData = {
+      shingles: { low: 350, high: 500, bundlesPerSq: 3, name: 'Asphalt Shingles' },
+      metal: { low: 700, high: 1200, bundlesPerSq: null, name: 'Metal Panels' },
+      tile: { low: 800, high: 1600, bundlesPerSq: null, name: 'Tile' }
+    };
+
+    function calculate() {
+      const l = parseFloat(document.getElementById('roof-length').value);
+      const w = parseFloat(document.getElementById('roof-width').value);
+      const pitchFactor = parseFloat(document.getElementById('roof-pitch').value);
+      const materialKey = document.getElementById('roof-material').value;
+      const sections = parseInt(document.getElementById('roof-sections').value) || 1;
+
+      if (!l || !w) return alert('Please fill in roof length and width.');
+
+      const mat = materialData[materialKey];
+      const roofArea = l * w * pitchFactor * sections;
+      const roofAreaWithWaste = roofArea * 1.10; // 10% waste
+      const squares = roofAreaWithWaste / 100;
+      const costLow = squares * mat.low;
+      const costHigh = squares * mat.high;
+
+      document.getElementById('r-area').textContent = Math.round(roofArea).toLocaleString();
+      document.getElementById('r-pitch-note').textContent = 'with pitch factor × ' + pitchFactor;
+      document.getElementById('r-squares').textContent = squares.toFixed(1);
+
+      if (mat.bundlesPerSq) {
+        const bundles = Math.ceil(squares * mat.bundlesPerSq);
+        document.getElementById('r-bundles').textContent = bundles;
+        document.getElementById('r-bundle-note').textContent = mat.bundlesPerSq + ' per square (shingles)';
+      } else {
+        document.getElementById('r-bundles').textContent = '—';
+        document.getElementById('r-bundle-note').textContent = mat.name + ' sold by square';
+      }
+
+      document.getElementById('r-cost').textContent = '$' + Math.round(costLow).toLocaleString() + '–$' + Math.round(costHigh).toLocaleString();
+      document.getElementById('r-cost-note').textContent = mat.name + ' (materials only)';
+
+      document.getElementById('results').classList.add('show');
+      document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  </script>
+<script>
+function handleCapture(e){
+  e.preventDefault();
+  var em=document.getElementById("capture-email").value;
+  var msg=document.getElementById("capture-msg");
+  var btn=e.target.querySelector("button");
+  btn.textContent="Sending...";btn.disabled=true;
+  fetch("/api/subscribe",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:em,source:window.location.pathname,lead_magnet:"contractor-toolkit"})})
+  .then(function(r){return r.json()})
+  .then(function(d){msg.textContent="✅ Check your inbox! Templates are on the way.";msg.style.display="block";document.getElementById("capture-form").style.display="none"})
+  .catch(function(){msg.textContent="Something went wrong. Try again.";msg.style.color="#ef4444";msg.style.display="block";btn.textContent="Send Me the Templates";btn.disabled=false});
+  return false;
+}
+</script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
+</body>
+</html>
