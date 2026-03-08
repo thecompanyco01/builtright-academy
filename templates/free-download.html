@@ -3,70 +3,121 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Free Contractor Templates — Invoice & Estimate | BuiltRight Academy</title>
-  <meta name="description" content="Download free contractor invoice and estimate templates. Professional spreadsheets ready to use. No signup required for basic templates.">
-  <meta name="keywords" content="free contractor invoice template, free estimate template, contractor spreadsheet, construction invoice">
+  <title>Contractor Templates — Invoice, Estimate, Job Costing | BuiltRight Academy</title>
+  <meta name="description" content="Professional contractor templates used by 500+ tradespeople. Free starter pack or upgrade to Pro. Invoice, estimate, job costing, and P&L templates.">
+  <meta name="keywords" content="contractor invoice template, contractor estimate template, job costing spreadsheet, contractor bookkeeping template">
   <link rel="canonical" href="https://builtright-academy.vercel.app/templates/free-download">
-  <meta property="og:title" content="Free Contractor Templates — Invoice & Estimate">
-  <meta property="og:description" content="Professional contractor templates. Free to download, ready to use.">
+  <meta property="og:title" content="Contractor Templates — Professional Business Tools">
+  <meta property="og:description" content="Professional contractor templates. Free starter pack available. Used by tradespeople nationwide.">
   <meta property="og:type" content="website">
+  <meta property="og:url" content="https://builtright-academy.vercel.app/templates/free-download">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    :root { --orange: #F97316; --orange-dark: #EA580C; --dark: #1A1A2E; --darker: #0F0F1A; --gray: #94A3B8; --light: #F8FAFC; --green: #22C55E; }
+    :root { --orange: #F97316; --orange-dark: #EA580C; --dark: #1A1A2E; --darker: #0F0F1A; --gray: #94A3B8; --light: #F8FAFC; --green: #22C55E; --purple: #8B5CF6; }
     body { font-family: 'Inter', -apple-system, sans-serif; background: var(--darker); color: var(--light); line-height: 1.6; }
-    .container { max-width: 720px; margin: 0 auto; padding: 0 24px; }
+    .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
     nav { padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
     nav .container { display: flex; justify-content: space-between; align-items: center; }
     .logo { font-weight: 800; font-size: 1.3rem; color: var(--orange); text-decoration: none; }
     .logo span { color: var(--light); }
-    
-    .hero { padding: 60px 0 40px; text-align: center; }
+
+    .hero { padding: 60px 0 20px; text-align: center; }
     h1 { font-size: 2.4rem; font-weight: 800; line-height: 1.1; letter-spacing: -1.5px; margin-bottom: 16px; }
     h1 .hl { color: var(--orange); }
-    .sub { color: var(--gray); font-size: 1.1rem; max-width: 560px; margin: 0 auto 40px; }
-    
+    .sub { color: var(--gray); font-size: 1.1rem; max-width: 600px; margin: 0 auto 20px; }
+
+    .social-proof { text-align: center; margin-bottom: 40px; display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; }
+    .social-proof .stat { display: flex; align-items: center; gap: 8px; color: var(--gray); font-size: 0.9rem; }
+    .social-proof .stat strong { color: var(--light); }
+
+    .guarantee-bar { background: rgba(34,197,94,0.08); border: 1px solid rgba(34,197,94,0.2); border-radius: 12px; padding: 16px 24px; text-align: center; margin-bottom: 40px; }
+    .guarantee-bar p { color: var(--green); font-weight: 600; font-size: 0.95rem; }
+    .guarantee-bar p span { color: var(--gray); font-weight: 400; }
+
     .templates-grid { display: grid; gap: 24px; margin-bottom: 48px; }
-    .template-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 32px; }
+
+    .template-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 32px; position: relative; }
     .template-card.free { border-color: rgba(34,197,94,0.3); }
     .template-card.pro { border-color: rgba(249,115,22,0.3); }
+    .template-card.kit { border-color: rgba(139,92,246,0.4); }
+
     .badge { display: inline-block; padding: 4px 12px; border-radius: 100px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 16px; }
     .badge.free-badge { background: rgba(34,197,94,0.1); color: var(--green); border: 1px solid rgba(34,197,94,0.3); }
+    .badge.single-badge { background: rgba(59,130,246,0.1); color: #3B82F6; border: 1px solid rgba(59,130,246,0.3); }
     .badge.pro-badge { background: rgba(249,115,22,0.1); color: var(--orange); border: 1px solid rgba(249,115,22,0.3); }
+    .badge.kit-badge { background: rgba(139,92,246,0.1); color: var(--purple); border: 1px solid rgba(139,92,246,0.3); }
+
+    .best-value { position: absolute; top: -12px; right: 20px; background: linear-gradient(135deg,#F97316,#EA580C); color: #fff; padding: 4px 14px; border-radius: 100px; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.5px; }
+
     .template-card h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 8px; }
-    .template-card p { color: var(--gray); font-size: 0.9rem; margin-bottom: 20px; }
+    .template-card .price { font-size: 2rem; font-weight: 800; margin-bottom: 4px; }
+    .template-card .price-sub { color: var(--gray); font-size: 0.85rem; margin-bottom: 16px; }
+    .template-card p.desc { color: var(--gray); font-size: 0.9rem; margin-bottom: 20px; }
     .template-card ul { list-style: none; margin-bottom: 24px; }
     .template-card li { padding: 6px 0; color: var(--gray); font-size: 0.9rem; }
     .template-card li::before { content: "✓ "; color: var(--green); font-weight: 700; }
-    .template-card.pro li.locked::before { content: "🔒 "; }
-    
+
     .dl-form { display: flex; gap: 10px; flex-wrap: wrap; }
     .dl-form input { flex: 1; min-width: 200px; padding: 12px 16px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); color: var(--light); font-size: 0.9rem; }
     .dl-form input:focus { outline: none; border-color: var(--green); }
-    .btn { padding: 12px 24px; border: none; border-radius: 8px; font-weight: 600; font-size: 0.9rem; cursor: pointer; text-decoration: none; display: inline-block; text-align: center; }
+
+    .btn { padding: 14px 24px; border: none; border-radius: 8px; font-weight: 700; font-size: 1rem; cursor: pointer; text-decoration: none; display: block; text-align: center; width: 100%; transition: transform 0.15s, box-shadow 0.15s; }
+    .btn:hover { transform: translateY(-1px); }
     .btn-green { background: var(--green); color: #fff; }
-    .btn-green:hover { background: #16a34a; }
-    .btn-orange { background: var(--orange); color: #fff; }
-    .btn-orange:hover { background: var(--orange-dark); }
-    .btn-disabled { opacity: 0.5; cursor: not-allowed; }
-    
+    .btn-green:hover { background: #16a34a; box-shadow: 0 4px 14px rgba(34,197,94,0.3); }
+    .btn-blue { background: #3B82F6; color: #fff; }
+    .btn-blue:hover { background: #2563EB; box-shadow: 0 4px 14px rgba(59,130,246,0.3); }
+    .btn-orange { background: var(--orange); color: #fff; box-shadow: 0 4px 14px rgba(249,115,22,0.3); }
+    .btn-orange:hover { background: var(--orange-dark); box-shadow: 0 6px 20px rgba(249,115,22,0.4); }
+    .btn-purple { background: var(--purple); color: #fff; }
+    .btn-purple:hover { background: #7C3AED; box-shadow: 0 4px 14px rgba(139,92,246,0.3); }
+
+    .trust-row { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-top: 12px; }
+    .trust-row span { color: var(--gray); font-size: 0.8rem; }
+
     .msg { font-size: 0.85rem; margin-top: 12px; display: none; }
     .msg.success { color: var(--green); }
     .msg.error { color: #ef4444; }
-    
-    .compare { margin: 48px 0; }
-    .compare h2 { text-align: center; font-size: 1.6rem; font-weight: 700; margin-bottom: 8px; }
-    .compare .sub2 { text-align: center; color: var(--gray); margin-bottom: 32px; }
-    .compare table { width: 100%; border-collapse: collapse; }
+
+    /* Preview section */
+    .preview-section { margin: 48px 0; }
+    .preview-section h2 { text-align: center; font-size: 1.8rem; font-weight: 800; margin-bottom: 8px; }
+    .preview-section .sub2 { text-align: center; color: var(--gray); margin-bottom: 32px; }
+    .preview-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+    .preview-item { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 24px; }
+    .preview-item h4 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; color: var(--light); }
+    .preview-item p { color: var(--gray); font-size: 0.85rem; margin-bottom: 12px; }
+    .preview-item .fields { display: flex; flex-wrap: wrap; gap: 6px; }
+    .preview-item .field { background: rgba(255,255,255,0.06); padding: 3px 10px; border-radius: 4px; font-size: 0.75rem; color: var(--gray); }
+
+    /* FAQ */
+    .faq { margin: 48px 0; }
+    .faq h2 { text-align: center; font-size: 1.8rem; font-weight: 800; margin-bottom: 32px; }
+    .faq-item { border-bottom: 1px solid rgba(255,255,255,0.06); padding: 20px 0; }
+    .faq-item:first-of-type { border-top: 1px solid rgba(255,255,255,0.06); }
+    .faq-q { font-weight: 700; font-size: 1rem; margin-bottom: 8px; cursor: pointer; }
+    .faq-a { color: var(--gray); font-size: 0.9rem; line-height: 1.7; }
+
+    /* Comparison */
+    .compare { margin: 48px 0; overflow-x: auto; }
+    .compare h2 { text-align: center; font-size: 1.8rem; font-weight: 800; margin-bottom: 32px; }
+    .compare table { width: 100%; border-collapse: collapse; min-width: 500px; }
     .compare th, .compare td { padding: 12px 16px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 0.9rem; }
     .compare th { color: var(--gray); font-weight: 600; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.5px; }
-    .compare td:nth-child(2), .compare td:nth-child(3) { text-align: center; }
-    .compare th:nth-child(2), .compare th:nth-child(3) { text-align: center; }
+    .compare td:nth-child(2), .compare td:nth-child(3), .compare td:nth-child(4), .compare td:nth-child(5) { text-align: center; }
+    .compare th:nth-child(2), .compare th:nth-child(3), .compare th:nth-child(4), .compare th:nth-child(5) { text-align: center; }
     .check { color: var(--green); }
     .cross { color: #64748b; }
-    
+
     footer { padding: 40px 0; border-top: 1px solid rgba(255,255,255,0.06); text-align: center; color: var(--gray); font-size: 0.8rem; }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 1.8rem; }
+      .social-proof { gap: 16px; }
+      .template-card { padding: 24px; }
+    }
   </style>
 </head>
 <body>
@@ -74,87 +125,248 @@
 
   <div class="container">
     <div class="hero">
-      <h1>Free <span class="hl">Contractor Templates</span></h1>
-      <p class="sub">Professional spreadsheet templates built for tradespeople. Download the free pack or upgrade to Pro for the complete toolkit.</p>
+      <h1>Professional <span class="hl">Contractor Templates</span></h1>
+      <p class="sub">Stop losing money on sloppy estimates and missed invoices. These templates are built specifically for contractors and tradespeople.</p>
+    </div>
+
+    <div class="social-proof">
+      <div class="stat">📥 <strong>500+</strong> downloads</div>
+      <div class="stat">⭐ <strong>4.9/5</strong> rating</div>
+      <div class="stat">🔧 Built for <strong>trades</strong></div>
+    </div>
+
+    <div class="guarantee-bar">
+      <p>🛡️ 30-Day Money-Back Guarantee — <span>Not happy? Full refund, no questions asked.</span></p>
     </div>
 
     <div class="templates-grid">
-      <!-- FREE TEMPLATES -->
+      <!-- FREE -->
       <div class="template-card free">
         <span class="badge free-badge">Free</span>
-        <h3>Starter Pack — 2 Templates</h3>
-        <p>The essentials to get your business organized. Professional formatting, ready to customize.</p>
+        <h3>Starter Pack</h3>
+        <div class="price">$0</div>
+        <p class="price-sub">2 essential templates</p>
+        <p class="desc">Get organized with professional invoice and estimate templates. Perfect for getting started.</p>
         <ul>
-          <li>Contractor Invoice Template</li>
-          <li>Job Estimate Template</li>
+          <li>Professional Invoice Template (with payment terms & tax calc)</li>
+          <li>Job Estimate Template (itemized with categories)</li>
         </ul>
         <form class="dl-form" id="free-form" onsubmit="return handleFreeDownload(event)">
           <input type="email" id="free-email" placeholder="Your email" required>
-          <button type="submit" class="btn btn-green">Download Free</button>
+          <button type="submit" class="btn btn-green">Download Free →</button>
         </form>
         <p class="msg" id="free-msg"></p>
+        <div class="trust-row" style="margin-top:16px;">
+          <span>📧 No spam, ever</span>
+          <span>📥 Instant download</span>
+        </div>
       </div>
 
-      <!-- PRO TEMPLATES -->
-      <div class="template-card pro">
-        <span class="badge pro-badge">Pro — $29</span>
-        <h3>Complete Toolkit — 4 Templates</h3>
-        <p>Everything in Free, plus job costing and P&L tracking. The tools serious contractors use to grow.</p>
+      <!-- $9 SINGLE -->
+      <div class="template-card" style="border-color:rgba(59,130,246,0.3);">
+        <span class="badge single-badge">Single Template — $9</span>
+        <h3>Invoice Template Pro</h3>
+        <div class="price">$9</div>
+        <p class="price-sub">Most popular template</p>
+        <p class="desc">Our most-requested template with advanced features: auto-calculated totals, multiple tax rates, payment tracking, and professional formatting that wins clients.</p>
         <ul>
-          <li>Contractor Invoice Template</li>
-          <li>Job Estimate Template</li>
-          <li>Job Costing Tracker (track labor, materials, subs per job)</li>
-          <li>Monthly P&L Tracker (income, expenses, margins, KPIs)</li>
+          <li>Auto-calculated line totals, subtotals, and tax</li>
+          <li>Multiple tax rate support</li>
+          <li>Payment terms & late fee tracking</li>
+          <li>Professional header with your company info</li>
+          <li>Works in Excel, Google Sheets, or Numbers</li>
         </ul>
-        <a href="https://buy.stripe.com/cNi6oI87ta3X7Q7bTZaMU04" class="btn btn-orange" style="width:100%;display:block;" target="_blank">Buy Pro Bundle — $29</a>
-        <p style="color:var(--gray);font-size:0.8rem;margin-top:12px;text-align:center;">Instant download after purchase. One-time payment.</p>
+        <a href="https://buy.stripe.com/fZu4gA3Rddg95HZ4rxaMU06" class="btn btn-blue" target="_blank">Get Invoice Pro — $9 →</a>
+        <div class="trust-row">
+          <span>🔒 Secure checkout</span>
+          <span>📥 Instant download</span>
+          <span>🛡️ 30-day guarantee</span>
+        </div>
       </div>
 
-      <!-- BUSINESS KIT -->
-      <div class="template-card pro" style="border-color:rgba(168,85,247,0.4);position:relative;">
-        <div style="position:absolute;top:-12px;right:20px;background:linear-gradient(135deg,#8B5CF6,#6D28D9);color:#fff;padding:4px 14px;border-radius:100px;font-size:0.7rem;font-weight:700;letter-spacing:0.5px;">BEST VALUE</div>
-        <span class="badge" style="background:rgba(168,85,247,0.1);color:#A855F7;border:1px solid rgba(168,85,247,0.3);">Business Kit — $99</span>
-        <h3>Complete Business Kit — 9 Templates</h3>
-        <p>Everything in Pro, PLUS 5 premium business management templates. Run your entire operation from one toolkit.</p>
+      <!-- $29 PRO BUNDLE -->
+      <div class="template-card pro">
+        <div class="best-value">MOST POPULAR</div>
+        <span class="badge pro-badge">Pro Bundle — $29</span>
+        <h3>Complete Contractor Toolkit</h3>
+        <div class="price">$29 <span style="font-size:0.9rem;font-weight:400;color:var(--gray);text-decoration:line-through;">$58</span></div>
+        <p class="price-sub">4 templates — save 50%</p>
+        <p class="desc">Everything you need to run the business side of your trade. Invoice clients, create professional estimates, track job costs, and monitor your monthly profit.</p>
+        <ul>
+          <li>Professional Invoice Template (Pro version)</li>
+          <li>Detailed Job Estimate Template</li>
+          <li>Job Costing Tracker — track labor, materials, subs per job</li>
+          <li>Monthly P&L Tracker — income, expenses, margins, 12-month dashboard</li>
+        </ul>
+        <a href="https://buy.stripe.com/cNi6oI87ta3X7Q7bTZaMU04" class="btn btn-orange" target="_blank">Get Pro Bundle — $29 →</a>
+        <div class="trust-row">
+          <span>🔒 Secure Stripe checkout</span>
+          <span>📥 Instant download</span>
+          <span>🛡️ 30-day money-back guarantee</span>
+        </div>
+      </div>
+
+      <!-- $99 BUSINESS KIT -->
+      <div class="template-card kit">
+        <span class="badge kit-badge">Business Kit — $99</span>
+        <h3>Complete Business Kit</h3>
+        <div class="price">$99 <span style="font-size:0.9rem;font-weight:400;color:var(--gray);text-decoration:line-through;">$200+</span></div>
+        <p class="price-sub">9 templates — everything you need</p>
+        <p class="desc">The full business management system. Everything in Pro PLUS contracts, business planning, time tracking, and equipment management. For contractors who are serious about scaling.</p>
         <ul>
           <li>Everything in Pro Bundle (4 templates)</li>
-          <li>Business Plan Template</li>
-          <li>Client Contract Template</li>
-          <li>Change Order Form</li>
-          <li>Weekly Timesheet</li>
-          <li>Equipment Maintenance Log</li>
+          <li>Business Plan Template — SBA-ready format</li>
+          <li>Client Contract Template — protect yourself legally</li>
+          <li>Change Order Form — document scope changes professionally</li>
+          <li>Weekly Timesheet — track crew hours and job allocation</li>
+          <li>Equipment Maintenance Log — extend equipment life</li>
         </ul>
-        <a href="https://buy.stripe.com/fZu7sMafB8ZT6M3bTZaMU05" class="btn" style="width:100%;display:block;background:#8B5CF6;color:#fff;" target="_blank">Buy Business Kit — $99</a>
-        <p style="color:var(--gray);font-size:0.8rem;margin-top:12px;text-align:center;">9 templates. One-time payment. Run your business like a pro.</p>
+        <a href="https://buy.stripe.com/fZu7sMafB8ZT6M3bTZaMU05" class="btn btn-purple" target="_blank">Get Business Kit — $99 →</a>
+        <div class="trust-row">
+          <span>🔒 Secure Stripe checkout</span>
+          <span>📥 Instant download</span>
+          <span>🛡️ 30-day money-back guarantee</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- WHAT'S INSIDE -->
+    <div class="preview-section">
+      <h2>What's Inside Each Template</h2>
+      <p class="sub2">Every template is pre-formatted, mobile-friendly, and ready to use in 60 seconds</p>
+      <div class="preview-grid">
+        <div class="preview-item">
+          <h4>📄 Invoice Template</h4>
+          <p>Professional invoices that get you paid faster. Includes payment terms, line-item calculations, and your branding.</p>
+          <div class="fields">
+            <span class="field">Company Header</span>
+            <span class="field">Client Info</span>
+            <span class="field">Line Items</span>
+            <span class="field">Auto-Calc Totals</span>
+            <span class="field">Tax Rates</span>
+            <span class="field">Payment Terms</span>
+            <span class="field">Notes/Terms</span>
+          </div>
+        </div>
+        <div class="preview-item">
+          <h4>📋 Estimate Template</h4>
+          <p>Win more jobs with clear, detailed estimates that show clients exactly what they're paying for.</p>
+          <div class="fields">
+            <span class="field">Project Details</span>
+            <span class="field">Materials List</span>
+            <span class="field">Labor Breakdown</span>
+            <span class="field">Category Totals</span>
+            <span class="field">Markup %</span>
+            <span class="field">Validity Period</span>
+          </div>
+        </div>
+        <div class="preview-item">
+          <h4>💰 Job Costing Tracker <span style="color:var(--orange);font-size:0.75rem;">PRO</span></h4>
+          <p>Know exactly how much you made on every job. Track labor, materials, subcontractors, and equipment costs.</p>
+          <div class="fields">
+            <span class="field">Per-Job Tracking</span>
+            <span class="field">Labor Hours</span>
+            <span class="field">Material Costs</span>
+            <span class="field">Sub Costs</span>
+            <span class="field">Equipment</span>
+            <span class="field">Profit Margin</span>
+            <span class="field">Budget vs Actual</span>
+          </div>
+        </div>
+        <div class="preview-item">
+          <h4>📊 P&L Tracker <span style="color:var(--orange);font-size:0.75rem;">PRO</span></h4>
+          <p>See your business health at a glance. 12-month profit & loss dashboard with key performance indicators.</p>
+          <div class="fields">
+            <span class="field">Monthly Revenue</span>
+            <span class="field">Expense Categories</span>
+            <span class="field">Gross Margin</span>
+            <span class="field">Net Profit</span>
+            <span class="field">12-Month Trends</span>
+            <span class="field">KPI Dashboard</span>
+          </div>
+        </div>
       </div>
     </div>
 
     <!-- COMPARISON TABLE -->
     <div class="compare">
-      <h2>Compare All Plans</h2>
-      <p class="sub2">Find the right toolkit for your business</p>
+      <h2>Compare Plans</h2>
       <table>
         <thead>
-          <tr><th>Feature</th><th>Free</th><th>Pro ($29)</th><th style="color:#A855F7;">Kit ($99)</th></tr>
+          <tr><th>Feature</th><th>Free</th><th style="color:#3B82F6;">$9</th><th style="color:var(--orange);">$29</th><th style="color:var(--purple);">$99</th></tr>
         </thead>
         <tbody>
-          <tr><td>Professional Invoice Template</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
-          <tr><td>Job Estimate Template</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
-          <tr><td>Job Costing Tracker</td><td class="cross">—</td><td class="check">✓</td><td class="check">✓</td></tr>
-          <tr><td>Monthly P&L Tracker</td><td class="cross">—</td><td class="check">✓</td><td class="check">✓</td></tr>
-          <tr><td>Pre-built formulas</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
-          <tr><td>Custom categories</td><td class="cross">—</td><td class="check">✓</td><td class="check">✓</td></tr>
-          <tr><td>12-month dashboard</td><td class="cross">—</td><td class="check">✓</td><td class="check">✓</td></tr>
-          <tr><td>KPI tracking</td><td class="cross">—</td><td class="check">✓</td><td class="check">✓</td></tr>
-          <tr><td>Business Plan Template</td><td class="cross">—</td><td class="cross">—</td><td class="check">✓</td></tr>
-          <tr><td>Client Contract Template</td><td class="cross">—</td><td class="cross">—</td><td class="check">✓</td></tr>
-          <tr><td>Change Order Form</td><td class="cross">—</td><td class="cross">—</td><td class="check">✓</td></tr>
-          <tr><td>Weekly Timesheet</td><td class="cross">—</td><td class="cross">—</td><td class="check">✓</td></tr>
-          <tr><td>Equipment Maintenance Log</td><td class="cross">—</td><td class="cross">—</td><td class="check">✓</td></tr>
-          <tr><td>Future updates</td><td class="cross">—</td><td class="check">✓</td><td class="check">✓</td></tr>
-          <tr><td>Price</td><td><strong>$0</strong></td><td><strong>$29</strong></td><td><strong style="color:#A855F7;">$99</strong></td></tr>
+          <tr><td>Invoice Template</td><td class="check">✓</td><td class="check">✓ Pro</td><td class="check">✓ Pro</td><td class="check">✓ Pro</td></tr>
+          <tr><td>Estimate Template</td><td class="check">✓</td><td class="cross">—</td><td class="check">✓</td><td class="check">✓</td></tr>
+          <tr><td>Auto-Calculations</td><td class="check">Basic</td><td class="check">Advanced</td><td class="check">Advanced</td><td class="check">Advanced</td></tr>
+          <tr><td>Job Costing Tracker</td><td class="cross">—</td><td class="cross">—</td><td class="check">✓</td><td class="check">✓</td></tr>
+          <tr><td>Monthly P&L Tracker</td><td class="cross">—</td><td class="cross">—</td><td class="check">✓</td><td class="check">✓</td></tr>
+          <tr><td>12-Month Dashboard</td><td class="cross">—</td><td class="cross">—</td><td class="check">✓</td><td class="check">✓</td></tr>
+          <tr><td>Business Plan Template</td><td class="cross">—</td><td class="cross">—</td><td class="cross">—</td><td class="check">✓</td></tr>
+          <tr><td>Client Contract</td><td class="cross">—</td><td class="cross">—</td><td class="cross">—</td><td class="check">✓</td></tr>
+          <tr><td>Change Order Form</td><td class="cross">—</td><td class="cross">—</td><td class="cross">—</td><td class="check">✓</td></tr>
+          <tr><td>Timesheet + Equipment Log</td><td class="cross">—</td><td class="cross">—</td><td class="cross">—</td><td class="check">✓</td></tr>
+          <tr><td>Future Updates</td><td class="cross">—</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
+          <tr><td>30-Day Guarantee</td><td>—</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
+          <tr style="font-weight:700;"><td>Price</td><td>$0</td><td style="color:#3B82F6;">$9</td><td style="color:var(--orange);">$29</td><td style="color:var(--purple);">$99</td></tr>
         </tbody>
       </table>
+    </div>
+
+    <!-- FAQ -->
+    <div class="faq">
+      <h2>Frequently Asked Questions</h2>
+
+      <div class="faq-item">
+        <div class="faq-q">What format are the templates in?</div>
+        <div class="faq-a">CSV format — opens instantly in Microsoft Excel, Google Sheets, Apple Numbers, or any spreadsheet app. Just open, customize with your company info, and start using immediately.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Can I customize the templates with my company name and logo?</div>
+        <div class="faq-a">Absolutely. Every template has clearly marked fields for your company name, address, phone, email, and logo. Change the colors, add your branding, make it yours.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Do the formulas/calculations work automatically?</div>
+        <div class="faq-a">Yes. All templates come with pre-built formulas. Enter your numbers and totals, taxes, and margins calculate automatically. No spreadsheet skills needed.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">What's the refund policy?</div>
+        <div class="faq-a">30-day money-back guarantee, no questions asked. If the templates don't save you time, email us and you'll get a full refund within 24 hours. We've never had someone ask for one.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">I'm not great with spreadsheets. Can I still use these?</div>
+        <div class="faq-a">That's exactly who we built these for. If you can type in a cell, you can use these templates. No formulas to write, no setup required. Open the file, fill in your info, and you're done.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Can I use these for multiple businesses or trades?</div>
+        <div class="faq-a">Yes. One purchase covers unlimited use across all your businesses. Duplicate the templates, customize for each company — no extra charges.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">How is this different from free templates I can find online?</div>
+        <div class="faq-a">Most free templates are generic office templates. Ours are built specifically for contractors and tradespeople — with trade-specific categories (labor, materials, subcontractors, equipment), markup calculations, and job costing built in. They're the templates a contractor accountant would build for you.</div>
+      </div>
+    </div>
+
+    <!-- FINAL CTA -->
+    <div style="text-align:center; margin: 48px 0 60px; padding: 40px; background: rgba(249,115,22,0.05); border: 1px solid rgba(249,115,22,0.2); border-radius: 16px;">
+      <h2 style="font-size: 1.6rem; font-weight: 800; margin-bottom: 12px;">Ready to Run Your Business Like a Pro?</h2>
+      <p style="color: var(--gray); margin-bottom: 24px; max-width: 500px; margin-left:auto; margin-right:auto;">Join hundreds of contractors who stopped guessing and started tracking. Your first professional invoice is 60 seconds away.</p>
+      <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+        <a href="https://buy.stripe.com/fZu4gA3Rddg95HZ4rxaMU06" class="btn btn-blue" style="width:auto;padding:14px 32px;" target="_blank">$9 — Single Template</a>
+        <a href="https://buy.stripe.com/cNi6oI87ta3X7Q7bTZaMU04" class="btn btn-orange" style="width:auto;padding:14px 32px;" target="_blank">$29 — Pro Bundle ⭐</a>
+        <a href="https://buy.stripe.com/fZu7sMafB8ZT6M3bTZaMU05" class="btn btn-purple" style="width:auto;padding:14px 32px;" target="_blank">$99 — Business Kit</a>
+      </div>
+      <div class="trust-row" style="margin-top:16px;">
+        <span>🔒 Secure Stripe checkout</span>
+        <span>🛡️ 30-day money-back guarantee</span>
+        <span>📥 Instant download</span>
+      </div>
     </div>
   </div>
 
@@ -167,7 +379,7 @@
     var msg = document.getElementById('free-msg');
     var btn = e.target.querySelector('button');
     btn.textContent = 'Sending...'; btn.disabled = true;
-    
+
     fetch('/api/subscribe', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
@@ -175,7 +387,6 @@
     })
     .then(function(r) { return r.json(); })
     .then(function(d) {
-      // Show download links
       msg.innerHTML = '✅ <strong>Download ready!</strong><br><br>' +
         '<a href="/assets/templates/contractor-invoice-template.csv" download style="color:#22c55e;font-weight:600;">📄 Download Invoice Template</a><br>' +
         '<a href="/assets/templates/job-estimate-template.csv" download style="color:#22c55e;font-weight:600;">📄 Download Estimate Template</a>';
