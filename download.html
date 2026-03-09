@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-5R1VM2SZE1"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-5R1VM2SZE1');</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Download Your Templates — BuiltRight Academy</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root { --orange: #F97316; --orange-dark: #EA580C; --dark: #1A1A2E; --darker: #0F172A; --gray: #94A3B8; --light: #F8FAFC; }
+    body { font-family: 'Inter', -apple-system, sans-serif; background: var(--darker); color: var(--light); line-height: 1.6; -webkit-font-smoothing: antialiased; min-height: 100vh; display: flex; flex-direction: column; }
+    .container { max-width: 640px; margin: 0 auto; padding: 0 24px; }
+    nav { padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    nav .container { display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.3rem; color: var(--orange); text-decoration: none; letter-spacing: -0.5px; }
+    .logo span { color: var(--light); }
+    .nav-links a { color: var(--gray); text-decoration: none; font-size: 0.9rem; margin-left: 24px; }
+    .nav-links a:hover { color: var(--light); }
+    .content { flex: 1; display: flex; align-items: center; justify-content: center; padding: 60px 0; }
+    .card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 48px 40px;
+      text-align: center;
+      max-width: 540px;
+      width: 100%;
+    }
+    .card .icon { font-size: 3.5rem; margin-bottom: 16px; }
+    .card h1 { font-size: 1.8rem; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 8px; }
+    .card p { color: var(--gray); font-size: 1rem; margin-bottom: 24px; }
+    .download-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 32px; background: var(--orange); color: #fff;
+      border: none; border-radius: 10px; font-size: 1.05rem;
+      font-weight: 700; font-family: inherit; cursor: pointer;
+      text-decoration: none; margin: 6px;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .download-btn:hover { background: var(--orange-dark); transform: translateY(-1px); }
+    .download-btn svg { width: 20px; height: 20px; }
+    .upsell {
+      margin-top: 32px; padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .upsell h3 { font-size: 1.1rem; margin-bottom: 8px; }
+    .upsell p { font-size: 0.9rem; color: var(--gray); margin-bottom: 16px; }
+    .upsell-btn {
+      display: inline-block; padding: 10px 24px;
+      border: 2px solid var(--orange); color: var(--orange);
+      border-radius: 8px; font-weight: 600; font-size: 0.95rem;
+      text-decoration: none; transition: all 0.2s;
+    }
+    .upsell-btn:hover { background: var(--orange); color: #fff; }
+    .error-msg { color: #F87171; }
+    .loading { color: var(--gray); }
+    #loading-state, #success-state, #error-state { display: none; }
+    footer { padding: 24px 0; border-top: 1px solid rgba(255,255,255,0.06); text-align: center; font-size: 0.8rem; color: #334155; }
+    @media (max-width: 600px) { .card { padding: 32px 24px; } }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <a href="/" class="logo">Built<span>Right</span></a>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/blog/">Blog</a>
+      <a href="/templates/">Templates</a>
+    </div>
+  </div>
+</nav>
+
+<div class="content">
+  <div class="container">
+
+    <div class="card" id="loading-state">
+      <div class="icon">⏳</div>
+      <h1 class="loading">Verifying your purchase...</h1>
+      <p>Hang tight — we're confirming your payment.</p>
+    </div>
+
+    <div class="card" id="success-state">
+      <div class="icon">🎉</div>
+      <h1>You're all set!</h1>
+      <p>Your payment is confirmed. Click below to download your templates.</p>
+      <div id="download-buttons"></div>
+      <div class="upsell" id="upsell-section" style="display:none;">
+        <h3>🔥 Want the full toolkit?</h3>
+        <p>Upgrade to the <strong>Pro Contractor Bundle</strong> — get estimate templates, job costing tracker, and P&L tracker. Everything you need to run a profitable operation.</p>
+        <a href="/templates/#pro-bundle" class="upsell-btn">See Pro Bundle — $29</a>
+      </div>
+    </div>
+
+    <div class="card" id="error-state">
+      <div class="icon">⚠️</div>
+      <h1 class="error-msg">Payment Not Verified</h1>
+      <p>We couldn't verify your payment. This can happen if the payment is still processing or the link has expired.</p>
+      <a href="/templates/" class="download-btn">← Back to Templates</a>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <div class="container">
+    © 2026 BuiltRight Academy. Business skills for tradespeople.
+  </div>
+</footer>
+
+<script>
+(async function() {
+  const params = new URLSearchParams(window.location.search);
+  const sessionId = params.get('session_id');
+
+  if (!sessionId) {
+    document.getElementById('error-state').style.display = 'block';
+    return;
+  }
+
+  document.getElementById('loading-state').style.display = 'block';
+
+  try {
+    const res = await fetch('/api/verify-session?session_id=' + encodeURIComponent(sessionId));
+    const data = await res.json();
+
+    document.getElementById('loading-state').style.display = 'none';
+
+    if (data.paid && data.files && data.files.length > 0) {
+      document.getElementById('success-state').style.display = 'block';
+
+      const container = document.getElementById('download-buttons');
+      const fileLabels = {
+        'contractor-invoice.xlsx': '📄 Download Invoice Template',
+        'pro-bundle.zip': '📦 Download Pro Bundle (4 Templates)',
+        'complete-kit.zip': '📦 Download Complete Kit (9 Templates)',
+      };
+
+      data.files.forEach(function(file) {
+        const a = document.createElement('a');
+        a.href = '/api/download?file=' + encodeURIComponent(file) + '&session_id=' + encodeURIComponent(sessionId);
+        a.className = 'download-btn';
+        a.innerHTML = '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg> ' + (fileLabels[file] || 'Download ' + file);
+        container.appendChild(a);
+      });
+
+      // Show upsell for invoice-only buyers
+      if (data.product === 'invoice-pro') {
+        document.getElementById('upsell-section').style.display = 'block';
+      }
+
+      // Track conversion
+      if (typeof gtag === 'function') {
+        gtag('event', 'purchase', { transaction_id: sessionId, value: 0, currency: 'USD' });
+      }
+    } else {
+      document.getElementById('error-state').style.display = 'block';
+    }
+  } catch (err) {
+    document.getElementById('loading-state').style.display = 'none';
+    document.getElementById('error-state').style.display = 'block';
+  }
+})();
+</script>
+
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/_vercel/speed-insights/script.js"></script>
+</body>
+</html>

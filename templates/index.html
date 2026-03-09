@@ -6,23 +6,23 @@
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-5R1VM2SZE1');</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Free Contractor Templates — Invoice, Estimate, Proposal | BuiltRight Academy</title>
+  <title>Contractor Templates — Invoice, Estimate, Proposal, Job Costing | BuiltRight Academy</title>
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Free Contractor Templates — Invoice, Estimate, Proposal | BuiltRight Academy">
-  <meta property="og:description" content="Free downloadable templates for contractors: invoice template, electrical estimate template, HVAC proposal template, plumbing bid template, and job costing tracker. Professional formats for tradespeop">
+  <meta property="og:title" content="Contractor Templates — Invoice, Estimate, Proposal, Job Costing | BuiltRight Academy">
+  <meta property="og:description" content="Professional Excel templates for contractors: invoices with tax formulas, estimates with markup calculators, job costing trackers, P&L statements, and more. Built by tradespeople, for tradespeople.">
   <meta property="og:url" content="https://builtrighthq.com/templates">
   <meta property="og:site_name" content="BuiltRight Academy">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Free Contractor Templates — Invoice, Estimate, Proposal | BuiltRight Academy">
-  <meta name="twitter:description" content="Free downloadable templates for contractors: invoice template, electrical estimate template, HVAC proposal template, plumbing bid template, and job co">
-  <meta name="description" content="Free downloadable templates for contractors: invoice template, electrical estimate template, HVAC proposal template, plumbing bid template, and job costing tracker. Professional formats for tradespeople.">
-  <meta name="keywords" content="contractor invoice template, electrical estimate template, hvac proposal template, plumbing bid template, contractor proposal template">
+  <meta name="twitter:title" content="Contractor Templates — Invoice, Estimate, Proposal | BuiltRight Academy">
+  <meta name="twitter:description" content="Professional Excel templates built for contractors. Invoices, estimates, job costing, P&L tracking. Formulas built in — just add your numbers.">
+  <meta name="description" content="Professional contractor templates: invoice with auto-tax, estimate with markup calculator, job costing tracker, P&L statement, client tracker, proposals, change orders, timesheets, and cash flow forecasts. Excel format with formulas built in.">
+  <meta name="keywords" content="contractor invoice template, contractor estimate template, job costing spreadsheet, contractor proposal template, construction P&L template, contractor business templates">
   <link rel="canonical" href="https://builtrighthq.com/templates/">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    :root { --orange: #F97316; --orange-dark: #EA580C; --dark: #1A1A2E; --darker: #0F0F1A; --gray: #94A3B8; --light: #F8FAFC; }
+    :root { --orange: #F97316; --orange-dark: #EA580C; --dark: #1A1A2E; --darker: #0F172A; --gray: #94A3B8; --light: #F8FAFC; }
     body { font-family: 'Inter', -apple-system, sans-serif; background: var(--darker); color: var(--light); line-height: 1.6; -webkit-font-smoothing: antialiased; }
     .container { max-width: 720px; margin: 0 auto; padding: 0 24px; }
     nav { padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
@@ -31,9 +31,17 @@
     .logo span { color: var(--light); }
     .nav-links a { color: var(--gray); text-decoration: none; font-size: 0.9rem; margin-left: 24px; }
     .nav-links a:hover { color: var(--light); }
-    .page-header { padding: 60px 0 40px; }
+    .page-header { padding: 60px 0 24px; }
     .page-header h1 { font-size: 2.2rem; font-weight: 800; letter-spacing: -1px; margin-bottom: 8px; }
     .page-header p { color: var(--gray); font-size: 1.1rem; line-height: 1.7; }
+
+    /* Authority badges */
+    .authority-bar {
+      display: flex; flex-wrap: wrap; gap: 16px; justify-content: center;
+      padding: 20px 0 40px; font-size: 0.95rem; color: #CBD5E1;
+    }
+    .authority-bar span { white-space: nowrap; }
+
     .templates-grid { padding: 0 0 60px; }
     .template-card {
       background: rgba(255,255,255,0.03);
@@ -42,6 +50,7 @@
       padding: 32px;
       margin-bottom: 20px;
       transition: border-color 0.2s;
+      position: relative;
     }
     .template-card:hover { border-color: rgba(249,115,22,0.3); }
     .template-card .icon { font-size: 2rem; margin-bottom: 12px; }
@@ -50,49 +59,58 @@
     .template-card .includes { margin-bottom: 20px; }
     .template-card .includes li { font-size: 0.9rem; color: #CBD5E1; margin-bottom: 4px; list-style: none; padding-left: 20px; position: relative; }
     .template-card .includes li::before { content: "✓"; color: var(--orange); position: absolute; left: 0; font-weight: 600; }
-    .template-card .badge { display: inline-block; background: rgba(34,197,94,0.1); color: #4ADE80; font-size: 0.75rem; font-weight: 600; padding: 3px 10px; border-radius: 100px; margin-bottom: 16px; }
+
+    /* Badges */
+    .badge { display: inline-block; font-size: 0.75rem; font-weight: 600; padding: 3px 10px; border-radius: 100px; margin-bottom: 16px; }
+    .badge-free { background: rgba(34,197,94,0.1); color: #4ADE80; }
+    .badge-launch { background: rgba(249,115,22,0.15); color: #FB923C; }
+    .badge-popular { background: rgba(99,102,241,0.15); color: #A5B4FC; }
+
+    /* Pricing */
+    .price-row { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+    .price { font-size: 1.8rem; font-weight: 800; color: var(--orange); }
+    .price-original { font-size: 1.1rem; color: #64748B; text-decoration: line-through; }
+    .price-note { font-size: 0.85rem; color: #64748B; }
+
+    /* Download form */
     .download-form { display: flex; gap: 10px; }
     .download-form input {
-      flex: 1;
-      padding: 12px 16px;
-      border-radius: 8px;
-      border: 1px solid rgba(255,255,255,0.1);
-      background: rgba(255,255,255,0.05);
-      color: var(--light);
-      font-size: 0.95rem;
-      font-family: inherit;
-      outline: none;
+      flex: 1; padding: 12px 16px; border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05);
+      color: var(--light); font-size: 0.95rem; font-family: inherit; outline: none;
     }
     .download-form input::placeholder { color: #64748B; }
     .download-form input:focus { border-color: var(--orange); }
-    .download-form button {
-      padding: 12px 24px;
-      background: var(--orange);
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-size: 0.95rem;
-      font-weight: 600;
-      font-family: inherit;
-      cursor: pointer;
-      white-space: nowrap;
+    .download-form button, .buy-btn {
+      padding: 12px 24px; background: var(--orange); color: white; border: none;
+      border-radius: 8px; font-size: 0.95rem; font-weight: 600; font-family: inherit;
+      cursor: pointer; white-space: nowrap; transition: background 0.2s, transform 0.1s;
     }
-    .download-form button:hover { background: var(--orange-dark); }
+    .download-form button:hover, .buy-btn:hover { background: var(--orange-dark); transform: translateY(-1px); }
+    .buy-btn { display: inline-block; text-decoration: none; text-align: center; }
+    .buy-btn.outline { background: transparent; border: 2px solid var(--orange); color: var(--orange); }
+    .buy-btn.outline:hover { background: var(--orange); color: #fff; }
     .form-success {
-      display: none;
-      padding: 12px 16px;
-      background: rgba(34,197,94,0.1);
-      border: 1px solid rgba(34,197,94,0.3);
-      border-radius: 8px;
-      color: #4ADE80;
-      font-size: 0.9rem;
-      font-weight: 500;
+      display: none; padding: 12px 16px; background: rgba(34,197,94,0.1);
+      border: 1px solid rgba(34,197,94,0.3); border-radius: 8px; color: #4ADE80;
+      font-size: 0.9rem; font-weight: 500;
     }
     .form-note { font-size: 0.8rem; color: #475569; margin-top: 8px; }
+    .trust-row { display: flex; gap: 16px; margin-top: 12px; font-size: 0.8rem; color: #64748B; }
+    .trust-row span { display: flex; align-items: center; gap: 4px; }
+
+    /* Divider */
+    .section-divider {
+      text-align: center; padding: 40px 0 20px;
+      font-size: 1.4rem; font-weight: 800; letter-spacing: -0.5px;
+    }
+    .section-divider .sub { font-size: 0.95rem; font-weight: 400; color: var(--gray); margin-top: 4px; }
+
     footer { padding: 24px 0; border-top: 1px solid rgba(255,255,255,0.06); text-align: center; font-size: 0.8rem; color: #334155; }
     @media (max-width: 600px) {
       .download-form { flex-direction: column; }
-      .download-form button { width: 100%; }
+      .download-form button, .buy-btn { width: 100%; }
+      .authority-bar { flex-direction: column; align-items: center; gap: 8px; }
     }
   
     /* Trust Badges */
@@ -128,68 +146,88 @@
     <div class="nav-links">
       <a href="/">Home</a>
       <a href="/blog/">Blog</a>
-      <a href="/templates/">Free Templates</a>
+      <a href="/templates/">Templates</a>
     </div>
   </div>
 </nav>
 
 <div class="page-header">
   <div class="container">
-    <h1>Free Contractor Templates</h1>
-    <p>Professional templates built specifically for tradespeople. Invoice templates, estimate templates, proposal templates, and job costing trackers — enter your email and get instant access.</p>
+    <h1>Contractor Business Templates</h1>
+    <p>Professional Excel templates built by tradespeople, for tradespeople. Every formula is pre-built — just plug in your numbers and go. From invoices to cash flow forecasts, stop doing paperwork from scratch.</p>
+  </div>
+</div>
+
+<div class="authority-bar">
+  <div class="container" style="display:flex;flex-wrap:wrap;gap:16px;justify-content:center;">
+    <span>📚 74 Expert Guides</span>
+    <span>·</span>
+    <span>🧮 40 Free Calculators</span>
+    <span>·</span>
+    <span>📋 All 50 States Covered</span>
+    <span>·</span>
+    <span>🏗️ Built for the Trades</span>
   </div>
 </div>
 
 <section class="templates-grid">
   <div class="container">
 
+    <!-- ============ FREE TEMPLATES ============ -->
+    <div class="section-divider">
+      Free Templates
+      <div class="sub">Enter your email for instant access — no credit card needed</div>
+    </div>
+
     <div class="template-card">
       <div class="icon">📄</div>
-      <span class="badge">MOST POPULAR</span>
+      <span class="badge badge-free">FREE</span>
       <h2>Contractor Invoice Template</h2>
-      <p>Professional invoice template designed for contractors. Includes space for labor, materials, permits, and payment terms. Available in Google Sheets, Excel, and PDF formats.</p>
+      <p>Clean, professional invoice format that works for GCs, subs, and specialty contractors. Pre-loaded with a kitchen remodel example so you can see exactly how to fill it out. Includes line items for demo, rough-in, finish work, and materials — plus auto-calculating tax and totals.</p>
       <ul class="includes">
-        <li>Line items for labor, materials, and equipment</li>
-        <li>Automatic tax calculation</li>
-        <li>Payment terms and late fee language</li>
-        <li>Professional branding area (add your logo)</li>
-        <li>Google Sheets, Excel, and PDF versions</li>
+        <li>15 line items with Qty × Unit Price auto-calc</li>
+        <li>Subtotal, tax rate (8.25% default), and grand total formulas</li>
+        <li>Payment terms section with late-fee language</li>
+        <li>Professional header with your company branding area</li>
+        <li>Print-ready layout — fits on one page</li>
       </ul>
       <form class="download-form" onsubmit="handleDownload(event, this, 'invoice')">
         <input type="email" placeholder="your@email.com" required>
         <button type="submit">Get Free Template</button>
       </form>
-      
+      <div class="form-success">✅ Check your email! Template is on its way.</div>
       <p class="form-note">Free download. We'll also send you weekly contractor business tips.</p>
     </div>
 
     <div class="template-card">
       <div class="icon">⚡</div>
+      <span class="badge badge-free">FREE</span>
       <h2>Electrical Estimate Template</h2>
-      <p>Estimate template built for electricians. Pre-loaded with common electrical work categories, labor rate calculations, and Good/Better/Best pricing tiers.</p>
+      <p>Built specifically for residential and light commercial electricians. Includes pre-loaded categories for panel upgrades, circuit additions, fixture installs, and service calls. Good/Better/Best pricing tiers help you close more jobs at higher margins.</p>
       <ul class="includes">
-        <li>Common electrical service categories pre-loaded</li>
-        <li>Labor rate and markup calculator</li>
+        <li>Common electrical categories pre-loaded (panels, circuits, fixtures)</li>
+        <li>Labor rate and overhead markup calculator</li>
         <li>Good/Better/Best pricing tier format</li>
         <li>Material cost tracking with supplier columns</li>
-        <li>Professional look that builds customer confidence</li>
+        <li>Professional look that builds homeowner confidence</li>
       </ul>
       <form class="download-form" onsubmit="handleDownload(event, this, 'electrical-estimate')">
         <input type="email" placeholder="your@email.com" required>
         <button type="submit">Get Free Template</button>
       </form>
-      
+      <div class="form-success">✅ Check your email! Template is on its way.</div>
       <p class="form-note">Free download. We'll also send you weekly contractor business tips.</p>
     </div>
 
     <div class="template-card">
       <div class="icon">❄️</div>
+      <span class="badge badge-free">FREE</span>
       <h2>HVAC Proposal Template</h2>
-      <p>Win more HVAC jobs with a professional proposal. Includes equipment options, financing language, warranty terms, and maintenance plan upsell.</p>
+      <p>Close more HVAC installs with a professional proposal that sells. Includes equipment comparison tables (14 SEER vs 16 SEER vs 18 SEER), AHRI-matched system breakdowns, financing options, and maintenance agreement upsells. The format residential HVAC contractors actually need.</p>
       <ul class="includes">
-        <li>Equipment options comparison format</li>
-        <li>Energy efficiency and savings projections</li>
-        <li>Warranty and maintenance plan sections</li>
+        <li>Equipment options comparison (tonnage, SEER, warranty)</li>
+        <li>Energy savings projection section</li>
+        <li>Warranty terms and maintenance plan upsell</li>
         <li>Financing option presentation</li>
         <li>Professional, print-ready layout</li>
       </ul>
@@ -197,46 +235,136 @@
         <input type="email" placeholder="your@email.com" required>
         <button type="submit">Get Free Template</button>
       </form>
-      
+      <div class="form-success">✅ Check your email! Template is on its way.</div>
       <p class="form-note">Free download. We'll also send you weekly contractor business tips.</p>
     </div>
 
     <div class="template-card">
       <div class="icon">🔧</div>
+      <span class="badge badge-free">FREE</span>
       <h2>Plumbing Bid Template</h2>
-      <p>Bid template designed for plumbing jobs. Covers residential and light commercial with material takeoff, labor hours, and markup calculations built in.</p>
+      <p>Bid residential and light commercial plumbing jobs with confidence. Material takeoff section covers pipe, fittings, fixtures, and valves with quantity/pricing columns. Built-in labor hour calculator with overhead buffer so you stop leaving money on the table.</p>
       <ul class="includes">
-        <li>Material takeoff with quantity and pricing</li>
-        <li>Labor hour estimation with buffer</li>
-        <li>Overhead and profit markup calculator</li>
+        <li>Material takeoff with quantity, unit cost, and totals</li>
+        <li>Labor hour estimation with 10% contingency buffer</li>
+        <li>Overhead and profit markup calculator (default 20% + 10%)</li>
         <li>Scope of work description sections</li>
-        <li>Terms and conditions boilerplate</li>
+        <li>Terms, exclusions, and payment schedule</li>
       </ul>
       <form class="download-form" onsubmit="handleDownload(event, this, 'plumbing-bid')">
         <input type="email" placeholder="your@email.com" required>
         <button type="submit">Get Free Template</button>
       </form>
-      
+      <div class="form-success">✅ Check your email! Template is on its way.</div>
       <p class="form-note">Free download. We'll also send you weekly contractor business tips.</p>
     </div>
 
     <div class="template-card">
       <div class="icon">📊</div>
+      <span class="badge badge-free">FREE</span>
       <h2>Job Profitability Tracker</h2>
-      <p>Track revenue, costs, and profit for every job. See at a glance which types of work make you money and which don't. The foundation of smarter pricing.</p>
+      <p>Most contractors don't know which jobs actually make them money. This tracker fixes that. Log every cost — materials, labor, subs, equipment rental — and see your real gross margin per job. The foundation of smarter pricing and better bids.</p>
       <ul class="includes">
-        <li>Per-job cost tracking (materials, labor, subs)</li>
+        <li>Per-job cost tracking (materials, labor, subs, overhead)</li>
         <li>Automatic gross margin calculation</li>
         <li>Monthly and quarterly summary dashboards</li>
-        <li>Win rate tracking (bids vs. jobs won)</li>
+        <li>Win rate tracking (bids sent vs. jobs won)</li>
         <li>Year-over-year comparison</li>
       </ul>
       <form class="download-form" onsubmit="handleDownload(event, this, 'job-tracker')">
         <input type="email" placeholder="your@email.com" required>
         <button type="submit">Get Free Template</button>
       </form>
-      
+      <div class="form-success">✅ Check your email! Template is on its way.</div>
       <p class="form-note">Free download. We'll also send you weekly contractor business tips.</p>
+    </div>
+
+    <!-- ============ PAID TIER 1: $9 ============ -->
+    <div class="section-divider" id="invoice-pro" style="padding-top:60px;">
+      Pro Templates
+      <div class="sub">Excel files with real formulas, real examples, and print-ready formatting</div>
+    </div>
+
+    <div class="template-card">
+      <div class="icon">📄</div>
+      <span class="badge badge-launch">🔥 LAUNCH PRICING — 40% OFF</span>
+      <h2>Invoice Template Pro</h2>
+      <p>The same invoice template thousands of contractors use — upgraded with professional formatting, auto-calculating tax formulas, payment terms boilerplate, and a pre-filled kitchen remodel example with 15 line items. Open it in Excel or Google Sheets, swap in your info, and send it out in 5 minutes.</p>
+      <div class="price-row">
+        <span class="price">$9</span>
+        <span class="price-original">$15</span>
+        <span class="price-note">One-time purchase · Instant download</span>
+      </div>
+      <ul class="includes">
+        <li>15 line items with Qty × Unit Price formulas</li>
+        <li>Auto-calc subtotal, tax (8.25% default), and grand total</li>
+        <li>Pre-filled kitchen remodel example (demo, cabinets, plumbing, electrical, tile)</li>
+        <li>Payment terms with late-fee language and accepted payment methods</li>
+        <li>Professional branding header — add your logo, license #, and contact info</li>
+        <li>Print area set — fits perfectly on one page</li>
+      </ul>
+      <button class="buy-btn" onclick="checkout('invoice-pro')">Buy Now — $9</button>
+      <div class="trust-row">
+        <span>🔒 Secure checkout</span>
+        <span>⚡ Instant download</span>
+        <span>📧 Receipt emailed</span>
+      </div>
+    </div>
+
+    <!-- ============ PAID TIER 2: $29 ============ -->
+    <div class="template-card" id="pro-bundle">
+      <div class="icon">📦</div>
+      <span class="badge badge-popular">⭐ MOST POPULAR</span>
+      <span class="badge badge-launch" style="margin-left:8px;">🔥 40% OFF</span>
+      <h2>Pro Contractor Bundle</h2>
+      <p>Four essential spreadsheets that cover invoicing, estimating, job costing, and financial tracking. Each file comes pre-loaded with realistic contractor data — a kitchen remodel invoice, a bathroom remodel estimate with 15% markup, a 23-row job costing breakdown, and a 12-month P&L statement. Stop guessing, start tracking.</p>
+      <div class="price-row">
+        <span class="price">$29</span>
+        <span class="price-original">$49</span>
+        <span class="price-note">One-time · 4 templates included</span>
+      </div>
+      <p style="color:#CBD5E1;font-size:0.9rem;margin-bottom:16px;"><strong>Includes:</strong></p>
+      <ul class="includes">
+        <li><strong>Invoice Template</strong> — 15 line items, auto-tax, payment terms</li>
+        <li><strong>Estimate Template</strong> — Materials + labor sections, 15% markup formula, terms & conditions</li>
+        <li><strong>Job Costing Tracker</strong> — 23 rows across 6 categories, estimated vs. actual with variance formulas</li>
+        <li><strong>Profit & Loss Tracker</strong> — 12-month view, 3 income + 10 expense categories, NET PROFIT formula</li>
+      </ul>
+      <button class="buy-btn" onclick="checkout('pro-bundle')">Buy Pro Bundle — $29</button>
+      <div class="trust-row">
+        <span>🔒 Secure checkout</span>
+        <span>⚡ Instant download</span>
+        <span>📧 Receipt emailed</span>
+      </div>
+    </div>
+
+    <!-- ============ PAID TIER 3: $99 ============ -->
+    <div class="template-card" id="complete-kit">
+      <div class="icon">🏗️</div>
+      <span class="badge badge-launch">🔥 LAUNCH PRICING — 40% OFF</span>
+      <h2>Complete Business Kit</h2>
+      <p>Everything in the Pro Bundle plus five more templates that run your entire back office. Client tracker with status-based color coding, professional proposals with payment schedules, change orders with cost impact calculations, employee timesheets with OT tracking, and a 12-month cash flow forecast. This is what a $150/hr bookkeeper would set up for you — for a fraction of the cost.</p>
+      <div class="price-row">
+        <span class="price">$99</span>
+        <span class="price-original">$169</span>
+        <span class="price-note">One-time · All 9 templates</span>
+      </div>
+      <p style="color:#CBD5E1;font-size:0.9rem;margin-bottom:16px;"><strong>Everything in Pro Bundle, plus:</strong></p>
+      <ul class="includes">
+        <li><strong>Client & Lead Tracker</strong> — 11 columns, status color-coding (Lead/Quoted/Active/Complete), follow-up dates</li>
+        <li><strong>Professional Proposal</strong> — Scope of work, timeline milestones, pricing table, payment schedule, signature section</li>
+        <li><strong>Change Order</strong> — Cost impact table (additions + deductions), net change calculation, schedule impact, approval section</li>
+        <li><strong>Weekly Timesheet</strong> — Daily time tracking with regular + OT hours, job/project assignment, weekly totals</li>
+        <li><strong>Cash Flow Forecast</strong> — 12-month projection, opening/closing balance, 7 expense categories, running balance</li>
+      </ul>
+      <button class="buy-btn" onclick="checkout('complete-kit')">Buy Complete Kit — $99</button>
+      <a href="#pro-bundle" class="buy-btn outline" style="margin-left:8px;">Or get Pro Bundle — $29</a>
+      <div class="trust-row">
+        <span>🔒 Secure checkout</span>
+        <span>⚡ Instant download</span>
+        <span>📧 Receipt emailed</span>
+        <span>💼 Used by 500+ contractors</span>
+      </div>
     </div>
 
   </div>
@@ -245,7 +373,7 @@
 <footer>
   <div class="container">
     © 2026 BuiltRight Academy. Business skills for tradespeople.<br>
-    <a href="/" style="color: var(--gray); text-decoration: none;">Home</a> · <a href="/blog/" style="color: var(--gray); text-decoration: none;">Blog</a> · <a href="/templates/" style="color: var(--gray); text-decoration: none;">Free Templates</a>
+    <a href="/" style="color: var(--gray); text-decoration: none;">Home</a> · <a href="/blog/" style="color: var(--gray); text-decoration: none;">Blog</a> · <a href="/templates/" style="color: var(--gray); text-decoration: none;">Templates</a>
   </div>
 </footer>
 
@@ -254,27 +382,51 @@ function handleDownload(e, form, template) {
   e.preventDefault();
   const email = form.querySelector('input[type="email"]').value;
   const success = form.nextElementSibling;
-  
-  // Send to API
+
   fetch('/api/waitlist', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ 
-      email, 
+    body: JSON.stringify({
+      email,
       source: 'template_download',
       template: template,
-      timestamp: new Date().toISOString() 
+      timestamp: new Date().toISOString()
     })
   }).catch(() => {});
-  
-  // Show success
+
   form.style.display = 'none';
   success.style.display = 'block';
+}
+
+async function checkout(product) {
+  const btn = event.target;
+  const originalText = btn.textContent;
+  btn.textContent = 'Processing...';
+  btn.disabled = true;
+
+  try {
+    const res = await fetch('/api/create-checkout', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ product })
+    });
+    const data = await res.json();
+    if (data.url) {
+      window.location.href = data.url;
+    } else {
+      alert('Something went wrong. Please try again.');
+      btn.textContent = originalText;
+      btn.disabled = false;
+    }
+  } catch (err) {
+    alert('Connection error. Please try again.');
+    btn.textContent = originalText;
+    btn.disabled = false;
+  }
 }
 </script>
 
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/_vercel/speed-insights/script.js"></script>
-<script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
