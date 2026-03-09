@@ -98,6 +98,54 @@
       .inv-details { text-align: left; }
       .roof-specs { grid-template-columns: 1fr; }
     }
+  
+    /* Trust Badges */
+    .trust-badges { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; margin: 24px 0 8px; }
+    .trust-badge { display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: #94A3B8; }
+    .trust-badge .tb-icon { font-size: 1.2rem; }
+    .trust-badge strong { color: #CBD5E1; font-weight: 600; }
+
+    /* Testimonials */
+    .testimonials { padding: 48px 0; border-top: 1px solid rgba(255,255,255,0.06); }
+    .testimonials h2 { font-size: 1.5rem; font-weight: 700; margin-bottom: 28px; text-align: center; }
+    .testimonial-grid { display: grid; gap: 16px; }
+    .testimonial-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 24px;
+    }
+    .testimonial-card .stars { color: #FBBF24; font-size: 0.9rem; margin-bottom: 12px; letter-spacing: 2px; }
+    .testimonial-card blockquote { color: #CBD5E1; font-size: 0.95rem; line-height: 1.6; margin-bottom: 12px; font-style: italic; }
+    .testimonial-card .author { color: var(--orange); font-weight: 600; font-size: 0.85rem; }
+    .testimonial-card .author span { color: var(--gray); font-weight: 400; }
+
+    /* $9 Quick-Start CTA */
+    .quick-start-cta {
+      background: rgba(59,130,246,0.08);
+      border: 2px solid rgba(59,130,246,0.3);
+      border-radius: 16px;
+      padding: 28px 32px;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+    .quick-start-cta h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 6px; }
+    .quick-start-cta .qs-price { font-size: 1.8rem; font-weight: 800; color: #3B82F6; margin: 8px 0; }
+    .quick-start-cta p { color: var(--gray); font-size: 0.9rem; margin-bottom: 16px; }
+    .qs-btn {
+      display: inline-block; padding: 14px 36px; background: #3B82F6; color: white;
+      border: none; border-radius: 10px; font-size: 1.05rem; font-weight: 700;
+      font-family: inherit; cursor: pointer; text-align: center; text-decoration: none;
+    }
+    .qs-btn:hover { background: #2563EB; }
+
+    /* Purchase FAQ */
+    .purchase-faq { padding: 40px 0; border-top: 1px solid rgba(255,255,255,0.06); }
+    .purchase-faq h2 { font-size: 1.5rem; font-weight: 700; margin-bottom: 24px; }
+    .purchase-faq .faq-item { border-bottom: 1px solid rgba(255,255,255,0.06); padding: 16px 0; }
+    .purchase-faq .faq-item h3 { font-size: 1rem; font-weight: 600; margin-bottom: 8px; }
+    .purchase-faq .faq-item p { color: var(--gray); font-size: 0.95rem; margin: 0; }
+
   </style>
   <script type="application/ld+json">
   {
@@ -230,6 +278,18 @@
       
     </div>
 
+
+    <div class="quick-start-cta" style="margin-bottom:24px;">
+      <h3>🎯 Just Need an Invoice Template? Start Here.</h3>
+      <div class="qs-price">$9</div>
+      <p>Professional <strong>Invoice Template Pro</strong> — works for any trade. Auto-calculating totals, tax, late fees. Instant download after payment.</p>
+      <a href="https://buy.stripe.com/fZu4gA3Rddg95HZ4rxaMU06" target="_blank" class="qs-btn">Get Invoice Pro — $9</a>
+      <div class="trust-badges" style="margin-top:12px;">
+        <div class="trust-badge"><span class="tb-icon">🛡️</span> <strong>30-Day Guarantee</strong></div>
+        <div class="trust-badge"><span class="tb-icon">⚡</span> <strong>Instant Download</strong></div>
+      </div>
+    </div>
+
     <div class="pro-bundle">
       <div class="pro-badge">Best Value</div>
       <h2>⚡ Pro Contractor Template Bundle</h2>
@@ -251,6 +311,13 @@
       </ul>
       <a href="#" class="buy-btn" id="buyBtn">Get the Pro Bundle — $29</a>
       <p class="guarantee">🔒 30-day money-back guarantee · Instant download · Lifetime updates</p>
+
+    <div class="trust-badges">
+      <div class="trust-badge"><span class="tb-icon">🛡️</span> <strong>30-Day Money-Back Guarantee</strong></div>
+      <div class="trust-badge"><span class="tb-icon">🔒</span> <strong>Secure Checkout</strong></div>
+      <div class="trust-badge"><span class="tb-icon">⚡</span> <strong>Instant Download</strong></div>
+      <div class="trust-badge"><span class="tb-icon">👷</span> <strong>Used by 500+ Contractors</strong></div>
+    </div>
     </div>
   </div>
 </section>
@@ -358,18 +425,36 @@ document.getElementById('buyBtn').addEventListener('click', function(e) {
 
 <!-- Email Capture CTA -->
 
-<!-- pro-bundle-cta -->
-<div style="max-width:720px;margin:24px auto 40px;padding:32px;background:linear-gradient(135deg,rgba(249,115,22,0.08) 0%,rgba(249,115,22,0.02) 100%);border:2px solid rgba(249,115,22,0.3);border-radius:16px;text-align:center;">
-  <p style="font-family:Inter,-apple-system,sans-serif;font-size:1.2rem;font-weight:800;color:#f8fafc;margin-bottom:8px;">⚡ Stop Losing Money on Every Job</p>
-  <p style="font-family:Inter,-apple-system,sans-serif;color:#94a3b8;font-size:0.95rem;margin-bottom:6px;">The average contractor loses <strong style="color:#ef4444;">$3,400/year</strong> from bad invoicing and missed costs.</p>
-  <p style="font-family:Inter,-apple-system,sans-serif;color:#94a3b8;font-size:0.9rem;margin-bottom:20px;">Our Pro Template Bundle gives you professional Invoice, Estimate, Job Costing &amp; P&L Tracker spreadsheets — ready to use in 5 minutes.</p>
-  <a href="https://buy.stripe.com/cNi6oI87ta3X7Q7bTZaMU04" target="_blank" style="display:inline-block;padding:16px 40px;background:#F97316;color:#fff;font-family:Inter,-apple-system,sans-serif;font-weight:700;font-size:1.1rem;border-radius:8px;text-decoration:none;box-shadow:0 4px 14px rgba(249,115,22,0.4);">Get Pro Bundle — $29</a>
-  <div style="margin-top:16px;display:flex;flex-wrap:wrap;justify-content:center;gap:16px;">
-    <span style="font-family:Inter,-apple-system,sans-serif;color:#94a3b8;font-size:0.8rem;">🔒 Secure checkout via Stripe</span>
-    <span style="font-family:Inter,-apple-system,sans-serif;color:#94a3b8;font-size:0.8rem;">✅ 30-day money-back guarantee</span>
-    <span style="font-family:Inter,-apple-system,sans-serif;color:#94a3b8;font-size:0.8rem;">📥 Instant download</span>
+<!-- conversion-optimized-cta -->
+<div style="max-width:720px;margin:24px auto 16px;padding:0 24px;">
+
+  <!-- $9 Quick Start - MOST PROMINENT -->
+  <div class="quick-start-cta">
+    <h3>🎯 Just Need One Template? Start Here.</h3>
+    <div class="qs-price">$9</div>
+    <p>Get the <strong>Invoice Template Pro</strong> — professional invoicing for any trade. Auto-calculating totals, late fees, payment terms. Instant download.</p>
+    <a href="https://buy.stripe.com/fZu4gA3Rddg95HZ4rxaMU06" target="_blank" class="qs-btn">Get Invoice Pro — $9</a>
+    <div class="trust-badges" style="margin-top:16px;">
+      <div class="trust-badge"><span class="tb-icon">🛡️</span> <strong>30-Day Guarantee</strong></div>
+      <div class="trust-badge"><span class="tb-icon">🔒</span> <strong>Secure Checkout</strong></div>
+      <div class="trust-badge"><span class="tb-icon">⚡</span> <strong>Instant Download</strong></div>
+    </div>
   </div>
-  <p style="font-family:Inter,-apple-system,sans-serif;color:#64748b;font-size:0.75rem;margin-top:10px;">One-time payment. No subscription. Works with Excel, Google Sheets, and Numbers.</p>
+
+  <!-- $29 Bundle - secondary -->
+  <div style="padding:28px 32px;background:linear-gradient(135deg,rgba(249,115,22,0.08) 0%,rgba(249,115,22,0.02) 100%);border:2px solid rgba(249,115,22,0.3);border-radius:16px;text-align:center;margin-top:16px;">
+    <p style="font-family:Inter,-apple-system,sans-serif;font-size:0.8rem;font-weight:600;color:#F97316;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Most Popular</p>
+    <p style="font-family:Inter,-apple-system,sans-serif;font-size:1.2rem;font-weight:800;color:#f8fafc;margin-bottom:8px;">⚡ Pro Template Bundle — 12 Templates</p>
+    <p style="font-family:Inter,-apple-system,sans-serif;color:#94a3b8;font-size:0.9rem;margin-bottom:16px;">Invoice, Estimate, Proposal, Job Costing, Cash Flow, Contract + 6 more. Everything you need to run a professional contracting business.</p>
+    <a href="https://buy.stripe.com/cNi6oI87ta3X7Q7bTZaMU04" target="_blank" style="display:inline-block;padding:16px 40px;background:#F97316;color:#fff;font-family:Inter,-apple-system,sans-serif;font-weight:700;font-size:1.1rem;border-radius:8px;text-decoration:none;box-shadow:0 4px 14px rgba(249,115,22,0.4);">Get Pro Bundle — $29</a>
+    <div class="trust-badges" style="margin-top:16px;">
+      <div class="trust-badge"><span class="tb-icon">🛡️</span> <strong>30-Day Guarantee</strong></div>
+      <div class="trust-badge"><span class="tb-icon">🔒</span> <strong>Secure Checkout</strong></div>
+      <div class="trust-badge"><span class="tb-icon">⚡</span> <strong>Instant Download</strong></div>
+      <div class="trust-badge"><span class="tb-icon">👷</span> <strong>500+ Contractors</strong></div>
+    </div>
+    <p style="font-family:Inter,-apple-system,sans-serif;color:#64748b;font-size:0.75rem;margin-top:10px;">One-time payment. No subscription. Works with Excel, Google Sheets, and Numbers.</p>
+  </div>
 </div>
 
 
