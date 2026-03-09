@@ -2,7 +2,7 @@ import { readFileSync } from 'fs';
 import { join } from 'path';
 
 export default async function handler(req, res) {
-  const stripe = require('stripe')(process.env.MACK_STRIPE_KEY);
+  const stripe = require('stripe')(process.env.AGENT4_STRIPE_KEY);
   const { file, session_id } = req.query;
   if (!file || !session_id) return res.status(400).json({ error: 'Missing params' });
 

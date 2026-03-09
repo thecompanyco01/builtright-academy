@@ -4,7 +4,7 @@ export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   if (req.method === 'OPTIONS') return res.status(200).end();
 
-  const stripe = require('stripe')(process.env.MACK_STRIPE_KEY);
+  const stripe = require('stripe')(process.env.AGENT4_STRIPE_KEY);
   const { session_id } = req.query;
   if (!session_id) return res.status(400).json({ error: 'Missing session_id' });
 

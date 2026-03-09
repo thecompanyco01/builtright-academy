@@ -5,11 +5,11 @@ export default async function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(200).end();
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
-  const stripe = require('stripe')(process.env.MACK_STRIPE_KEY);
+  const stripe = require('stripe')(process.env.AGENT4_STRIPE_KEY);
   const products = {
-    'invoice-pro': { price: 'price_1T8klbLLqbtKyF4mSqbExGu0', name: 'Invoice Template Pro' },
-    'pro-bundle': { price: 'price_1T8YqILLqbtKyF4mwrtJsqoB', name: 'Pro Contractor Bundle' },
-    'complete-kit': { price: 'price_1T8YvHLLqbtKyF4mYhOy5htr', name: 'Complete Business Kit' }
+    'invoice-pro': { price: 'price_1T9AhyPwH6Vr5IXOZ9l7UfG9', name: 'Invoice Template Pro' },
+    'pro-bundle': { price: 'price_1T9AhzPwH6Vr5IXOCClJ5NL7', name: 'Pro Contractor Bundle' },
+    'complete-kit': { price: 'price_1T9Ai1PwH6Vr5IXOV6vcx4eS', name: 'Complete Business Kit' }
   };
 
   const { product } = req.body || {};
