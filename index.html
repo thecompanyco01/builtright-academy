@@ -537,17 +537,18 @@
 </section>
 
 <section class="bottom-cta">
-  <div class="container">
+  <div class="container" style="text-align:center;">
     <h2>Stop guessing. Start building right.</h2>
-    <p>Get free contractor templates, calculator updates, and business tips for your trade.</p>
-    <form class="waitlist-form" id="waitlistForm2">
-      <input type="email" id="emailInput2" placeholder="your@email.com" required>
-      <button type="submit">Get Free Templates</button>
-    </form>
-    <div class="form-success" id="formSuccess2">
-      🎉 Check your downloads! <a href="/templates/free-download" style="color:#F97316;">Get your free templates here →</a>
+    <p>Professional templates used by 500+ contractors to win more jobs and boost profits.</p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:24px;">
+      <a href="https://buy.stripe.com/cNi6oI87ta3X7Q7bTZaMU04" target="_blank" style="display:inline-block;padding:16px 40px;background:#F97316;color:#fff;font-family:Inter,-apple-system,sans-serif;font-weight:700;font-size:1.1rem;border-radius:8px;text-decoration:none;box-shadow:0 4px 14px rgba(249,115,22,0.4);">Get Pro Bundle — $29</a>
+      <a href="https://buy.stripe.com/fZu7sMafB8ZT6M3bTZaMU05" target="_blank" style="display:inline-block;padding:16px 40px;background:transparent;color:#F97316;font-family:Inter,-apple-system,sans-serif;font-weight:700;font-size:1.1rem;border-radius:8px;text-decoration:none;border:2px solid #F97316;">Complete Business Kit — $99</a>
     </div>
-    <p class="form-note">No spam. Free invoice & estimate templates included.</p>
+    <div style="margin-top:16px;display:flex;flex-wrap:wrap;justify-content:center;gap:16px;">
+      <span style="font-family:Inter,-apple-system,sans-serif;color:#94a3b8;font-size:0.8rem;">🔒 Secure Stripe checkout</span>
+      <span style="font-family:Inter,-apple-system,sans-serif;color:#94a3b8;font-size:0.8rem;">✅ 30-day money-back guarantee</span>
+      <span style="font-family:Inter,-apple-system,sans-serif;color:#94a3b8;font-size:0.8rem;">📥 Instant download</span>
+    </div>
   </div>
 </section>
 
@@ -585,10 +586,7 @@
         body: JSON.stringify({ email, source: 'landing_page', lead_magnet: 'waitlist', timestamp: new Date().toISOString() })
       }).catch(() => {});
     });
-  }
-  handleSubmit('waitlistForm', 'formSuccess');
-  handleSubmit('waitlistForm2', 'formSuccess2');
-</script>
+  }</script>
 
 <script type="application/ld+json">
 {
