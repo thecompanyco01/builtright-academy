@@ -2,7 +2,8 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
-    { "source": "/calculators/:path*", "destination": "/tools/:path*", "permanent": true }
+    { "source": "/calculators/:path*", "destination": "/tools/:path*", "permanent": true },
+    { "source": "/free-download", "destination": "/templates/free-download", "permanent": true }
   ],
   "headers": [
     {
