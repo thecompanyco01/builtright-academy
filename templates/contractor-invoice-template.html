@@ -187,6 +187,28 @@
     .purchase-faq .faq-item h3 { font-size: 1rem; font-weight: 600; margin-bottom: 8px; }
     .purchase-faq .faq-item p { color: var(--gray); font-size: 0.95rem; margin: 0; }
 
+  
+    /* Preview Gallery */
+    .preview-gallery { padding: 48px 0; }
+    .preview-gallery h2 { font-size: 1.5rem; font-weight: 700; margin-bottom: 8px; text-align: center; }
+    .preview-gallery .pg-sub { color: var(--gray); text-align: center; margin-bottom: 28px; font-size: 0.95rem; }
+    .preview-images { display: flex; flex-direction: column; gap: 20px; }
+    .preview-img-wrap {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 24px;
+      transition: border-color 0.2s;
+    }
+    .preview-img-wrap:hover { border-color: rgba(249,115,22,0.3); }
+    .preview-img-wrap img { width: 100%; height: auto; border-radius: 8px; }
+    .preview-img-wrap .caption { text-align: center; color: var(--gray); font-size: 0.85rem; margin-top: 12px; }
+    /* Launch pricing */
+    .launch-price { display: flex; align-items: baseline; gap: 12px; justify-content: center; }
+    .launch-price .current { font-size: 2.2rem; font-weight: 800; color: #3B82F6; }
+    .launch-price .was { font-size: 1.1rem; color: var(--gray); text-decoration: line-through; }
+    .launch-badge { display: inline-block; background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); color: #EF4444; font-size: 0.75rem; font-weight: 700; padding: 4px 12px; border-radius: 100px; text-transform: uppercase; letter-spacing: 0.5px; }
+
   </style>
   <script type="application/ld+json">
   {
@@ -254,6 +276,24 @@
         Subtotal: $2,800.00<br>
         Tax (8%): $224.00<br>
         <span style="color: #F97316; font-size:1.2rem;">Total Due: $3,024.00</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="preview-gallery">
+  <div class="container">
+    <h2>📋 What You Get — Template Preview</h2>
+    <p class="pg-sub">Professional invoice template, filled out with real contractor data. This is exactly what your customers will see.</p>
+    <div class="preview-images">
+      <div class="preview-img-wrap">
+        <img src="/images/previews/invoice-preview.svg" alt="Contractor invoice template preview - filled out with line items, labor, materials, tax calculation" loading="lazy">
+        <p class="caption">Filled-out invoice with auto-calculating subtotals, tax, and payment terms</p>
+      </div>
+      <div class="preview-img-wrap">
+        <img src="/images/previews/invoice-preview-2.svg" alt="Invoice template features checklist - what's included" loading="lazy">
+        <p class="caption">Everything included — works for all trades, fully customizable</p>
       </div>
     </div>
   </div>
