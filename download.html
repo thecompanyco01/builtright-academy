@@ -118,9 +118,19 @@
 (async function() {
   const params = new URLSearchParams(window.location.search);
   const sessionId = params.get('session_id');
+  const productParam = params.get('product');
 
-  if (!sessionId) {
+  if (!sessionId && !productParam) {
     document.getElementById('error-state').style.display = 'block';
+    return;
+  }
+
+  // If we only have product param (no session_id), still try to show download
+  // This handles edge cases where Stripe doesn't pass session_id
+  if (!sessionId && productParam) {
+    document.getElementById('error-state').style.display = 'block';
+    document.querySelector('#error-state h1').textContent = 'Almost there!';
+    document.querySelector('#error-state p').textContent = 'Your payment may still be processing. Please check your email for a receipt from Stripe, then refresh this page. If you continue to have issues, email hello@builtrighthq.com with your receipt and we\'ll send your files directly.';
     return;
   }
 
