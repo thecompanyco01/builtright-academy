@@ -167,6 +167,26 @@
     .launch-price .was { font-size: 1.1rem; color: var(--gray); text-decoration: line-through; }
     .launch-badge { display: inline-block; background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); color: #EF4444; font-size: 0.75rem; font-weight: 700; padding: 4px 12px; border-radius: 100px; text-transform: uppercase; letter-spacing: 0.5px; }
 
+  
+    /* What's Included Checklist */
+    .whats-included { padding: 48px 0; border-top: 1px solid rgba(255,255,255,0.06); }
+    .whats-included h2 { font-size: 1.5rem; font-weight: 700; margin-bottom: 8px; }
+    .whats-included .wi-sub { color: var(--gray); margin-bottom: 24px; font-size: 0.95rem; }
+    .wi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+    .wi-item { display: flex; gap: 10px; align-items: flex-start; padding: 12px 16px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 10px; }
+    .wi-item .wi-check { color: #22C55E; font-weight: 700; flex-shrink: 0; font-size: 1.1rem; line-height: 1; margin-top: 2px; }
+    .wi-item .wi-text { font-size: 0.9rem; color: #CBD5E1; line-height: 1.4; }
+    .wi-item .wi-text strong { color: var(--light); font-weight: 600; }
+    .wi-item .wi-text small { display: block; color: var(--gray); font-size: 0.8rem; margin-top: 2px; }
+    .bundle-previews { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 24px; }
+    .bundle-previews .bp-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 16px; }
+    .bundle-previews .bp-card img { width: 100%; height: auto; border-radius: 8px; }
+    .bundle-previews .bp-card .bp-label { text-align: center; color: var(--gray); font-size: 0.8rem; margin-top: 8px; }
+    @media (max-width: 600px) {
+      .wi-grid { grid-template-columns: 1fr; }
+      .bundle-previews { grid-template-columns: 1fr; }
+    }
+
   </style>
   <script type="application/ld+json">
   {
@@ -345,6 +365,119 @@
       <div class="trust-badge"><span class="tb-icon">⚡</span> <strong>Instant Download</strong></div>
       <div class="trust-badge"><span class="tb-icon">👷</span> <strong>Used by 500+ Contractors</strong></div>
     </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="whats-included">
+  <div class="container">
+    <h2>📦 What's Included — Invoice Template Pro ($9)</h2>
+    <p class="wi-sub">Everything you need to send professional invoices and get paid faster. One template, fully loaded.</p>
+    <div class="wi-grid">
+      <div class="wi-item">
+        <span class="wi-check">✓</span>
+        <div class="wi-text"><strong>Auto-Calculating Invoice</strong><small>Subtotals, tax rates, and totals update automatically. Just enter line items.</small></div>
+      </div>
+      <div class="wi-item">
+        <span class="wi-check">✓</span>
+        <div class="wi-text"><strong>Late Fee Calculator</strong><small>Built-in 1.5%/month late fee formula. Shows customers you're serious.</small></div>
+      </div>
+      <div class="wi-item">
+        <span class="wi-check">✓</span>
+        <div class="wi-text"><strong>Professional Layout</strong><small>Company name, license #, logo space, insurance info — looks like a real business.</small></div>
+      </div>
+      <div class="wi-item">
+        <span class="wi-check">✓</span>
+        <div class="wi-text"><strong>Labor + Materials Breakdown</strong><small>Separate line items for labor, materials, equipment, and permits.</small></div>
+      </div>
+      <div class="wi-item">
+        <span class="wi-check">✓</span>
+        <div class="wi-text"><strong>Payment Terms Section</strong><small>Net 15/30 options, accepted payment methods, deposit requirements.</small></div>
+      </div>
+      <div class="wi-item">
+        <span class="wi-check">✓</span>
+        <div class="wi-text"><strong>3 Formats Included</strong><small>Excel (.xlsx), Google Sheets, and CSV. Works everywhere.</small></div>
+      </div>
+      <div class="wi-item">
+        <span class="wi-check">✓</span>
+        <div class="wi-text"><strong>Fully Editable</strong><small>No locked cells. Change anything — colors, formulas, layout, fields.</small></div>
+      </div>
+      <div class="wi-item">
+        <span class="wi-check">✓</span>
+        <div class="wi-text"><strong>PDF Export Ready</strong><small>Print or export to PDF for customers. Looks crisp and professional.</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="whats-included" style="background: rgba(249,115,22,0.02);">
+  <div class="container">
+    <h2>📦 What's Included — Pro Bundle ($29)</h2>
+    <p class="wi-sub">12 professional templates with auto-calculating formulas. Everything to run your contracting business like a pro.</p>
+    <div class="wi-grid">
+      <div class="wi-item">
+        <span class="wi-check">✓</span>
+        <div class="wi-text"><strong>Invoice Template</strong><small>Auto-calc totals, tax, late fees. Line items for labor + materials.</small></div>
+      </div>
+      <div class="wi-item">
+        <span class="wi-check">✓</span>
+        <div class="wi-text"><strong>Estimate Template</strong><small>Good/Better/Best tiered pricing. Close more deals with options.</small></div>
+      </div>
+      <div class="wi-item">
+        <span class="wi-check">✓</span>
+        <div class="wi-text"><strong>Proposal Template</strong><small>Win commercial and residential jobs with professional proposals.</small></div>
+      </div>
+      <div class="wi-item">
+        <span class="wi-check">✓</span>
+        <div class="wi-text"><strong>Job Costing Tracker</strong><small>Track revenue, materials, labor, overhead per job. See which jobs make money.</small></div>
+      </div>
+      <div class="wi-item">
+        <span class="wi-check">✓</span>
+        <div class="wi-text"><strong>Cash Flow Forecast</strong><small>12-month projection. Know when money's tight before it happens.</small></div>
+      </div>
+      <div class="wi-item">
+        <span class="wi-check">✓</span>
+        <div class="wi-text"><strong>Change Order Form</strong><small>Protect yourself from scope creep. Document every change in writing.</small></div>
+      </div>
+      <div class="wi-item">
+        <span class="wi-check">✓</span>
+        <div class="wi-text"><strong>Customer Contract</strong><small>Lawyer-reviewed language. Payment schedule, scope, liability limits.</small></div>
+      </div>
+      <div class="wi-item">
+        <span class="wi-check">✓</span>
+        <div class="wi-text"><strong>Markup &amp; Margin Calculator</strong><small>Stop confusing markup and margin. Built-in formulas show both.</small></div>
+      </div>
+      <div class="wi-item">
+        <span class="wi-check">✓</span>
+        <div class="wi-text"><strong>Weekly Timesheet</strong><small>Track employee hours per job. Export for payroll.</small></div>
+      </div>
+      <div class="wi-item">
+        <span class="wi-check">✓</span>
+        <div class="wi-text"><strong>Material Takeoff Sheet</strong><small>Organized material ordering. Never forget supplies again.</small></div>
+      </div>
+      <div class="wi-item">
+        <span class="wi-check">✓</span>
+        <div class="wi-text"><strong>Vehicle Expense Log</strong><small>Track mileage + fuel per job. Maximize tax deductions.</small></div>
+      </div>
+      <div class="wi-item">
+        <span class="wi-check">✓</span>
+        <div class="wi-text"><strong>Profit &amp; Loss Template</strong><small>Monthly P&amp;L for contractors. Revenue, COGS, expenses, net profit.</small></div>
+      </div>
+    </div>
+    <p style="text-align:center;color:var(--gray);font-size:0.85rem;margin-top:4px;">+ All templates include: Excel + Google Sheets + CSV formats · Fully editable · No locked cells · Lifetime updates</p>
+    
+    <!-- Bundle preview images -->
+    <div class="bundle-previews">
+      <div class="bp-card">
+        <img src="/images/previews/job-costing-preview.svg" alt="Job costing tracker template preview - track profit per job" loading="lazy">
+        <p class="bp-label">Job Costing Tracker — know which jobs make money</p>
+      </div>
+      <div class="bp-card">
+        <img src="/images/previews/pl-preview.svg" alt="Profit and loss template preview - monthly P&L for contractors" loading="lazy">
+        <p class="bp-label">Profit &amp; Loss — monthly P&amp;L at a glance</p>
+      </div>
     </div>
   </div>
 </section>

@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 400" fill="none">
+  <rect width="680" height="400" rx="12" fill="#fff"/>
+  <rect x="0" y="0" width="680" height="8" rx="4" fill="#8B5CF6"/>
+  <text x="40" y="44" font-family="Inter,system-ui,sans-serif" font-size="18" font-weight="800" fill="#1a1a2e">PROFIT &amp; LOSS STATEMENT</text>
+  <text x="640" y="44" font-family="Inter,system-ui,sans-serif" font-size="11" fill="#94a3b8" text-anchor="end">March 2026 · Monthly P&amp;L for Contractors</text>
+  <line x1="40" y1="60" x2="640" y2="60" stroke="#e2e8f0"/>
+  <!-- Revenue -->
+  <rect x="40" y="72" width="600" height="28" rx="4" fill="#F0FDF4"/>
+  <text x="56" y="91" font-family="Inter,system-ui,sans-serif" font-size="11" font-weight="700" fill="#047857">REVENUE</text>
+  <text x="624" y="91" font-family="Inter,system-ui,sans-serif" font-size="12" font-weight="700" fill="#047857" text-anchor="end">$24,531.00</text>
+  <text x="72" y="118" font-family="Inter,system-ui,sans-serif" font-size="12" fill="#475569">Residential jobs</text>
+  <text x="624" y="118" font-family="Inter,system-ui,sans-serif" font-size="12" fill="#1e293b" text-anchor="end">$18,281.00</text>
+  <text x="72" y="140" font-family="Inter,system-ui,sans-serif" font-size="12" fill="#475569">Commercial jobs</text>
+  <text x="624" y="140" font-family="Inter,system-ui,sans-serif" font-size="12" fill="#1e293b" text-anchor="end">$6,250.00</text>
+  <line x1="56" y1="154" x2="624" y2="154" stroke="#f1f5f9"/>
+  <!-- COGS -->
+  <rect x="40" y="164" width="600" height="28" rx="4" fill="#FEF2F2"/>
+  <text x="56" y="183" font-family="Inter,system-ui,sans-serif" font-size="11" font-weight="700" fill="#DC2626">COST OF GOODS SOLD</text>
+  <text x="624" y="183" font-family="Inter,system-ui,sans-serif" font-size="12" font-weight="700" fill="#DC2626" text-anchor="end">($11,635.00)</text>
+  <text x="72" y="210" font-family="Inter,system-ui,sans-serif" font-size="12" fill="#475569">Materials &amp; supplies</text>
+  <text x="624" y="210" font-family="Inter,system-ui,sans-serif" font-size="12" fill="#1e293b" text-anchor="end">$7,635.00</text>
+  <text x="72" y="232" font-family="Inter,system-ui,sans-serif" font-size="12" fill="#475569">Subcontractor labor</text>
+  <text x="624" y="232" font-family="Inter,system-ui,sans-serif" font-size="12" fill="#1e293b" text-anchor="end">$4,000.00</text>
+  <line x1="40" y1="246" x2="640" y2="246" stroke="#e2e8f0"/>
+  <!-- Gross Profit -->
+  <text x="56" y="270" font-family="Inter,system-ui,sans-serif" font-size="13" font-weight="700" fill="#1a1a2e">GROSS PROFIT</text>
+  <text x="624" y="270" font-family="Inter,system-ui,sans-serif" font-size="14" font-weight="800" fill="#047857" text-anchor="end">$12,896.00 (52.6%)</text>
+  <line x1="56" y1="284" x2="624" y2="284" stroke="#f1f5f9"/>
+  <!-- Operating Expenses -->
+  <text x="56" y="306" font-family="Inter,system-ui,sans-serif" font-size="11" font-weight="700" fill="#475569">OPERATING EXPENSES</text>
+  <text x="72" y="328" font-family="Inter,system-ui,sans-serif" font-size="11" fill="#475569">Vehicle · Insurance · Tools · Marketing · Phone · Software</text>
+  <text x="624" y="328" font-family="Inter,system-ui,sans-serif" font-size="12" fill="#1e293b" text-anchor="end">($4,280.00)</text>
+  <line x1="40" y1="346" x2="640" y2="346" stroke="#8B5CF6" stroke-width="2"/>
+  <!-- Net Profit -->
+  <rect x="40" y="356" width="600" height="32" rx="6" fill="#F5F3FF"/>
+  <text x="56" y="377" font-family="Inter,system-ui,sans-serif" font-size="15" font-weight="800" fill="#1a1a2e">NET PROFIT</text>
+  <text x="624" y="377" font-family="Inter,system-ui,sans-serif" font-size="18" font-weight="800" fill="#8B5CF6" text-anchor="end">$8,616.00 (35.1%)</text>
+</svg>

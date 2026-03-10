@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 420" fill="none">
+  <rect width="680" height="420" rx="12" fill="#fff"/>
+  <rect x="0" y="0" width="680" height="8" rx="4" fill="#22C55E"/>
+  <text x="40" y="44" font-family="Inter,system-ui,sans-serif" font-size="18" font-weight="800" fill="#1a1a2e">JOB COSTING TRACKER</text>
+  <text x="640" y="44" font-family="Inter,system-ui,sans-serif" font-size="11" fill="#94a3b8" text-anchor="end">Auto-calculating · All formulas built in</text>
+  <line x1="40" y1="60" x2="640" y2="60" stroke="#e2e8f0"/>
+  <!-- Header row -->
+  <rect x="40" y="72" width="600" height="28" rx="4" fill="#f1f5f9"/>
+  <text x="56" y="91" font-family="Inter,system-ui,sans-serif" font-size="10" font-weight="700" fill="#475569" letter-spacing="0.5">JOB NAME</text>
+  <text x="220" y="91" font-family="Inter,system-ui,sans-serif" font-size="10" font-weight="700" fill="#475569" letter-spacing="0.5">REVENUE</text>
+  <text x="320" y="91" font-family="Inter,system-ui,sans-serif" font-size="10" font-weight="700" fill="#475569" letter-spacing="0.5">MATERIALS</text>
+  <text x="420" y="91" font-family="Inter,system-ui,sans-serif" font-size="10" font-weight="700" fill="#475569" letter-spacing="0.5">LABOR</text>
+  <text x="510" y="91" font-family="Inter,system-ui,sans-serif" font-size="10" font-weight="700" fill="#475569" letter-spacing="0.5">OVERHEAD</text>
+  <text x="624" y="91" font-family="Inter,system-ui,sans-serif" font-size="10" font-weight="700" fill="#475569" letter-spacing="0.5" text-anchor="end">PROFIT</text>
+  <!-- Job rows -->
+  <text x="56" y="124" font-family="Inter,system-ui,sans-serif" font-size="12" fill="#1e293b">Peterson Panel Upgrade</text>
+  <text x="220" y="124" font-family="Inter,system-ui,sans-serif" font-size="12" fill="#1e293b">$3,031</text>
+  <text x="320" y="124" font-family="Inter,system-ui,sans-serif" font-size="12" fill="#475569">$825</text>
+  <text x="420" y="124" font-family="Inter,system-ui,sans-serif" font-size="12" fill="#475569">$1,080</text>
+  <text x="510" y="124" font-family="Inter,system-ui,sans-serif" font-size="12" fill="#475569">$245</text>
+  <rect x="580" y="112" width="56" height="20" rx="4" fill="#D1FAE5"/>
+  <text x="608" y="127" font-family="Inter,system-ui,sans-serif" font-size="12" font-weight="700" fill="#047857" text-anchor="middle">$881</text>
+  <line x1="56" y1="138" x2="624" y2="138" stroke="#f1f5f9"/>
+  <text x="56" y="160" font-family="Inter,system-ui,sans-serif" font-size="12" fill="#1e293b">Johnson Bath Remodel</text>
+  <text x="220" y="160" font-family="Inter,system-ui,sans-serif" font-size="12" fill="#1e293b">$7,250</text>
+  <text x="320" y="160" font-family="Inter,system-ui,sans-serif" font-size="12" fill="#475569">$2,340</text>
+  <text x="420" y="160" font-family="Inter,system-ui,sans-serif" font-size="12" fill="#475569">$2,700</text>
+  <text x="510" y="160" font-family="Inter,system-ui,sans-serif" font-size="12" fill="#475569">$580</text>
+  <rect x="580" y="148" width="56" height="20" rx="4" fill="#D1FAE5"/>
+  <text x="608" y="163" font-family="Inter,system-ui,sans-serif" font-size="12" font-weight="700" fill="#047857" text-anchor="middle">$1,630</text>
+  <line x1="56" y1="174" x2="624" y2="174" stroke="#f1f5f9"/>
+  <text x="56" y="196" font-family="Inter,system-ui,sans-serif" font-size="12" fill="#1e293b">Smith Kitchen Electrical</text>
+  <text x="220" y="196" font-family="Inter,system-ui,sans-serif" font-size="12" fill="#1e293b">$1,850</text>
+  <text x="320" y="196" font-family="Inter,system-ui,sans-serif" font-size="12" fill="#475569">$620</text>
+  <text x="420" y="196" font-family="Inter,system-ui,sans-serif" font-size="12" fill="#475569">$960</text>
+  <text x="510" y="196" font-family="Inter,system-ui,sans-serif" font-size="12" fill="#475569">$185</text>
+  <rect x="580" y="184" width="56" height="20" rx="4" fill="#FEF2F2"/>
+  <text x="608" y="199" font-family="Inter,system-ui,sans-serif" font-size="12" font-weight="700" fill="#DC2626" text-anchor="middle">$85</text>
+  <line x1="56" y1="210" x2="624" y2="210" stroke="#f1f5f9"/>
+  <text x="56" y="232" font-family="Inter,system-ui,sans-serif" font-size="12" fill="#1e293b">Garcia Whole-House Rewire</text>
+  <text x="220" y="232" font-family="Inter,system-ui,sans-serif" font-size="12" fill="#1e293b">$12,400</text>
+  <text x="320" y="232" font-family="Inter,system-ui,sans-serif" font-size="12" fill="#475569">$3,850</text>
+  <text x="420" y="232" font-family="Inter,system-ui,sans-serif" font-size="12" fill="#475569">$4,200</text>
+  <text x="510" y="232" font-family="Inter,system-ui,sans-serif" font-size="12" fill="#475569">$960</text>
+  <rect x="580" y="220" width="56" height="20" rx="4" fill="#D1FAE5"/>
+  <text x="608" y="235" font-family="Inter,system-ui,sans-serif" font-size="12" font-weight="700" fill="#047857" text-anchor="middle">$3,390</text>
+  <!-- Summary -->
+  <rect x="40" y="260" width="600" height="64" rx="8" fill="#F0FDF4"/>
+  <text x="60" y="285" font-family="Inter,system-ui,sans-serif" font-size="12" font-weight="600" fill="#1a1a2e">Monthly Summary</text>
+  <text x="220" y="285" font-family="Inter,system-ui,sans-serif" font-size="11" fill="#475569">Revenue: <tspan font-weight="700" fill="#1e293b">$24,531</tspan></text>
+  <text x="380" y="285" font-family="Inter,system-ui,sans-serif" font-size="11" fill="#475569">Total Costs: <tspan font-weight="700" fill="#1e293b">$18,545</tspan></text>
+  <text x="540" y="285" font-family="Inter,system-ui,sans-serif" font-size="11" fill="#475569">Net Profit: <tspan font-weight="800" fill="#047857">$5,986</tspan></text>
+  <text x="60" y="310" font-family="Inter,system-ui,sans-serif" font-size="11" fill="#475569">Avg Margin: <tspan font-weight="700" fill="#047857">24.4%</tspan></text>
+  <text x="220" y="310" font-family="Inter,system-ui,sans-serif" font-size="11" fill="#475569">Best Job: <tspan font-weight="600" fill="#1e293b">Garcia Rewire (27%)</tspan></text>
+  <text x="440" y="310" font-family="Inter,system-ui,sans-serif" font-size="11" fill="#DC2626">⚠ Smith Kitchen only 4.6% margin — reprice!</text>
+  <!-- Insight -->
+  <rect x="40" y="340" width="600" height="64" rx="8" fill="#FFF7ED"/>
+  <text x="340" y="366" font-family="Inter,system-ui,sans-serif" font-size="13" font-weight="700" fill="#C2410C" text-anchor="middle">💡 This is how you find out which jobs actually make money.</text>
+  <text x="340" y="390" font-family="Inter,system-ui,sans-serif" font-size="11" fill="#EA580C" text-anchor="middle">Most contractors guess. This tracker shows you the real numbers — job by job.</text>
+</svg>
