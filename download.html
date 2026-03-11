@@ -137,7 +137,9 @@
   document.getElementById('loading-state').style.display = 'block';
 
   try {
-    const res = await fetch('/api/verify-session?session_id=' + encodeURIComponent(sessionId));
+    let verifyUrl = '/api/verify-session?session_id=' + encodeURIComponent(sessionId);
+    if (productParam) verifyUrl += '&product=' + encodeURIComponent(productParam);
+    const res = await fetch(verifyUrl);
     const data = await res.json();
 
     document.getElementById('loading-state').style.display = 'none';
